@@ -11,7 +11,7 @@
 </div>
 
 <p align="center">
-  <img src="doc/img/CodeWave_logo.png" alt="Logo da equipe"
+  <img src="img/readme/CodeWave_logo.png" alt="Logo da equipe"
      width="400"/>
 </p>
 
