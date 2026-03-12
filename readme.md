@@ -48,7 +48,7 @@ O desafio consiste em desenvolver uma plataforma web estruturada para centraliza
 
 ## :medal_sports: Requisitos do Cliente <a id="requisitos"></a>
 
-AAKAER solicitou à equipe OMNIDEVS o desenvolvimento de uma solução capaz de fornecer uma base técnica sólida e rastreável para a Engenharia de Sistemas Aeronáuticos.
+AAKAER solicitou o desenvolvimento de uma solução capaz de fornecer uma base técnica sólida e rastreável para a Engenharia de Sistemas Aeronáuticos.
 
 :black_small_square: Centralização de Dados: Realizar o cadastro de normas e seus requisitos vinculados.
 
