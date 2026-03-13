@@ -95,23 +95,33 @@ AAKAER solicitou o desenvolvimento de uma solução capaz de fornecer uma base t
 ## 📋 Sprint 1 - Requisitos
 | ID | Prioridade | User Story | Estimativa | Sprint | Status |
 |:---|:---|:---|:---:|:---:|:---|
-| $\color{green}{\text{1}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Administrador,}}$ $\color{green}{\text{quero cadastrar um novo}}$ $\color{green}{\text{projetista/administrador}}$ $\color{green}{\text{no sistema}}$ $\color{green}{\text{(inserindo nome e e-mail),}}$ $\color{green}{\text{para que ele possa ter acesso}}$ $\color{green}{\text{às funcionalidades da plataforma}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
-| $\color{green}{\text{2}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Administrador,}}$ $\color{green}{\text{quero cadastrar/editar}}$ $\color{green}{\text{normas (emitente, título, data)}}$ $\color{green}{\text{técnicas,}}$ $\color{green}{\text{para permitir}}$ $\color{green}{\text{melhor visualização}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
-| 3 | Alta | **Como Administrador**, quero adicionar/editar requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 2 | ⌛ |
-| $\color{green}{\text{4}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Administrador}}$ $\color{green}{\text{ou Projetista,}}$ $\color{green}{\text{quero realizar login}}$ $\color{green}{\text{informando meu email}}$ $\color{green}{\text{e senha para acessar}}$ $\color{green}{\text{o sistema.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
+| $\color{green}{\text{1}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero cadastrar um novo}}$ $\color{green}{\text{projetista na plataforma}}$ $\color{green}{\text{(inserindo nome e e-mail),}}$ $\color{green}{\text{para garantir o acesso ao}}$ $\color{green}{\text{sistema e suas funcionalidades}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
+| $\color{green}{\text{2}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero atribuir e manipular}}$ $\color{green}{\text{normas (emitente, título, data)}}$ $\color{green}{\text{técnicas ao sistema,}}$ $\color{green}{\text{para permitir melhor}}$ $\color{green}{\text{visualização das informações}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
+| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ⌛ |
+| $\color{green}{\text{4}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero realizar login}}$ $\color{green}{\text{informando meu email}}$ $\color{green}{\text{e senha para acessar}}$ $\color{green}{\text{o sistema.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
 
-### 📋 Product Backlog - User Stories
+## 📊 Escala de Estimativa de Esforço
+
+| Pontuação | Significado |
+|:---:|:---|
+| 1-5 | Muito Pequeno |
+| 6-10 | Médio |
+| 11-15 | Grande |
+| 16-20 | Muito Grande |
+
+## 📋 Product Backlog - User Stories
 
 | ID | Prioridade | User Story | Estimativa | Sprint | Status |
-| :--- | :--- | :--- | :---: | :---: | :---: |
-| 1 | Alta | **Como Administrador**, quero cadastrar um novo projetista/administrador no sistema (inserindo nome e e-mail), para que ele possa ter acesso às funcionalidades da plataforma. | 11 | 1 | ⌛ |
-| 2 | Alta | **Como Administrador**, quero cadastrar/editar normas (emitente, título, data) técnicas, para permitir melhor visualização. | 11 | 1 | ⌛ |
-| 3 | Alta | **Como Administrador**, quero adicionar/editar requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 2 | ⌛ |
-| 4 | Alta | **Como Administrador ou Projetista**, quero realizar login informando meu email e senha para acessar o sistema. | 8 | 1 | ⌛ |
-| 5 | Alta | **Como Administrador**, quero filtrar as normas técnicas por órgão, categoria e palavra-chave, para que eu possa agilizar o processo de busca. | 8 | 2 | ⌛ |
-| 6 | Média | **Como Administrador**, quero ver todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 1 | ⌛ |
-| 7 | Alta | **Como Administrador**, quero adicionar notas técnicas a um requisito para documentar análises. | 8 | 3 | ⌛ |
-| 8 | Média | **Como Administrador**, quero ver histórico de alterações nos requisitos para rastreabilidade. | 8 | 3 | ⌛ |
+|:---:|:---:|:---|:---:|:---:|:---:|
+| 1 | Alta | Como Analista de Qualidade, quero cadastrar um novo projetista na plataforma (inserindo nome e e-mail), para garantir o acesso ao sistema e suas funcionalidades. | 11 | 1 | ⌛ |
+| 2 | Alta | Como Analista de Qualidade, quero atribuir e manipular normas (emitente, título, data) técnicas ao sistema, para permitir melhor visualização das informações. | 11 | 1 | ⌛ |
+| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ⌛ |
+| 4 | Alta | Como Analista de Qualidade, quero realizar login informando meu email e senha para acessar o sistema. | 8 | 1 | ⌛ |
+| 5 | Alta | Como Analista de Qualidade, quero filtrar normas técnicas por órgão, categoria e palavra-chave, para agilizar o processo de busca. | 8 | 2 | ⌛ |
+| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | ⌛ |
+| 7 | Média | Como Analista de Qualidade, quero adicionar notas técnicas a um requisito para documentar análises. | 8 | 2 | ⌛ |
+| 8 | Média | Como Analista de Qualidade, quero visualizar o histórico de alterações nos requisitos para rastreabilidade. | 8 | 3 | ⌛ |
+| 9 | Baixa | Como Projetista, quero vizualizar o site pelo meu celular, para visualizar detalhes técnicos. | 8 | 3 | ⌛ |
 
 <br>
 
@@ -146,4 +156,3 @@ AAKAER solicitou o desenvolvimento de uma solução capaz de fornecer uma base t
 
 </div>
 </br>
-
