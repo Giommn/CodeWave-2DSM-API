@@ -121,6 +121,27 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 
 <br>
 
+### 📋 PRINCIPAIS DOR (DEFINIÇÃO DE PRONTO)
+
+| DOR | Descrição | Critérios de Aceitação |
+|:---:|:-----------|:------------------------|
+| **DOR 01** | Mockup das Telas no Figma | • Telas principais representadas<br>• Layout e componentes visuais definidos<br>• Fluxo de navegação representado estaticamente |
+| **DOR 02** | Modelo de Dados Conceitual | • Entidades mapeadas<br>• Relacionamentos definidos<br>• Cardinalidades estabelecidas<br>• Atributos principais identificados | Modelo disponível em `docs/model/` |
+
+---
+
+## 🗃️ MODELO DE DADOS
+
+<details>
+<summary><b>Clique para visualizar o Modelo Conceitual do Banco de Dados</b></summary>
+<br>
+
+![Modelo de Dados](docs/model/CodewaveModel-Normas.png)
+
+**Caminho:** `docs/model/CodewaveModel-Normas.png`
+
+</details>
+
 ## 📆 Cronograma de Evolução do Projeto <a id="cronogramaPJ"></a>
 
 | Sprint | Período |  Status  | Foco |
