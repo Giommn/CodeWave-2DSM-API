@@ -65,6 +65,8 @@
     data_criacao DateTime @default(now()) @db.Timestamp(0)
     data_update  DateTime @default(now()) @db.Timestamp(0)
     notas Notas[]
+    pdf_nome_original String @db.VarChar(255)  
+    pdf_caminho       String @db.VarChar(500) 
     usuario Users @relation(fields: [adm_criador],references: [id_user])
     orgaos Orgaos @relation(fields: [org_criador],references: [org_id])
     normas_origem      Normas_Referenciadas[] @relation("origem")
@@ -118,7 +120,8 @@
     emissao        DateTime @db.Date
     criado_em      DateTime @db.Timestamp(0) 
     criado_em_novo DateTime @default(now()) @db.Timestamp(0) 
-
+    pdf_nome_original String @db.VarChar(255)  
+    pdf_caminho       String @db.VarChar(500) 
     norma          Norma    @relation(fields: [norma_id], references: [id_norm], onDelete: Cascade)
 
     @@unique([norma_id, versao_numero])

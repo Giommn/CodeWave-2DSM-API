@@ -17,10 +17,10 @@ export interface LoginDTO{
 
 // Saida
 export interface ResponseUser{
-    id:number,
-    nome:string,
-    email:string,
-    data_cricao:Date
+    id_user:number,
+    user_name:string,
+    email:string,  
+    nivel_user:string
 }
 
 export interface Authenticacao{
