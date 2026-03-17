@@ -100,7 +100,7 @@
     norma_origem_id  Int
     norma_destino_id Int
 
-    @@id([norma_origem_id, norma_destino_id]) // Ordem consistente
+    @@id([norma_origem_id, norma_destino_id]) 
 
     norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem")
     norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino")
