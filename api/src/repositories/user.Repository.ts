@@ -1,8 +1,5 @@
-import { error } from "node:console";
 import { prisma } from "../config/prisma";
 import { ResponseUser } from "../dtos/user.dto";
-import { NivelUser } from "../generated/prisma";
-import { Public } from "../generated/prisma/runtime/client";
 import IUser from "../interfaces/user.Interface";
 
 export default class UserRepository implements IUser {
@@ -62,8 +59,8 @@ export default class UserRepository implements IUser {
         },
       });
       return usuario;
-    } catch (Error) {
-      throw new Error("Unique constraint failed: duplicated register");
+    } catch (error) {
+      console.error(error)
     }
   }
   public async listUser(): Promise<Array<ResponseUser>> {
@@ -75,9 +72,7 @@ export default class UserRepository implements IUser {
         nivel_user: true,
       },
     });
-    if (!usuario) {
-      throw new Error(`No users found`);
-    } 
+   
     return usuario;
   }
 }
