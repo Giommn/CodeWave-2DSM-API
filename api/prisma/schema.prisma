@@ -1,0 +1,140 @@
+  // This is your Prisma schema file,
+  // learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+  // Get a free hosted Postgres database in seconds: `npx create-db`
+
+  generator client {
+    provider = "prisma-client-js"
+    output   = "../src/generated/prisma"
+  }
+
+  datasource db {
+    provider = "mysql"
+  }
+
+  enum NivelUser {
+    ADM
+    USER
+  }
+
+  model Users{
+    id_user  Int @id @default(autoincrement())
+    user_name String 
+    email String @unique
+    user_senha_hash String @db.VarChar(255)
+    data_criacao  DateTime @default(now()) @db.Timestamp(0)
+    nivel_user NivelUser @default(USER)
+
+    orgaos Orgaos[]
+    categoria Categoria[]
+    normas Norma[]
+    notas Notas[]
+    mfa Mfa[]
+    @@map("usuarios")
+  }
+
+  model Orgaos{
+    org_id Int @id @default(autoincrement())
+    org_desc String @db.VarChar(50)
+    org_sigla String @db.VarChar(10)
+    adm_criador Int
+    normas Norma[]
+    usuarios  Users @relation(fields: [adm_criador],references: [id_user])
+    @@map("orgaos")
+  }
+
+  model Categoria{
+    cat_id Int @id @default(autoincrement())
+    cat_nome String @db.VarChar(50) @unique
+    adm_criador Int 
+    data_criacao DateTime @default(now()) @db.Timestamp(0)
+    nota_cat Nota_Categoria[]
+    usuario Users @relation(fields: [adm_criador],references: [id_user])
+    @@map("categoria")
+  }
+
+
+  model Norma{
+    id_norm Int @id @default(autoincrement())
+    norm_titulo String @db.VarChar(100)
+    norm_desc String @db.Text
+    org_criador Int
+    adm_criador Int
+    emissao  DateTime
+    norm_codigo String @db.VarChar(50) @unique
+    data_criacao DateTime @default(now()) @db.Timestamp(0)
+    data_update  DateTime @default(now()) @db.Timestamp(0)
+    notas Notas[]
+    pdf_nome_original String @db.VarChar(255)  
+    pdf_caminho       String @db.VarChar(500) 
+    usuario Users @relation(fields: [adm_criador],references: [id_user])
+    orgaos Orgaos @relation(fields: [org_criador],references: [org_id])
+    normas_origem      Normas_Referenciadas[] @relation("origem")
+    normas_destino     Normas_Referenciadas[] @relation("destino")
+    versoes       Normas_Versoes[] 
+    @@map("normas")
+  }
+
+  model Notas{
+    id_not Int @id @default(autoincrement())
+    not_titulo String 
+    not_dec String @db.Text
+    norm_criador Int
+    adm_criador Int
+    data_criacao DateTime @default(now()) @db.Timestamp(0)
+    usuario Users @relation(fields: [adm_criador],references: [id_user])
+    normas Norma @relation(fields: [norm_criador],references: [id_norm])
+    nota_cat Nota_Categoria[]
+  
+    @@map("notas")
+  }
+
+
+  model Nota_Categoria{
+    id_nota Int
+    id_cat Int
+    @@id([id_nota, id_cat])
+    cat Categoria @relation(fields: [id_cat],references: [cat_id])
+    nota Notas @relation(fields: [id_nota],references: [id_not])
+  }
+
+  model Normas_Referenciadas {
+    norma_origem_id  Int
+    norma_destino_id Int
+
+    @@id([norma_origem_id, norma_destino_id]) 
+
+    norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem")
+    norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino")
+
+    @@map("normas_referenciadas")
+  }
+
+
+  model Normas_Versoes {
+  id_versao      Int      @id @default(autoincrement())
+    norma_id       Int
+    versao_numero  Int
+    norm_titulo    String   @db.VarChar(50)
+    norm_dec       String   @db.VarChar(500)
+    emissao        DateTime @db.Date
+    criado_em      DateTime @db.Timestamp(0) 
+    criado_em_novo DateTime @default(now()) @db.Timestamp(0) 
+    pdf_nome_original String @db.VarChar(255)  
+    pdf_caminho       String @db.VarChar(500) 
+    norma          Norma    @relation(fields: [norma_id], references: [id_norm], onDelete: Cascade)
+
+    @@unique([norma_id, versao_numero])
+    @@map("normas_versoes")
+  }
+
+
+  model Mfa {
+  id              Int      @id @default(autoincrement())
+  user_id_FK      Int
+  cod_mfa         String   @db.VarChar(255)
+  cod_data_cricao DateTime @default(now()) @db.Timestamp(0)
+  usuario         Users @relation(fields: [user_id_FK], references: [id_user], onDelete: Cascade)
+
+  @@map("mfa")
+}
