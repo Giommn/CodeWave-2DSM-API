@@ -1,27 +1,25 @@
-import { error } from "node:console";
 import { prisma } from "../config/prisma";
-import { ResponseUser } from "../dtos/user.dto";
-import { NivelUser } from "../generated/prisma";
-import { Public } from "../generated/prisma/runtime/client";
+import { ResponseUser, ResponseUserHash } from "../dtos/user.dto";
+import { NivelUser} from "../generated/prisma";
+import { PrismaError } from "../help/typeError";
 import IUser from "../interfaces/user.Interface";
 
 export default class UserRepository implements IUser {
-  public async getUser(id: number): Promise<ResponseUser> {
-    const usuario: ResponseUser | null = await prisma.users.findUnique({
-      where: {
-        id_user: id,
-      },
+  public async getUser(id?: number,email?:string): Promise<ResponseUserHash> {
+    const where: any = {}
+   if (id !== undefined) where.id_user = id
+   if (email !== undefined) where.email = email
+    const usuario: ResponseUserHash = await prisma.users.findUnique({
+      where: where,
       select: {
         id_user: true,
         user_name: true,
         email: true,
         nivel_user: true,
+        user_senha_hash:true
+        
       },
     });
-
-    if (!usuario) {
-      throw new Error(`User not found`);
-    }
 
     return usuario;
   }
@@ -62,8 +60,8 @@ export default class UserRepository implements IUser {
         },
       });
       return usuario;
-    } catch (Error) {
-      throw new Error("Unique constraint failed: duplicated register");
+    } catch (error) {
+      throw await PrismaError.verifyError(error)
     }
   }
   public async listUser(): Promise<Array<ResponseUser>> {
@@ -75,9 +73,28 @@ export default class UserRepository implements IUser {
         nivel_user: true,
       },
     });
-    if (!usuario) {
-      throw new Error(`No users found`);
-    } 
+   
     return usuario;
   }
+
+  public async createUser(nome: string, email: string, senha: string,nivel_user:NivelUser): Promise<ResponseUser> {
+    try{
+            const usuario:ResponseUser=await prisma.users.create({
+              data:{
+                user_name:nome,
+                email:email,
+                user_senha_hash:senha,
+                nivel_user:nivel_user
+              }
+            })
+
+            return usuario;
+          }catch(error){
+               throw await PrismaError.verifyError(error)
+          }
+
+  }
+  
+     
+
 }
