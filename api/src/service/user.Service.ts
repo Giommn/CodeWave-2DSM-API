@@ -10,9 +10,9 @@ export default class UserService{
     ){}
 
     public async login(email:string,senha:string):Promise<Auth>{
-        try{
+        
      const userCompleto:ResponseUserHash= await this.userRepository.getUser(undefined,email);
-             if(!await bcrypt.compare(senha,userCompleto.user_senha_hash))throw new Error('Invalid information')
+             if(!await bcrypt.compare(senha,userCompleto.user_senha_hash) )throw new Error('Invalid information');
 
         return {
             token:jw.criarToken(userCompleto),
@@ -23,16 +23,6 @@ export default class UserService{
                 email:userCompleto.email
             }
         }
-     }catch(erro){
-        console.log("Login Failed:"+erro); 
-         throw Error('Não foi possivel achar o usuario');
-         
-      
-           
-                 
-        
-        
-     }
      
 }
 }

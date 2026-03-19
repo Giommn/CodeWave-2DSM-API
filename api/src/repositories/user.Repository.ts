@@ -1,6 +1,7 @@
 import { prisma } from "../config/prisma";
 import { ResponseUser, ResponseUserHash } from "../dtos/user.dto";
-import { NivelUser } from "../generated/prisma";
+import { NivelUser} from "../generated/prisma";
+import { PrismaError } from "../help/typeError";
 import IUser from "../interfaces/user.Interface";
 
 export default class UserRepository implements IUser {
@@ -60,7 +61,7 @@ export default class UserRepository implements IUser {
       });
       return usuario;
     } catch (error) {
-      console.error(error)
+      throw await PrismaError.verifyError(error)
     }
   }
   public async listUser(): Promise<Array<ResponseUser>> {
@@ -88,9 +89,8 @@ export default class UserRepository implements IUser {
             })
 
             return usuario;
-          }catch(erro){
-               console.error(erro)
-               throw new Error("")
+          }catch(error){
+               throw await PrismaError.verifyError(error)
           }
 
   }

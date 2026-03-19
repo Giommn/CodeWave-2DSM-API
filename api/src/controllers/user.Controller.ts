@@ -2,6 +2,7 @@ import { Request,Response } from "express";
 import UserService from "../service/user.Service";
 import UserRepository from "../repositories/user.Repository";
 import { Auth } from "../dtos/user.dto";
+import { PrismaError } from "../help/typeError";
 
 
 
@@ -21,10 +22,15 @@ export default class UserController{
           
 
     }catch(erro){
+        if(((await PrismaError.verifyError(erro)).message)!="500")
             return res.status(400).json({
             status: 'error', 
-            message: 'Falha no login',
-            erro: erro.message || 'Validation error',
+            message: erro.message,
+           
+        });
+        return res.status(500).json({
+            status: 'error', 
+            code: 500,
            
         });
        
