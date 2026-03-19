@@ -1,24 +1,24 @@
 import { prisma } from "../config/prisma";
-import { ResponseUser } from "../dtos/user.dto";
+import { ResponseUser, ResponseUserHash } from "../dtos/user.dto";
+import { NivelUser } from "../generated/prisma";
 import IUser from "../interfaces/user.Interface";
 
 export default class UserRepository implements IUser {
-  public async getUser(id: number): Promise<ResponseUser> {
-    const usuario: ResponseUser | null = await prisma.users.findUnique({
-      where: {
-        id_user: id,
-      },
+  public async getUser(id?: number,email?:string): Promise<ResponseUserHash> {
+    const where: any = {}
+   if (id !== undefined) where.id_user = id
+   if (email !== undefined) where.email = email
+    const usuario: ResponseUserHash = await prisma.users.findUnique({
+      where: where,
       select: {
         id_user: true,
         user_name: true,
         email: true,
         nivel_user: true,
+        user_senha_hash:true
+        
       },
     });
-
-    if (!usuario) {
-      throw new Error(`User not found`);
-    }
 
     return usuario;
   }
@@ -75,4 +75,26 @@ export default class UserRepository implements IUser {
    
     return usuario;
   }
+
+  public async createUser(nome: string, email: string, senha: string,nivel_user:NivelUser): Promise<ResponseUser> {
+    try{
+            const usuario:ResponseUser=await prisma.users.create({
+              data:{
+                user_name:nome,
+                email:email,
+                user_senha_hash:senha,
+                nivel_user:nivel_user
+              }
+            })
+
+            return usuario;
+          }catch(erro){
+               console.error(erro)
+               throw new Error("")
+          }
+
+  }
+  
+     
+
 }

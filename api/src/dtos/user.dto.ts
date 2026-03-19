@@ -3,6 +3,7 @@ export interface CreateUserDTO {
   nome: string;
   senha: string;
   email: string;
+  nivel_user:string
 }
 
 export interface UpdateUser {
@@ -28,3 +29,8 @@ export interface Auth {
   token: string;
   user: ResponseUser;
 }
+
+export interface ResponseUserHash extends ResponseUser{
+      user_senha_hash:string
+}
+

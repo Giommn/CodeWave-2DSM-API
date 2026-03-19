@@ -1,8 +1,9 @@
 import * as  jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
+import path from 'path'
 import { Auth, ResponseUser } from "../dtos/user.dto";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '..','..','.env') });
 
 
 const SECRET = process.env.JWT_SECRET;
