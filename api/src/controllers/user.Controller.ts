@@ -10,6 +10,7 @@ export default class UserController{
    static async loginUser(req:Request,res:Response):Promise<Response>{
     try{
          const {email,senha}=req.body;
+         if(!email || !senha)throw new Error('Invalid information');
          const user_service=new UserService(new UserRepository())
          const resposta:Auth=await user_service.login(email,senha)
         
@@ -22,6 +23,7 @@ export default class UserController{
           
 
     }catch(erro){
+        console.log(erro)
         if((( PrismaError.verifyError(erro)).message)!="500")
             return res.status(400).json({
             status: 'error', 

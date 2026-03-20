@@ -12,7 +12,8 @@ export default class UserService{
     public async login(email:string,senha:string):Promise<Auth>{
         
      const userCompleto:ResponseUserHash= await this.userRepository.getUser(undefined,email);
-             if(!await bcrypt.compare(senha,userCompleto.user_senha_hash) )throw new Error('Invalid information');
+     
+             if(!userCompleto || !await bcrypt.compare(senha,userCompleto.user_senha_hash ) )throw new Error('Invalid information');
 
         return {
             token:jw.criarToken(userCompleto),
