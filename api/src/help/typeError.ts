@@ -1,7 +1,7 @@
 import { Prisma } from "../generated/prisma";
 export class PrismaError{
   
-    static async verifyError(erro:unknown){
+    static  verifyError(erro:unknown){
     if(erro instanceof Prisma.PrismaClientKnownRequestError)
        switch(erro.code){
         case 'P2002':return new Error("Duplicate Elemets");
