@@ -1,7 +1,7 @@
 import { Request,Response } from "express";
 import UserService from "../service/user.Service";
 import UserRepository from "../repositories/user.Repository";
-import { Auth } from "../dtos/user.dto";
+import { Auth, ResponseUser } from "../dtos/user.dto";
 import { PrismaError } from "../help/typeError";
 
 
@@ -22,7 +22,7 @@ export default class UserController{
           
 
     }catch(erro){
-        if(((await PrismaError.verifyError(erro)).message)!="500")
+        if((( PrismaError.verifyError(erro)).message)!="500")
             return res.status(400).json({
             status: 'error', 
             message: erro.message,
@@ -34,6 +34,36 @@ export default class UserController{
            
         });
        
+    }}
+
+
+    static async CreateUser(req:Request,res:Response):Promise<Response>{
+        try{
+        const {nome,email,senha,nivel_user}=req.body
+        const CreateUser=new UserService(new UserRepository())
+        const resposta:ResponseUser=await CreateUser.createUser(nome,email,senha,nivel_user)
+        return res.status(200).json({
+            resposta:resposta
+        })
+    }catch(error){
+        if (error.message!="500")
+         return res.status(400).json({
+            status: 'error', 
+            message: error.message,
+         })
+         return res.status(500).json({
+            status: 'error', 
+            code: 500,
+           
+        });
+       
     }
-   }
+    }
+
+
+
+
+
+
+
 }

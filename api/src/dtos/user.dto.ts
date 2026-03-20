@@ -16,7 +16,7 @@ export interface LoginDTO {
   email: string;
   senha: string;
 }
-
+export type NivelUser="ADM" | "USER"
 // Saida
 export interface ResponseUser {
   id_user: number;

@@ -1,4 +1,4 @@
-import { Auth, ResponseUserHash } from "../dtos/user.dto";
+import { Auth, ResponseUserHash ,NivelUser, ResponseUser} from "../dtos/user.dto";
 import bcrypt from 'bcryptjs';
 import * as jw from '../config/jwt'
 import UserRepository from "../repositories/user.Repository";
@@ -22,7 +22,11 @@ export default class UserService{
                 nivel_user:userCompleto.nivel_user,
                 email:userCompleto.email
             }
-        }
-     
-}
+        }}
+
+    public async createUser(nome: string, email: string, senha: string,nivel_user:NivelUser):Promise<ResponseUser>{
+            senha= await bcrypt.hash(senha,10)
+            const  user:ResponseUser=await this.userRepository.createUser(nome,email,senha,nivel_user);
+            return user;
+           }
 }
