@@ -1,5 +1,9 @@
+import Cadastro from "./pages/cadastro";
+
 function App() {
-  return <></>;
+  return <>
+  <Cadastro />
+  </>;
 }
 
 export default App;
