@@ -12,6 +12,7 @@
 import { useState } from "react";
 import { RegisterModal } from "../components/RegisterModal";
 import Navibar from "../components/Navibar";
+import CardsDados from "../components/CardsDados";
 
 /**
  * Componente da página de cadastro de usuários
@@ -73,19 +74,11 @@ export default function Cadastro() {
       {/* Cabeçalho da Página */}
       <Navibar />
 
+      {/* Cards com dados de cadastro  */}
+      <CardsDados setIsModalOpen={setIsModalOpen} />
+
       {/* Conteúdo Principal */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Botão para Abrir Modal de Registro */}
-        <div className="mb-8">
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition shadow-md"
-            title="Abrir formulário para novo registro de usuário"
-          >
-            + Novo Cadastro de Usuário
-          </button>
-        </div>
-
         {/* Tabela de Usuários Registrados */}
         {registeredUsers.length > 0 ? (
           <div className="bg-white rounded-lg shadow overflow-hidden">

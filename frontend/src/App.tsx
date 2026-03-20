@@ -1,9 +1,13 @@
+import TabelaUser from "./components/TabelaUser";
 import Cadastro from "./pages/cadastro";
 
 function App() {
-  return <>
-  <Cadastro />
-  </>;
+  return (
+    <>
+      <Cadastro />
+      <TabelaUser />
+    </>
+  );
 }
 
 export default App;
