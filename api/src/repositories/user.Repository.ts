@@ -19,7 +19,6 @@ export default class UserRepository implements IUser {
         
       },
     });
-
     return usuario;
   }
 
