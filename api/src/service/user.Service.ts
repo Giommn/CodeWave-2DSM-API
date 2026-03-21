@@ -30,4 +30,17 @@ export default class UserService{
             const  user:ResponseUser=await this.userRepository.createUser(nome,email,senha,nivel_user);
             return user;
            }
-}
+    public async updateUser(id: number, nome?: string, email?: string, senha?: string):Promise<ResponseUser>{
+            if (senha){ 
+                senha = await bcrypt.hash(senha,10)
+            }
+            const user:ResponseUser=await this.userRepository.updateUser(id,nome,email,senha);
+                return user; 
+  
+    }
+    public async deleteUser(id: number):Promise<ResponseUser>{
+        const user:ResponseUser=await this.userRepository.deleteUser(id);
+        return user;
+
+    }
+}  
