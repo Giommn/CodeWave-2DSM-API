@@ -62,8 +62,38 @@ export default class UserController{
     }
     }
 
-
-
+    static async DeleteUser(req:Request,res:Response):Promise<Response>{
+        try{
+            const {id}=req.body
+            const DeleteUser=new UserService(new UserRepository())
+            const resposta:ResponseUser=await DeleteUser.deleteUser(id);
+            return res.status(200).json({
+                status:"Success", 
+                    resposta:resposta
+           })
+        } catch(error){
+          return res.status(400).json({
+              status: 'error',
+              message: error.message
+          })
+        }
+    }
+    static async UpdateUser(req:Request,res:Response):Promise<Response>{
+        try{
+            const {id,name,email,senha}=req.body
+            const UpdateUser=new UserService(new UserRepository())
+            const resposta:ResponseUser=await UpdateUser.updateUser(id,name,email,senha);
+            return res.status(200).json({
+                status: "Success",
+                    resposta:resposta
+            })
+        } catch(error){
+            return res.status(400).json({
+                status: 'error',
+                message: error.message
+          })
+        }
+    }
 
 
 

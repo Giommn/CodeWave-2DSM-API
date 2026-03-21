@@ -95,7 +95,7 @@ export default class UserRepository implements IUser {
 
             return usuario;
           }catch(error){
-           throw PrismaError.verifyError(error)
+            console.log(error) 
           }
 
   }
