@@ -16,9 +16,7 @@ if (!SECRET) {
 export function criarToken(usuario:ResponseUser) {
   return jwt.sign(
     { 
-      id: usuario.id_user,
-      user_name:usuario.user_name,
-      email: usuario.email,
+      id_user:usuario.id_user,
       nivel_user:usuario.nivel_user
     },
     SECRET,
