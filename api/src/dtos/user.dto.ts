@@ -19,11 +19,12 @@ export interface LoginDTO {
 export type NivelUser="ADM" | "USER"
 // Saida
 export interface ResponseUser {
-  id_user: number;
+  id_user?: number;
   user_name: string;
   email: string;
-  nivel_user: string;
+  nivel_user?: string;
 }
+
 
 export interface Auth {
   token: string;
@@ -33,4 +34,3 @@ export interface Auth {
 export interface ResponseUserHash extends ResponseUser{
       user_senha_hash:string
 }
-

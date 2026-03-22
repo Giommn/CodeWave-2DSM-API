@@ -1,26 +1,18 @@
-import { Prisma } from "../generated/prisma";
-export class PrismaError{
-  
-    static  verifyError(erro:unknown){
-    if(erro instanceof Prisma.PrismaClientKnownRequestError)
-       switch(erro.code){
-        case 'P2002':return new Error("Duplicate Elemets");
-        case 'P2025':return new Error("Register Not Found");
-        case 'P2011':return new Error("Camp Obrigatiob");
-        case  'P2003':return new Error("Foreign Key Error")
-        case 'P2014':return new Error("Relation  Error")
-        case 'P2000':return new Error("Value too longo")
-        default: return new Error("500");
-       }
-    else if(erro instanceof Error){
-        switch(erro.message){
-            case 'Invalid information':return erro;
-            default: return new Error("500");
+export class FullError extends Error{
+        public readonly message: string
+        public readonly statusCode:number
+        public readonly code:string
+        constructor(message:string,statusCode:number,code?:string){
+          super(message)
+          this.statusCode=statusCode
+          this.code=code
         }
 
-    }
-
-    }
-   
+        
 }
 
+export class ValidatorError extends FullError{
+  constructor(message:string,statusCode:number,code?:string){
+    super(message,statusCode,code)
+  }
+}
