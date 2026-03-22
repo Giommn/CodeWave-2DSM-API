@@ -24,7 +24,7 @@
     user_senha_hash String @db.VarChar(255)
     data_criacao  DateTime @default(now()) @db.Timestamp(0)
     nivel_user NivelUser @default(USER)
-
+  
     orgaos Orgaos[]
     categoria Categoria[]
     normas Norma[]
@@ -40,6 +40,7 @@
     adm_criador Int
     normas Norma[]
     usuarios  Users @relation(fields: [adm_criador],references: [id_user])
+     @@index([adm_criador])  
     @@map("orgaos")
   }
 
@@ -50,6 +51,7 @@
     data_criacao DateTime @default(now()) @db.Timestamp(0)
     nota_cat Nota_Categoria[]
     usuario Users @relation(fields: [adm_criador],references: [id_user])
+     @@index([adm_criador])  
     @@map("categoria")
   }
 
@@ -72,6 +74,13 @@
     normas_origem      Normas_Referenciadas[] @relation("origem")
     normas_destino     Normas_Referenciadas[] @relation("destino")
     versoes       Normas_Versoes[] 
+     @@index([adm_criador])   
+  @@index([org_criador])   
+  
+  
+  @@index([norm_titulo])  
+  @@index([emissao])      
+  @@index([data_criacao])  
     @@map("normas")
   }
 
@@ -85,7 +94,9 @@
     usuario Users @relation(fields: [adm_criador],references: [id_user])
     normas Norma @relation(fields: [norm_criador],references: [id_norm])
     nota_cat Nota_Categoria[]
-  
+   @@index([adm_criador])
+   @@index([norm_criador])
+   @@index([not_titulo])
     @@map("notas")
   }
 
@@ -94,6 +105,8 @@
     id_nota Int
     id_cat Int
     @@id([id_nota, id_cat])
+    @@index([id_cat])
+    @@index([id_nota])
     cat Categoria @relation(fields: [id_cat],references: [cat_id])
     nota Notas @relation(fields: [id_nota],references: [id_not])
   }
@@ -103,10 +116,11 @@
     norma_destino_id Int
 
     @@id([norma_origem_id, norma_destino_id]) 
-
+  
     norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem")
     norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino")
-
+    @@index([norma_destino_id])
+    @@index([norma_origem_id])
     @@map("normas_referenciadas")
   }
 
@@ -125,6 +139,9 @@
     norma          Norma    @relation(fields: [norma_id], references: [id_norm], onDelete: Cascade)
 
     @@unique([norma_id, versao_numero])
+    @@index([norma_id])
+    @@index([norma_id, versao_numero])   
+     @@index([emissao, norma_id]) 
     @@map("normas_versoes")
   }
 
@@ -135,6 +152,6 @@
   cod_mfa         String   @db.VarChar(255)
   cod_data_cricao DateTime @default(now()) @db.Timestamp(0)
   usuario         Users @relation(fields: [user_id_FK], references: [id_user], onDelete: Cascade)
-
+  @@index([user_id_FK]) 
   @@map("mfa")
 }

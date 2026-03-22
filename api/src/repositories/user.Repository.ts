@@ -1,7 +1,6 @@
 import { prisma } from "../config/prisma";
-import { ResponseUser, ResponseUserHash } from "../dtos/user.dto";
-import { NivelUser} from "../generated/prisma";
-import { PrismaError } from "../help/typeError";
+import { ResponseUser, ResponseUserHash,NivelUser } from "../dtos/user.dto";
+import { ValidatorError } from "../help/typeError";
 import IUser from "../interfaces/user.Interface";
 
 export default class UserRepository implements IUser {
@@ -20,11 +19,12 @@ export default class UserRepository implements IUser {
         
       },
     });
-
+    if (!usuario) throw new ValidatorError(`User not Found`,400,'Not Found');
     return usuario;
   }
 
   public async deleteUser(id: number): Promise<ResponseUser> {
+    try{
     const usuario = await prisma.users.delete({
       where: {
         id_user: id,
@@ -36,9 +36,11 @@ export default class UserRepository implements IUser {
         nivel_user: true,
       },
     });
-
-    if (!usuario) throw new Error(`User not found`);
-    return usuario;
+     return usuario;
+  }catch(erro){
+    throw new ValidatorError(`User not Found`,400,erro.code);
+  }
+   
   }
 
   public async updateUser(
@@ -53,7 +55,6 @@ export default class UserRepository implements IUser {
           id_user: id,
         },
         data: {
-          id_user: id,
           user_name: name != null ? name : undefined,
           email: email != null ? email : undefined,
           user_senha_hash: senha != null ? senha : undefined,
@@ -61,7 +62,7 @@ export default class UserRepository implements IUser {
       });
       return usuario;
     } catch (error) {
-      throw await PrismaError.verifyError(error)
+      throw new ValidatorError("User not Found",400,error.code)
     }
   }
   public async listUser(): Promise<Array<ResponseUser>> {
@@ -73,25 +74,34 @@ export default class UserRepository implements IUser {
         nivel_user: true,
       },
     });
-   
+   if(usuario.length==0)throw new ValidatorError("Not Exists Users",400,"Not Found")
     return usuario;
   }
 
   public async createUser(nome: string, email: string, senha: string,nivel_user:NivelUser): Promise<ResponseUser> {
-    try{
-            const usuario:ResponseUser=await prisma.users.create({
+    try{          
+       const usuario:ResponseUser=await prisma.users.create({
               data:{
                 user_name:nome,
                 email:email,
                 user_senha_hash:senha,
                 nivel_user:nivel_user
-              }
+              },
+              select: {
+        id_user: true,
+        user_name: true,
+        email: true,
+        nivel_user: true
+      
+                    }
             })
-
-            return usuario;
-          }catch(error){
-               throw await PrismaError.verifyError(error)
+            return usuario
+          }catch(erro){
+            throw new ValidatorError("Duplicate Elementes",400,erro.code)
           }
+
+            
+          
 
   }
   
