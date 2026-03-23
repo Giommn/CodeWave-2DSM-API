@@ -1,5 +1,11 @@
+import TelaRequisito from './components/TelaRequisito';
+
 function App() {
-  return <></>;
+  return (
+    <div>
+      <TelaRequisito />
+    </div>
+  );
 }
 
 export default App;
