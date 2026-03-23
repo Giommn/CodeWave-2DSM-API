@@ -1,4 +1,5 @@
-import Select from "react-select";
+import ListaRequisitoCheckBoxCategorizacao from "./ListaRequisitoCheckBoxCategorizacao";
+import ListaRequisitoCheckBoxNorma from "./ListaRequisitoCheckBoxNorma";
 
 const options = [
   { value: "1", label: "Opção 1" },
@@ -39,9 +40,13 @@ function Modal({ isOpen, onClose }: ModalProps) {
               />
             </div>
 
-            <div className="flex gap-4">
-              <Select options={options} isMulti />
-              <Select options={options} isMulti />
+            <div className="flex gap-6 w-full">
+              <div className="w-1/2">
+                <ListaRequisitoCheckBoxCategorizacao />
+              </div>
+              <div className="w-1/2">
+                <ListaRequisitoCheckBoxNorma />
+              </div>
             </div>
 
             <div className="flex flex-col gap-3">
