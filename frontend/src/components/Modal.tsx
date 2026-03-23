@@ -1,48 +1,77 @@
-import React from 'react';
+import Select from "react-select";
 
-// Isso diz ao TypeScript o que o Modal precisa receber para funcionar
+const options = [
+  { value: "1", label: "Opção 1" },
+  { value: "2", label: "Opção 2" },
+];
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 function Modal({ isOpen, onClose }: ModalProps) {
-  // Se o estado for falso (não está aberto), ele não renderiza nada na tela
   if (!isOpen) return null;
 
   return (
-    // Fundo escuro transparente (Overlay) que cobre a tela toda
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-      
-      {/* Caixa do Modal em si */}
-      <div className="bg-white p-6 rounded-xl w-[500px] shadow-lg">
-        
-        {/* Cabeçalho com o botão de fechar */}
-        <div className="flex justify-between items-center border-b border-gray-400 pb-3 mb-4">
-          <h2 className="text-xl font-bold text-black">Meu Modal de Teste</h2>
-          <button 
-            onClick={onClose} 
-            className="text-black font-bold text-xl hover:text-gray-700"
-          >
-            ✕
-          </button>
-        </div>
-        
-        {/* Corpo do Modal */}
-        <p className="text-gray-700">
-          Deu certo! O seu estado do React mudou para "true" e fez este modal aparecer.
-        </p>
-        
-        {/* Botão de fechar no rodapé */}
-        <div className="mt-6 flex justify-end">
-          <button 
-            onClick={onClose}
-            className="bg-[#8a1c32] text-white px-4 py-2 rounded-lg hover:bg-[#6b1526] transition-colors"
-          >
-            Fechar Modal
-          </button>
-        </div>
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 backdrop-blur-[7px]">
+      <div className="w-full h-full  flex justify-center items-center p-4">
+        <section className="bg-[#D9D9D9] w-full max-w-lg rounded-3xl p-8 shadow-md relative ">
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="font-bold text-lg">Adicionando novo requisito:</h2>
+            <button
+              onClick={onClose}
+              className="text-xl font-bold cursor-pointer"
+            >
+              ✕
+            </button>
+          </div>
 
+          <hr className="border-gray-400 mb-6" />
+
+          <div className="flex flex-col gap-4">
+            <div>
+              <label className="text-sm font-semibold ml-2">Título</label>
+              <input
+                type="text"
+                placeholder="Ex: requisito ABC..."
+                className="w-full p-2 px-4 rounded-full border border-gray-400 bg-gray-100 outline-none"
+              />
+            </div>
+
+            <div className="flex gap-4">
+              <Select options={options} isMulti />
+              <Select options={options} isMulti />
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <div>
+                <label className="text-sm font-semibold ml-2">
+                  Interpretação técnica:
+                </label>
+                <textarea className="w-full h-20 p-3 rounded-2xl border border-gray-400 bg-gray-100 resize-none outline-none" />
+              </div>
+
+              <div>
+                <label className="text-sm font-semibold ml-2">
+                  Abordagens aceitáveis:
+                </label>
+                <textarea className="w-full h-20 p-3 rounded-2xl border border-gray-400 bg-gray-100 resize-none outline-none" />
+              </div>
+
+              <div>
+                <label className="text-sm font-semibold ml-2">
+                  Pontos de atenção:
+                </label>
+                <textarea className="w-full h-20 p-3 rounded-2xl border border-gray-400 bg-gray-100 resize-none outline-none" />
+              </div>
+            </div>
+
+            <button className="w-full bg-[#801D33] text-white cursor-pointer font-bold py-3 mt-4 rounded-xl hover:opacity-90 transition-opacity">
+              Cadastrar novo requisito
+            </button>
+          </div>
+        </section>
       </div>
     </div>
   );

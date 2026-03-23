@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Modal from './Modal';
+import { useState } from "react";
+import Modal from "./Modal";
 
 function TelaRequisito() {
   const [modal, setModal] = useState(false);
@@ -15,7 +15,6 @@ function TelaRequisito() {
         crie outro <button> igual a esse logo abaixo.
     */
     <div className="p-10 flex justify-center w-full">
-      
       {/* --- O BOTÃO GIGANTE (O Quadrado) ---
         
         - w-[600px] h-[350px]: Define o tamanho exato do quadrado (largura e altura).
@@ -27,20 +26,19 @@ function TelaRequisito() {
         *DICA DE MARGEM*: Se você quiser apenas empurrar ele um pouco pra baixo, 
         adicione 'mt-10' (margin-top). Se quiser empurrar para a esquerda, adicione 'ml-10'.
       */}
-      <button 
+      <button
         onClick={() => setModal(true)}
         className="w-[600px] h-[350px] bg-[#e5e5e5] rounded-3xl flex items-center justify-center space-x-4 hover:bg-[#d4d4d4] transition-colors cursor-pointer"
       >
-        
         {/* ÍCONE (Símbolo de Mais no círculo) */}
-        <svg 
-          width="50" 
-          height="50" 
-          viewBox="0 0 24 24" 
-          fill="none" 
+        <svg
+          width="50"
+          height="50"
+          viewBox="0 0 24 24"
+          fill="none"
           stroke="#8c8c8c" /* Cor cinza do ícone */
-          strokeWidth="2" 
-          strokeLinecap="round" 
+          strokeWidth="2"
+          strokeLinecap="round"
           strokeLinejoin="round"
         >
           <circle cx="12" cy="12" r="10" />
@@ -52,13 +50,12 @@ function TelaRequisito() {
         <span className="text-4xl font-semibold text-[#8c8c8c]">
           Adicionar requisito
         </span>
-
       </button>
 
       {/* O Modal continua aqui embaixo, sem alterações */}
       <Modal isOpen={modal} onClose={() => setModal(false)} />
     </div>
-  )
+  );
 }
 
 export default TelaRequisito;
