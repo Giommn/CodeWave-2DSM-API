@@ -36,7 +36,7 @@
 
   model Orgaos{
     org_id Int @id @default(autoincrement())
-    org_desc String @db.VarChar(50)
+    org_desc String @unique @db.VarChar(50)
     org_sigla String @db.VarChar(10)
     adm_criador Int
     normas Norma[]
