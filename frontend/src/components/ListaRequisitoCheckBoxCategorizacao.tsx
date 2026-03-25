@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-function ListaRequisitoCheckBoxCategorizacao() {
+interface Props {
+  onChange?: (selecionados: number[]) => void;
+}
+
+function ListaRequisitoCheckBoxCategorizacao({ onChange }: Props) {
   const [estaAberto, setEstaAberto] = useState(false);
   
-  // 1. MEMÓRIA: Busca as categorias salvas ou inicia vazio
+  // 1. Estado para guardar o texto da busca
+  const [termoBusca, setTermoBusca] = useState('');
+
   const [itensSelecionados, setItensSelecionados] = useState<number[]>(() => {
     const salvos = localStorage.getItem('categoriasSelecionadas');
     return salvos ? JSON.parse(salvos) : [];
@@ -19,17 +25,21 @@ function ListaRequisitoCheckBoxCategorizacao() {
 
   const [listaExibicao, setListaExibicao] = useState(categoriasOriginais);
 
-  // 2. SALVAMENTO AUTOMÁTICO
   useEffect(() => {
     localStorage.setItem('categoriasSelecionadas', JSON.stringify(itensSelecionados));
-  }, [itensSelecionados]);
+    if (onChange) {
+      onChange(itensSelecionados);
+    }
+  }, [itensSelecionados, onChange]);
 
-  // 3. REORDENAÇÃO: Roda sempre que o menu é aberto
   useEffect(() => {
     if (estaAberto) {
       const marcados = categoriasOriginais.filter(c => itensSelecionados.includes(c.id));
       const desmarcados = categoriasOriginais.filter(c => !itensSelecionados.includes(c.id));
       setListaExibicao([...marcados, ...desmarcados]);
+    } else {
+      // Limpa a barra de pesquisa ao fechar o menu
+      setTermoBusca('');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [estaAberto]);
@@ -39,6 +49,11 @@ function ListaRequisitoCheckBoxCategorizacao() {
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
   };
+
+  // 2. Filtra as categorias baseadas no que o usuário digitou
+  const itensFiltrados = listaExibicao.filter((item) =>
+    item.titulo.toLowerCase().includes(termoBusca.toLowerCase())
+  );
 
   return (
     <div className="relative w-full font-sans">
@@ -58,22 +73,51 @@ function ListaRequisitoCheckBoxCategorizacao() {
 
       {estaAberto && (
         <div className="absolute top-full left-0 w-full mt-2 bg-[#e5e5e5] border border-gray-300 rounded-xl p-2 shadow-lg z-50">
+          
+          {/* 3. BARRA DE PESQUISA DA CATEGORIA */}
+          <div className="mb-2 relative">
+            <input
+              type="text"
+              placeholder="Buscar categoria..."
+              value={termoBusca}
+              onChange={(e) => setTermoBusca(e.target.value)}
+              className="w-full bg-[#c4c4c4] text-black placeholder-gray-600 rounded-xl py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#8a1c32]"
+            />
+            <svg
+              className="absolute right-3 top-2.5 w-5 h-5 text-black"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth="3"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </div>
+
           <ul className="space-y-1 max-h-48 overflow-y-auto pr-1">
-            {listaExibicao.map((item) => (
-              <li 
-                key={item.id} 
-                className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#d4d4d4] cursor-pointer transition-colors"
-                onClick={() => alternarItem(item.id)}
-              >
-                <input
-                  type="checkbox"
-                  className="w-5 h-5 accent-[#8a1c32] rounded border-gray-400 cursor-pointer shrink-0"
-                  checked={itensSelecionados.includes(item.id)}
-                  onChange={() => {}} 
-                />
-                <span className="text-base text-black font-medium">{item.titulo}</span>
+            {/* 4. Renderiza apenas os itens filtrados */}
+            {itensFiltrados.length > 0 ? (
+              itensFiltrados.map((item) => (
+                <li 
+                  key={item.id} 
+                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#d4d4d4] cursor-pointer transition-colors"
+                  onClick={() => alternarItem(item.id)}
+                >
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 accent-[#8a1c32] rounded border-gray-400 cursor-pointer shrink-0"
+                    checked={itensSelecionados.includes(item.id)}
+                    onChange={() => {}} 
+                  />
+                  <span className="text-base text-black font-medium">{item.titulo}</span>
+                </li>
+              ))
+            ) : (
+              <li className="p-2 text-gray-500 text-sm text-center">
+                Nenhum resultado encontrado.
               </li>
-            ))}
+            )}
           </ul>
         </div>
       )}
