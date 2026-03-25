@@ -30,6 +30,7 @@
     normas Norma[]
     notas Notas[]
     mfa Mfa[]
+    historicoAcessoNormas Historico_Acesso_Normas[]
     @@map("usuarios")
   }
 
@@ -74,6 +75,7 @@
     normas_origem      Normas_Referenciadas[] @relation("origem")
     normas_destino     Normas_Referenciadas[] @relation("destino")
     versoes       Normas_Versoes[] 
+    HistoricoAcessoNormas Historico_Acesso_Normas[]
      @@index([adm_criador])   
   @@index([org_criador])   
   
@@ -154,4 +156,14 @@
   usuario         Users @relation(fields: [user_id_FK], references: [id_user], onDelete: Cascade)
   @@index([user_id_FK]) 
   @@map("mfa")
+}
+
+model Historico_Acesso_Normas{
+   id_user Int 
+   id_norma Int 
+   data_acesso DateTime @default(now())
+   usuarios Users @relation(fields: [id_user],references: [id_user])
+   normas Norma @relation(fields: [id_norma],references: [id_norm])
+   @@id([id_norma,id_user])
+
 }

@@ -21,7 +21,7 @@ export default class UserController{
          return res.status(200).json({
              status:'success',
              resposta:resposta,
-             msg:'Login completed',
+            
              
          })
           
@@ -93,7 +93,7 @@ export default class UserController{
         try{
             const {id,name,email,senha}=req.body
             const resposta:ResponseUser=await UserController.userService.updateUser(id,name,email,senha);
-            return res.status(200).json({
+            return res.status(201).json({
                 status: "Success",
                     resposta:resposta
             })
