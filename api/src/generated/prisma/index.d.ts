@@ -58,6 +58,11 @@ export type Normas_Versoes = $Result.DefaultSelection<Prisma.$Normas_VersoesPayl
  * 
  */
 export type Mfa = $Result.DefaultSelection<Prisma.$MfaPayload>
+/**
+ * Model Historico_Acesso_Normas
+ * 
+ */
+export type Historico_Acesso_Normas = $Result.DefaultSelection<Prisma.$Historico_Acesso_NormasPayload>
 
 /**
  * Enums
@@ -286,6 +291,16 @@ export class PrismaClient<
     * ```
     */
   get mfa(): Prisma.MfaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.historico_Acesso_Normas`: Exposes CRUD operations for the **Historico_Acesso_Normas** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Historico_Acesso_Normas
+    * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.findMany()
+    * ```
+    */
+  get historico_Acesso_Normas(): Prisma.Historico_Acesso_NormasDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -728,7 +743,8 @@ export namespace Prisma {
     Nota_Categoria: 'Nota_Categoria',
     Normas_Referenciadas: 'Normas_Referenciadas',
     Normas_Versoes: 'Normas_Versoes',
-    Mfa: 'Mfa'
+    Mfa: 'Mfa',
+    Historico_Acesso_Normas: 'Historico_Acesso_Normas'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -744,7 +760,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "orgaos" | "categoria" | "norma" | "notas" | "nota_Categoria" | "normas_Referenciadas" | "normas_Versoes" | "mfa"
+      modelProps: "users" | "orgaos" | "categoria" | "norma" | "notas" | "nota_Categoria" | "normas_Referenciadas" | "normas_Versoes" | "mfa" | "historico_Acesso_Normas"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1342,6 +1358,72 @@ export namespace Prisma {
           }
         }
       }
+      Historico_Acesso_Normas: {
+        payload: Prisma.$Historico_Acesso_NormasPayload<ExtArgs>
+        fields: Prisma.Historico_Acesso_NormasFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Historico_Acesso_NormasFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Historico_Acesso_NormasFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload>
+          }
+          findFirst: {
+            args: Prisma.Historico_Acesso_NormasFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Historico_Acesso_NormasFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload>
+          }
+          findMany: {
+            args: Prisma.Historico_Acesso_NormasFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload>[]
+          }
+          create: {
+            args: Prisma.Historico_Acesso_NormasCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload>
+          }
+          createMany: {
+            args: Prisma.Historico_Acesso_NormasCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.Historico_Acesso_NormasDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload>
+          }
+          update: {
+            args: Prisma.Historico_Acesso_NormasUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload>
+          }
+          deleteMany: {
+            args: Prisma.Historico_Acesso_NormasDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Historico_Acesso_NormasUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.Historico_Acesso_NormasUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Historico_Acesso_NormasPayload>
+          }
+          aggregate: {
+            args: Prisma.Historico_Acesso_NormasAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHistorico_Acesso_Normas>
+          }
+          groupBy: {
+            args: Prisma.Historico_Acesso_NormasGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Historico_Acesso_NormasGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Historico_Acesso_NormasCountArgs<ExtArgs>
+            result: $Utils.Optional<Historico_Acesso_NormasCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1459,6 +1541,7 @@ export namespace Prisma {
     normas_Referenciadas?: Normas_ReferenciadasOmit
     normas_Versoes?: Normas_VersoesOmit
     mfa?: MfaOmit
+    historico_Acesso_Normas?: Historico_Acesso_NormasOmit
   }
 
   /* Types for Logging */
@@ -1544,6 +1627,7 @@ export namespace Prisma {
     normas: number
     notas: number
     mfa: number
+    historicoAcessoNormas: number
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1552,6 +1636,7 @@ export namespace Prisma {
     normas?: boolean | UsersCountOutputTypeCountNormasArgs
     notas?: boolean | UsersCountOutputTypeCountNotasArgs
     mfa?: boolean | UsersCountOutputTypeCountMfaArgs
+    historicoAcessoNormas?: boolean | UsersCountOutputTypeCountHistoricoAcessoNormasArgs
   }
 
   // Custom InputTypes
@@ -1598,6 +1683,13 @@ export namespace Prisma {
    */
   export type UsersCountOutputTypeCountMfaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MfaWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountHistoricoAcessoNormasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Historico_Acesso_NormasWhereInput
   }
 
 
@@ -1672,6 +1764,7 @@ export namespace Prisma {
     normas_origem: number
     normas_destino: number
     versoes: number
+    HistoricoAcessoNormas: number
   }
 
   export type NormaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1679,6 +1772,7 @@ export namespace Prisma {
     normas_origem?: boolean | NormaCountOutputTypeCountNormas_origemArgs
     normas_destino?: boolean | NormaCountOutputTypeCountNormas_destinoArgs
     versoes?: boolean | NormaCountOutputTypeCountVersoesArgs
+    HistoricoAcessoNormas?: boolean | NormaCountOutputTypeCountHistoricoAcessoNormasArgs
   }
 
   // Custom InputTypes
@@ -1718,6 +1812,13 @@ export namespace Prisma {
    */
   export type NormaCountOutputTypeCountVersoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Normas_VersoesWhereInput
+  }
+
+  /**
+   * NormaCountOutputType without action
+   */
+  export type NormaCountOutputTypeCountHistoricoAcessoNormasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Historico_Acesso_NormasWhereInput
   }
 
 
@@ -1967,6 +2068,7 @@ export namespace Prisma {
     normas?: boolean | Users$normasArgs<ExtArgs>
     notas?: boolean | Users$notasArgs<ExtArgs>
     mfa?: boolean | Users$mfaArgs<ExtArgs>
+    historicoAcessoNormas?: boolean | Users$historicoAcessoNormasArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["users"]>
 
@@ -1988,6 +2090,7 @@ export namespace Prisma {
     normas?: boolean | Users$normasArgs<ExtArgs>
     notas?: boolean | Users$notasArgs<ExtArgs>
     mfa?: boolean | Users$mfaArgs<ExtArgs>
+    historicoAcessoNormas?: boolean | Users$historicoAcessoNormasArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1999,6 +2102,7 @@ export namespace Prisma {
       normas: Prisma.$NormaPayload<ExtArgs>[]
       notas: Prisma.$NotasPayload<ExtArgs>[]
       mfa: Prisma.$MfaPayload<ExtArgs>[]
+      historicoAcessoNormas: Prisma.$Historico_Acesso_NormasPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_user: number
@@ -2352,6 +2456,7 @@ export namespace Prisma {
     normas<T extends Users$normasArgs<ExtArgs> = {}>(args?: Subset<T, Users$normasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notas<T extends Users$notasArgs<ExtArgs> = {}>(args?: Subset<T, Users$notasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mfa<T extends Users$mfaArgs<ExtArgs> = {}>(args?: Subset<T, Users$mfaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MfaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    historicoAcessoNormas<T extends Users$historicoAcessoNormasArgs<ExtArgs> = {}>(args?: Subset<T, Users$historicoAcessoNormasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2852,6 +2957,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MfaScalarFieldEnum | MfaScalarFieldEnum[]
+  }
+
+  /**
+   * Users.historicoAcessoNormas
+   */
+  export type Users$historicoAcessoNormasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    where?: Historico_Acesso_NormasWhereInput
+    orderBy?: Historico_Acesso_NormasOrderByWithRelationInput | Historico_Acesso_NormasOrderByWithRelationInput[]
+    cursor?: Historico_Acesso_NormasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Historico_Acesso_NormasScalarFieldEnum | Historico_Acesso_NormasScalarFieldEnum[]
   }
 
   /**
@@ -5115,6 +5244,7 @@ export namespace Prisma {
     normas_origem?: boolean | Norma$normas_origemArgs<ExtArgs>
     normas_destino?: boolean | Norma$normas_destinoArgs<ExtArgs>
     versoes?: boolean | Norma$versoesArgs<ExtArgs>
+    HistoricoAcessoNormas?: boolean | Norma$HistoricoAcessoNormasArgs<ExtArgs>
     _count?: boolean | NormaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["norma"]>
 
@@ -5142,6 +5272,7 @@ export namespace Prisma {
     normas_origem?: boolean | Norma$normas_origemArgs<ExtArgs>
     normas_destino?: boolean | Norma$normas_destinoArgs<ExtArgs>
     versoes?: boolean | Norma$versoesArgs<ExtArgs>
+    HistoricoAcessoNormas?: boolean | Norma$HistoricoAcessoNormasArgs<ExtArgs>
     _count?: boolean | NormaCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5154,6 +5285,7 @@ export namespace Prisma {
       normas_origem: Prisma.$Normas_ReferenciadasPayload<ExtArgs>[]
       normas_destino: Prisma.$Normas_ReferenciadasPayload<ExtArgs>[]
       versoes: Prisma.$Normas_VersoesPayload<ExtArgs>[]
+      HistoricoAcessoNormas: Prisma.$Historico_Acesso_NormasPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_norm: number
@@ -5513,6 +5645,7 @@ export namespace Prisma {
     normas_origem<T extends Norma$normas_origemArgs<ExtArgs> = {}>(args?: Subset<T, Norma$normas_origemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Normas_ReferenciadasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     normas_destino<T extends Norma$normas_destinoArgs<ExtArgs> = {}>(args?: Subset<T, Norma$normas_destinoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Normas_ReferenciadasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     versoes<T extends Norma$versoesArgs<ExtArgs> = {}>(args?: Subset<T, Norma$versoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Normas_VersoesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    HistoricoAcessoNormas<T extends Norma$HistoricoAcessoNormasArgs<ExtArgs> = {}>(args?: Subset<T, Norma$HistoricoAcessoNormasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5994,6 +6127,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Normas_VersoesScalarFieldEnum | Normas_VersoesScalarFieldEnum[]
+  }
+
+  /**
+   * Norma.HistoricoAcessoNormas
+   */
+  export type Norma$HistoricoAcessoNormasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    where?: Historico_Acesso_NormasWhereInput
+    orderBy?: Historico_Acesso_NormasOrderByWithRelationInput | Historico_Acesso_NormasOrderByWithRelationInput[]
+    cursor?: Historico_Acesso_NormasWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Historico_Acesso_NormasScalarFieldEnum | Historico_Acesso_NormasScalarFieldEnum[]
   }
 
   /**
@@ -8937,19 +9094,17 @@ export namespace Prisma {
   export type Normas_VersoesAvgAggregateOutputType = {
     id_versao: number | null
     norma_id: number | null
-    versao_numero: number | null
   }
 
   export type Normas_VersoesSumAggregateOutputType = {
     id_versao: number | null
     norma_id: number | null
-    versao_numero: number | null
   }
 
   export type Normas_VersoesMinAggregateOutputType = {
     id_versao: number | null
     norma_id: number | null
-    versao_numero: number | null
+    norma_codigo: string | null
     norm_titulo: string | null
     norm_dec: string | null
     emissao: Date | null
@@ -8962,7 +9117,7 @@ export namespace Prisma {
   export type Normas_VersoesMaxAggregateOutputType = {
     id_versao: number | null
     norma_id: number | null
-    versao_numero: number | null
+    norma_codigo: string | null
     norm_titulo: string | null
     norm_dec: string | null
     emissao: Date | null
@@ -8975,7 +9130,7 @@ export namespace Prisma {
   export type Normas_VersoesCountAggregateOutputType = {
     id_versao: number
     norma_id: number
-    versao_numero: number
+    norma_codigo: number
     norm_titulo: number
     norm_dec: number
     emissao: number
@@ -8990,19 +9145,17 @@ export namespace Prisma {
   export type Normas_VersoesAvgAggregateInputType = {
     id_versao?: true
     norma_id?: true
-    versao_numero?: true
   }
 
   export type Normas_VersoesSumAggregateInputType = {
     id_versao?: true
     norma_id?: true
-    versao_numero?: true
   }
 
   export type Normas_VersoesMinAggregateInputType = {
     id_versao?: true
     norma_id?: true
-    versao_numero?: true
+    norma_codigo?: true
     norm_titulo?: true
     norm_dec?: true
     emissao?: true
@@ -9015,7 +9168,7 @@ export namespace Prisma {
   export type Normas_VersoesMaxAggregateInputType = {
     id_versao?: true
     norma_id?: true
-    versao_numero?: true
+    norma_codigo?: true
     norm_titulo?: true
     norm_dec?: true
     emissao?: true
@@ -9028,7 +9181,7 @@ export namespace Prisma {
   export type Normas_VersoesCountAggregateInputType = {
     id_versao?: true
     norma_id?: true
-    versao_numero?: true
+    norma_codigo?: true
     norm_titulo?: true
     norm_dec?: true
     emissao?: true
@@ -9128,7 +9281,7 @@ export namespace Prisma {
   export type Normas_VersoesGroupByOutputType = {
     id_versao: number
     norma_id: number
-    versao_numero: number
+    norma_codigo: string
     norm_titulo: string
     norm_dec: string
     emissao: Date
@@ -9160,7 +9313,7 @@ export namespace Prisma {
   export type Normas_VersoesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_versao?: boolean
     norma_id?: boolean
-    versao_numero?: boolean
+    norma_codigo?: boolean
     norm_titulo?: boolean
     norm_dec?: boolean
     emissao?: boolean
@@ -9176,7 +9329,7 @@ export namespace Prisma {
   export type Normas_VersoesSelectScalar = {
     id_versao?: boolean
     norma_id?: boolean
-    versao_numero?: boolean
+    norma_codigo?: boolean
     norm_titulo?: boolean
     norm_dec?: boolean
     emissao?: boolean
@@ -9186,7 +9339,7 @@ export namespace Prisma {
     pdf_caminho?: boolean
   }
 
-  export type Normas_VersoesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_versao" | "norma_id" | "versao_numero" | "norm_titulo" | "norm_dec" | "emissao" | "criado_em" | "criado_em_novo" | "pdf_nome_original" | "pdf_caminho", ExtArgs["result"]["normas_Versoes"]>
+  export type Normas_VersoesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_versao" | "norma_id" | "norma_codigo" | "norm_titulo" | "norm_dec" | "emissao" | "criado_em" | "criado_em_novo" | "pdf_nome_original" | "pdf_caminho", ExtArgs["result"]["normas_Versoes"]>
   export type Normas_VersoesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     norma?: boolean | NormaDefaultArgs<ExtArgs>
   }
@@ -9199,7 +9352,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id_versao: number
       norma_id: number
-      versao_numero: number
+      norma_codigo: string
       norm_titulo: string
       norm_dec: string
       emissao: Date
@@ -9579,7 +9732,7 @@ export namespace Prisma {
   interface Normas_VersoesFieldRefs {
     readonly id_versao: FieldRef<"Normas_Versoes", 'Int'>
     readonly norma_id: FieldRef<"Normas_Versoes", 'Int'>
-    readonly versao_numero: FieldRef<"Normas_Versoes", 'Int'>
+    readonly norma_codigo: FieldRef<"Normas_Versoes", 'String'>
     readonly norm_titulo: FieldRef<"Normas_Versoes", 'String'>
     readonly norm_dec: FieldRef<"Normas_Versoes", 'String'>
     readonly emissao: FieldRef<"Normas_Versoes", 'DateTime'>
@@ -10915,6 +11068,960 @@ export namespace Prisma {
 
 
   /**
+   * Model Historico_Acesso_Normas
+   */
+
+  export type AggregateHistorico_Acesso_Normas = {
+    _count: Historico_Acesso_NormasCountAggregateOutputType | null
+    _avg: Historico_Acesso_NormasAvgAggregateOutputType | null
+    _sum: Historico_Acesso_NormasSumAggregateOutputType | null
+    _min: Historico_Acesso_NormasMinAggregateOutputType | null
+    _max: Historico_Acesso_NormasMaxAggregateOutputType | null
+  }
+
+  export type Historico_Acesso_NormasAvgAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type Historico_Acesso_NormasSumAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type Historico_Acesso_NormasMinAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+    data_acesso: Date | null
+  }
+
+  export type Historico_Acesso_NormasMaxAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+    data_acesso: Date | null
+  }
+
+  export type Historico_Acesso_NormasCountAggregateOutputType = {
+    id_user: number
+    id_norma: number
+    data_acesso: number
+    _all: number
+  }
+
+
+  export type Historico_Acesso_NormasAvgAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type Historico_Acesso_NormasSumAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type Historico_Acesso_NormasMinAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_acesso?: true
+  }
+
+  export type Historico_Acesso_NormasMaxAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_acesso?: true
+  }
+
+  export type Historico_Acesso_NormasCountAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_acesso?: true
+    _all?: true
+  }
+
+  export type Historico_Acesso_NormasAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Historico_Acesso_Normas to aggregate.
+     */
+    where?: Historico_Acesso_NormasWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Historico_Acesso_Normas to fetch.
+     */
+    orderBy?: Historico_Acesso_NormasOrderByWithRelationInput | Historico_Acesso_NormasOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Historico_Acesso_NormasWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Historico_Acesso_Normas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Historico_Acesso_Normas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Historico_Acesso_Normas
+    **/
+    _count?: true | Historico_Acesso_NormasCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Historico_Acesso_NormasAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Historico_Acesso_NormasSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Historico_Acesso_NormasMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Historico_Acesso_NormasMaxAggregateInputType
+  }
+
+  export type GetHistorico_Acesso_NormasAggregateType<T extends Historico_Acesso_NormasAggregateArgs> = {
+        [P in keyof T & keyof AggregateHistorico_Acesso_Normas]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHistorico_Acesso_Normas[P]>
+      : GetScalarType<T[P], AggregateHistorico_Acesso_Normas[P]>
+  }
+
+
+
+
+  export type Historico_Acesso_NormasGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Historico_Acesso_NormasWhereInput
+    orderBy?: Historico_Acesso_NormasOrderByWithAggregationInput | Historico_Acesso_NormasOrderByWithAggregationInput[]
+    by: Historico_Acesso_NormasScalarFieldEnum[] | Historico_Acesso_NormasScalarFieldEnum
+    having?: Historico_Acesso_NormasScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Historico_Acesso_NormasCountAggregateInputType | true
+    _avg?: Historico_Acesso_NormasAvgAggregateInputType
+    _sum?: Historico_Acesso_NormasSumAggregateInputType
+    _min?: Historico_Acesso_NormasMinAggregateInputType
+    _max?: Historico_Acesso_NormasMaxAggregateInputType
+  }
+
+  export type Historico_Acesso_NormasGroupByOutputType = {
+    id_user: number
+    id_norma: number
+    data_acesso: Date
+    _count: Historico_Acesso_NormasCountAggregateOutputType | null
+    _avg: Historico_Acesso_NormasAvgAggregateOutputType | null
+    _sum: Historico_Acesso_NormasSumAggregateOutputType | null
+    _min: Historico_Acesso_NormasMinAggregateOutputType | null
+    _max: Historico_Acesso_NormasMaxAggregateOutputType | null
+  }
+
+  type GetHistorico_Acesso_NormasGroupByPayload<T extends Historico_Acesso_NormasGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Historico_Acesso_NormasGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Historico_Acesso_NormasGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Historico_Acesso_NormasGroupByOutputType[P]>
+            : GetScalarType<T[P], Historico_Acesso_NormasGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Historico_Acesso_NormasSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_user?: boolean
+    id_norma?: boolean
+    data_acesso?: boolean
+    usuarios?: boolean | UsersDefaultArgs<ExtArgs>
+    normas?: boolean | NormaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["historico_Acesso_Normas"]>
+
+
+
+  export type Historico_Acesso_NormasSelectScalar = {
+    id_user?: boolean
+    id_norma?: boolean
+    data_acesso?: boolean
+  }
+
+  export type Historico_Acesso_NormasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_user" | "id_norma" | "data_acesso", ExtArgs["result"]["historico_Acesso_Normas"]>
+  export type Historico_Acesso_NormasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuarios?: boolean | UsersDefaultArgs<ExtArgs>
+    normas?: boolean | NormaDefaultArgs<ExtArgs>
+  }
+
+  export type $Historico_Acesso_NormasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Historico_Acesso_Normas"
+    objects: {
+      usuarios: Prisma.$UsersPayload<ExtArgs>
+      normas: Prisma.$NormaPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_user: number
+      id_norma: number
+      data_acesso: Date
+    }, ExtArgs["result"]["historico_Acesso_Normas"]>
+    composites: {}
+  }
+
+  type Historico_Acesso_NormasGetPayload<S extends boolean | null | undefined | Historico_Acesso_NormasDefaultArgs> = $Result.GetResult<Prisma.$Historico_Acesso_NormasPayload, S>
+
+  type Historico_Acesso_NormasCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Historico_Acesso_NormasFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Historico_Acesso_NormasCountAggregateInputType | true
+    }
+
+  export interface Historico_Acesso_NormasDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Historico_Acesso_Normas'], meta: { name: 'Historico_Acesso_Normas' } }
+    /**
+     * Find zero or one Historico_Acesso_Normas that matches the filter.
+     * @param {Historico_Acesso_NormasFindUniqueArgs} args - Arguments to find a Historico_Acesso_Normas
+     * @example
+     * // Get one Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Historico_Acesso_NormasFindUniqueArgs>(args: SelectSubset<T, Historico_Acesso_NormasFindUniqueArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Historico_Acesso_Normas that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Historico_Acesso_NormasFindUniqueOrThrowArgs} args - Arguments to find a Historico_Acesso_Normas
+     * @example
+     * // Get one Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Historico_Acesso_NormasFindUniqueOrThrowArgs>(args: SelectSubset<T, Historico_Acesso_NormasFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Historico_Acesso_Normas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Historico_Acesso_NormasFindFirstArgs} args - Arguments to find a Historico_Acesso_Normas
+     * @example
+     * // Get one Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Historico_Acesso_NormasFindFirstArgs>(args?: SelectSubset<T, Historico_Acesso_NormasFindFirstArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Historico_Acesso_Normas that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Historico_Acesso_NormasFindFirstOrThrowArgs} args - Arguments to find a Historico_Acesso_Normas
+     * @example
+     * // Get one Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Historico_Acesso_NormasFindFirstOrThrowArgs>(args?: SelectSubset<T, Historico_Acesso_NormasFindFirstOrThrowArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Historico_Acesso_Normas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Historico_Acesso_NormasFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.findMany()
+     * 
+     * // Get first 10 Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.findMany({ take: 10 })
+     * 
+     * // Only select the `id_user`
+     * const historico_Acesso_NormasWithId_userOnly = await prisma.historico_Acesso_Normas.findMany({ select: { id_user: true } })
+     * 
+     */
+    findMany<T extends Historico_Acesso_NormasFindManyArgs>(args?: SelectSubset<T, Historico_Acesso_NormasFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Historico_Acesso_Normas.
+     * @param {Historico_Acesso_NormasCreateArgs} args - Arguments to create a Historico_Acesso_Normas.
+     * @example
+     * // Create one Historico_Acesso_Normas
+     * const Historico_Acesso_Normas = await prisma.historico_Acesso_Normas.create({
+     *   data: {
+     *     // ... data to create a Historico_Acesso_Normas
+     *   }
+     * })
+     * 
+     */
+    create<T extends Historico_Acesso_NormasCreateArgs>(args: SelectSubset<T, Historico_Acesso_NormasCreateArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Historico_Acesso_Normas.
+     * @param {Historico_Acesso_NormasCreateManyArgs} args - Arguments to create many Historico_Acesso_Normas.
+     * @example
+     * // Create many Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Historico_Acesso_NormasCreateManyArgs>(args?: SelectSubset<T, Historico_Acesso_NormasCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Historico_Acesso_Normas.
+     * @param {Historico_Acesso_NormasDeleteArgs} args - Arguments to delete one Historico_Acesso_Normas.
+     * @example
+     * // Delete one Historico_Acesso_Normas
+     * const Historico_Acesso_Normas = await prisma.historico_Acesso_Normas.delete({
+     *   where: {
+     *     // ... filter to delete one Historico_Acesso_Normas
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Historico_Acesso_NormasDeleteArgs>(args: SelectSubset<T, Historico_Acesso_NormasDeleteArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Historico_Acesso_Normas.
+     * @param {Historico_Acesso_NormasUpdateArgs} args - Arguments to update one Historico_Acesso_Normas.
+     * @example
+     * // Update one Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Historico_Acesso_NormasUpdateArgs>(args: SelectSubset<T, Historico_Acesso_NormasUpdateArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Historico_Acesso_Normas.
+     * @param {Historico_Acesso_NormasDeleteManyArgs} args - Arguments to filter Historico_Acesso_Normas to delete.
+     * @example
+     * // Delete a few Historico_Acesso_Normas
+     * const { count } = await prisma.historico_Acesso_Normas.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Historico_Acesso_NormasDeleteManyArgs>(args?: SelectSubset<T, Historico_Acesso_NormasDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Historico_Acesso_Normas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Historico_Acesso_NormasUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Historico_Acesso_NormasUpdateManyArgs>(args: SelectSubset<T, Historico_Acesso_NormasUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Historico_Acesso_Normas.
+     * @param {Historico_Acesso_NormasUpsertArgs} args - Arguments to update or create a Historico_Acesso_Normas.
+     * @example
+     * // Update or create a Historico_Acesso_Normas
+     * const historico_Acesso_Normas = await prisma.historico_Acesso_Normas.upsert({
+     *   create: {
+     *     // ... data to create a Historico_Acesso_Normas
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Historico_Acesso_Normas we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Historico_Acesso_NormasUpsertArgs>(args: SelectSubset<T, Historico_Acesso_NormasUpsertArgs<ExtArgs>>): Prisma__Historico_Acesso_NormasClient<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Historico_Acesso_Normas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Historico_Acesso_NormasCountArgs} args - Arguments to filter Historico_Acesso_Normas to count.
+     * @example
+     * // Count the number of Historico_Acesso_Normas
+     * const count = await prisma.historico_Acesso_Normas.count({
+     *   where: {
+     *     // ... the filter for the Historico_Acesso_Normas we want to count
+     *   }
+     * })
+    **/
+    count<T extends Historico_Acesso_NormasCountArgs>(
+      args?: Subset<T, Historico_Acesso_NormasCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Historico_Acesso_NormasCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Historico_Acesso_Normas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Historico_Acesso_NormasAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Historico_Acesso_NormasAggregateArgs>(args: Subset<T, Historico_Acesso_NormasAggregateArgs>): Prisma.PrismaPromise<GetHistorico_Acesso_NormasAggregateType<T>>
+
+    /**
+     * Group by Historico_Acesso_Normas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Historico_Acesso_NormasGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Historico_Acesso_NormasGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Historico_Acesso_NormasGroupByArgs['orderBy'] }
+        : { orderBy?: Historico_Acesso_NormasGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Historico_Acesso_NormasGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHistorico_Acesso_NormasGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Historico_Acesso_Normas model
+   */
+  readonly fields: Historico_Acesso_NormasFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Historico_Acesso_Normas.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Historico_Acesso_NormasClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuarios<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    normas<T extends NormaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NormaDefaultArgs<ExtArgs>>): Prisma__NormaClient<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Historico_Acesso_Normas model
+   */
+  interface Historico_Acesso_NormasFieldRefs {
+    readonly id_user: FieldRef<"Historico_Acesso_Normas", 'Int'>
+    readonly id_norma: FieldRef<"Historico_Acesso_Normas", 'Int'>
+    readonly data_acesso: FieldRef<"Historico_Acesso_Normas", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Historico_Acesso_Normas findUnique
+   */
+  export type Historico_Acesso_NormasFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * Filter, which Historico_Acesso_Normas to fetch.
+     */
+    where: Historico_Acesso_NormasWhereUniqueInput
+  }
+
+  /**
+   * Historico_Acesso_Normas findUniqueOrThrow
+   */
+  export type Historico_Acesso_NormasFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * Filter, which Historico_Acesso_Normas to fetch.
+     */
+    where: Historico_Acesso_NormasWhereUniqueInput
+  }
+
+  /**
+   * Historico_Acesso_Normas findFirst
+   */
+  export type Historico_Acesso_NormasFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * Filter, which Historico_Acesso_Normas to fetch.
+     */
+    where?: Historico_Acesso_NormasWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Historico_Acesso_Normas to fetch.
+     */
+    orderBy?: Historico_Acesso_NormasOrderByWithRelationInput | Historico_Acesso_NormasOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Historico_Acesso_Normas.
+     */
+    cursor?: Historico_Acesso_NormasWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Historico_Acesso_Normas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Historico_Acesso_Normas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Historico_Acesso_Normas.
+     */
+    distinct?: Historico_Acesso_NormasScalarFieldEnum | Historico_Acesso_NormasScalarFieldEnum[]
+  }
+
+  /**
+   * Historico_Acesso_Normas findFirstOrThrow
+   */
+  export type Historico_Acesso_NormasFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * Filter, which Historico_Acesso_Normas to fetch.
+     */
+    where?: Historico_Acesso_NormasWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Historico_Acesso_Normas to fetch.
+     */
+    orderBy?: Historico_Acesso_NormasOrderByWithRelationInput | Historico_Acesso_NormasOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Historico_Acesso_Normas.
+     */
+    cursor?: Historico_Acesso_NormasWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Historico_Acesso_Normas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Historico_Acesso_Normas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Historico_Acesso_Normas.
+     */
+    distinct?: Historico_Acesso_NormasScalarFieldEnum | Historico_Acesso_NormasScalarFieldEnum[]
+  }
+
+  /**
+   * Historico_Acesso_Normas findMany
+   */
+  export type Historico_Acesso_NormasFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * Filter, which Historico_Acesso_Normas to fetch.
+     */
+    where?: Historico_Acesso_NormasWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Historico_Acesso_Normas to fetch.
+     */
+    orderBy?: Historico_Acesso_NormasOrderByWithRelationInput | Historico_Acesso_NormasOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Historico_Acesso_Normas.
+     */
+    cursor?: Historico_Acesso_NormasWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Historico_Acesso_Normas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Historico_Acesso_Normas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Historico_Acesso_Normas.
+     */
+    distinct?: Historico_Acesso_NormasScalarFieldEnum | Historico_Acesso_NormasScalarFieldEnum[]
+  }
+
+  /**
+   * Historico_Acesso_Normas create
+   */
+  export type Historico_Acesso_NormasCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Historico_Acesso_Normas.
+     */
+    data: XOR<Historico_Acesso_NormasCreateInput, Historico_Acesso_NormasUncheckedCreateInput>
+  }
+
+  /**
+   * Historico_Acesso_Normas createMany
+   */
+  export type Historico_Acesso_NormasCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Historico_Acesso_Normas.
+     */
+    data: Historico_Acesso_NormasCreateManyInput | Historico_Acesso_NormasCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Historico_Acesso_Normas update
+   */
+  export type Historico_Acesso_NormasUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Historico_Acesso_Normas.
+     */
+    data: XOR<Historico_Acesso_NormasUpdateInput, Historico_Acesso_NormasUncheckedUpdateInput>
+    /**
+     * Choose, which Historico_Acesso_Normas to update.
+     */
+    where: Historico_Acesso_NormasWhereUniqueInput
+  }
+
+  /**
+   * Historico_Acesso_Normas updateMany
+   */
+  export type Historico_Acesso_NormasUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Historico_Acesso_Normas.
+     */
+    data: XOR<Historico_Acesso_NormasUpdateManyMutationInput, Historico_Acesso_NormasUncheckedUpdateManyInput>
+    /**
+     * Filter which Historico_Acesso_Normas to update
+     */
+    where?: Historico_Acesso_NormasWhereInput
+    /**
+     * Limit how many Historico_Acesso_Normas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Historico_Acesso_Normas upsert
+   */
+  export type Historico_Acesso_NormasUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Historico_Acesso_Normas to update in case it exists.
+     */
+    where: Historico_Acesso_NormasWhereUniqueInput
+    /**
+     * In case the Historico_Acesso_Normas found by the `where` argument doesn't exist, create a new Historico_Acesso_Normas with this data.
+     */
+    create: XOR<Historico_Acesso_NormasCreateInput, Historico_Acesso_NormasUncheckedCreateInput>
+    /**
+     * In case the Historico_Acesso_Normas was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Historico_Acesso_NormasUpdateInput, Historico_Acesso_NormasUncheckedUpdateInput>
+  }
+
+  /**
+   * Historico_Acesso_Normas delete
+   */
+  export type Historico_Acesso_NormasDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+    /**
+     * Filter which Historico_Acesso_Normas to delete.
+     */
+    where: Historico_Acesso_NormasWhereUniqueInput
+  }
+
+  /**
+   * Historico_Acesso_Normas deleteMany
+   */
+  export type Historico_Acesso_NormasDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Historico_Acesso_Normas to delete
+     */
+    where?: Historico_Acesso_NormasWhereInput
+    /**
+     * Limit how many Historico_Acesso_Normas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Historico_Acesso_Normas without action
+   */
+  export type Historico_Acesso_NormasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Historico_Acesso_Normas
+     */
+    select?: Historico_Acesso_NormasSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Historico_Acesso_Normas
+     */
+    omit?: Historico_Acesso_NormasOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Historico_Acesso_NormasInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11008,7 +12115,7 @@ export namespace Prisma {
   export const Normas_VersoesScalarFieldEnum: {
     id_versao: 'id_versao',
     norma_id: 'norma_id',
-    versao_numero: 'versao_numero',
+    norma_codigo: 'norma_codigo',
     norm_titulo: 'norm_titulo',
     norm_dec: 'norm_dec',
     emissao: 'emissao',
@@ -11029,6 +12136,15 @@ export namespace Prisma {
   };
 
   export type MfaScalarFieldEnum = (typeof MfaScalarFieldEnum)[keyof typeof MfaScalarFieldEnum]
+
+
+  export const Historico_Acesso_NormasScalarFieldEnum: {
+    id_user: 'id_user',
+    id_norma: 'id_norma',
+    data_acesso: 'data_acesso'
+  };
+
+  export type Historico_Acesso_NormasScalarFieldEnum = (typeof Historico_Acesso_NormasScalarFieldEnum)[keyof typeof Historico_Acesso_NormasScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11083,6 +12199,7 @@ export namespace Prisma {
 
 
   export const Normas_VersoesOrderByRelevanceFieldEnum: {
+    norma_codigo: 'norma_codigo',
     norm_titulo: 'norm_titulo',
     norm_dec: 'norm_dec',
     pdf_nome_original: 'pdf_nome_original',
@@ -11157,6 +12274,7 @@ export namespace Prisma {
     normas?: NormaListRelationFilter
     notas?: NotasListRelationFilter
     mfa?: MfaListRelationFilter
+    historicoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
   }
 
   export type UsersOrderByWithRelationInput = {
@@ -11171,6 +12289,7 @@ export namespace Prisma {
     normas?: NormaOrderByRelationAggregateInput
     notas?: NotasOrderByRelationAggregateInput
     mfa?: MfaOrderByRelationAggregateInput
+    historicoAcessoNormas?: Historico_Acesso_NormasOrderByRelationAggregateInput
     _relevance?: UsersOrderByRelevanceInput
   }
 
@@ -11189,6 +12308,7 @@ export namespace Prisma {
     normas?: NormaListRelationFilter
     notas?: NotasListRelationFilter
     mfa?: MfaListRelationFilter
+    historicoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
   }, "id_user" | "email">
 
   export type UsersOrderByWithAggregationInput = {
@@ -11241,15 +12361,15 @@ export namespace Prisma {
 
   export type OrgaosWhereUniqueInput = Prisma.AtLeast<{
     org_id?: number
+    org_desc?: string
     AND?: OrgaosWhereInput | OrgaosWhereInput[]
     OR?: OrgaosWhereInput[]
     NOT?: OrgaosWhereInput | OrgaosWhereInput[]
-    org_desc?: StringFilter<"Orgaos"> | string
     org_sigla?: StringFilter<"Orgaos"> | string
     adm_criador?: IntFilter<"Orgaos"> | number
     normas?: NormaListRelationFilter
     usuarios?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-  }, "org_id">
+  }, "org_id" | "org_desc">
 
   export type OrgaosOrderByWithAggregationInput = {
     org_id?: SortOrder
@@ -11350,6 +12470,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasListRelationFilter
     normas_destino?: Normas_ReferenciadasListRelationFilter
     versoes?: Normas_VersoesListRelationFilter
+    HistoricoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
   }
 
   export type NormaOrderByWithRelationInput = {
@@ -11370,6 +12491,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasOrderByRelationAggregateInput
     normas_destino?: Normas_ReferenciadasOrderByRelationAggregateInput
     versoes?: Normas_VersoesOrderByRelationAggregateInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasOrderByRelationAggregateInput
     _relevance?: NormaOrderByRelevanceInput
   }
 
@@ -11394,6 +12516,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasListRelationFilter
     normas_destino?: Normas_ReferenciadasListRelationFilter
     versoes?: Normas_VersoesListRelationFilter
+    HistoricoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
   }, "id_norm" | "norm_codigo">
 
   export type NormaOrderByWithAggregationInput = {
@@ -11599,7 +12722,7 @@ export namespace Prisma {
     NOT?: Normas_VersoesWhereInput | Normas_VersoesWhereInput[]
     id_versao?: IntFilter<"Normas_Versoes"> | number
     norma_id?: IntFilter<"Normas_Versoes"> | number
-    versao_numero?: IntFilter<"Normas_Versoes"> | number
+    norma_codigo?: StringFilter<"Normas_Versoes"> | string
     norm_titulo?: StringFilter<"Normas_Versoes"> | string
     norm_dec?: StringFilter<"Normas_Versoes"> | string
     emissao?: DateTimeFilter<"Normas_Versoes"> | Date | string
@@ -11613,7 +12736,7 @@ export namespace Prisma {
   export type Normas_VersoesOrderByWithRelationInput = {
     id_versao?: SortOrder
     norma_id?: SortOrder
-    versao_numero?: SortOrder
+    norma_codigo?: SortOrder
     norm_titulo?: SortOrder
     norm_dec?: SortOrder
     emissao?: SortOrder
@@ -11627,12 +12750,11 @@ export namespace Prisma {
 
   export type Normas_VersoesWhereUniqueInput = Prisma.AtLeast<{
     id_versao?: number
-    norma_id_versao_numero?: Normas_VersoesNorma_idVersao_numeroCompoundUniqueInput
     AND?: Normas_VersoesWhereInput | Normas_VersoesWhereInput[]
     OR?: Normas_VersoesWhereInput[]
     NOT?: Normas_VersoesWhereInput | Normas_VersoesWhereInput[]
     norma_id?: IntFilter<"Normas_Versoes"> | number
-    versao_numero?: IntFilter<"Normas_Versoes"> | number
+    norma_codigo?: StringFilter<"Normas_Versoes"> | string
     norm_titulo?: StringFilter<"Normas_Versoes"> | string
     norm_dec?: StringFilter<"Normas_Versoes"> | string
     emissao?: DateTimeFilter<"Normas_Versoes"> | Date | string
@@ -11641,12 +12763,12 @@ export namespace Prisma {
     pdf_nome_original?: StringFilter<"Normas_Versoes"> | string
     pdf_caminho?: StringFilter<"Normas_Versoes"> | string
     norma?: XOR<NormaScalarRelationFilter, NormaWhereInput>
-  }, "id_versao" | "norma_id_versao_numero">
+  }, "id_versao">
 
   export type Normas_VersoesOrderByWithAggregationInput = {
     id_versao?: SortOrder
     norma_id?: SortOrder
-    versao_numero?: SortOrder
+    norma_codigo?: SortOrder
     norm_titulo?: SortOrder
     norm_dec?: SortOrder
     emissao?: SortOrder
@@ -11667,7 +12789,7 @@ export namespace Prisma {
     NOT?: Normas_VersoesScalarWhereWithAggregatesInput | Normas_VersoesScalarWhereWithAggregatesInput[]
     id_versao?: IntWithAggregatesFilter<"Normas_Versoes"> | number
     norma_id?: IntWithAggregatesFilter<"Normas_Versoes"> | number
-    versao_numero?: IntWithAggregatesFilter<"Normas_Versoes"> | number
+    norma_codigo?: StringWithAggregatesFilter<"Normas_Versoes"> | string
     norm_titulo?: StringWithAggregatesFilter<"Normas_Versoes"> | string
     norm_dec?: StringWithAggregatesFilter<"Normas_Versoes"> | string
     emissao?: DateTimeWithAggregatesFilter<"Normas_Versoes"> | Date | string
@@ -11730,6 +12852,57 @@ export namespace Prisma {
     cod_data_cricao?: DateTimeWithAggregatesFilter<"Mfa"> | Date | string
   }
 
+  export type Historico_Acesso_NormasWhereInput = {
+    AND?: Historico_Acesso_NormasWhereInput | Historico_Acesso_NormasWhereInput[]
+    OR?: Historico_Acesso_NormasWhereInput[]
+    NOT?: Historico_Acesso_NormasWhereInput | Historico_Acesso_NormasWhereInput[]
+    id_user?: IntFilter<"Historico_Acesso_Normas"> | number
+    id_norma?: IntFilter<"Historico_Acesso_Normas"> | number
+    data_acesso?: DateTimeFilter<"Historico_Acesso_Normas"> | Date | string
+    usuarios?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    normas?: XOR<NormaScalarRelationFilter, NormaWhereInput>
+  }
+
+  export type Historico_Acesso_NormasOrderByWithRelationInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_acesso?: SortOrder
+    usuarios?: UsersOrderByWithRelationInput
+    normas?: NormaOrderByWithRelationInput
+  }
+
+  export type Historico_Acesso_NormasWhereUniqueInput = Prisma.AtLeast<{
+    id_norma_id_user?: Historico_Acesso_NormasId_normaId_userCompoundUniqueInput
+    AND?: Historico_Acesso_NormasWhereInput | Historico_Acesso_NormasWhereInput[]
+    OR?: Historico_Acesso_NormasWhereInput[]
+    NOT?: Historico_Acesso_NormasWhereInput | Historico_Acesso_NormasWhereInput[]
+    id_user?: IntFilter<"Historico_Acesso_Normas"> | number
+    id_norma?: IntFilter<"Historico_Acesso_Normas"> | number
+    data_acesso?: DateTimeFilter<"Historico_Acesso_Normas"> | Date | string
+    usuarios?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    normas?: XOR<NormaScalarRelationFilter, NormaWhereInput>
+  }, "id_norma_id_user">
+
+  export type Historico_Acesso_NormasOrderByWithAggregationInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_acesso?: SortOrder
+    _count?: Historico_Acesso_NormasCountOrderByAggregateInput
+    _avg?: Historico_Acesso_NormasAvgOrderByAggregateInput
+    _max?: Historico_Acesso_NormasMaxOrderByAggregateInput
+    _min?: Historico_Acesso_NormasMinOrderByAggregateInput
+    _sum?: Historico_Acesso_NormasSumOrderByAggregateInput
+  }
+
+  export type Historico_Acesso_NormasScalarWhereWithAggregatesInput = {
+    AND?: Historico_Acesso_NormasScalarWhereWithAggregatesInput | Historico_Acesso_NormasScalarWhereWithAggregatesInput[]
+    OR?: Historico_Acesso_NormasScalarWhereWithAggregatesInput[]
+    NOT?: Historico_Acesso_NormasScalarWhereWithAggregatesInput | Historico_Acesso_NormasScalarWhereWithAggregatesInput[]
+    id_user?: IntWithAggregatesFilter<"Historico_Acesso_Normas"> | number
+    id_norma?: IntWithAggregatesFilter<"Historico_Acesso_Normas"> | number
+    data_acesso?: DateTimeWithAggregatesFilter<"Historico_Acesso_Normas"> | Date | string
+  }
+
   export type UsersCreateInput = {
     user_name: string
     email: string
@@ -11741,6 +12914,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateInput = {
@@ -11755,6 +12929,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUpdateInput = {
@@ -11768,6 +12943,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateInput = {
@@ -11782,6 +12958,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersCreateManyInput = {
@@ -11923,6 +13100,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateInput = {
@@ -11941,6 +13119,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUpdateInput = {
@@ -11958,6 +13137,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateInput = {
@@ -11976,6 +13156,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaCreateManyInput = {
@@ -12148,7 +13329,7 @@ export namespace Prisma {
   }
 
   export type Normas_VersoesCreateInput = {
-    versao_numero: number
+    norma_codigo: string
     norm_titulo: string
     norm_dec: string
     emissao: Date | string
@@ -12162,7 +13343,7 @@ export namespace Prisma {
   export type Normas_VersoesUncheckedCreateInput = {
     id_versao?: number
     norma_id: number
-    versao_numero: number
+    norma_codigo: string
     norm_titulo: string
     norm_dec: string
     emissao: Date | string
@@ -12173,7 +13354,7 @@ export namespace Prisma {
   }
 
   export type Normas_VersoesUpdateInput = {
-    versao_numero?: IntFieldUpdateOperationsInput | number
+    norma_codigo?: StringFieldUpdateOperationsInput | string
     norm_titulo?: StringFieldUpdateOperationsInput | string
     norm_dec?: StringFieldUpdateOperationsInput | string
     emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12187,7 +13368,7 @@ export namespace Prisma {
   export type Normas_VersoesUncheckedUpdateInput = {
     id_versao?: IntFieldUpdateOperationsInput | number
     norma_id?: IntFieldUpdateOperationsInput | number
-    versao_numero?: IntFieldUpdateOperationsInput | number
+    norma_codigo?: StringFieldUpdateOperationsInput | string
     norm_titulo?: StringFieldUpdateOperationsInput | string
     norm_dec?: StringFieldUpdateOperationsInput | string
     emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12200,7 +13381,7 @@ export namespace Prisma {
   export type Normas_VersoesCreateManyInput = {
     id_versao?: number
     norma_id: number
-    versao_numero: number
+    norma_codigo: string
     norm_titulo: string
     norm_dec: string
     emissao: Date | string
@@ -12211,7 +13392,7 @@ export namespace Prisma {
   }
 
   export type Normas_VersoesUpdateManyMutationInput = {
-    versao_numero?: IntFieldUpdateOperationsInput | number
+    norma_codigo?: StringFieldUpdateOperationsInput | string
     norm_titulo?: StringFieldUpdateOperationsInput | string
     norm_dec?: StringFieldUpdateOperationsInput | string
     emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12224,7 +13405,7 @@ export namespace Prisma {
   export type Normas_VersoesUncheckedUpdateManyInput = {
     id_versao?: IntFieldUpdateOperationsInput | number
     norma_id?: IntFieldUpdateOperationsInput | number
-    versao_numero?: IntFieldUpdateOperationsInput | number
+    norma_codigo?: StringFieldUpdateOperationsInput | string
     norm_titulo?: StringFieldUpdateOperationsInput | string
     norm_dec?: StringFieldUpdateOperationsInput | string
     emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12277,6 +13458,46 @@ export namespace Prisma {
     user_id_FK?: IntFieldUpdateOperationsInput | number
     cod_mfa?: StringFieldUpdateOperationsInput | string
     cod_data_cricao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Historico_Acesso_NormasCreateInput = {
+    data_acesso?: Date | string
+    usuarios: UsersCreateNestedOneWithoutHistoricoAcessoNormasInput
+    normas: NormaCreateNestedOneWithoutHistoricoAcessoNormasInput
+  }
+
+  export type Historico_Acesso_NormasUncheckedCreateInput = {
+    id_user: number
+    id_norma: number
+    data_acesso?: Date | string
+  }
+
+  export type Historico_Acesso_NormasUpdateInput = {
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UsersUpdateOneRequiredWithoutHistoricoAcessoNormasNestedInput
+    normas?: NormaUpdateOneRequiredWithoutHistoricoAcessoNormasNestedInput
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Historico_Acesso_NormasCreateManyInput = {
+    id_user: number
+    id_norma: number
+    data_acesso?: Date | string
+  }
+
+  export type Historico_Acesso_NormasUpdateManyMutationInput = {
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateManyInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -12353,6 +13574,12 @@ export namespace Prisma {
     none?: MfaWhereInput
   }
 
+  export type Historico_Acesso_NormasListRelationFilter = {
+    every?: Historico_Acesso_NormasWhereInput
+    some?: Historico_Acesso_NormasWhereInput
+    none?: Historico_Acesso_NormasWhereInput
+  }
+
   export type OrgaosOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -12370,6 +13597,10 @@ export namespace Prisma {
   }
 
   export type MfaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type Historico_Acesso_NormasOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12772,15 +14003,10 @@ export namespace Prisma {
     search: string
   }
 
-  export type Normas_VersoesNorma_idVersao_numeroCompoundUniqueInput = {
-    norma_id: number
-    versao_numero: number
-  }
-
   export type Normas_VersoesCountOrderByAggregateInput = {
     id_versao?: SortOrder
     norma_id?: SortOrder
-    versao_numero?: SortOrder
+    norma_codigo?: SortOrder
     norm_titulo?: SortOrder
     norm_dec?: SortOrder
     emissao?: SortOrder
@@ -12793,13 +14019,12 @@ export namespace Prisma {
   export type Normas_VersoesAvgOrderByAggregateInput = {
     id_versao?: SortOrder
     norma_id?: SortOrder
-    versao_numero?: SortOrder
   }
 
   export type Normas_VersoesMaxOrderByAggregateInput = {
     id_versao?: SortOrder
     norma_id?: SortOrder
-    versao_numero?: SortOrder
+    norma_codigo?: SortOrder
     norm_titulo?: SortOrder
     norm_dec?: SortOrder
     emissao?: SortOrder
@@ -12812,7 +14037,7 @@ export namespace Prisma {
   export type Normas_VersoesMinOrderByAggregateInput = {
     id_versao?: SortOrder
     norma_id?: SortOrder
-    versao_numero?: SortOrder
+    norma_codigo?: SortOrder
     norm_titulo?: SortOrder
     norm_dec?: SortOrder
     emissao?: SortOrder
@@ -12825,7 +14050,6 @@ export namespace Prisma {
   export type Normas_VersoesSumOrderByAggregateInput = {
     id_versao?: SortOrder
     norma_id?: SortOrder
-    versao_numero?: SortOrder
   }
 
   export type MfaOrderByRelevanceInput = {
@@ -12865,6 +14089,39 @@ export namespace Prisma {
     user_id_FK?: SortOrder
   }
 
+  export type Historico_Acesso_NormasId_normaId_userCompoundUniqueInput = {
+    id_norma: number
+    id_user: number
+  }
+
+  export type Historico_Acesso_NormasCountOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_acesso?: SortOrder
+  }
+
+  export type Historico_Acesso_NormasAvgOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
+
+  export type Historico_Acesso_NormasMaxOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_acesso?: SortOrder
+  }
+
+  export type Historico_Acesso_NormasMinOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_acesso?: SortOrder
+  }
+
+  export type Historico_Acesso_NormasSumOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
+
   export type OrgaosCreateNestedManyWithoutUsuariosInput = {
     create?: XOR<OrgaosCreateWithoutUsuariosInput, OrgaosUncheckedCreateWithoutUsuariosInput> | OrgaosCreateWithoutUsuariosInput[] | OrgaosUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: OrgaosCreateOrConnectWithoutUsuariosInput | OrgaosCreateOrConnectWithoutUsuariosInput[]
@@ -12900,6 +14157,13 @@ export namespace Prisma {
     connect?: MfaWhereUniqueInput | MfaWhereUniqueInput[]
   }
 
+  export type Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
+    createMany?: Historico_Acesso_NormasCreateManyUsuariosInputEnvelope
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+  }
+
   export type OrgaosUncheckedCreateNestedManyWithoutUsuariosInput = {
     create?: XOR<OrgaosCreateWithoutUsuariosInput, OrgaosUncheckedCreateWithoutUsuariosInput> | OrgaosCreateWithoutUsuariosInput[] | OrgaosUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: OrgaosCreateOrConnectWithoutUsuariosInput | OrgaosCreateOrConnectWithoutUsuariosInput[]
@@ -12933,6 +14197,13 @@ export namespace Prisma {
     connectOrCreate?: MfaCreateOrConnectWithoutUsuarioInput | MfaCreateOrConnectWithoutUsuarioInput[]
     createMany?: MfaCreateManyUsuarioInputEnvelope
     connect?: MfaWhereUniqueInput | MfaWhereUniqueInput[]
+  }
+
+  export type Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
+    createMany?: Historico_Acesso_NormasCreateManyUsuariosInputEnvelope
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -13017,6 +14288,20 @@ export namespace Prisma {
     deleteMany?: MfaScalarWhereInput | MfaScalarWhereInput[]
   }
 
+  export type Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
+    upsert?: Historico_Acesso_NormasUpsertWithWhereUniqueWithoutUsuariosInput | Historico_Acesso_NormasUpsertWithWhereUniqueWithoutUsuariosInput[]
+    createMany?: Historico_Acesso_NormasCreateManyUsuariosInputEnvelope
+    set?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    disconnect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    delete?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput[]
+    updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput[]
+    deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -13093,6 +14378,20 @@ export namespace Prisma {
     update?: MfaUpdateWithWhereUniqueWithoutUsuarioInput | MfaUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: MfaUpdateManyWithWhereWithoutUsuarioInput | MfaUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: MfaScalarWhereInput | MfaScalarWhereInput[]
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
+    upsert?: Historico_Acesso_NormasUpsertWithWhereUniqueWithoutUsuariosInput | Historico_Acesso_NormasUpsertWithWhereUniqueWithoutUsuariosInput[]
+    createMany?: Historico_Acesso_NormasCreateManyUsuariosInputEnvelope
+    set?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    disconnect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    delete?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput[]
+    updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput[]
+    deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
   }
 
   export type NormaCreateNestedManyWithoutOrgaosInput = {
@@ -13247,6 +14546,13 @@ export namespace Prisma {
     connect?: Normas_VersoesWhereUniqueInput | Normas_VersoesWhereUniqueInput[]
   }
 
+  export type Historico_Acesso_NormasCreateNestedManyWithoutNormasInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutNormasInput, Historico_Acesso_NormasUncheckedCreateWithoutNormasInput> | Historico_Acesso_NormasCreateWithoutNormasInput[] | Historico_Acesso_NormasUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutNormasInput | Historico_Acesso_NormasCreateOrConnectWithoutNormasInput[]
+    createMany?: Historico_Acesso_NormasCreateManyNormasInputEnvelope
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+  }
+
   export type NotasUncheckedCreateNestedManyWithoutNormasInput = {
     create?: XOR<NotasCreateWithoutNormasInput, NotasUncheckedCreateWithoutNormasInput> | NotasCreateWithoutNormasInput[] | NotasUncheckedCreateWithoutNormasInput[]
     connectOrCreate?: NotasCreateOrConnectWithoutNormasInput | NotasCreateOrConnectWithoutNormasInput[]
@@ -13273,6 +14579,13 @@ export namespace Prisma {
     connectOrCreate?: Normas_VersoesCreateOrConnectWithoutNormaInput | Normas_VersoesCreateOrConnectWithoutNormaInput[]
     createMany?: Normas_VersoesCreateManyNormaInputEnvelope
     connect?: Normas_VersoesWhereUniqueInput | Normas_VersoesWhereUniqueInput[]
+  }
+
+  export type Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutNormasInput, Historico_Acesso_NormasUncheckedCreateWithoutNormasInput> | Historico_Acesso_NormasCreateWithoutNormasInput[] | Historico_Acesso_NormasUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutNormasInput | Historico_Acesso_NormasCreateOrConnectWithoutNormasInput[]
+    createMany?: Historico_Acesso_NormasCreateManyNormasInputEnvelope
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
   }
 
   export type NotasUpdateManyWithoutNormasNestedInput = {
@@ -13347,6 +14660,20 @@ export namespace Prisma {
     deleteMany?: Normas_VersoesScalarWhereInput | Normas_VersoesScalarWhereInput[]
   }
 
+  export type Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutNormasInput, Historico_Acesso_NormasUncheckedCreateWithoutNormasInput> | Historico_Acesso_NormasCreateWithoutNormasInput[] | Historico_Acesso_NormasUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutNormasInput | Historico_Acesso_NormasCreateOrConnectWithoutNormasInput[]
+    upsert?: Historico_Acesso_NormasUpsertWithWhereUniqueWithoutNormasInput | Historico_Acesso_NormasUpsertWithWhereUniqueWithoutNormasInput[]
+    createMany?: Historico_Acesso_NormasCreateManyNormasInputEnvelope
+    set?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    disconnect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    delete?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput[]
+    updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput[]
+    deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+  }
+
   export type NotasUncheckedUpdateManyWithoutNormasNestedInput = {
     create?: XOR<NotasCreateWithoutNormasInput, NotasUncheckedCreateWithoutNormasInput> | NotasCreateWithoutNormasInput[] | NotasUncheckedCreateWithoutNormasInput[]
     connectOrCreate?: NotasCreateOrConnectWithoutNormasInput | NotasCreateOrConnectWithoutNormasInput[]
@@ -13401,6 +14728,20 @@ export namespace Prisma {
     update?: Normas_VersoesUpdateWithWhereUniqueWithoutNormaInput | Normas_VersoesUpdateWithWhereUniqueWithoutNormaInput[]
     updateMany?: Normas_VersoesUpdateManyWithWhereWithoutNormaInput | Normas_VersoesUpdateManyWithWhereWithoutNormaInput[]
     deleteMany?: Normas_VersoesScalarWhereInput | Normas_VersoesScalarWhereInput[]
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput = {
+    create?: XOR<Historico_Acesso_NormasCreateWithoutNormasInput, Historico_Acesso_NormasUncheckedCreateWithoutNormasInput> | Historico_Acesso_NormasCreateWithoutNormasInput[] | Historico_Acesso_NormasUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutNormasInput | Historico_Acesso_NormasCreateOrConnectWithoutNormasInput[]
+    upsert?: Historico_Acesso_NormasUpsertWithWhereUniqueWithoutNormasInput | Historico_Acesso_NormasUpsertWithWhereUniqueWithoutNormasInput[]
+    createMany?: Historico_Acesso_NormasCreateManyNormasInputEnvelope
+    set?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    disconnect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    delete?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+    update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput[]
+    updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput[]
+    deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
   }
 
   export type UsersCreateNestedOneWithoutNotasInput = {
@@ -13555,6 +14896,34 @@ export namespace Prisma {
     upsert?: UsersUpsertWithoutMfaInput
     connect?: UsersWhereUniqueInput
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutMfaInput, UsersUpdateWithoutMfaInput>, UsersUncheckedUpdateWithoutMfaInput>
+  }
+
+  export type UsersCreateNestedOneWithoutHistoricoAcessoNormasInput = {
+    create?: XOR<UsersCreateWithoutHistoricoAcessoNormasInput, UsersUncheckedCreateWithoutHistoricoAcessoNormasInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutHistoricoAcessoNormasInput
+    connect?: UsersWhereUniqueInput
+  }
+
+  export type NormaCreateNestedOneWithoutHistoricoAcessoNormasInput = {
+    create?: XOR<NormaCreateWithoutHistoricoAcessoNormasInput, NormaUncheckedCreateWithoutHistoricoAcessoNormasInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutHistoricoAcessoNormasInput
+    connect?: NormaWhereUniqueInput
+  }
+
+  export type UsersUpdateOneRequiredWithoutHistoricoAcessoNormasNestedInput = {
+    create?: XOR<UsersCreateWithoutHistoricoAcessoNormasInput, UsersUncheckedCreateWithoutHistoricoAcessoNormasInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutHistoricoAcessoNormasInput
+    upsert?: UsersUpsertWithoutHistoricoAcessoNormasInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutHistoricoAcessoNormasInput, UsersUpdateWithoutHistoricoAcessoNormasInput>, UsersUncheckedUpdateWithoutHistoricoAcessoNormasInput>
+  }
+
+  export type NormaUpdateOneRequiredWithoutHistoricoAcessoNormasNestedInput = {
+    create?: XOR<NormaCreateWithoutHistoricoAcessoNormasInput, NormaUncheckedCreateWithoutHistoricoAcessoNormasInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutHistoricoAcessoNormasInput
+    upsert?: NormaUpsertWithoutHistoricoAcessoNormasInput
+    connect?: NormaWhereUniqueInput
+    update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutHistoricoAcessoNormasInput, NormaUpdateWithoutHistoricoAcessoNormasInput>, NormaUncheckedUpdateWithoutHistoricoAcessoNormasInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -13730,6 +15099,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutUsuarioInput = {
@@ -13747,6 +15117,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutUsuarioInput = {
@@ -13804,6 +15175,26 @@ export namespace Prisma {
 
   export type MfaCreateManyUsuarioInputEnvelope = {
     data: MfaCreateManyUsuarioInput | MfaCreateManyUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type Historico_Acesso_NormasCreateWithoutUsuariosInput = {
+    data_acesso?: Date | string
+    normas: NormaCreateNestedOneWithoutHistoricoAcessoNormasInput
+  }
+
+  export type Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput = {
+    id_norma: number
+    data_acesso?: Date | string
+  }
+
+  export type Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput = {
+    where: Historico_Acesso_NormasWhereUniqueInput
+    create: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput>
+  }
+
+  export type Historico_Acesso_NormasCreateManyUsuariosInputEnvelope = {
+    data: Historico_Acesso_NormasCreateManyUsuariosInput | Historico_Acesso_NormasCreateManyUsuariosInput[]
     skipDuplicates?: boolean
   }
 
@@ -13946,6 +15337,31 @@ export namespace Prisma {
     cod_data_cricao?: DateTimeFilter<"Mfa"> | Date | string
   }
 
+  export type Historico_Acesso_NormasUpsertWithWhereUniqueWithoutUsuariosInput = {
+    where: Historico_Acesso_NormasWhereUniqueInput
+    update: XOR<Historico_Acesso_NormasUpdateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedUpdateWithoutUsuariosInput>
+    create: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput>
+  }
+
+  export type Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput = {
+    where: Historico_Acesso_NormasWhereUniqueInput
+    data: XOR<Historico_Acesso_NormasUpdateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedUpdateWithoutUsuariosInput>
+  }
+
+  export type Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput = {
+    where: Historico_Acesso_NormasScalarWhereInput
+    data: XOR<Historico_Acesso_NormasUpdateManyMutationInput, Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosInput>
+  }
+
+  export type Historico_Acesso_NormasScalarWhereInput = {
+    AND?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+    OR?: Historico_Acesso_NormasScalarWhereInput[]
+    NOT?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+    id_user?: IntFilter<"Historico_Acesso_Normas"> | number
+    id_norma?: IntFilter<"Historico_Acesso_Normas"> | number
+    data_acesso?: DateTimeFilter<"Historico_Acesso_Normas"> | Date | string
+  }
+
   export type NormaCreateWithoutOrgaosInput = {
     norm_titulo: string
     norm_desc: string
@@ -13960,6 +15376,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutOrgaosInput = {
@@ -13977,6 +15394,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutOrgaosInput = {
@@ -13999,6 +15417,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutOrgaosInput = {
@@ -14012,6 +15431,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutOrgaosInput = {
@@ -14056,6 +15476,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutOrgaosInput = {
@@ -14069,6 +15490,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type Nota_CategoriaCreateWithoutCatInput = {
@@ -14099,6 +15521,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutCategoriaInput = {
@@ -14112,6 +15535,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutCategoriaInput = {
@@ -14164,6 +15588,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutCategoriaInput = {
@@ -14177,6 +15602,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type NotasCreateWithoutNormasInput = {
@@ -14216,6 +15642,7 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutNormasInput = {
@@ -14229,6 +15656,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutNormasInput = {
@@ -14291,7 +15719,7 @@ export namespace Prisma {
   }
 
   export type Normas_VersoesCreateWithoutNormaInput = {
-    versao_numero: number
+    norma_codigo: string
     norm_titulo: string
     norm_dec: string
     emissao: Date | string
@@ -14303,7 +15731,7 @@ export namespace Prisma {
 
   export type Normas_VersoesUncheckedCreateWithoutNormaInput = {
     id_versao?: number
-    versao_numero: number
+    norma_codigo: string
     norm_titulo: string
     norm_dec: string
     emissao: Date | string
@@ -14320,6 +15748,26 @@ export namespace Prisma {
 
   export type Normas_VersoesCreateManyNormaInputEnvelope = {
     data: Normas_VersoesCreateManyNormaInput | Normas_VersoesCreateManyNormaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type Historico_Acesso_NormasCreateWithoutNormasInput = {
+    data_acesso?: Date | string
+    usuarios: UsersCreateNestedOneWithoutHistoricoAcessoNormasInput
+  }
+
+  export type Historico_Acesso_NormasUncheckedCreateWithoutNormasInput = {
+    id_user: number
+    data_acesso?: Date | string
+  }
+
+  export type Historico_Acesso_NormasCreateOrConnectWithoutNormasInput = {
+    where: Historico_Acesso_NormasWhereUniqueInput
+    create: XOR<Historico_Acesso_NormasCreateWithoutNormasInput, Historico_Acesso_NormasUncheckedCreateWithoutNormasInput>
+  }
+
+  export type Historico_Acesso_NormasCreateManyNormasInputEnvelope = {
+    data: Historico_Acesso_NormasCreateManyNormasInput | Historico_Acesso_NormasCreateManyNormasInput[]
     skipDuplicates?: boolean
   }
 
@@ -14360,6 +15808,7 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutNormasInput = {
@@ -14373,6 +15822,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type OrgaosUpsertWithoutNormasInput = {
@@ -14461,7 +15911,7 @@ export namespace Prisma {
     NOT?: Normas_VersoesScalarWhereInput | Normas_VersoesScalarWhereInput[]
     id_versao?: IntFilter<"Normas_Versoes"> | number
     norma_id?: IntFilter<"Normas_Versoes"> | number
-    versao_numero?: IntFilter<"Normas_Versoes"> | number
+    norma_codigo?: StringFilter<"Normas_Versoes"> | string
     norm_titulo?: StringFilter<"Normas_Versoes"> | string
     norm_dec?: StringFilter<"Normas_Versoes"> | string
     emissao?: DateTimeFilter<"Normas_Versoes"> | Date | string
@@ -14469,6 +15919,22 @@ export namespace Prisma {
     criado_em_novo?: DateTimeFilter<"Normas_Versoes"> | Date | string
     pdf_nome_original?: StringFilter<"Normas_Versoes"> | string
     pdf_caminho?: StringFilter<"Normas_Versoes"> | string
+  }
+
+  export type Historico_Acesso_NormasUpsertWithWhereUniqueWithoutNormasInput = {
+    where: Historico_Acesso_NormasWhereUniqueInput
+    update: XOR<Historico_Acesso_NormasUpdateWithoutNormasInput, Historico_Acesso_NormasUncheckedUpdateWithoutNormasInput>
+    create: XOR<Historico_Acesso_NormasCreateWithoutNormasInput, Historico_Acesso_NormasUncheckedCreateWithoutNormasInput>
+  }
+
+  export type Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput = {
+    where: Historico_Acesso_NormasWhereUniqueInput
+    data: XOR<Historico_Acesso_NormasUpdateWithoutNormasInput, Historico_Acesso_NormasUncheckedUpdateWithoutNormasInput>
+  }
+
+  export type Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput = {
+    where: Historico_Acesso_NormasScalarWhereInput
+    data: XOR<Historico_Acesso_NormasUpdateManyMutationInput, Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasInput>
   }
 
   export type UsersCreateWithoutNotasInput = {
@@ -14481,6 +15947,7 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutNotasInput = {
@@ -14494,6 +15961,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutNotasInput = {
@@ -14515,6 +15983,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutNotasInput = {
@@ -14532,6 +16001,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutNotasInput = {
@@ -14578,6 +16048,7 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutNotasInput = {
@@ -14591,6 +16062,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type NormaUpsertWithoutNotasInput = {
@@ -14618,6 +16090,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutNotasInput = {
@@ -14635,6 +16108,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type Nota_CategoriaUpsertWithWhereUniqueWithoutNotaInput = {
@@ -14759,6 +16233,7 @@ export namespace Prisma {
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutNormas_origemInput = {
@@ -14776,6 +16251,7 @@ export namespace Prisma {
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutNormas_origemInput = {
@@ -14797,6 +16273,7 @@ export namespace Prisma {
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutNormas_destinoInput = {
@@ -14814,6 +16291,7 @@ export namespace Prisma {
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutNormas_destinoInput = {
@@ -14846,6 +16324,7 @@ export namespace Prisma {
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutNormas_origemInput = {
@@ -14863,6 +16342,7 @@ export namespace Prisma {
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUpsertWithoutNormas_destinoInput = {
@@ -14890,6 +16370,7 @@ export namespace Prisma {
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutNormas_destinoInput = {
@@ -14907,6 +16388,7 @@ export namespace Prisma {
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaCreateWithoutVersoesInput = {
@@ -14923,6 +16405,7 @@ export namespace Prisma {
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutVersoesInput = {
@@ -14940,6 +16423,7 @@ export namespace Prisma {
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutVersoesInput = {
@@ -14972,6 +16456,7 @@ export namespace Prisma {
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutVersoesInput = {
@@ -14989,6 +16474,7 @@ export namespace Prisma {
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type UsersCreateWithoutMfaInput = {
@@ -15001,6 +16487,7 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutMfaInput = {
@@ -15014,6 +16501,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutMfaInput = {
@@ -15042,6 +16530,7 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutMfaInput = {
@@ -15055,6 +16544,163 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type UsersCreateWithoutHistoricoAcessoNormasInput = {
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
+    normas?: NormaCreateNestedManyWithoutUsuarioInput
+    notas?: NotasCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsersUncheckedCreateWithoutHistoricoAcessoNormasInput = {
+    id_user?: number
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosUncheckedCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
+    normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
+    notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsersCreateOrConnectWithoutHistoricoAcessoNormasInput = {
+    where: UsersWhereUniqueInput
+    create: XOR<UsersCreateWithoutHistoricoAcessoNormasInput, UsersUncheckedCreateWithoutHistoricoAcessoNormasInput>
+  }
+
+  export type NormaCreateWithoutHistoricoAcessoNormasInput = {
+    norm_titulo: string
+    norm_desc: string
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasCreateNestedManyWithoutNormasInput
+    usuario: UsersCreateNestedOneWithoutNormasInput
+    orgaos: OrgaosCreateNestedOneWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+  }
+
+  export type NormaUncheckedCreateWithoutHistoricoAcessoNormasInput = {
+    id_norm?: number
+    norm_titulo: string
+    norm_desc: string
+    org_criador: number
+    adm_criador: number
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+  }
+
+  export type NormaCreateOrConnectWithoutHistoricoAcessoNormasInput = {
+    where: NormaWhereUniqueInput
+    create: XOR<NormaCreateWithoutHistoricoAcessoNormasInput, NormaUncheckedCreateWithoutHistoricoAcessoNormasInput>
+  }
+
+  export type UsersUpsertWithoutHistoricoAcessoNormasInput = {
+    update: XOR<UsersUpdateWithoutHistoricoAcessoNormasInput, UsersUncheckedUpdateWithoutHistoricoAcessoNormasInput>
+    create: XOR<UsersCreateWithoutHistoricoAcessoNormasInput, UsersUncheckedCreateWithoutHistoricoAcessoNormasInput>
+    where?: UsersWhereInput
+  }
+
+  export type UsersUpdateToOneWithWhereWithoutHistoricoAcessoNormasInput = {
+    where?: UsersWhereInput
+    data: XOR<UsersUpdateWithoutHistoricoAcessoNormasInput, UsersUncheckedUpdateWithoutHistoricoAcessoNormasInput>
+  }
+
+  export type UsersUpdateWithoutHistoricoAcessoNormasInput = {
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type UsersUncheckedUpdateWithoutHistoricoAcessoNormasInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUncheckedUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type NormaUpsertWithoutHistoricoAcessoNormasInput = {
+    update: XOR<NormaUpdateWithoutHistoricoAcessoNormasInput, NormaUncheckedUpdateWithoutHistoricoAcessoNormasInput>
+    create: XOR<NormaCreateWithoutHistoricoAcessoNormasInput, NormaUncheckedCreateWithoutHistoricoAcessoNormasInput>
+    where?: NormaWhereInput
+  }
+
+  export type NormaUpdateToOneWithWhereWithoutHistoricoAcessoNormasInput = {
+    where?: NormaWhereInput
+    data: XOR<NormaUpdateWithoutHistoricoAcessoNormasInput, NormaUncheckedUpdateWithoutHistoricoAcessoNormasInput>
+  }
+
+  export type NormaUpdateWithoutHistoricoAcessoNormasInput = {
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUpdateManyWithoutNormasNestedInput
+    usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
+    orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+  }
+
+  export type NormaUncheckedUpdateWithoutHistoricoAcessoNormasInput = {
+    id_norm?: IntFieldUpdateOperationsInput | number
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    org_criador?: IntFieldUpdateOperationsInput | number
+    adm_criador?: IntFieldUpdateOperationsInput | number
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
   }
 
   export type OrgaosCreateManyUsuariosInput = {
@@ -15094,6 +16740,11 @@ export namespace Prisma {
     id?: number
     cod_mfa: string
     cod_data_cricao?: Date | string
+  }
+
+  export type Historico_Acesso_NormasCreateManyUsuariosInput = {
+    id_norma: number
+    data_acesso?: Date | string
   }
 
   export type OrgaosUpdateWithoutUsuariosInput = {
@@ -15148,6 +16799,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutUsuarioInput = {
@@ -15165,6 +16817,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateManyWithoutUsuarioInput = {
@@ -15222,6 +16875,21 @@ export namespace Prisma {
     cod_data_cricao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type Historico_Acesso_NormasUpdateWithoutUsuariosInput = {
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+    normas?: NormaUpdateOneRequiredWithoutHistoricoAcessoNormasNestedInput
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateWithoutUsuariosInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type NormaCreateManyOrgaosInput = {
     id_norm?: number
     norm_titulo: string
@@ -15249,6 +16917,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutOrgaosInput = {
@@ -15266,6 +16935,7 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateManyWithoutOrgaosInput = {
@@ -15315,7 +16985,7 @@ export namespace Prisma {
 
   export type Normas_VersoesCreateManyNormaInput = {
     id_versao?: number
-    versao_numero: number
+    norma_codigo: string
     norm_titulo: string
     norm_dec: string
     emissao: Date | string
@@ -15323,6 +16993,11 @@ export namespace Prisma {
     criado_em_novo?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
+  }
+
+  export type Historico_Acesso_NormasCreateManyNormasInput = {
+    id_user: number
+    data_acesso?: Date | string
   }
 
   export type NotasUpdateWithoutNormasInput = {
@@ -15375,7 +17050,7 @@ export namespace Prisma {
   }
 
   export type Normas_VersoesUpdateWithoutNormaInput = {
-    versao_numero?: IntFieldUpdateOperationsInput | number
+    norma_codigo?: StringFieldUpdateOperationsInput | string
     norm_titulo?: StringFieldUpdateOperationsInput | string
     norm_dec?: StringFieldUpdateOperationsInput | string
     emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15387,7 +17062,7 @@ export namespace Prisma {
 
   export type Normas_VersoesUncheckedUpdateWithoutNormaInput = {
     id_versao?: IntFieldUpdateOperationsInput | number
-    versao_numero?: IntFieldUpdateOperationsInput | number
+    norma_codigo?: StringFieldUpdateOperationsInput | string
     norm_titulo?: StringFieldUpdateOperationsInput | string
     norm_dec?: StringFieldUpdateOperationsInput | string
     emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15399,7 +17074,7 @@ export namespace Prisma {
 
   export type Normas_VersoesUncheckedUpdateManyWithoutNormaInput = {
     id_versao?: IntFieldUpdateOperationsInput | number
-    versao_numero?: IntFieldUpdateOperationsInput | number
+    norma_codigo?: StringFieldUpdateOperationsInput | string
     norm_titulo?: StringFieldUpdateOperationsInput | string
     norm_dec?: StringFieldUpdateOperationsInput | string
     emissao?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15407,6 +17082,21 @@ export namespace Prisma {
     criado_em_novo?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type Historico_Acesso_NormasUpdateWithoutNormasInput = {
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UsersUpdateOneRequiredWithoutHistoricoAcessoNormasNestedInput
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateWithoutNormasInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Nota_CategoriaCreateManyNotaInput = {

@@ -30,7 +30,7 @@ export default class UserRepository implements IUser {
         where: { id_user: id },
         select: { id_user: true, user_name: true, email: true, nivel_user: true },
       });
-    } catch (erro: any) {
+    } catch (erro) {
       throw new ValidatorError(`User not Found`, 400, erro.code);
     }
   }
@@ -46,7 +46,7 @@ export default class UserRepository implements IUser {
         },
         select: { id_user: true, user_name: true, email: true, nivel_user: true }
       });
-    } catch (error: any) {
+    } catch (error) {
       throw new ValidatorError("User not Found", 400, error.code);
     }
   }

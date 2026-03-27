@@ -25,23 +25,25 @@ model Users {
   data_criacao    DateTime  @default(now()) @db.Timestamp(0)
   nivel_user      NivelUser @default(USER)
 
-  orgaos    Orgaos[]
-  categoria Categoria[]
-  normas    Norma[]
-  notas     Notas[]
-  mfa       Mfa[]
+  orgaos                Orgaos[]
+  categoria             Categoria[]
+  normas                Norma[]
+  notas                 Notas[]
+  mfa                   Mfa[]
+  historicoAcessoNormas Historico_Acesso_Normas[]
 
   @@map("usuarios")
 }
 
 model Orgaos {
   org_id      Int     @id @default(autoincrement())
-  org_desc    String  @db.VarChar(50)
+  org_desc    String  @unique @db.VarChar(50)
   org_sigla   String  @db.VarChar(10)
   adm_criador Int
   normas      Norma[]
   usuarios    Users   @relation(fields: [adm_criador], references: [id_user])
 
+  @@index([adm_criador])
   @@map("orgaos")
 }
 
@@ -53,28 +55,35 @@ model Categoria {
   nota_cat     Nota_Categoria[]
   usuario      Users            @relation(fields: [adm_criador], references: [id_user])
 
+  @@index([adm_criador])
   @@map("categoria")
 }
 
 model Norma {
-  id_norm           Int                    @id @default(autoincrement())
-  norm_titulo       String                 @db.VarChar(100)
-  norm_desc         String                 @db.Text
-  org_criador       Int
-  adm_criador       Int
-  emissao           DateTime
-  norm_codigo       String                 @unique @db.VarChar(50)
-  data_criacao      DateTime               @default(now()) @db.Timestamp(0)
-  data_update       DateTime               @default(now()) @db.Timestamp(0)
-  notas             Notas[]
-  pdf_nome_original String                 @db.VarChar(255)
-  pdf_caminho       String                 @db.VarChar(500)
-  usuario           Users                  @relation(fields: [adm_criador], references: [id_user])
-  orgaos            Orgaos                 @relation(fields: [org_criador], references: [org_id])
-  normas_origem     Normas_Referenciadas[] @relation("origem")
-  normas_destino    Normas_Referenciadas[] @relation("destino")
-  versoes           Normas_Versoes[]
+  id_norm               Int                       @id @default(autoincrement())
+  norm_titulo           String                    @db.VarChar(100)
+  norm_desc             String                    @db.Text
+  org_criador           Int
+  adm_criador           Int
+  emissao               DateTime                  @db.Date
+  norm_codigo           String                    @unique @db.VarChar(50)
+  data_criacao          DateTime                  @default(now()) @db.Timestamp(0)
+  data_update           DateTime                  @default(now()) @updatedAt @db.Timestamp(0)
+  notas                 Notas[]
+  pdf_nome_original     String                    @db.VarChar(255)
+  pdf_caminho           String                    @db.VarChar(500)
+  usuario               Users                     @relation(fields: [adm_criador], references: [id_user])
+  orgaos                Orgaos                    @relation(fields: [org_criador], references: [org_id])
+  normas_origem         Normas_Referenciadas[]    @relation("origem")
+  normas_destino        Normas_Referenciadas[]    @relation("destino")
+  versoes               Normas_Versoes[]
+  HistoricoAcessoNormas Historico_Acesso_Normas[]
 
+  @@index([adm_criador])
+  @@index([org_criador])
+  @@index([norm_titulo])
+  @@index([emissao])
+  @@index([data_criacao])
   @@map("normas")
 }
 
@@ -89,6 +98,9 @@ model Notas {
   normas       Norma            @relation(fields: [norm_criador], references: [id_norm])
   nota_cat     Nota_Categoria[]
 
+  @@index([adm_criador])
+  @@index([norm_criador])
+  @@index([not_titulo])
   @@map("notas")
 }
 
@@ -99,6 +111,8 @@ model Nota_Categoria {
   nota    Notas     @relation(fields: [id_nota], references: [id_not])
 
   @@id([id_nota, id_cat])
+  @@index([id_cat])
+  @@index([id_nota])
 }
 
 model Normas_Referenciadas {
@@ -109,13 +123,15 @@ model Normas_Referenciadas {
   norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino")
 
   @@id([norma_origem_id, norma_destino_id])
+  @@index([norma_destino_id])
+  @@index([norma_origem_id])
   @@map("normas_referenciadas")
 }
 
 model Normas_Versoes {
   id_versao         Int      @id @default(autoincrement())
   norma_id          Int
-  versao_numero     Int
+  norma_codigo      String   @db.VarChar(50)
   norm_titulo       String   @db.VarChar(50)
   norm_dec          String   @db.VarChar(500)
   emissao           DateTime @db.Date
@@ -125,7 +141,8 @@ model Normas_Versoes {
   pdf_caminho       String   @db.VarChar(500)
   norma             Norma    @relation(fields: [norma_id], references: [id_norm], onDelete: Cascade)
 
-  @@unique([norma_id, versao_numero])
+  @@index([norma_id])
+  @@index([norma_codigo])
   @@map("normas_versoes")
 }
 
@@ -136,5 +153,16 @@ model Mfa {
   cod_data_cricao DateTime @default(now()) @db.Timestamp(0)
   usuario         Users    @relation(fields: [user_id_FK], references: [id_user], onDelete: Cascade)
 
+  @@index([user_id_FK])
   @@map("mfa")
+}
+
+model Historico_Acesso_Normas {
+  id_user     Int
+  id_norma    Int
+  data_acesso DateTime @default(now())
+  usuarios    Users    @relation(fields: [id_user], references: [id_user])
+  normas      Norma    @relation(fields: [id_norma], references: [id_norm])
+
+  @@id([id_norma, id_user])
 }

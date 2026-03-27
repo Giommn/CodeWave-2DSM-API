@@ -63,10 +63,10 @@
     norm_desc String @db.Text
     org_criador Int
     adm_criador Int
-    emissao  DateTime
+    emissao  DateTime @db.Date
     norm_codigo String @db.VarChar(50) @unique
     data_criacao DateTime @default(now()) @db.Timestamp(0)
-    data_update  DateTime @default(now()) @db.Timestamp(0)
+    data_update  DateTime @default(now()) @db.Timestamp(0) @updatedAt
     notas Notas[]
     pdf_nome_original String @db.VarChar(255)  
     pdf_caminho       String @db.VarChar(500) 
@@ -130,7 +130,7 @@
   model Normas_Versoes {
   id_versao      Int      @id @default(autoincrement())
     norma_id       Int
-    versao_numero  Int
+    norma_codigo String @db.VarChar(50) 
     norm_titulo    String   @db.VarChar(50)
     norm_dec       String   @db.VarChar(500)
     emissao        DateTime @db.Date
@@ -140,10 +140,8 @@
     pdf_caminho       String @db.VarChar(500) 
     norma          Norma    @relation(fields: [norma_id], references: [id_norm], onDelete: Cascade)
 
-    @@unique([norma_id, versao_numero])
-    @@index([norma_id])
-    @@index([norma_id, versao_numero])   
-     @@index([emissao, norma_id]) 
+     @@index([norma_id]) 
+     @@index([norma_codigo])
     @@map("normas_versoes")
   }
 
