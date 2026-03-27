@@ -229,5 +229,40 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
         throw new ValidatorError("Não foi possível salvar no histórico", 400, erro.message);
     }
     }
-   
-}
+    public async getHistocNorms(id_user: number): Promise<Array<ResponseNorm>> {
+        const normas= await prisma.historico_Acesso_Normas.findMany({
+            where: {id_user:id_user},
+            take:10,
+            orderBy:{
+                data_acesso:'desc'
+            },
+            select:{
+               normas:{
+                   select:{
+                    id_norm:true,
+                    norm_titulo:true,
+                    norm_desc:true,
+                    norm_codigo:true,
+                    emissao:true,
+                    orgaos:{select:{org_desc:true}},
+                    usuario:{select:{user_name:true}},
+                    normas_origem:{
+                        select:{norma_destino:{select:{norm_titulo:true}}}
+                    }
+                   }
+               }
+            }
+        })
+        return normas.map(n=>{
+      return{
+        norm_titulo: n.normas.norm_titulo,
+        norm_desc: n.normas.norm_desc,
+        norm_codigo: n.normas.norm_codigo,
+        org_criador: n.normas.orgaos.org_desc, 
+        emissao: n.normas.emissao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
+        adm_criador:n.normas.usuario.user_name,
+        id_norm:n.normas.id_norm,
+        referencias:n.normas.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
+    }});
+        } 
+    }
