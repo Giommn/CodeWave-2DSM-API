@@ -29,10 +29,10 @@ export default class NormRepository implements INorm {
                                 usuarios: { connect: { id_user: norma.adm_criador } },
                             }
                         },
-                        normas_origem: {
+                    },
+                 normas_origem: {
                     create: norma.referencias?.map(id => ({ norma_destino_id: id }))
                 }
-                    },
                 },
                 select: {
                     norm_titulo: true,
@@ -71,10 +71,10 @@ export default class NormRepository implements INorm {
         }
     }
 
-    public async deleteNorm(id: string, norm_codigo: string): Promise<ResponseNorm> {
+    public async deleteNorm(id: number): Promise<ResponseNorm> {
         try {
             const norma = await prisma.norma.delete({
-                where: { norm_codigo: norm_codigo },
+                where: { id_norm:id },
                 select: {
                     norm_titulo: true,
                     norm_desc: true,
@@ -229,7 +229,7 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
         throw new ValidatorError("Não foi possível salvar no histórico", 400, erro.message);
     }
     }
-    public async getHistocNorms(id_user: number): Promise<Array<ResponseNorm>> {
+    public async getHistoricNorms(id_user: number): Promise<Array<ResponseNorm>> {
         const normas= await prisma.historico_Acesso_Normas.findMany({
             where: {id_user:id_user},
             take:10,
