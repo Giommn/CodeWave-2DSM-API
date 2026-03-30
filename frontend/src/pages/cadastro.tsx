@@ -7,15 +7,15 @@ export default function Cadastro() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [registeredUsers, setRegisteredUsers] = useState<
-    Array<{ email: string; name: string; isAdmin: boolean }>
+    Array<{ email: string; nome: string; nivel_user: "ADM" | "USER" }>
   >([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleRegisterSubmit = async (userData: {
     email: string;
-    name: string;
-    password: string;
-    isAdmin: boolean;
+    nome: string;
+    senha: string;
+    nivel_user: "ADM" | "USER";
   }) => {
     try {
       const response = await fetch("/createuser", {
@@ -37,7 +37,7 @@ export default function Cadastro() {
 
       setIsModalOpen(false);
 
-      alert(`Usuário registrado com sucesso: ${userData.name}`);
+      alert(`Usuário registrado com sucesso: ${userData.nome}`);
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
       alert("Falha no registro. Por favor, tente novamente.");
@@ -46,7 +46,7 @@ export default function Cadastro() {
 
   const filteredUsers = registeredUsers.filter(
     (user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.nome.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -89,7 +89,7 @@ export default function Cadastro() {
                 <tbody>
                   {filteredUsers.map(
                     (
-                      user: { name: any; email: any;  isAdmin: boolean },
+                      user: { nome: any; email: any;  nivel_user: "ADM" | "USER" },
                       index: any,
                     ) => (
                       <tr
@@ -97,18 +97,18 @@ export default function Cadastro() {
                         className="border-b border-gray-200 hover:bg-gray-50"
                       >
                         <td className="px-6 py-4 text-sm text-gray-900">
-                          {user.name}
+                          {user.nome}
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-900">
                           {user.email}
                         </td>
                         <td className="px-6 py-4 text-sm">
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            user.isAdmin
+                            user.nivel_user === "ADM"
                               ? 'bg-blue-100 text-blue-800'
                               : 'bg-gray-100 text-gray-800'
                           }`}>
-                            {user.isAdmin ? 'Sim' : 'Não'}
+                            {user.nivel_user === "ADM" ? 'Sim' : 'Não'}
                           </span>
                         </td>
                       </tr>

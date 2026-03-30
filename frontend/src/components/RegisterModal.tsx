@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 interface RegisterModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (userData: { email: string; name: string; password: string; isAdmin: boolean }) => void;
+  onSubmit: (userData: { email: string; nome: string; senha: string; nivel_user: "ADM" | "USER" }) => void;
 }
 
 export const RegisterModal: React.FC<RegisterModalProps> = ({
@@ -11,29 +11,28 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
   onClose,
   onSubmit,
 }) => {
-  //TODO: trocar isAdmin por nivel_user, password por senha, name por nome
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [nome, setNome] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmSenha, setConfirmSenha] = useState('');
+  const [nivel_user, setNivelUser] = useState<"ADM" | "USER">("USER");
   const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!email || !name || !password || !confirmPassword) {
+    if (!email || !nome || !senha || !confirmSenha) {
       setError('Todos os campos são obrigatórios');
       return;
     }
 
-    if (password !== confirmPassword) {
+    if (senha !== confirmSenha) {
       setError('As senhas não coincidem');
       return;
     }
 
-    if (password.length < 6) {
+    if (senha.length < 6) {
       setError('A senha deve ter pelo menos 6 caracteres');
       return;
     }
@@ -44,16 +43,16 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
       return;
     }
 
-    onSubmit({ email, name, password, isAdmin });
+    onSubmit({ email, nome, senha, nivel_user });
     resetForm();
   };
 
   const resetForm = () => {
     setEmail('');
-    setName('');
-    setPassword('');
-    setConfirmPassword('');
-    setIsAdmin(false);
+    setNome('');
+    setSenha('');
+    setConfirmSenha('');
+    setNivelUser('USER');
     setError('');
   };
 
@@ -86,14 +85,14 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-1">
               Nome Completo:
             </label>
             <input
-              id="name"
+              id="nome"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
               placeholder="Digite seu nome completo"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
@@ -114,28 +113,28 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="senha" className="block text-sm font-medium text-gray-700 mb-1">
               Senha:
             </label>
             <input
-              id="password"
+              id="senha"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
               placeholder="Digite sua senha"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="confirmSenha" className="block text-sm font-medium text-gray-700 mb-1">
               Confirmar Senha:
             </label>
             <input
-              id="confirmPassword"
+              id="confirmSenha"
               type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={confirmSenha}
+              onChange={(e) => setConfirmSenha(e.target.value)}
               placeholder="Confirme sua senha"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
@@ -143,13 +142,13 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
 
           <div className="flex items-center">
             <input
-              id="isAdmin"
+              id="nivel_user"
               type="checkbox"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)}
+              checked={nivel_user === "ADM"}
+              onChange={(e) => setNivelUser(e.target.checked ? "ADM" : "USER")}
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
             />
-            <label htmlFor="isAdmin" className="ml-2 text-sm font-medium text-gray-700">
+            <label htmlFor="nivel_user" className="ml-2 text-sm font-medium text-gray-700">
               <b>Administrador</b>, este usuário terá permissão para alterar e cadastrar normas e notas técnicas
             </label>
           </div>
