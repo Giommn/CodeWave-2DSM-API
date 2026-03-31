@@ -9,7 +9,7 @@
     // See also https://aka.ms/tsconfig/module
     "module": "commonjs",
     "target": "es2020",
-    "types": ["node","express"],
+    "types": ["node","express","multer"],
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],

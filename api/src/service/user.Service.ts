@@ -1,4 +1,4 @@
-import { Auth, ResponseUserHash, NivelUser, ResponseUser, CreateUserDTO, UpdateUser, LoginDTO } from "../dtos/user.dto";
+import { Auth, ResponseUser, CreateUserDTO, UpdateUser, LoginDTO } from "../dtos/user.dto";
 import bcrypt from 'bcryptjs';
 import * as jw from '../config/jwt';
 import UserRepository from "../repositories/user.Repository";

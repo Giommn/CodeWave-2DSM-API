@@ -17,7 +17,7 @@ export default class UserController {
             return res.status(200).json({ status: 'success', resposta });
         } catch (erro) {
             if (erro instanceof ValidatorError) return res.status(erro.statusCode).json({ status: 'error', message: erro.message });
-            return res.status(500).json({ status: 'error', code: 500 });
+            return res.status(500).json({ status: 'error', message: 500 });
         }
     }
 
@@ -27,10 +27,10 @@ export default class UserController {
             if (!reqUser.nome || !reqUser.email || !reqUser.senha || !reqUser.nivel_user) throw new Error('Invalid information');
 
             const resposta:ResponseUser = await UserController.userService.createUser(reqUser);
-            return res.status(200).json({ resposta });
+            return res.status(201).json({ status:"sucesss", resposta });
         } catch (error) {
             if (error instanceof ValidatorError) return res.status(error.statusCode).json({ status: 'error', message: error.message });
-            return res.status(500).json({ status: 'error', message: error.message });
+            return res.status(500).json({ status: 'error', message: 500 });
         }
     }
 
@@ -43,7 +43,7 @@ export default class UserController {
             return res.status(201).json({ status: "Success", resposta });
         } catch (error) {
             if (error instanceof ValidatorError) return res.status(error.statusCode).json({ status: 'error', message: error.message });
-            return res.status(500).json({ status: 'error', message: error.message });
+            return res.status(500).json({ status: 'error', message: 500 });
         }
     }
 
@@ -54,7 +54,7 @@ export default class UserController {
             return res.status(200).json({ status: "Success", resposta });
         } catch (error) {
             if (error instanceof ValidatorError) return res.status(error.statusCode).json({ status: 'error', message: error.message });
-            return res.status(500).json({ status: 'error', message: error.message });
+            return res.status(500).json({ status: 'error', message: 500 });
         }
     }
 
@@ -64,7 +64,7 @@ export default class UserController {
             return res.status(200).json({ status: "Success", resposta });
         } catch (error) {
             if (error instanceof ValidatorError) return res.status(error.statusCode).json({ status: 'error', message: error.message });
-            return res.status(500).json({ status: 'error', message: error.message });
+            return res.status(500).json({ status: 'error', message: 500 });
         }
     }
 }
