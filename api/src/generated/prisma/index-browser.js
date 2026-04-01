@@ -179,7 +179,7 @@ exports.Prisma.Normas_ReferenciadasScalarFieldEnum = {
 exports.Prisma.Normas_VersoesScalarFieldEnum = {
   id_versao: 'id_versao',
   norma_id: 'norma_id',
-  versao_numero: 'versao_numero',
+  norma_codigo: 'norma_codigo',
   norm_titulo: 'norm_titulo',
   norm_dec: 'norm_dec',
   emissao: 'emissao',
@@ -194,6 +194,12 @@ exports.Prisma.MfaScalarFieldEnum = {
   user_id_FK: 'user_id_FK',
   cod_mfa: 'cod_mfa',
   cod_data_cricao: 'cod_data_cricao'
+};
+
+exports.Prisma.Historico_Acesso_NormasScalarFieldEnum = {
+  id_user: 'id_user',
+  id_norma: 'id_norma',
+  data_acesso: 'data_acesso'
 };
 
 exports.Prisma.SortOrder = {
@@ -230,6 +236,7 @@ exports.Prisma.NotasOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.Normas_VersoesOrderByRelevanceFieldEnum = {
+  norma_codigo: 'norma_codigo',
   norm_titulo: 'norm_titulo',
   norm_dec: 'norm_dec',
   pdf_nome_original: 'pdf_nome_original',
@@ -253,7 +260,8 @@ exports.Prisma.ModelName = {
   Nota_Categoria: 'Nota_Categoria',
   Normas_Referenciadas: 'Normas_Referenciadas',
   Normas_Versoes: 'Normas_Versoes',
-  Mfa: 'Mfa'
+  Mfa: 'Mfa',
+  Historico_Acesso_Normas: 'Historico_Acesso_Normas'
 };
 
 /**

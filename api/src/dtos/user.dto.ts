@@ -3,10 +3,11 @@ export interface CreateUserDTO {
   nome: string;
   senha: string;
   email: string;
-  nivel_user:string
+  nivel_user:NivelUser
 }
 
 export interface UpdateUser {
+  id:number;
   nome?: string;
   email?: string;
   senha?: string;
