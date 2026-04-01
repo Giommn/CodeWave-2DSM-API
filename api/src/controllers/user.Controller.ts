@@ -64,7 +64,7 @@ export default class UserController {
             return res.status(200).json({ status: "Success", resposta });
         } catch (error) {
             if (error instanceof ValidatorError) return res.status(error.statusCode).json({ status: 'error', message: error.message });
-            return res.status(500).json({ status: 'error', message: 500 });
+            return res.status(500).json({ status: 'error', message: 500  });
         }
     }
 }

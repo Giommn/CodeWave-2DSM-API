@@ -119,8 +119,8 @@
 
     @@id([norma_origem_id, norma_destino_id]) 
   
-    norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem")
-    norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino")
+    norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem",onDelete: Cascade)
+    norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino",onDelete: Cascade)
     @@index([norma_destino_id])
     @@index([norma_origem_id])
     @@map("normas_referenciadas")
@@ -160,8 +160,8 @@ model Historico_Acesso_Normas{
    id_user Int 
    id_norma Int 
    data_acesso DateTime @default(now())
-   usuarios Users @relation(fields: [id_user],references: [id_user])
-   normas Norma @relation(fields: [id_norma],references: [id_norm])
+   usuarios Users @relation(fields: [id_user],references: [id_user],onDelete: Cascade)
+   normas Norma @relation(fields: [id_norma],references: [id_norm],onDelete: Cascade)
    @@id([id_norma,id_user])
 
 }
