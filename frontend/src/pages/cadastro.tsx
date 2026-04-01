@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RegisterModal } from "../components/RegisterModal";
 import Navibar from "../components/Navibar";
 import CardsDados from "../components/CardsDados";
@@ -7,9 +7,27 @@ export default function Cadastro() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [registeredUsers, setRegisteredUsers] = useState<
-    Array<{ email: string; nome: string; nivel_user: "ADM" | "USER" }>
+    Array<{ id_user?: number; email: string; user_name: string; nivel_user: "ADM" | "USER" }>
   >([]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Fetch users from database on component mount
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/getusers");
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        setRegisteredUsers(data.resposta || []);
+      } catch (error) {
+        console.error("Erro ao buscar usuários:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleRegisterSubmit = async (userData: {
     email: string;
@@ -18,7 +36,7 @@ export default function Cadastro() {
     nivel_user: "ADM" | "USER";
   }) => {
     try {
-      const response = await fetch("/createuser", {
+      const response = await fetch("http://localhost:3000/createuser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +51,12 @@ export default function Cadastro() {
       const result = await response.json();
       console.log("Usuário registrado com sucesso:", result);
 
-      setRegisteredUsers([...registeredUsers, userData]);
+      // Refresh users list from database
+      const usersResponse = await fetch("http://localhost:3000/getusers");
+      if (usersResponse.ok) {
+        const usersData = await usersResponse.json();
+        setRegisteredUsers(usersData.resposta || []);
+      }
 
       setIsModalOpen(false);
 
@@ -46,7 +69,7 @@ export default function Cadastro() {
 
   const filteredUsers = registeredUsers.filter(
     (user) =>
-      user.nome.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.user_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -89,15 +112,15 @@ export default function Cadastro() {
                 <tbody>
                   {filteredUsers.map(
                     (
-                      user: { nome: any; email: any;  nivel_user: "ADM" | "USER" },
+                      user: { id_user?: number; email: any; user_name: any; nivel_user: "ADM" | "USER" },
                       index: any,
                     ) => (
                       <tr
-                        key={index}
+                        key={user.id_user || index}
                         className="border-b border-gray-200 hover:bg-gray-50"
                       >
                         <td className="px-6 py-4 text-sm text-gray-900">
-                          {user.nome}
+                          {user.user_name}
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-900">
                           {user.email}
