@@ -1,5 +1,11 @@
+import Normas from "./pages/Normas";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Normas></Normas>
+    </>
+  );
 }
 
 export default App;
