@@ -10,5 +10,6 @@ route.put("/norma/update",jwt.authToken,upload.single('arquivo'),NormController.
 route.get("/norma/getnorms",NormController.GetNorms)
 route.post("/norma/saveinhistoric",NormController.SaveHistoric)
 route.get("/norma/gethistoricacess/:id",NormController.GetHistoricNorms)
+route.get("/norma/getpdf/:nome",NormController.getPdf)
 
 export default route
