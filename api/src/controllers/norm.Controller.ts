@@ -33,15 +33,11 @@ export default class NormController {
       } = JSON.parse(req.body.metadata);
       const pdf_caminho: string = req.file.filename;
       const pdf_nome_original: string = req.file.originalname;
-
-      const admCriadorNumber = Number(adm_criador);
-      const orgCriadorNumber = org_criador ? Number(org_criador) : undefined;
-
       const resposta = await NormController.norm_service.createNorm({
         norm_titulo: norm_titulo,
         norm_desc: norm_desc,
-        org_criador: orgCriadorNumber ?? 0,
-        adm_criador: admCriadorNumber,
+        org_criador: parseInt(org_criador),
+        adm_criador: parseInt(adm_criador),
         emissao: emissao,
         norm_codigo: norm_codigo,
         org_desc: org_desc,
@@ -55,17 +51,14 @@ export default class NormController {
         resposta,
       });
     } catch (erro) {
-      if (req.file) {
-        const deleteOFarquvio = path.resolve(
-          __dirname,
-          "..",
-          "..",
-          "upload_pdf",
-          req.file.filename,
-        );
-        await fs.unlink(deleteOFarquvio).catch(() => null);
-      }
-
+      const deleteOFarquvio = path.resolve(
+        __dirname,
+        "..",
+        "..",
+        "upload_pdf",
+        req.file.filename,
+      );
+      await fs.unlink(deleteOFarquvio);
       if (erro instanceof ValidatorError)
         return res.status(erro.statusCode).json({
           status: "error",
@@ -86,21 +79,16 @@ export default class NormController {
     try {
       const { id } = req.params;
       if (!id) throw new ValidatorError("ID is required", 400);
-      const resposta: any = await NormController.norm_service.deleteNorm(
+      const resposta = await NormController.norm_service.deleteNorm(
         Number(id),
       );
-
-      if (resposta?.pdf_caminho) {
-        const caminhoArquivo = path.resolve(
-          __dirname,
-          "..",
-          "..",
-          "upload_pdf",
-          resposta.pdf_caminho,
-        );
-        await fs.unlink(caminhoArquivo).catch(() => null);
-      }
-
+     fs.unlink(path.resolve(
+        __dirname,
+        "..",
+        "..",
+        "upload_pdf",
+        resposta.pdf_caminho,
+      ))
       return res.status(200).json({
         status: "sucess",
         resposta,
@@ -176,39 +164,7 @@ export default class NormController {
       });
     }
   }
-
-  public static async DownloadPdf(req: Request, res: Response) {
-    try {
-      const norm_codigo = Array.isArray(req.params.norm_codigo)
-        ? req.params.norm_codigo[0]
-        : req.params.norm_codigo;
-      if (!norm_codigo) {
-        return res
-          .status(400)
-          .json({ status: "error", message: "Código da norma é obrigatório" });
-      }
-
-      const norma = await NormController.norm_service.findByCodigo(norm_codigo);
-      if (!norma || !norma.pdf_caminho) {
-        return res
-          .status(404)
-          .json({ status: "error", message: "Norma não encontrada" });
-      }
-
-      const filePath = path.resolve(
-        __dirname,
-        "..",
-        "..",
-        "upload_pdf",
-        norma.pdf_caminho,
-      );
-      return res.sendFile(filePath);
-    } catch (erro) {
-      return res.status(500).json({ status: "error", message: 500 });
-    }
-  }
-
-  public static async SaveHistoric(req: Request, res: Response) {
+  public static async SaveHistoric(req: Request, res: Response){
     try {
       const { id_norm, id_user } = req.body;
       if (!id_norm || !id_user)
@@ -260,5 +216,18 @@ export default class NormController {
         message: 500,
       });
     }
+  }
+  public static getPdf(req:Request,res:Response){
+    try{
+        const arquivo=req.params.nome
+        const caminhoDoArquivo=path.resolve(__dirname,'..','..','upload_pdf',String(arquivo))
+        res.sendFile(caminhoDoArquivo)
+    }catch(erro){
+        return res.status(404).json({
+          status:"error",
+          message:erro.message
+        })
+    }
+        
   }
 }

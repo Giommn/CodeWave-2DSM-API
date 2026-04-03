@@ -16,9 +16,6 @@ export default class NormService {
   public getNorms() {
     return this.NormRepository.getNorms();
   }
-  public findByCodigo(norm_codigo: string) {
-    return this.NormRepository.findByCodigo(norm_codigo);
-  }
   public saveHistoric(id_norm: number, id_user: number) {
     return this.NormRepository.saveNormsInHistoric(id_norm, id_user);
   }

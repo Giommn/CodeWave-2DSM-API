@@ -4,6 +4,7 @@ import UserRepository from "../repositories/user.Repository";
 import { Auth, ResponseUser, CreateUserDTO, UpdateUser, LoginDTO } from "../dtos/user.dto";
 import { ValidatorError } from "../help/typeError";
 
+
 export default class UserController {
     private static userRepository = new UserRepository();
     private static userService = new UserService(UserController.userRepository);

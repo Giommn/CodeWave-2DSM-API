@@ -9,6 +9,7 @@ interface ResponseNorm {
   emissao: string;
   adm_criador: string;
   referencias: string[];
+  pdf_caminho?: string;
 }
 
 interface Props {
@@ -123,7 +124,7 @@ function ListaNormas({ arquivos, apiUrl, onNormaExcluida }: Props) {
               title="Download"
               className="text-gray-400 hover:text-[#8a1c32] transition-colors"
               onClick={() =>
-                window.open(`${apiUrl}/uploads/${norma.norm_codigo}`, "_blank")
+                window.open(`${apiUrl}/norma/getpdf/${norma.pdf_caminho}`, "_blank")
               }
             >
               <svg
