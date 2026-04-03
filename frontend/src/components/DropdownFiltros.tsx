@@ -1,78 +1,59 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface Props {
-  onChange?: (selecionados: number[]) => void;
+  grupo: string;
+  label: string;
+  opcoes: string[];
+  selecionados: string[];
+  onToggle: (valor: string) => void;
   className?: string;
 }
 
-function ListaRequisitoCheckBoxNorma({ onChange, className }: Props) {
-  const [estaAberto, setEstaAberto] = useState(false);
+function DropdownFiltros({
+  label,
+  opcoes,
+  selecionados,
+  onToggle,
+  className,
+}: Props) {
+  const [aberto, setAberto] = useState(false);
+  const [busca, setBusca] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
 
-  // Estado para guardar o texto da busca
-  const [termoBusca, setTermoBusca] = useState("");
-
-  const [itensSelecionados, setItensSelecionados] = useState<number[]>(() => {
-    const salvos = localStorage.getItem("normasSelecionadas");
-    return salvos ? JSON.parse(salvos) : [];
-  });
-
-  const normasOriginais = [
-    { id: 1, titulo: "Exemplo de Norma 1" },
-    { id: 2, titulo: "Exemplo de Norma 2" },
-    { id: 3, titulo: "Exemplo de Norma 3" },
-    { id: 4, titulo: "Exemplo de Norma 4" },
-    { id: 5, titulo: "Exemplo de Norma 5" },
-  ];
-
-  const [listaExibicao, setListaExibicao] = useState(normasOriginais);
-
+  // Fecha ao clicar fora
   useEffect(() => {
-    localStorage.setItem(
-      "normasSelecionadas",
-      JSON.stringify(itensSelecionados),
-    );
-    if (onChange) {
-      onChange(itensSelecionados);
-    }
-  }, [itensSelecionados, onChange]);
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setAberto(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
-  useEffect(() => {
-    if (estaAberto) {
-      const marcados = normasOriginais.filter((n) =>
-        itensSelecionados.includes(n.id),
-      );
-      const desmarcados = normasOriginais.filter(
-        (n) => !itensSelecionados.includes(n.id),
-      );
-      setListaExibicao([...marcados, ...desmarcados]);
-    } else {
-      // Limpa a barra de pesquisa ao fechar o menu
-      setTermoBusca("");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [estaAberto]);
-
-  const alternarItem = (id: number) => {
-    setItensSelecionados((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
-    );
-  };
-
-  // Filtra as normas baseadas no que o usuário digitou
-  const itensFiltrados = listaExibicao.filter((item) =>
-    item.titulo.toLowerCase().includes(termoBusca.toLowerCase()),
+  const opcoesFiltradas = opcoes.filter((op) =>
+    op.toLowerCase().includes(busca.toLowerCase()),
   );
 
+  // Label do botão: mostra quantos estão selecionados
+  const textoLabel =
+    selecionados.length > 0 ? `${label} (${selecionados.length})` : label;
+
   return (
-    <div className={`relative font-sans ${className}`}>
+    <div ref={ref} className={`relative font-sans ${className}`}>
       <button
         type="button"
-        onClick={() => setEstaAberto(!estaAberto)}
-        className="w-full flex justify-between items-center bg-[#cecece] px-4 py-1 rounded-xl text-black font-semibold hover:bg-[#c0c0c0] transition-colors"
+        onClick={() => setAberto(!aberto)}
+        className={`w-full flex justify-between items-center px-4 py-1.5 rounded-xl font-semibold transition-colors
+          ${
+            selecionados.length > 0
+              ? "bg-[#8a1c32] text-white hover:bg-[#6e1628]"
+              : "bg-[#cecece] text-black hover:bg-[#c0c0c0]"
+          }`}
       >
-        <span>Vincular norma</span>
+        <span>{textoLabel}</span>
         <svg
-          className={`w-6 h-6 transition-transform duration-200 ${estaAberto ? "rotate-180" : ""}`}
+          className={`w-5 h-5 transition-transform duration-200 ${aberto ? "rotate-180" : ""}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -86,20 +67,19 @@ function ListaRequisitoCheckBoxNorma({ onChange, className }: Props) {
         </svg>
       </button>
 
-      {estaAberto && (
-        <div className="absolute top-full left-0 w-full mt-2 bg-[#e5e5e5] border border-gray-300 rounded-xl p-2 shadow-lg z-50">
-          {/* --- BARRA DE PESQUISA DA NORMA AQUI --- */}
+      {aberto && (
+        <div className="absolute top-full left-0 w-full mt-1 bg-[#e5e5e5] border border-gray-300 rounded-xl p-2 shadow-lg z-50 min-w-[160px]">
+          {/* Busca dentro do dropdown */}
           <div className="mb-2 relative">
             <input
               type="text"
-              placeholder="Buscar norma..."
-              value={termoBusca}
-              onChange={(e) => setTermoBusca(e.target.value)}
-              className="w-full bg-[#c4c4c4] text-black placeholder-gray-600 rounded-xl py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#8a1c32]"
+              placeholder="Buscar..."
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              className="w-full bg-[#c4c4c4] text-black placeholder-gray-600 rounded-lg py-1.5 pl-3 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-[#8a1c32]"
             />
-            {/* Ícone de Lupa */}
             <svg
-              className="absolute right-3 top-2.5 w-5 h-5 text-black"
+              className="absolute right-2 top-2 w-4 h-4 text-black"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -110,28 +90,26 @@ function ListaRequisitoCheckBoxNorma({ onChange, className }: Props) {
             </svg>
           </div>
 
-          <ul className="space-y-1 max-h-48 overflow-y-auto pr-1">
-            {itensFiltrados.length > 0 ? (
-              itensFiltrados.map((item) => (
+          <ul className="space-y-1 max-h-48 overflow-y-auto">
+            {opcoesFiltradas.length > 0 ? (
+              opcoesFiltradas.map((op) => (
                 <li
-                  key={item.id}
-                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#d4d4d4] cursor-pointer transition-colors"
-                  onClick={() => alternarItem(item.id)}
+                  key={op}
+                  onClick={() => onToggle(op)}
+                  className="flex items-center gap-2 p-2 rounded-lg hover:bg-[#d4d4d4] cursor-pointer transition-colors"
                 >
                   <input
                     type="checkbox"
-                    className="w-5 h-5 accent-[#8a1c32] rounded border-gray-400 cursor-pointer shrink-0"
-                    checked={itensSelecionados.includes(item.id)}
+                    className="w-4 h-4 accent-[#8a1c32] cursor-pointer shrink-0"
+                    checked={selecionados.includes(op)}
                     onChange={() => {}}
                   />
-                  <span className="text-base text-black font-medium">
-                    {item.titulo}
-                  </span>
+                  <span className="text-sm text-black font-medium">{op}</span>
                 </li>
               ))
             ) : (
               <li className="p-2 text-gray-500 text-sm text-center">
-                Nenhum resultado encontrado.
+                Nenhum resultado.
               </li>
             )}
           </ul>
@@ -141,4 +119,4 @@ function ListaRequisitoCheckBoxNorma({ onChange, className }: Props) {
   );
 }
 
-export default ListaRequisitoCheckBoxNorma;
+export default DropdownFiltros;
