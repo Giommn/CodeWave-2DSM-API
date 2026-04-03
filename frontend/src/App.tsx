@@ -1,11 +1,13 @@
-import Normas from "./pages/Normas";
+import Home from './components/Home';
 
 function App() {
+
   return (
-    <>
-      <Normas></Normas>
-    </>
+    <div>
+      <Home/>
+    </div>
   );
+  
 }
 
 export default App;
