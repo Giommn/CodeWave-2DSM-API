@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import Navbar from "../components/Navbar";
 import UploadsCards from "../components/UploadsCards";
 import DropdownFiltros from "../components/DropdownFiltros";
 import FiltroData from "../components/FiltroData";
@@ -108,7 +109,8 @@ function Normas() {
   const temFiltroAtivo = filtrosAtivos.length > 0 || dataInicio || dataFim;
 
   return (
-    <div className="flex flex-col gap-6 p-6 w-full">
+    <div className="flex flex-col gap-6 px-6 pb-6 w-full">
+      <Navbar />
       <UploadsCards onNormaCadastrada={fetchNormas} />
 
       {}
