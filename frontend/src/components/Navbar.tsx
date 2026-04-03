@@ -24,7 +24,7 @@ function Navbar() {
       id: "admin",
       texto: "Ger. usuarios",
       icon: <GrUserManager className="w-5 h-5 sm:w-6 sm:h-6" />,
-      path: "/admin",
+      path: "/cadastro",
     },
   ];
 
