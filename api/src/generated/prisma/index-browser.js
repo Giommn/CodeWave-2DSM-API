@@ -213,6 +213,11 @@ exports.Prisma.UsersOrderByRelevanceFieldEnum = {
   user_senha_hash: 'user_senha_hash'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.OrgaosOrderByRelevanceFieldEnum = {
   org_desc: 'org_desc',
   org_sigla: 'org_sigla'

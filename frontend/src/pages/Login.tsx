@@ -26,7 +26,7 @@ function Login() {
 
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      navigate("/Home");
+      navigate("/");
     } catch (err) {
       setError("Email ou senha incorretos.");
     }

@@ -38,9 +38,9 @@
     org_id Int @id @default(autoincrement())
     org_desc String @unique @db.VarChar(50)
     org_sigla String @db.VarChar(10)
-    adm_criador Int
+    adm_criador Int?
     normas Norma[]
-    usuarios  Users @relation(fields: [adm_criador],references: [id_user])
+    usuarios  Users? @relation(fields: [adm_criador],references: [id_user])
      @@index([adm_criador])  
     @@map("orgaos")
   }
@@ -75,10 +75,7 @@
     normas_origem      Normas_Referenciadas[] @relation("origem")
     normas_destino     Normas_Referenciadas[] @relation("destino")
     versoes       Normas_Versoes[] 
-<<<<<<< HEAD
-=======
     HistoricoAcessoNormas Historico_Acesso_Normas[]
->>>>>>> ad15f9a60509215b678982e821fc3f52176ac351
      @@index([adm_criador])   
   @@index([org_criador])   
   
@@ -122,13 +119,8 @@
 
     @@id([norma_origem_id, norma_destino_id]) 
   
-<<<<<<< HEAD
-    norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem")
-    norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino")
-=======
     norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem",onDelete: Cascade)
     norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino",onDelete: Cascade)
->>>>>>> ad15f9a60509215b678982e821fc3f52176ac351
     @@index([norma_destino_id])
     @@index([norma_origem_id])
     @@map("normas_referenciadas")
@@ -148,15 +140,8 @@
     pdf_caminho       String @db.VarChar(500) 
     norma          Norma    @relation(fields: [norma_id], references: [id_norm], onDelete: Cascade)
 
-<<<<<<< HEAD
-    @@unique([norma_id, versao_numero])
-    @@index([norma_id])
-    @@index([norma_id, versao_numero])   
-     @@index([emissao, norma_id]) 
-=======
      @@index([norma_id]) 
      @@index([norma_codigo])
->>>>>>> ad15f9a60509215b678982e821fc3f52176ac351
     @@map("normas_versoes")
   }
 

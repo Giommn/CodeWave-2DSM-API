@@ -39,9 +39,9 @@ model Orgaos {
   org_id      Int     @id @default(autoincrement())
   org_desc    String  @unique @db.VarChar(50)
   org_sigla   String  @db.VarChar(10)
-  adm_criador Int
+  adm_criador Int?
   normas      Norma[]
-  usuarios    Users   @relation(fields: [adm_criador], references: [id_user])
+  usuarios    Users?  @relation(fields: [adm_criador], references: [id_user])
 
   @@index([adm_criador])
   @@map("orgaos")
@@ -119,8 +119,8 @@ model Normas_Referenciadas {
   norma_origem_id  Int
   norma_destino_id Int
 
-  norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem")
-  norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino")
+  norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem", onDelete: Cascade)
+  norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino", onDelete: Cascade)
 
   @@id([norma_origem_id, norma_destino_id])
   @@index([norma_destino_id])
@@ -161,8 +161,8 @@ model Historico_Acesso_Normas {
   id_user     Int
   id_norma    Int
   data_acesso DateTime @default(now())
-  usuarios    Users    @relation(fields: [id_user], references: [id_user])
-  normas      Norma    @relation(fields: [id_norma], references: [id_norm])
+  usuarios    Users    @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  normas      Norma    @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
 
   @@id([id_norma, id_user])
 }
