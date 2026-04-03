@@ -210,4 +210,17 @@ export default class NormController {
       });
     }
   }
+  public static getPdf(req:Request,res:Response){
+    try{
+        const arquivo=req.params.nome
+        const caminhoDoArquivo=path.resolve(__dirname,'..','..','upload_pdf',String(arquivo))
+        res.sendFile(caminhoDoArquivo)
+    }catch(erro){
+        return res.status(404).json({
+          status:"error",
+          message:erro.message
+        })
+    }
+        
+  }
 }

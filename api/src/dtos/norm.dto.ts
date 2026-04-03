@@ -32,6 +32,7 @@ emissao:string;
 norm_codigo:string;
 adm_criador:string;
 id_norm:number;
+pdf_caminho:string;
 referencias:Array<string>
 }
 

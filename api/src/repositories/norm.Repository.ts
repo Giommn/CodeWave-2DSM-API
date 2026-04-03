@@ -46,7 +46,8 @@ export default class NormRepository implements INorm {
                         select:{norma_destino:{
                             select:{norm_titulo:true}
                         }}
-                    }
+                    },
+                    pdf_caminho:true
                 }
             });
 
@@ -58,6 +59,7 @@ export default class NormRepository implements INorm {
                 norm_codigo: norma_.norm_codigo,
                 adm_criador:norma_.usuario.user_name,
                 id_norm:norma_.id_norm,
+                pdf_caminho:norma_.pdf_caminho,
                 referencias:norma_.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
                 
 
@@ -87,7 +89,9 @@ export default class NormRepository implements INorm {
                         select:{norma_destino:{
                             select:{norm_titulo:true}
                         }}
-                    }
+                    },
+                    pdf_caminho:true
+                
                 }
             });
 
@@ -99,6 +103,7 @@ export default class NormRepository implements INorm {
                 norm_codigo: norma.norm_codigo,
                 adm_criador:norma.usuario.user_name,
                 id_norm:norma.id_norm,
+                pdf_caminho:norma.pdf_caminho,
                 referencias:norma.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
                 
             };
@@ -160,7 +165,10 @@ norm_codigo: update_norm.norm_codigo,
   orgaos: { select: { org_desc: true } },
   usuario:{select:{user_name:true}},
   id_norm:true,
-  normas_origem:{select:{norma_destino:{select:{norm_titulo:true}}}}
+  normas_origem:{select:{norma_destino:{select:{norm_titulo:true}
+
+}}},
+pdf_caminho:true
  }
  });
  return {
@@ -171,6 +179,7 @@ org_criador: normaAtualizada.orgaos.org_desc,
 norm_codigo: normaAtualizada.norm_codigo,
 adm_criador:normaAtualizada.usuario.user_name,
 id_norm:normaAtualizada.id_norm,
+pdf_caminho:normaAtualizada.pdf_caminho,
 referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
 };
 });
@@ -188,7 +197,8 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
                 norm_codigo:true,
                 usuario:{select:{user_name:true}},
                 id_norm:true,
-                normas_origem:{select:{norma_destino:{select:{norm_titulo:true}}}}
+                normas_origem:{select:{norma_destino:{select:{norm_titulo:true}}}},
+                pdf_caminho:true
             }
         })
         return normas.map(n => ({
@@ -199,6 +209,7 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
         emissao: n.emissao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
         adm_criador:n.usuario.user_name,
         id_norm:n.id_norm,
+        pdf_caminho:n.pdf_caminho,
         referencias:n.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
     }));
         
@@ -248,7 +259,8 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
                     usuario:{select:{user_name:true}},
                     normas_origem:{
                         select:{norma_destino:{select:{norm_titulo:true}}}
-                    }
+                    },
+                    pdf_caminho:true
                    }
                }
             }
@@ -262,6 +274,7 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
         emissao: n.normas.emissao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
         adm_criador:n.normas.usuario.user_name,
         id_norm:n.normas.id_norm,
+        pdf_caminho:n.normas.pdf_caminho,
         referencias:n.normas.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
     }});
         } 
