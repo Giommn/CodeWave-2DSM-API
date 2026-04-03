@@ -8,19 +8,23 @@ interface CardsDadosProps {
   totalAdmins?: number;
 }
 
-const CardsDados: React.FC<CardsDadosProps> = ({ setIsModalOpen }) => {
+const CardsDados: React.FC<CardsDadosProps> = ({
+  setIsModalOpen,
+  totalAdmins,
+  totalUsers,
+}) => {
   const dashboardData = [
     {
       id: 1,
       titulo: "Total de usuários",
-      valor: "213",
+      valor: totalUsers ?? 0,
       icon: <FaUsers size={20} />,
       isBotao: false,
     },
     {
       id: 2,
       titulo: "Total de admins",
-      valor: "213",
+      valor: totalAdmins ?? 0,
       icon: <BsShieldCheck size={20} />,
       isBotao: false,
     },

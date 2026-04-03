@@ -1,46 +1,47 @@
-/**
- * Página de Cadastro de Usuários
- *
- * Componente principal que gerencia a página de registro de usuários.
- * Exibe um botão para abrir o modal de registro e uma tabela com os
- * usuários já registrados no sistema.
- *
- * @component
- * @returns {JSX.Element} Página de cadastro com modal de registro e lista de usuários
- */
-
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { RegisterModal } from "../components/RegisterModal";
-import Navibar from "../components/Navibar";
+import Navbar from "../components/Navbar";
 import CardsDados from "../components/CardsDados";
 
-/**
- * Componente da página de cadastro de usuários
- * Gerencia o estado do modal de registro e a lista de usuários registrados
- */
 export default function Cadastro() {
-  // Estado para controlar se o modal está aberto ou fechado
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Estado para armazenar a lista de usuários registrados
   const [registeredUsers, setRegisteredUsers] = useState<
-    Array<{ email: string; name: string; password: string }>
+    Array<{
+      id_user?: number;
+      email: string;
+      user_name: string;
+      nivel_user: "ADM" | "USER";
+    }>
   >([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  /**
-   * Manipula o envio do formulário de registro de usuário
-   * Envia os dados para a API de backend e adiciona o usuário à lista local
-   * @param {Object} userData - Dados do usuário (email, name, password)
-   */
+  // Fetch users from database on component mount
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/getusers");
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        setRegisteredUsers(data.resposta || []);
+      } catch (error) {
+        console.error("Erro ao buscar usuários:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   const handleRegisterSubmit = async (userData: {
     email: string;
-    name: string;
-    password: string;
+    nome: string;
+    senha: string;
+    nivel_user: "ADM" | "USER";
   }) => {
     try {
-      // Envia requisição POST para registrar novo usuário
-      // TODO: Substituir com o endpoint real da sua API
-      const response = await fetch("/api/users/register", {
+      const response = await fetch("http://localhost:3000/createuser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,37 +56,60 @@ export default function Cadastro() {
       const result = await response.json();
       console.log("Usuário registrado com sucesso:", result);
 
-      // Adiciona o novo usuário à lista local (para fins de demonstração)
-      setRegisteredUsers([...registeredUsers, userData]);
+      // Refresh users list from database
+      const usersResponse = await fetch("http://localhost:3000/getusers");
+      if (usersResponse.ok) {
+        const usersData = await usersResponse.json();
+        setRegisteredUsers(usersData.resposta || []);
+      }
 
-      // Fecha o modal após registro bem-sucedido
       setIsModalOpen(false);
 
-      // Exibe mensagem de sucesso
-      alert(`Usuário registrado com sucesso: ${userData.name}`);
+      alert(`Usuário registrado com sucesso: ${userData.nome}`);
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
       alert("Falha no registro. Por favor, tente novamente.");
     }
   };
 
+  const filteredUsers = registeredUsers.filter(
+    (user) =>
+      user.user_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
+  const totalUsers = useMemo(() => registeredUsers.length, [registeredUsers]);
+
+  const totalAdmins = useMemo(
+    () => registeredUsers.filter((user) => user.nivel_user === "ADM").length,
+    [registeredUsers],
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Cabeçalho da Página */}
-      <Navibar />
+      <Navbar />
 
-      {/* Cards com dados de cadastro  */}
-      <CardsDados setIsModalOpen={setIsModalOpen} />
+      <CardsDados
+        setIsModalOpen={setIsModalOpen}
+        totalAdmins={totalAdmins}
+        totalUsers={totalUsers}
+      />
 
-      {/* Conteúdo Principal */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Tabela de Usuários Registrados */}
         {registeredUsers.length > 0 ? (
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Usuários Registrados ({registeredUsers.length})
-              </h2>
+              <input
+                type="text"
+                placeholder="Buscar usuários por nome ou email..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+              />
+              <p className="text-sm text-gray-500 mt-2">
+                Total de usuários: {registeredUsers.length} | Resultados
+                encontrados: {filteredUsers.length}
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -98,28 +122,41 @@ export default function Cadastro() {
                       Email
                     </th>
                     <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-                      Senha (Comprimento)
+                      Admin
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {registeredUsers.map(
+                  {filteredUsers.map(
                     (
-                      user: { name: any; email: any; password: string | any[] },
+                      user: {
+                        id_user?: number;
+                        email: any;
+                        user_name: any;
+                        nivel_user: "ADM" | "USER";
+                      },
                       index: any,
                     ) => (
                       <tr
-                        key={index}
+                        key={user.id_user || index}
                         className="border-b border-gray-200 hover:bg-gray-50"
                       >
                         <td className="px-6 py-4 text-sm text-gray-900">
-                          {user.name}
+                          {user.user_name}
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-900">
                           {user.email}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
-                          {"*".repeat(user.password.length)}
+                        <td className="px-6 py-4 text-sm">
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                              user.nivel_user === "ADM"
+                                ? "bg-red-400 text-white"
+                                : "bg-[#70243d] text-white"
+                            }`}
+                          >
+                            {user.nivel_user === "ADM" ? "Sim" : "Não"}
+                          </span>
                         </td>
                       </tr>
                     ),
@@ -140,7 +177,6 @@ export default function Cadastro() {
         )}
       </div>
 
-      {/* Modal de Registro */}
       <RegisterModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
