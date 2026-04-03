@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { RegisterModal } from "../components/RegisterModal";
-import Navibar from "../components/Navibar";
+import Navbar from "../components/Navbar";
 import CardsDados from "../components/CardsDados";
 
 export default function Cadastro() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [registeredUsers, setRegisteredUsers] = useState<
-    Array<{ id_user?: number; email: string; user_name: string; nivel_user: "ADM" | "USER" }>
+    Array<{
+      id_user?: number;
+      email: string;
+      user_name: string;
+      nivel_user: "ADM" | "USER";
+    }>
   >([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -70,14 +75,25 @@ export default function Cadastro() {
   const filteredUsers = registeredUsers.filter(
     (user) =>
       user.user_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase())
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
+  const totalUsers = useMemo(() => registeredUsers.length, [registeredUsers]);
+
+  const totalAdmins = useMemo(
+    () => registeredUsers.filter((user) => user.nivel_user === "ADM").length,
+    [registeredUsers],
   );
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navibar />
+      <Navbar />
 
-      <CardsDados setIsModalOpen={setIsModalOpen} />
+      <CardsDados
+        setIsModalOpen={setIsModalOpen}
+        totalAdmins={totalAdmins}
+        totalUsers={totalUsers}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {registeredUsers.length > 0 ? (
@@ -88,10 +104,11 @@ export default function Cadastro() {
                 placeholder="Buscar usuários por nome ou email..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
               />
               <p className="text-sm text-gray-500 mt-2">
-                Total de usuários: {registeredUsers.length} | Resultados encontrados: {filteredUsers.length}
+                Total de usuários: {registeredUsers.length} | Resultados
+                encontrados: {filteredUsers.length}
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -112,7 +129,12 @@ export default function Cadastro() {
                 <tbody>
                   {filteredUsers.map(
                     (
-                      user: { id_user?: number; email: any; user_name: any; nivel_user: "ADM" | "USER" },
+                      user: {
+                        id_user?: number;
+                        email: any;
+                        user_name: any;
+                        nivel_user: "ADM" | "USER";
+                      },
                       index: any,
                     ) => (
                       <tr
@@ -126,12 +148,14 @@ export default function Cadastro() {
                           {user.email}
                         </td>
                         <td className="px-6 py-4 text-sm">
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            user.nivel_user === "ADM"
-                              ? 'bg-blue-100 text-blue-800'
-                              : 'bg-gray-100 text-gray-800'
-                          }`}>
-                            {user.nivel_user === "ADM" ? 'Sim' : 'Não'}
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                              user.nivel_user === "ADM"
+                                ? "bg-red-400 text-white"
+                                : "bg-[#70243d] text-white"
+                            }`}
+                          >
+                            {user.nivel_user === "ADM" ? "Sim" : "Não"}
                           </span>
                         </td>
                       </tr>
