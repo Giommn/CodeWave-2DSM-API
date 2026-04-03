@@ -1,48 +1,45 @@
-import * as  jwt from "jsonwebtoken";
-import dotenv from 'dotenv';
-import path from 'path'
+import * as jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import path from "path";
 import { Auth, ResponseUser } from "../dtos/user.dto";
 
-dotenv.config({ path: path.resolve(__dirname, '..','..','.env') });
-
+dotenv.config({ path: path.resolve(__dirname, "..", "..", ".env") });
 
 const SECRET = process.env.JWT_SECRET;
 
 if (!SECRET) {
-  throw new Error('JWT_SECRET não definida no .env');
+  throw new Error("JWT_SECRET não definida no .env");
 }
 
-
-export function criarToken(usuario:ResponseUser) {
+export function criarToken(usuario: ResponseUser) {
   return jwt.sign(
+<<<<<<< HEAD
     { 
       id_user:usuario.id_user,
       nivel_user:usuario.nivel_user
+=======
+    {
+      id_user: usuario.id_user,
+      nivel_user: usuario.nivel_user,
+>>>>>>> ad15f9a60509215b678982e821fc3f52176ac351
     },
     SECRET,
-    { expiresIn: '1d' }
+    { expiresIn: "1d" },
   );
 }
 
-export function verificaToken(token:Auth){
-  try {
-    if( jwt.verify(token.token, SECRET))
-    return {
-      valido: true,
-      dados: {
-        id_user: token.user.id_user,
-        user_name: token.user.user_name,
-        email: token.user.email,
-        nivel_user: token.user.user_name
-      },
-      expirou: false
-    };
-  } catch (erro) {
-    return {
-      valido: false,
-      dados: null,
-      expirou: erro.name === 'TokenExpiredError',
-      erro: erro.message
-    };
-  }
+//Middleware
+export function authToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader?.split(" ")[1];
+
+  if (!token) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(401);
+    if (user.nivel_user == "USER") return res.sendStatus(401);
+
+    req.user = user;
+    next();
+  });
 }
