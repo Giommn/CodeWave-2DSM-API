@@ -13,15 +13,9 @@ if (!SECRET) {
 
 export function criarToken(usuario: ResponseUser) {
   return jwt.sign(
-<<<<<<< HEAD
-    { 
-      id_user:usuario.id_user,
-      nivel_user:usuario.nivel_user
-=======
     {
       id_user: usuario.id_user,
       nivel_user: usuario.nivel_user,
->>>>>>> ad15f9a60509215b678982e821fc3f52176ac351
     },
     SECRET,
     { expiresIn: "1d" },
