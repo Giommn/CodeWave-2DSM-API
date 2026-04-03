@@ -1,11 +1,18 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { IoDocumentOutline, IoHomeOutline } from "react-icons/io5";
 import { GrUserManager } from "react-icons/gr";
+import { IoLogOutOutline } from "react-icons/io5";
 import AkaerLogo from "../assets/Akaer.png";
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   const menuItems = [
     {
@@ -55,6 +62,17 @@ function Navbar() {
             </li>
           );
         })}
+
+        {/* Botão de Logout */}
+        <li
+          onClick={handleLogout}
+          className="flex items-center gap-2 cursor-pointer transition-all duration-300 rounded-full px-4 sm:px-6 py-2 text-white hover:bg-red-600 ml-2"
+        >
+          <IoLogOutOutline className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-sm sm:text-base font-bold whitespace-nowrap">
+            Sair
+          </span>
+        </li>
       </ul>
     </nav>
   );
