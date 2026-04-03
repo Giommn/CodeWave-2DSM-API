@@ -82,6 +82,13 @@ export default class NormController {
       const resposta = await NormController.norm_service.deleteNorm(
         Number(id),
       );
+     fs.unlink(path.resolve(
+        __dirname,
+        "..",
+        "..",
+        "upload_pdf",
+        resposta.pdf_caminho,
+      ))
       return res.status(200).json({
         status: "sucess",
         resposta,
