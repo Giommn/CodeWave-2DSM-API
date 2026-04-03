@@ -38,9 +38,9 @@
     org_id Int @id @default(autoincrement())
     org_desc String @unique @db.VarChar(50)
     org_sigla String @db.VarChar(10)
-    adm_criador Int
+    adm_criador Int?
     normas Norma[]
-    usuarios  Users @relation(fields: [adm_criador],references: [id_user])
+    usuarios  Users? @relation(fields: [adm_criador],references: [id_user])
      @@index([adm_criador])  
     @@map("orgaos")
   }

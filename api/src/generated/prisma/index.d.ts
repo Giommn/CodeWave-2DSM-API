@@ -3169,7 +3169,7 @@ export namespace Prisma {
     org_id: number
     org_desc: string
     org_sigla: string
-    adm_criador: number
+    adm_criador: number | null
     _count: OrgaosCountAggregateOutputType | null
     _avg: OrgaosAvgAggregateOutputType | null
     _sum: OrgaosSumAggregateOutputType | null
@@ -3197,7 +3197,7 @@ export namespace Prisma {
     org_sigla?: boolean
     adm_criador?: boolean
     normas?: boolean | Orgaos$normasArgs<ExtArgs>
-    usuarios?: boolean | UsersDefaultArgs<ExtArgs>
+    usuarios?: boolean | Orgaos$usuariosArgs<ExtArgs>
     _count?: boolean | OrgaosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["orgaos"]>
 
@@ -3213,7 +3213,7 @@ export namespace Prisma {
   export type OrgaosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"org_id" | "org_desc" | "org_sigla" | "adm_criador", ExtArgs["result"]["orgaos"]>
   export type OrgaosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     normas?: boolean | Orgaos$normasArgs<ExtArgs>
-    usuarios?: boolean | UsersDefaultArgs<ExtArgs>
+    usuarios?: boolean | Orgaos$usuariosArgs<ExtArgs>
     _count?: boolean | OrgaosCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3221,13 +3221,13 @@ export namespace Prisma {
     name: "Orgaos"
     objects: {
       normas: Prisma.$NormaPayload<ExtArgs>[]
-      usuarios: Prisma.$UsersPayload<ExtArgs>
+      usuarios: Prisma.$UsersPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       org_id: number
       org_desc: string
       org_sigla: string
-      adm_criador: number
+      adm_criador: number | null
     }, ExtArgs["result"]["orgaos"]>
     composites: {}
   }
@@ -3569,7 +3569,7 @@ export namespace Prisma {
   export interface Prisma__OrgaosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     normas<T extends Orgaos$normasArgs<ExtArgs> = {}>(args?: Subset<T, Orgaos$normasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    usuarios<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    usuarios<T extends Orgaos$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Orgaos$usuariosArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3972,6 +3972,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NormaScalarFieldEnum | NormaScalarFieldEnum[]
+  }
+
+  /**
+   * Orgaos.usuarios
+   */
+  export type Orgaos$usuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Users
+     */
+    select?: UsersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Users
+     */
+    omit?: UsersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsersInclude<ExtArgs> | null
+    where?: UsersWhereInput
   }
 
   /**
@@ -12164,6 +12183,14 @@ export namespace Prisma {
   export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const OrgaosOrderByRelevanceFieldEnum: {
     org_desc: 'org_desc',
     org_sigla: 'org_sigla'
@@ -12344,16 +12371,16 @@ export namespace Prisma {
     org_id?: IntFilter<"Orgaos"> | number
     org_desc?: StringFilter<"Orgaos"> | string
     org_sigla?: StringFilter<"Orgaos"> | string
-    adm_criador?: IntFilter<"Orgaos"> | number
+    adm_criador?: IntNullableFilter<"Orgaos"> | number | null
     normas?: NormaListRelationFilter
-    usuarios?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    usuarios?: XOR<UsersNullableScalarRelationFilter, UsersWhereInput> | null
   }
 
   export type OrgaosOrderByWithRelationInput = {
     org_id?: SortOrder
     org_desc?: SortOrder
     org_sigla?: SortOrder
-    adm_criador?: SortOrder
+    adm_criador?: SortOrderInput | SortOrder
     normas?: NormaOrderByRelationAggregateInput
     usuarios?: UsersOrderByWithRelationInput
     _relevance?: OrgaosOrderByRelevanceInput
@@ -12366,16 +12393,16 @@ export namespace Prisma {
     OR?: OrgaosWhereInput[]
     NOT?: OrgaosWhereInput | OrgaosWhereInput[]
     org_sigla?: StringFilter<"Orgaos"> | string
-    adm_criador?: IntFilter<"Orgaos"> | number
+    adm_criador?: IntNullableFilter<"Orgaos"> | number | null
     normas?: NormaListRelationFilter
-    usuarios?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    usuarios?: XOR<UsersNullableScalarRelationFilter, UsersWhereInput> | null
   }, "org_id" | "org_desc">
 
   export type OrgaosOrderByWithAggregationInput = {
     org_id?: SortOrder
     org_desc?: SortOrder
     org_sigla?: SortOrder
-    adm_criador?: SortOrder
+    adm_criador?: SortOrderInput | SortOrder
     _count?: OrgaosCountOrderByAggregateInput
     _avg?: OrgaosAvgOrderByAggregateInput
     _max?: OrgaosMaxOrderByAggregateInput
@@ -12390,7 +12417,7 @@ export namespace Prisma {
     org_id?: IntWithAggregatesFilter<"Orgaos"> | number
     org_desc?: StringWithAggregatesFilter<"Orgaos"> | string
     org_sigla?: StringWithAggregatesFilter<"Orgaos"> | string
-    adm_criador?: IntWithAggregatesFilter<"Orgaos"> | number
+    adm_criador?: IntNullableWithAggregatesFilter<"Orgaos"> | number | null
   }
 
   export type CategoriaWhereInput = {
@@ -12991,14 +13018,14 @@ export namespace Prisma {
     org_desc: string
     org_sigla: string
     normas?: NormaCreateNestedManyWithoutOrgaosInput
-    usuarios: UsersCreateNestedOneWithoutOrgaosInput
+    usuarios?: UsersCreateNestedOneWithoutOrgaosInput
   }
 
   export type OrgaosUncheckedCreateInput = {
     org_id?: number
     org_desc: string
     org_sigla: string
-    adm_criador: number
+    adm_criador?: number | null
     normas?: NormaUncheckedCreateNestedManyWithoutOrgaosInput
   }
 
@@ -13006,14 +13033,14 @@ export namespace Prisma {
     org_desc?: StringFieldUpdateOperationsInput | string
     org_sigla?: StringFieldUpdateOperationsInput | string
     normas?: NormaUpdateManyWithoutOrgaosNestedInput
-    usuarios?: UsersUpdateOneRequiredWithoutOrgaosNestedInput
+    usuarios?: UsersUpdateOneWithoutOrgaosNestedInput
   }
 
   export type OrgaosUncheckedUpdateInput = {
     org_id?: IntFieldUpdateOperationsInput | number
     org_desc?: StringFieldUpdateOperationsInput | string
     org_sigla?: StringFieldUpdateOperationsInput | string
-    adm_criador?: IntFieldUpdateOperationsInput | number
+    adm_criador?: NullableIntFieldUpdateOperationsInput | number | null
     normas?: NormaUncheckedUpdateManyWithoutOrgaosNestedInput
   }
 
@@ -13021,7 +13048,7 @@ export namespace Prisma {
     org_id?: number
     org_desc: string
     org_sigla: string
-    adm_criador: number
+    adm_criador?: number | null
   }
 
   export type OrgaosUpdateManyMutationInput = {
@@ -13033,7 +13060,7 @@ export namespace Prisma {
     org_id?: IntFieldUpdateOperationsInput | number
     org_desc?: StringFieldUpdateOperationsInput | string
     org_sigla?: StringFieldUpdateOperationsInput | string
-    adm_criador?: IntFieldUpdateOperationsInput | number
+    adm_criador?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CategoriaCreateInput = {
@@ -13703,9 +13730,25 @@ export namespace Prisma {
     _max?: NestedEnumNivelUserFilter<$PrismaModel>
   }
 
-  export type UsersScalarRelationFilter = {
-    is?: UsersWhereInput
-    isNot?: UsersWhereInput
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type UsersNullableScalarRelationFilter = {
+    is?: UsersWhereInput | null
+    isNot?: UsersWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type OrgaosOrderByRelevanceInput = {
@@ -13745,10 +13788,31 @@ export namespace Prisma {
     adm_criador?: SortOrder
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type Nota_CategoriaListRelationFilter = {
     every?: Nota_CategoriaWhereInput
     some?: Nota_CategoriaWhereInput
     none?: Nota_CategoriaWhereInput
+  }
+
+  export type UsersScalarRelationFilter = {
+    is?: UsersWhereInput
+    isNot?: UsersWhereInput
   }
 
   export type Nota_CategoriaOrderByRelationAggregateInput = {
@@ -14428,12 +14492,22 @@ export namespace Prisma {
     deleteMany?: NormaScalarWhereInput | NormaScalarWhereInput[]
   }
 
-  export type UsersUpdateOneRequiredWithoutOrgaosNestedInput = {
+  export type UsersUpdateOneWithoutOrgaosNestedInput = {
     create?: XOR<UsersCreateWithoutOrgaosInput, UsersUncheckedCreateWithoutOrgaosInput>
     connectOrCreate?: UsersCreateOrConnectWithoutOrgaosInput
     upsert?: UsersUpsertWithoutOrgaosInput
+    disconnect?: UsersWhereInput | boolean
+    delete?: UsersWhereInput | boolean
     connect?: UsersWhereUniqueInput
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutOrgaosInput, UsersUpdateWithoutOrgaosInput>, UsersUncheckedUpdateWithoutOrgaosInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NormaUncheckedUpdateManyWithoutOrgaosNestedInput = {
@@ -15039,6 +15113,44 @@ export namespace Prisma {
     _max?: NestedEnumNivelUserFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type OrgaosCreateWithoutUsuariosInput = {
     org_desc: string
     org_sigla: string
@@ -15221,7 +15333,7 @@ export namespace Prisma {
     org_id?: IntFilter<"Orgaos"> | number
     org_desc?: StringFilter<"Orgaos"> | string
     org_sigla?: StringFilter<"Orgaos"> | string
-    adm_criador?: IntFilter<"Orgaos"> | number
+    adm_criador?: IntNullableFilter<"Orgaos"> | number | null
   }
 
   export type CategoriaUpsertWithWhereUniqueWithoutUsuarioInput = {
@@ -15667,14 +15779,14 @@ export namespace Prisma {
   export type OrgaosCreateWithoutNormasInput = {
     org_desc: string
     org_sigla: string
-    usuarios: UsersCreateNestedOneWithoutOrgaosInput
+    usuarios?: UsersCreateNestedOneWithoutOrgaosInput
   }
 
   export type OrgaosUncheckedCreateWithoutNormasInput = {
     org_id?: number
     org_desc: string
     org_sigla: string
-    adm_criador: number
+    adm_criador?: number | null
   }
 
   export type OrgaosCreateOrConnectWithoutNormasInput = {
@@ -15839,14 +15951,14 @@ export namespace Prisma {
   export type OrgaosUpdateWithoutNormasInput = {
     org_desc?: StringFieldUpdateOperationsInput | string
     org_sigla?: StringFieldUpdateOperationsInput | string
-    usuarios?: UsersUpdateOneRequiredWithoutOrgaosNestedInput
+    usuarios?: UsersUpdateOneWithoutOrgaosNestedInput
   }
 
   export type OrgaosUncheckedUpdateWithoutNormasInput = {
     org_id?: IntFieldUpdateOperationsInput | number
     org_desc?: StringFieldUpdateOperationsInput | string
     org_sigla?: StringFieldUpdateOperationsInput | string
-    adm_criador?: IntFieldUpdateOperationsInput | number
+    adm_criador?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type Normas_ReferenciadasUpsertWithWhereUniqueWithoutNorma_origemInput = {
