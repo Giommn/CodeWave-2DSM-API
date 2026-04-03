@@ -20,7 +20,6 @@ function DropdownFiltros({
   const [busca, setBusca] = useState("");
   const ref = useRef<HTMLDivElement>(null);
 
-  // Fecha ao clicar fora
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -35,7 +34,6 @@ function DropdownFiltros({
     op.toLowerCase().includes(busca.toLowerCase()),
   );
 
-  // Label do botão: mostra quantos estão selecionados
   const textoLabel =
     selecionados.length > 0 ? `${label} (${selecionados.length})` : label;
 
@@ -69,7 +67,7 @@ function DropdownFiltros({
 
       {aberto && (
         <div className="absolute top-full left-0 w-full mt-1 bg-[#e5e5e5] border border-gray-300 rounded-xl p-2 shadow-lg z-50 min-w-[160px]">
-          {/* Busca dentro do dropdown */}
+          {}
           <div className="mb-2 relative">
             <input
               type="text"

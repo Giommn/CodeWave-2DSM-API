@@ -4,7 +4,6 @@ import Add from "../assets/Add.png";
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 
-// Decodifica o JWT pra pegar o id_user sem biblioteca extra
 function getIdFromToken(): number | null {
   try {
     const token = localStorage.getItem("token");
@@ -106,7 +105,7 @@ function ModalCadastrarNorma({ onFechar, onSucesso }: ModalProps) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl relative max-h-[90vh] overflow-y-auto">
-        {/* Header */}
+        {}
         <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-gray-200">
           <h2 className="text-lg font-bold text-gray-800">
             Adicionando nova norma:
@@ -120,7 +119,7 @@ function ModalCadastrarNorma({ onFechar, onSucesso }: ModalProps) {
         </div>
 
         <div className="px-6 py-5 flex flex-col gap-4">
-          {/* Área de upload */}
+          {}
           <label
             className={`flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-xl cursor-pointer transition-colors
               ${
@@ -186,7 +185,7 @@ function ModalCadastrarNorma({ onFechar, onSucesso }: ModalProps) {
             )}
           </label>
 
-          {/* Titulo */}
+          {}
           <div>
             <label className="text-sm font-semibold text-gray-700 mb-1 block">
               Titulo
@@ -201,7 +200,7 @@ function ModalCadastrarNorma({ onFechar, onSucesso }: ModalProps) {
             />
           </div>
 
-          {/* Descrição */}
+          {}
           <div>
             <label className="text-sm font-semibold text-gray-700 mb-1 block">
               Descrição:
@@ -215,7 +214,7 @@ function ModalCadastrarNorma({ onFechar, onSucesso }: ModalProps) {
             />
           </div>
 
-          {/* Código */}
+          {}
           <div>
             <label className="text-sm font-semibold text-gray-700 mb-1 block">
               Código:
@@ -230,7 +229,7 @@ function ModalCadastrarNorma({ onFechar, onSucesso }: ModalProps) {
             />
           </div>
 
-          {/* Data + Emissor */}
+          {}
           <div className="flex gap-3">
             <div className="flex-1">
               <label className="text-sm font-semibold text-gray-700 mb-1 block">
@@ -259,7 +258,7 @@ function ModalCadastrarNorma({ onFechar, onSucesso }: ModalProps) {
             </div>
           </div>
 
-          {/* Sigla */}
+          {}
           <div>
             <label className="text-sm font-semibold text-gray-700 mb-1 block">
               Sigla do emissor:

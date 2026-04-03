@@ -111,7 +111,7 @@ function Normas() {
     <div className="flex flex-col gap-6 p-6 w-full">
       <UploadsCards onNormaCadastrada={fetchNormas} />
 
-      {/* Filtros */}
+      {}
       <div className="flex gap-3 items-center w-full flex-wrap">
         <RemoverFiltros onClick={removerTodosFiltros} />
         <DropdownFiltros
@@ -133,7 +133,7 @@ function Normas() {
         />
       </div>
 
-      {/* Busca (esquerda) + Filtros ativos (direita) */}
+      {}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <BuscarNormas
           className="w-72"
@@ -178,7 +178,7 @@ function Normas() {
         )}
       </div>
 
-      {/* Tabela */}
+      {}
       {carregando ? (
         <div className="text-center py-12 text-gray-400">
           Carregando normas...

@@ -61,7 +61,7 @@ function ListaNormas({ arquivos, apiUrl, onNormaExcluida }: Props) {
 
   return (
     <div className="rounded-2xl overflow-hidden border border-gray-200">
-      {/* Cabeçalho */}
+      {}
       <div className="flex items-center gap-4 bg-gray-100 px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide">
         <input
           type="checkbox"
@@ -79,7 +79,7 @@ function ListaNormas({ arquivos, apiUrl, onNormaExcluida }: Props) {
         <span className="w-24 text-center">Ações</span>
       </div>
 
-      {/* Linhas */}
+      {}
       {arquivos.map((norma, index) => (
         <div
           key={norma.id_norm}
@@ -116,9 +116,9 @@ function ListaNormas({ arquivos, apiUrl, onNormaExcluida }: Props) {
             {norma.adm_criador}
           </span>
 
-          {/* Ações */}
+          {}
           <div className="w-24 flex items-center justify-center gap-3">
-            {/* Download */}
+            {}
             <button
               title="Download"
               className="text-gray-400 hover:text-[#8a1c32] transition-colors"
@@ -142,7 +142,7 @@ function ListaNormas({ arquivos, apiUrl, onNormaExcluida }: Props) {
               </svg>
             </button>
 
-            {/* Excluir */}
+            {}
             <button
               title="Excluir"
               disabled={excluindo === norma.id_norm}
@@ -165,7 +165,7 @@ function ListaNormas({ arquivos, apiUrl, onNormaExcluida }: Props) {
               </svg>
             </button>
 
-            {/* Mais opções */}
+            {}
             <button
               title="Mais opções"
               className="text-gray-400 hover:text-black transition-colors"

@@ -8,7 +8,7 @@ function RemoverFiltros({ onClick }: Props) {
       onClick={onClick}
       className="flex items-center gap-2 bg-[#8a1c32] text-white px-4 py-1.5 rounded-xl font-semibold hover:bg-[#6e1628] transition-colors whitespace-nowrap"
     >
-      {/* Ícone de filtro riscado */}
+      {}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="w-5 h-5"
