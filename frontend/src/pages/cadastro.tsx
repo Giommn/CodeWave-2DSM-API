@@ -3,9 +3,10 @@ import { RegisterModal } from "../components/RegisterModal";
 import Navbar from "../components/Navbar";
 import CardsDados from "../components/CardsDados";
 
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+
 export default function Cadastro() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [registeredUsers, setRegisteredUsers] = useState<
     Array<{
       id_user?: number;
@@ -16,11 +17,19 @@ export default function Cadastro() {
   >([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Get token from localStorage
+  const getToken = () => localStorage.getItem("token");
+
   // Fetch users from database on component mount
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/getusers");
+        const token = getToken();
+        const response = await fetch(`${API_URL}/getusers`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -41,30 +50,36 @@ export default function Cadastro() {
     nivel_user: "ADM" | "USER";
   }) => {
     try {
-      const response = await fetch("http://localhost:3000/createuser", {
+      const token = getToken();
+      const response = await fetch(`${API_URL}/createuser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(userData),
       });
 
       if (!response.ok) {
-        throw new Error("Registration failed");
+        const error = await response.json();
+        throw new Error(error.message || "Registration failed");
       }
 
       const result = await response.json();
       console.log("Usuário registrado com sucesso:", result);
 
       // Refresh users list from database
-      const usersResponse = await fetch("http://localhost:3000/getusers");
+      const usersResponse = await fetch(`${API_URL}/getusers`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (usersResponse.ok) {
         const usersData = await usersResponse.json();
         setRegisteredUsers(usersData.resposta || []);
       }
 
       setIsModalOpen(false);
-
       alert(`Usuário registrado com sucesso: ${userData.nome}`);
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
