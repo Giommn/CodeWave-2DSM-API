@@ -25,9 +25,9 @@ function Login() {
       }
 
       const data = await response.json();
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.resposta.token);
       window.dispatchEvent(new Event("storage"))
-      navigate("/");
+      window.location.href = "/";
     } catch (err) {
       setError("Email ou senha incorretos.");
     }
