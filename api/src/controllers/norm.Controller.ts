@@ -82,6 +82,7 @@ export default class NormController {
       const resposta = await NormController.norm_service.deleteNorm(
         Number(id),
       );
+      
      fs.unlink(path.resolve(
         __dirname,
         "..",
