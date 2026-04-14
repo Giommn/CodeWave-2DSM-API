@@ -44,7 +44,7 @@
 
 <br>
 
-> Status do Projeto: Em andamento Sprint 1! :hourglass_flowing_sand:
+> Status do Projeto: Em andamento Sprint 2! 🔛:
 
 ## :dart: Objetivo <a id="Objetivo"></a>
 O desafio consiste em desenvolver uma plataforma web estruturada para centralizar, organizar e correlacionar requisitos normativos aeronáuticos. O sistema visa transformar o processo atual, que é manual e descentralizado, em uma fonte de dados organizada que reduza o tempo de análise e o risco de inconsistências interpretativas, apoiando a tomada de decisão de profissionais habilitados.
@@ -108,16 +108,44 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 ## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
   <details>
   <summary> MVP - Sprint 1 </summary>
-    <img src="doc/videos/">
-  </details>
+  <br>
+  <video src="docs/videos/sprint1/video_mvp_api_2_sprint1.mp4" controls width="100%"></video>
+  <br>
+  <a href="https://youtu.be/Yi9m4oz6Bg4?si=PA6AvCtkteVwIgGQ" target="_blank">
+    <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
+  </a>
+
+</details>
+
   <details>
-  <summary> MVP - Sprint 2 </summary>
-    <img src="doc/videos/">
-  </details>
+  <summary> MVP - Sprint 2 (Não disponível) </summary>
+  <br>
+  <video src="docs/videos/sprint1/video_mvp_api_2_sprint2.mp4" controls width="100%"></video>
+  <br>
+  <a href="" target="_blank">
+    <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
+  </a>
+
+</details>
+
   <details>
-  <summary> MVP - Sprint 3 </summary>
-     <img src="doc/videos/">
-  </details>
+  <summary> MVP - Sprint 3 (Não disponível) </summary>
+  <br>
+  <video src="docs/videos/sprint1/video_mvp_api_2_sprint3.mp4" controls width="100%"></video>
+  <br>
+  <a href="" target="_blank">
+    <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
+  </a>
+
+</details>
+
+
+
+| Sprint | Status | Documentação |
+|:---:|:-----------|:------------------------|
+| **Sprint 1** | Pronta |  [DOC](docs/sprints/sprint1/readme.md) |
+| **Sprint 2** | Em andamento |   [DOC](docs/sprints/sprint2/readme.md) |
+| **Sprint 3** | A Fazer |  [DOC](docs/sprints/sprint3/readme.md) |
 
 <br>
 
@@ -146,19 +174,19 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 
 | Sprint | Período |  Status  | Foco |
 |:------:|:-------:|:------------:|:----------:|
-| **Sprint 1**  | 16/03 - 05/04 | ⏳ |  |
-| **Sprint 2**  | 13/04 - 03/05 | ⏳ |  |
-| **Sprint 3**  | 11/11 - 31/05 | ⏳ |  |
+| **Sprint 1**  | 16/03 - 05/04 | ✅ | Cadastro de usuários e normas |
+| **Sprint 2**  | 13/04 - 03/05 | 🔛 | Filtro de normas e requisitos |
+| **Sprint 3**  | 11/11 - 31/05 | ⏳ | Histórico de normas |
 
 </br>
 
 ## 📋 Sprint 1 - Requisitos <a id="sprint1-requisitos"></a>
 | ID | Prioridade | User Story | Estimativa | Sprint | Status |
 |:---|:---|:---|:---:|:---:|:---|
-| $\color{green}{\text{1}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero cadastrar um novo}}$ $\color{green}{\text{projetista na plataforma}}$ $\color{green}{\text{(inserindo nome e e-mail),}}$ $\color{green}{\text{para garantir o acesso ao}}$ $\color{green}{\text{sistema e suas funcionalidades}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
-| $\color{green}{\text{2}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero atribuir e manipular}}$ $\color{green}{\text{normas (emitente, título, data)}}$ $\color{green}{\text{técnicas ao sistema,}}$ $\color{green}{\text{para permitir melhor}}$ $\color{green}{\text{visualização das informações}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
-| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ⌛ |
-| $\color{green}{\text{4}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero realizar login}}$ $\color{green}{\text{informando meu email}}$ $\color{green}{\text{e senha para acessar}}$ $\color{green}{\text{o sistema.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{⌛}}$ |
+| $\color{green}{\text{1}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero cadastrar um novo}}$ $\color{green}{\text{projetista na plataforma}}$ $\color{green}{\text{(inserindo nome e e-mail),}}$ $\color{green}{\text{para garantir o acesso ao}}$ $\color{green}{\text{sistema e suas funcionalidades}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
+| $\color{green}{\text{2}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero atribuir e manipular}}$ $\color{green}{\text{normas (emitente, título, data)}}$ $\color{green}{\text{técnicas ao sistema,}}$ $\color{green}{\text{para permitir melhor}}$ $\color{green}{\text{visualização das informações}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
+| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ✅ |
+| $\color{green}{\text{4}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero realizar login}}$ $\color{green}{\text{informando meu email}}$ $\color{green}{\text{e senha para acessar}}$ $\color{green}{\text{o sistema.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
 
 <br>
 
@@ -216,13 +244,13 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 
 | ID | Prioridade | User Story | Estimativa | Sprint | Status |
 |:---:|:---:|:---|:---:|:---:|:---:|
-| 1 | Alta | Como Analista de Qualidade, quero cadastrar um novo projetista na plataforma (inserindo nome e e-mail), para garantir o acesso ao sistema e suas funcionalidades. | 11 | 1 | ⌛ |
-| 2 | Alta | Como Analista de Qualidade, quero atribuir e manipular normas (emitente, título, data) técnicas ao sistema, para permitir melhor visualização das informações. | 11 | 1 | ⌛ |
-| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ⌛ |
-| 4 | Alta | Como Analista de Qualidade, quero realizar login informando meu email e senha para acessar o sistema. | 8 | 1 | ⌛ |
-| 5 | Alta | Como Analista de Qualidade, quero filtrar normas técnicas por órgão, categoria e palavra-chave, para agilizar o processo de busca. | 8 | 2 | ⌛ |
-| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | ⌛ |
-| 7 | Média | Como Analista de Qualidade, quero adicionar notas técnicas a um requisito para documentar análises. | 8 | 2 | ⌛ |
+| 1 | Alta | Como Analista de Qualidade, quero cadastrar um novo projetista na plataforma (inserindo nome e e-mail), para garantir o acesso ao sistema e suas funcionalidades. | 11 | 1 | ✅ |
+| 2 | Alta | Como Analista de Qualidade, quero atribuir e manipular normas (emitente, título, data) técnicas ao sistema, para permitir melhor visualização das informações. | 11 | 1 | ✅ |
+| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ✅ |
+| 4 | Alta | Como Analista de Qualidade, quero realizar login informando meu email e senha para acessar o sistema. | 8 | 1 | ✅ |
+| 5 | Alta | Como Analista de Qualidade, quero filtrar normas técnicas por órgão, categoria e palavra-chave, para agilizar o processo de busca. | 8 | 2 | 🔛 |
+| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | 🔛 |
+| 7 | Média | Como Analista de Qualidade, quero adicionar notas técnicas a um requisito para documentar análises. | 8 | 2 | 🔛 |
 | 8 | Média | Como Analista de Qualidade, quero visualizar o histórico de alterações nos requisitos para rastreabilidade. | 8 | 3 | ⌛ |
 | 9 | Baixa | Como Projetista, quero vizualizar o site pelo meu celular, para visualizar detalhes técnicos. | 8 | 3 | ⌛ |
 
