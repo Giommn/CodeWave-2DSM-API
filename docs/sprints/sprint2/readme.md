@@ -65,6 +65,56 @@ Expandir as funcionalidades da plataforma introduzindo mecanismos de busca e vis
 
 <br>
 
+## 📋 Cenários de Teste - Sprint 2 <a id="cenarios-sprint2"></a>
+
+### User Story 5 - Filtro de Normas Técnicas
+[📑 Visualizar Cenários Completos](../../cenarios/sprint2/cenario-user-story-5.md)
+
+**Cenários:**
+- ✅ Filtro por órgão emitente
+- ✅ Filtro por categoria
+- ✅ Filtro por palavra-chave
+- ✅ Filtro combinado (múltiplos critérios)
+- ✅ Nenhum resultado encontrado
+- ✅ Limpar filtros
+
+### User Story 6 - Visualização de Projetistas Cadastrados
+[📑 Visualizar Cenários Completos](../../cenarios/sprint2/cenario-user-story-6.md)
+
+**Cenários:**
+- ✅ Listagem de projetistas
+- ✅ Ordenação da lista
+- ✅ Paginação da lista
+- ✅ Busca na lista de projetistas
+- ✅ Visualização de detalhes do projetista
+- ✅ Lista vazia
+
+### User Story 7 - Notas Técnicas em Requisitos
+[📑 Visualizar Cenários Completos](../../cenarios/sprint2/cenario-user-story-7.md)
+
+**Cenários:**
+- ✅ Adicionar nota técnica com sucesso
+- ✅ Campos obrigatórios
+- ✅ Editar nota técnica
+- ✅ Excluir nota técnica
+- ✅ Múltiplas notas no mesmo requisito
+- ✅ Visualizar notas de outros usuários
+
+<br>
+
+## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
+  <details>
+  <summary> MVP - Sprint 2 </summary>
+  <br>
+  <video src="" controls width="100%"></video>
+  <br>
+  <a href="" target="_blank">
+    <img src="" alt="Ver no YouTube" />
+  </a>
+  </details>
+
+  <br>
+
 ## 📂 DOCS 
 
 | Sprint | Status | Documentação |

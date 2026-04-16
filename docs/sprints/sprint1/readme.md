@@ -72,6 +72,61 @@ Estabelecer a fundação do sistema com foco no controle de acesso e na estrutur
 
 <br>
 
+## 📋 Cenários de Teste - Sprint 1 <a id="cenarios-sprint1"></a>
+
+### User Story 1 - Cadastro de Projetista
+[📑 Visualizar Cenários Completos](../../cenarios/sprint1/cenario-user-story-1.md)
+
+**Cenários:**
+- ✅ Cadastro realizado com sucesso
+- ✅ Campo nome obrigatório
+- ✅ Campo e-mail obrigatório
+- ✅ E-mail inválido
+- ✅ E-mail já cadastrado
+
+### User Story 2 - Cadastro de Normas Técnicas
+[📑 Visualizar Cenários Completos](../../cenarios/sprint1/cenario-user-story-2.md)
+
+**Cenários:**
+- ✅ Cadastro de norma realizado com sucesso
+- ✅ Campos obrigatórios
+- ✅ Edição de norma
+- ✅ Exclusão de norma
+
+### User Story 3 - Cadastro de Requisitos
+[📑 Visualizar Cenários Completos](../../cenarios/sprint1/cenario-user-story-3.md)
+
+**Cenários:**
+- ✅ Cadastro de requisito realizado com sucesso
+- ✅ Código de requisito duplicado na mesma norma
+- ✅ Edição de requisito
+- ✅ Visualização completa do requisito
+
+### User Story 4 - Login no Sistema
+[📑 Visualizar Cenários Completos](../../cenarios/sprint1/cenario-user-story-4.md)
+
+**Cenários:**
+- ✅ Login realizado com sucesso
+- ✅ E-mail não cadastrado
+- ✅ Senha incorreta
+- ✅ Campos obrigatórios
+- ✅ Sessão expirada
+
+<br>
+
+## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
+  <details>
+  <summary> MVP - Sprint 1 </summary>
+  <br>
+  <video src="docs/videos/sprint1/video_mvp_api_2_sprint1.mp4" controls width="100%"></video>
+  <br>
+  <a href="https://youtu.be/Yi9m4oz6Bg4?si=PA6AvCtkteVwIgGQ" target="_blank">
+    <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
+  </a>
+  </details>
+
+<br>
+
 ## 📂 DOCS 
 
 

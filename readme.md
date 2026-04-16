@@ -180,57 +180,52 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 
 </br>
 
-## 📋 Sprint 1 - Requisitos <a id="sprint1-requisitos"></a>
+## 📋 Backlog da Sprint
+
 | ID | Prioridade | User Story | Estimativa | Sprint | Status |
 |:---|:---|:---|:---:|:---:|:---|
-| $\color{green}{\text{1}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero cadastrar um novo}}$ $\color{green}{\text{projetista na plataforma}}$ $\color{green}{\text{(inserindo nome e e-mail),}}$ $\color{green}{\text{para garantir o acesso ao}}$ $\color{green}{\text{sistema e suas funcionalidades}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
-| $\color{green}{\text{2}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero atribuir e manipular}}$ $\color{green}{\text{normas (emitente, título, data)}}$ $\color{green}{\text{técnicas ao sistema,}}$ $\color{green}{\text{para permitir melhor}}$ $\color{green}{\text{visualização das informações}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
-| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ✅ |
-| $\color{green}{\text{4}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero realizar login}}$ $\color{green}{\text{informando meu email}}$ $\color{green}{\text{e senha para acessar}}$ $\color{green}{\text{o sistema.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
+| $\color{green}{\text{5}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero filtrar normas técnicas}}$ $\color{green}{\text{por órgão, categoria e palavra-chave,}}$ $\color{green}{\text{para agilizar o processo de busca.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{2}}$ | $\color{green}{\text{🔛}}$ |
+| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | 🔛 |
+| $\color{green}{\text{7}}$ | $\color{green}{\text{Média}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero adicionar notas técnicas}}$ $\color{green}{\text{a um requisito}}$ $\color{green}{\text{para documentar análises.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{2}}$ | $\color{green}{\text{🔛}}$ |
 
 <br>
 
-## 📋 Cenários de Teste - Sprint 1 <a id="cenarios-sprint1"></a>
+## 📋 Cenários de Teste - Sprint 2 <a id="cenarios-sprint2"></a>
 
-### User Story 1 - Cadastro de Projetista
-[📑 Visualizar Cenários Completos](docs/cenarios/sprint1/cenario-user-story-1.md)
-
-**Cenários:**
-- ✅ Cadastro realizado com sucesso
-- ✅ Campo nome obrigatório
-- ✅ Campo e-mail obrigatório
-- ✅ E-mail inválido
-- ✅ E-mail já cadastrado
-
-### User Story 2 - Cadastro de Normas Técnicas
-[📑 Visualizar Cenários Completos](docs/cenarios/sprint1/cenario-user-story-2.md)
+### User Story 5 - Filtro de Normas Técnicas
+[📑 Visualizar Cenários Completos](docs/cenarios/sprint2/cenario-user-story-5.md)
 
 **Cenários:**
-- ✅ Cadastro de norma realizado com sucesso
+- ✅ Filtro por órgão emitente
+- ✅ Filtro por categoria
+- ✅ Filtro por palavra-chave
+- ✅ Filtro combinado (múltiplos critérios)
+- ✅ Nenhum resultado encontrado
+- ✅ Limpar filtros
+
+### User Story 6 - Visualização de Projetistas Cadastrados
+[📑 Visualizar Cenários Completos](docs/cenarios/sprint2/cenario-user-story-6.md)
+
+**Cenários:**
+- ✅ Listagem de projetistas
+- ✅ Ordenação da lista
+- ✅ Paginação da lista
+- ✅ Busca na lista de projetistas
+- ✅ Visualização de detalhes do projetista
+- ✅ Lista vazia
+
+### User Story 7 - Notas Técnicas em Requisitos
+[📑 Visualizar Cenários Completos](docs/cenarios/sprint2/cenario-user-story-7.md)
+
+**Cenários:**
+- ✅ Adicionar nota técnica com sucesso
 - ✅ Campos obrigatórios
-- ✅ Edição de norma
-- ✅ Exclusão de norma
+- ✅ Editar nota técnica
+- ✅ Excluir nota técnica
+- ✅ Múltiplas notas no mesmo requisito
+- ✅ Visualizar notas de outros usuários
 
-### User Story 3 - Cadastro de Requisitos
-[📑 Visualizar Cenários Completos](docs/cenarios/sprint1/cenario-user-story-3.md)
-
-**Cenários:**
-- ✅ Cadastro de requisito realizado com sucesso
-- ✅ Código de requisito duplicado na mesma norma
-- ✅ Edição de requisito
-- ✅ Visualização completa do requisito
-
-### User Story 4 - Login no Sistema
-[📑 Visualizar Cenários Completos](docs/cenarios/sprint1/cenario-user-story-4.md)
-
-**Cenários:**
-- ✅ Login realizado com sucesso
-- ✅ E-mail não cadastrado
-- ✅ Senha incorreta
-- ✅ Campos obrigatórios
-- ✅ Sessão expirada
-
-<br>
+  <br>
 
 ## 📊 Escala de Estimativa de Esforço <a id="escala-estimativa"></a>
  Pontuação | Significado | Estimativa | 

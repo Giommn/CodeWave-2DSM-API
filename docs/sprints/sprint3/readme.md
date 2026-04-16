@@ -64,9 +64,46 @@ Garantir a rastreabilidade das informações e a acessibilidade multiplataforma 
 
 <br>
 
-## 📂 DOCS 
+## 📋 Cenários de Teste - Sprint 3 <a id="cenarios-sprint3"></a>
 
-*(Se você for colocar este arquivo dentro da pasta `sprint3`, os links ficarão assim)*
+### User Story 8 - Histórico de Alterações em Requisitos
+[📑 Visualizar Cenários Completos](../../cenarios/sprint3/cenario-user-story-8.md)
+
+**Cenários:**
+- ✅ Visualizar histórico do requisito (lista cronológica)
+- ✅ Registro de alteração de descrição
+- ✅ Registro de alteração de interpretação técnica
+- ✅ Registro de adição de nota técnica no histórico
+- ✅ Filtros por tipo de alteração
+- ✅ Comparação de versões lado a lado
+
+### User Story 9 - Responsividade para Dispositivos Móveis
+[📑 Visualizar Cenários Completos](../../cenarios/sprint3/cenario-user-story-9.md)
+
+**Cenários:**
+- ✅ Layout adaptável (Mobile First/Responsive)
+- ✅ Menu de navegação "Hambúrguer" funcional
+- ✅ Conversão de tabelas para formato de Cards em telas pequenas
+- ✅ Visualização de requisitos em Cards expansíveis (Accordion)
+- ✅ Formulários com largura total (100% viewport)
+- ✅ Feedback visual de toque (Touch states)
+- ✅ Performance e otimização de carregamento em 3G/4G
+- ✅ Ajuste dinâmico de orientação (Retrato/Paisagem)
+
+## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
+  <details>
+  <summary> MVP - Sprint 3 </summary>
+  <br>
+  <video src="" controls width="100%"></video>
+  <br>
+  <a href="" target="_blank">
+    <img src="" alt="Ver no YouTube" />
+  </a>
+  </details>
+
+  <br>
+
+## 📂 DOCS 
 
 | Sprint | Status | Documentação |
 |:---:|:-----------|:------------------------|
