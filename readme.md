@@ -34,10 +34,11 @@
   <a href ="#componentes"> Componentes</a>  |
   <a href ="#mvp"> MVP</a>  |
   <a href ="#cronogramaPJ"> Cronograma de Evolução do Projeto</a>  |
-  <a href ="#sprint1-requisitos"> Sprint 1 - Requisitos</a>  |
-  <a href ="#cenarios-sprint1"> Cenários Sprint 1</a>  |
   <a href ="#escala-estimativa"> Escala de Estimativa de Esforço</a>  |
   <a href ="#product-backlog"> Product Backlog</a>  |
+  <a href="docs/sprints/sprint1/readme.md">Sprint 1</a> |
+  <a href="docs/sprints/sprint2/readme.md">Sprint 2</a> |
+  <a href="docs/sprints/sprint3/readme.md">Sprint 3</a> |
   <a href ="#equipe"> Equipe</a>  |
   <a href ="#focalpoint"> Focal Point</a>
 </p>
@@ -105,10 +106,21 @@ Pode estar entre 1 e N, separados por vírgula quando houver múltiplos IDs.
 ### `<descrição da entrega feita no commit>`
 Descrição clara sobre o que está sendo entregue no commit criado e enviado para o Git.
 
-## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
+## Sprints<a id="mvp"></a>
   <details>
   <summary> MVP - Sprint 1 </summary>
   <br>
+
+  ## 📋 Backlog da Sprint
+
+| ID | Prioridade | User Story | Estimativa | Sprint | Status |
+|:---|:---|:---|:---:|:---:|:---|
+| $\color{green}{\text{1}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero cadastrar um novo}}$ $\color{green}{\text{projetista na plataforma}}$ $\color{green}{\text{(inserindo nome e e-mail),}}$ $\color{green}{\text{para garantir o acesso ao}}$ $\color{green}{\text{sistema e suas funcionalidades}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
+| $\color{green}{\text{2}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero atribuir e manipular}}$ $\color{green}{\text{normas (emitente, título, data)}}$ $\color{green}{\text{técnicas ao sistema,}}$ $\color{green}{\text{para permitir melhor}}$ $\color{green}{\text{visualização das informações}}$ | $\color{green}{\text{11}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
+| 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ✅ |
+| $\color{green}{\text{4}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero realizar login}}$ $\color{green}{\text{informando meu email}}$ $\color{green}{\text{e senha para acessar}}$ $\color{green}{\text{o sistema.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{1}}$ | $\color{green}{\text{✅}}$ |
+
+<br>
   <video src="docs/videos/sprint1/video_mvp_api_2_sprint1.mp4" controls width="100%"></video>
   <br>
   <a href="https://youtu.be/Yi9m4oz6Bg4?si=PA6AvCtkteVwIgGQ" target="_blank">
@@ -120,6 +132,16 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
   <details>
   <summary> MVP - Sprint 2 (Não disponível) </summary>
   <br>
+
+  ## 📋 Backlog da Sprint
+
+| ID | Prioridade | User Story | Estimativa | Sprint | Status |
+|:---|:---|:---|:---:|:---:|:---|
+| $\color{green}{\text{5}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero filtrar normas técnicas}}$ $\color{green}{\text{por órgão, categoria e palavra-chave,}}$ $\color{green}{\text{para agilizar o processo de busca.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{2}}$ | $\color{green}{\text{🔛}}$ |
+| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | 🔛 |
+| $\color{green}{\text{7}}$ | $\color{green}{\text{Média}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero adicionar notas técnicas}}$ $\color{green}{\text{a um requisito}}$ $\color{green}{\text{para documentar análises.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{2}}$ | $\color{green}{\text{🔛}}$ |
+
+<br>
   <video src="docs/videos/sprint1/video_mvp_api_2_sprint2.mp4" controls width="100%"></video>
   <br>
   <a href="" target="_blank">
@@ -130,6 +152,14 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 
   <details>
   <summary> MVP - Sprint 3 (Não disponível) </summary>
+
+  ## 📋 Backlog da Sprint
+
+| ID | Prioridade | User Story | Estimativa | Sprint | Status |
+|:---|:---|:---|:---:|:---:|:---|
+| $\color{green}{\text{8}}$ | $\color{green}{\text{Média}}$ | $\color{green}{\text{Como Analista de Qualidade, quero}}$ $\color{green}{\text{visualizar o histórico de alterações nos}}$ $\color{green}{\text{requisitos para rastreabilidade.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{3}}$ | $\color{green}{\text{⏳}}$ |
+| $\color{green}{\text{9}}$ | $\color{green}{\text{Baixa}}$ | $\color{green}{\text{Como Projetista, quero visualizar}}$ $\color{green}{\text{o site pelo meu celular, para}}$ $\color{green}{\text{visualizar detalhes técnicos.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{3}}$ | $\color{green}{\text{⏳}}$ |
+
   <br>
   <video src="docs/videos/sprint1/video_mvp_api_2_sprint3.mp4" controls width="100%"></video>
   <br>
@@ -139,8 +169,6 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 
 </details>
 
-
-
 | Sprint | Status | Documentação |
 |:---:|:-----------|:------------------------|
 | **Sprint 1** | Pronta |  [DOC](docs/sprints/sprint1/readme.md) |
@@ -149,14 +177,7 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 
 <br>
 
-### 📋 PRINCIPAIS DOR (DEFINIÇÃO DE PRONTO)
 
-| DOR | Descrição | Critérios de Aceitação |
-|:---:|:-----------|:------------------------|
-| **DOR 01** | Mockup das Telas no Figma | • Telas principais representadas<br>• Layout e componentes visuais definidos<br>• Fluxo de navegação representado estaticamente |
-| **DOR 02** | Modelo de Dados Conceitual | • Entidades mapeadas<br>• Relacionamentos definidos<br>• Cardinalidades estabelecidas<br>• Atributos principais identificados | Modelo disponível em `docs/model/` |
-
----
 
 ## 🗃️ MODELO DE DADOS
 
@@ -179,53 +200,6 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 | **Sprint 3**  | 11/11 - 31/05 | ⏳ | Histórico de normas |
 
 </br>
-
-## 📋 Backlog da Sprint
-
-| ID | Prioridade | User Story | Estimativa | Sprint | Status |
-|:---|:---|:---|:---:|:---:|:---|
-| $\color{green}{\text{5}}$ | $\color{green}{\text{Alta}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero filtrar normas técnicas}}$ $\color{green}{\text{por órgão, categoria e palavra-chave,}}$ $\color{green}{\text{para agilizar o processo de busca.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{2}}$ | $\color{green}{\text{🔛}}$ |
-| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | 🔛 |
-| $\color{green}{\text{7}}$ | $\color{green}{\text{Média}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero adicionar notas técnicas}}$ $\color{green}{\text{a um requisito}}$ $\color{green}{\text{para documentar análises.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{2}}$ | $\color{green}{\text{🔛}}$ |
-
-<br>
-
-## 📋 Cenários de Teste - Sprint 2 <a id="cenarios-sprint2"></a>
-
-### User Story 5 - Filtro de Normas Técnicas
-[📑 Visualizar Cenários Completos](docs/cenarios/sprint2/cenario-user-story-5.md)
-
-**Cenários:**
-- ✅ Filtro por órgão emitente
-- ✅ Filtro por categoria
-- ✅ Filtro por palavra-chave
-- ✅ Filtro combinado (múltiplos critérios)
-- ✅ Nenhum resultado encontrado
-- ✅ Limpar filtros
-
-### User Story 6 - Visualização de Projetistas Cadastrados
-[📑 Visualizar Cenários Completos](docs/cenarios/sprint2/cenario-user-story-6.md)
-
-**Cenários:**
-- ✅ Listagem de projetistas
-- ✅ Ordenação da lista
-- ✅ Paginação da lista
-- ✅ Busca na lista de projetistas
-- ✅ Visualização de detalhes do projetista
-- ✅ Lista vazia
-
-### User Story 7 - Notas Técnicas em Requisitos
-[📑 Visualizar Cenários Completos](docs/cenarios/sprint2/cenario-user-story-7.md)
-
-**Cenários:**
-- ✅ Adicionar nota técnica com sucesso
-- ✅ Campos obrigatórios
-- ✅ Editar nota técnica
-- ✅ Excluir nota técnica
-- ✅ Múltiplas notas no mesmo requisito
-- ✅ Visualizar notas de outros usuários
-
-  <br>
 
 ## 📊 Escala de Estimativa de Esforço <a id="escala-estimativa"></a>
  Pontuação | Significado | Estimativa | 
@@ -266,7 +240,6 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 | Felipe Batista | Desenvolvedor(a) | [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)]() [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/felipesgb) |
 
 </div>
-</br>
 
 <br>
 

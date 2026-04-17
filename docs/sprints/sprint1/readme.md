@@ -114,6 +114,28 @@ Estabelecer a fundação do sistema com foco no controle de acesso e na estrutur
 
 <br>
 
+---
+
+### 📋 PRINCIPAIS DOR (DEFINIÇÃO DE PRONTO)
+
+| DOR | Descrição | Critérios de Aceitação |
+|:---:|:-----------|:------------------------|
+| **DOR 01** | Mockup das Telas no Figma | • Telas principais representadas<br>• Layout e componentes visuais definidos<br>• Fluxo de navegação representado estaticamente |
+| **DOR 02** | Modelo de Dados Conceitual | • Entidades mapeadas<br>• Relacionamentos definidos<br>• Cardinalidades estabelecidas<br>• Atributos principais identificados | Modelo disponível em `docs/model/` |
+
+---
+
+### 📋 PRINCIPAIS DOD (DEFINIÇÃO DE FEITO)
+
+| DOD | Descrição | 
+|:---:|:-----------|
+| **DOD 01** | Regras de negócio de back-end de acordo com exigências do cliente  
+| **DOD 02** | Vídeo da entrega dessa sprint |
+| **DOD 03** | UI/UX validados pelo cliente  |
+| **DOD 04** | Integração back-end com front-end |
+
+---
+
 ## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
   <details>
   <summary> MVP - Sprint 1 </summary>

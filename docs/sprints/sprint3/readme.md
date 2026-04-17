@@ -59,8 +59,8 @@ Garantir a rastreabilidade das informações e a acessibilidade multiplataforma 
 
 | ID | Prioridade | User Story | Estimativa | Sprint | Status |
 |:---|:---|:---|:---:|:---:|:---|
-| <font color="green">8</font> | <font color="green">Média</font> | <font color="green">Como Analista de Qualidade, quero visualizar o histórico de alterações nos requisitos para rastreabilidade.</font> | <font color="green">8</font> | <font color="green">3</font> | ⏳ |
-| 9 | Baixa | Como Projetista, quero visualizar o site pelo meu celular, para visualizar detalhes técnicos. | 8 | 3 | ⏳ |
+| $\color{green}{\text{8}}$ | $\color{green}{\text{Média}}$ | $\color{green}{\text{Como Analista de Qualidade, quero}}$ $\color{green}{\text{visualizar o histórico de alterações nos}}$ $\color{green}{\text{requisitos para rastreabilidade.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{3}}$ | $\color{green}{\text{⏳}}$ |
+| $\color{green}{\text{9}}$ | $\color{green}{\text{Baixa}}$ | $\color{green}{\text{Como Projetista, quero visualizar}}$ $\color{green}{\text{o site pelo meu celular, para}}$ $\color{green}{\text{visualizar detalhes técnicos.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{3}}$ | $\color{green}{\text{⏳}}$ |
 
 <br>
 
