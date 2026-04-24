@@ -17,6 +17,9 @@ export default function Cadastro() {
   >([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // === NOVO: Pegando a função do usuário logado ===
+  const userRole = localStorage.getItem("userRole") || "user";
+
   // Get token from localStorage
   const getToken = () => localStorage.getItem("token");
 
@@ -104,10 +107,17 @@ export default function Cadastro() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
+      {/* NOVO: Passamos a prop 'userRole' para o CardsDados.
+        Adicionei um @ts-ignore rápido caso o seu TypeScript reclame 
+        que essa prop ainda não existe na interface do CardsDados.
+      */}
+      {/* @ts-ignore */}
       <CardsDados
-        setIsModalOpen={setIsModalOpen}
+        // Bloqueio de segurança: só envia a função de abrir o modal se for ADM
+        setIsModalOpen={userRole === "adm" ? setIsModalOpen : () => {}}
         totalAdmins={totalAdmins}
         totalUsers={totalUsers}
+        userRole={userRole} // Enviando a role para ocultar o botão lá dentro
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -185,9 +195,16 @@ export default function Cadastro() {
             <p className="text-gray-600 text-lg">
               Nenhum usuário registrado ainda.
             </p>
-            <p className="text-gray-500 text-sm mt-2">
-              Clique no botão acima para registrar um novo usuário.
-            </p>
+            {/* NOVO: Texto dinâmico com base na role */}
+            {userRole === "adm" ? (
+              <p className="text-gray-500 text-sm mt-2">
+                Clique no botão acima para registrar um novo usuário.
+              </p>
+            ) : (
+              <p className="text-gray-500 text-sm mt-2">
+                Somente administradores podem registrar novos usuários.
+              </p>
+            )}
           </div>
         )}
       </div>

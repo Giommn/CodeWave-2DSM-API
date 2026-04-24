@@ -62,7 +62,7 @@ const Home: React.FC = () => {
   const listaNormas = Array.from({ length: 12 });
 
   return (
-    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden ">
       <header className="relative w-full h-[500px] flex flex-col items-center overflow-hidden bg-white">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img

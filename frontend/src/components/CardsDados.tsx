@@ -6,13 +6,16 @@ interface CardsDadosProps {
   setIsModalOpen: (value: boolean) => void;
   totalUsers?: number;
   totalAdmins?: number;
+  userRole?: string; // NOVO: Propriedade para receber a função do usuário
 }
 
 const CardsDados: React.FC<CardsDadosProps> = ({
   setIsModalOpen,
   totalAdmins,
   totalUsers,
+  userRole = "user", // Fallback seguro
 }) => {
+  // 1. Criamos a lista base (apenas com os cards de leitura)
   const dashboardData = [
     {
       id: 1,
@@ -28,14 +31,18 @@ const CardsDados: React.FC<CardsDadosProps> = ({
       icon: <BsShieldCheck size={20} />,
       isBotao: false,
     },
-    {
+  ];
+
+  // 2. Condição de Segurança: Adiciona o card de "Cadastrar" SOMENTE se for ADM
+  if (userRole === "adm") {
+    dashboardData.push({
       id: 3,
       titulo: "Cadastrar novo usuário",
       valor: "Acessar",
       icon: <FaUserPlus size={20} />,
       isBotao: true,
-    },
-  ];
+    });
+  }
 
   return (
     <div className="flex flex-wrap gap-4 p-4 justify-center items-center">
