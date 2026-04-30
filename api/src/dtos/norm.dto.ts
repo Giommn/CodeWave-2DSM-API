@@ -1,3 +1,5 @@
+import { CreateNotaDTO, ResponseNota } from "./nota.dto";
+
 // Entrada
 export interface  CreateNormDTO{
   norm_titulo:string;
@@ -11,6 +13,8 @@ export interface  CreateNormDTO{
   org_desc:string;
   org_sigla:string;
   referencias?:Array<number>
+  notas?:Array<CreateNotaDTO>
+  categoria:Array<string>
 }
 
 export interface UpdateNormDTO{
@@ -34,6 +38,8 @@ adm_criador:string;
 id_norm:number;
 pdf_caminho:string;
 referencias:Array<string>
+notas:Array<ResponseNota>
+categoria:Array<string>
 }
 
 

@@ -33,6 +33,30 @@ export default class NormRepository implements INorm {
                  normas_origem: {
                     create: norma.referencias?.map(id => ({ norma_destino_id: id }))
                 }
+                ,
+                notas:{
+                    create: norma.notas?.map(nota=>({
+                        not_titulo:nota.notaTitulo,
+                        not_IT:nota.notaIT,
+                        not_AB:nota.notaAB,
+                        not_Pa:nota.notaPA,
+                        usuario:{ connect:{id_user:nota.adm_criador}},
+                        
+                    }))
+                },
+                categoria:{
+                       create: norma.categoria?.map(categoria=>({
+                          cat:{
+                            connectOrCreate:{
+                                where:{cat_nome:categoria},
+                                create:{
+                                    cat_nome:categoria,
+                                    adm_criador:norma.adm_criador
+                                }
+                            }
+                          }
+                       }))
+                }
                 },
                 select: {
                     norm_titulo: true,
@@ -47,7 +71,24 @@ export default class NormRepository implements INorm {
                             select:{norm_titulo:true}
                         }}
                     },
-                    pdf_caminho:true
+                    pdf_caminho:true,
+                    notas:{
+                        select:{
+                            not_IT:true,
+                            not_titulo:true,
+                            not_AB:true,
+                            not_Pa:true,
+                            normas:{
+                                select:{norm_titulo:true}
+                            },
+                           usuario:{
+                            select:{user_name:true}
+                           }
+                        }
+                    },
+                    categoria:{
+                        select: {cat:{select:{cat_nome:true}}}
+                    }
                 }
             });
 
@@ -60,8 +101,17 @@ export default class NormRepository implements INorm {
                 adm_criador:norma_.usuario.user_name,
                 id_norm:norma_.id_norm,
                 pdf_caminho:norma_.pdf_caminho,
-                referencias:norma_.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
-                
+                referencias:norma_.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
+                categoria:norma_.categoria.map(cat=>cat.cat.cat_nome),
+                notas:norma_.notas.map(nota=>{ return {
+                     notaIT:nota.not_IT,
+                     notaTitulo:nota.not_titulo,
+                     notaAB:nota.not_AB,
+                     notaPA:nota.not_Pa,
+                     norm_criador:nota.normas.norm_titulo,
+                     adm_criador:nota.usuario.user_name
+                     
+            }})
 
             };
 
@@ -90,7 +140,25 @@ export default class NormRepository implements INorm {
                             select:{norm_titulo:true}
                         }}
                     },
-                    pdf_caminho:true
+                    pdf_caminho:true,
+                     notas:{
+                        select:{
+                            not_IT:true,
+                            not_titulo:true,
+                            not_AB:true,
+                            not_Pa:true,
+                            normas:{
+                                select:{norm_titulo:true}
+                            },
+                           usuario:{
+                            select:{user_name:true}
+                           }
+                        }
+                    }
+                    ,
+                    categoria:{
+                        select:{cat:{select:{cat_nome:true}}}
+                    }
                 
                 }
             });
@@ -104,7 +172,16 @@ export default class NormRepository implements INorm {
                 adm_criador:norma.usuario.user_name,
                 id_norm:norma.id_norm,
                 pdf_caminho:norma.pdf_caminho,
-                referencias:norma.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
+                referencias:norma.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
+                 categoria:norma.categoria.map(cat=>cat.cat.cat_nome),
+                   notas:norma.notas.map(nota=>{ return {
+                     notaIT:nota.not_IT,
+                     notaTitulo:nota.not_titulo,
+                     notaAB:nota.not_AB,
+                     notaPA:nota.not_Pa,
+                     norm_criador:nota.normas.norm_titulo,
+                     adm_criador:nota.usuario.user_name
+            }})
                 
             };
 
@@ -165,10 +242,29 @@ norm_codigo: update_norm.norm_codigo,
   orgaos: { select: { org_desc: true } },
   usuario:{select:{user_name:true}},
   id_norm:true,
-  normas_origem:{select:{norma_destino:{select:{norm_titulo:true}
+  normas_origem:{select:{norma_destino:{select:{norm_titulo:true},
+
 
 }}},
-pdf_caminho:true
+pdf_caminho:true,
+categoria:{
+    select:{cat:{select:{cat_nome:true}}}
+},
+  notas:{
+                        select:{
+                            not_IT:true,
+                            not_titulo:true,
+                            not_AB:true,
+                            not_Pa:true,
+                            normas:{
+                                select:{norm_titulo:true}
+                            },
+                           usuario:{
+                            select:{user_name:true}
+                           }
+                        }
+                    }
+
  }
  });
  return {
@@ -180,7 +276,16 @@ norm_codigo: normaAtualizada.norm_codigo,
 adm_criador:normaAtualizada.usuario.user_name,
 id_norm:normaAtualizada.id_norm,
 pdf_caminho:normaAtualizada.pdf_caminho,
-referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
+referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
+categoria:normaAtualizada.categoria.map(cat=>cat.cat.cat_nome),
+   notas:normaAtualizada.notas.map(nota=>{ return {
+                     notaIT:nota.not_IT,
+                     notaTitulo:nota.not_titulo,
+                     notaAB:nota.not_AB,
+                     notaPA:nota.not_Pa,
+                     norm_criador:nota.normas.norm_titulo,
+                     adm_criador:nota.usuario.user_name
+            }})
 };
 });
     }catch(erro){
@@ -198,7 +303,24 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
                 usuario:{select:{user_name:true}},
                 id_norm:true,
                 normas_origem:{select:{norma_destino:{select:{norm_titulo:true}}}},
-                pdf_caminho:true
+                pdf_caminho:true,
+                categoria:{
+                    select: {cat:{select:{cat_nome:true}}}
+                },
+                notas:{
+                    select:{
+                        not_IT:true,
+                            not_titulo:true,
+                            not_AB:true,
+                            not_Pa:true,
+                            normas:{
+                                select:{norm_titulo:true}
+                            },
+                           usuario:{
+                            select:{user_name:true}
+                           }
+                    }
+                }
             }
         })
         return normas.map(n => ({
@@ -210,7 +332,16 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
         adm_criador:n.usuario.user_name,
         id_norm:n.id_norm,
         pdf_caminho:n.pdf_caminho,
-        referencias:n.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
+        referencias:n.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
+        categoria:n.categoria.map(cat=>cat.cat.cat_nome),
+        notas:n.notas.map(nota=>{ return {
+                     notaIT:nota.not_IT,
+                     notaTitulo:nota.not_titulo,
+                     notaAB:nota.not_AB,
+                     notaPA:nota.not_Pa,
+                     norm_criador:nota.normas.norm_titulo,
+                     adm_criador:nota.usuario.user_name
+            }})
     }));
         
     }
@@ -260,8 +391,26 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
                     normas_origem:{
                         select:{norma_destino:{select:{norm_titulo:true}}}
                     },
-                    pdf_caminho:true
+                    pdf_caminho:true,
+                    notas:{
+                    select:{
+                        not_IT:true,
+                            not_titulo:true,
+                            not_AB:true,
+                            not_Pa:true,
+                            normas:{
+                                select:{norm_titulo:true}
+                            },
+                           usuario:{
+                            select:{user_name:true}
+                           }
+                    }
+                },
+                categoria:{
+                    select:{cat:{select:{cat_nome:true}}}
+                }
                    }
+                   
                }
             }
         })
@@ -275,7 +424,18 @@ referencias:normaAtualizada.normas_origem.map(ref=> ref.norma_destino.norm_titul
         adm_criador:n.normas.usuario.user_name,
         id_norm:n.normas.id_norm,
         pdf_caminho:n.normas.pdf_caminho,
-        referencias:n.normas.normas_origem.map(ref=> ref.norma_destino.norm_titulo)
+        referencias:n.normas.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
+        categoria:n.normas.categoria.map(cat=>cat.cat.cat_nome),
+        notas:n.normas.notas.map(nota=>{ return {
+                     notaIT:nota.not_IT,
+                     notaTitulo:nota.not_titulo,
+                     notaAB:nota.not_AB,
+                     notaPA:nota.not_Pa,
+                     norm_criador:nota.normas.norm_titulo,
+                     adm_criador:nota.usuario.user_name
+            }})
     }});
         } 
+
+    
     }

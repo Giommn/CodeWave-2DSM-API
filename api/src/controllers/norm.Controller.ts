@@ -30,6 +30,8 @@ export default class NormController {
         org_desc,
         org_sigla,
         referencias,
+        notas,
+        categoria 
       } = JSON.parse(req.body.metadata);
       const pdf_caminho: string = req.file.filename;
       const pdf_nome_original: string = req.file.originalname;
@@ -43,8 +45,10 @@ export default class NormController {
         org_desc: org_desc,
         org_sigla: org_sigla,
         referencias: referencias,
+        notas:notas,
         pdf_caminho: pdf_caminho,
         pdf_nome_original: pdf_nome_original,
+        categoria:categoria
       });
       return res.status(201).json({
         status: "sucess",
@@ -62,7 +66,7 @@ export default class NormController {
       if (erro instanceof ValidatorError)
         return res.status(erro.statusCode).json({
           status: "error",
-          message: erro.message,
+          message: erro.code,
         });
 
       return res.status(500).json({
@@ -231,4 +235,5 @@ export default class NormController {
     }
         
   }
+
 }

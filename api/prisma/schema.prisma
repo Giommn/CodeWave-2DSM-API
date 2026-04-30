@@ -15,6 +15,22 @@
   enum NivelUser {
     ADM
     USER
+    CHECKER
+  }
+
+  enum AcaoDeAlteracao {
+    CREATE 
+    UPDATE
+  }
+  enum NotaOrNorma {
+    NORMA 
+    NOTA
+  }
+
+  enum Status {
+    PENDENTE 
+    REJEITADO 
+    APROVADO
   }
 
   model Users{
@@ -31,6 +47,7 @@
     notas Notas[]
     mfa Mfa[]
     historicoAcessoNormas Historico_Acesso_Normas[]
+    pedidos PedidosdeAlteracao[]
     @@map("usuarios")
   }
 
@@ -50,7 +67,7 @@
     cat_nome String @db.VarChar(50) @unique
     adm_criador Int 
     data_criacao DateTime @default(now()) @db.Timestamp(0)
-    nota_cat Nota_Categoria[]
+    norma_cat Norma_Categoria[]
     usuario Users @relation(fields: [adm_criador],references: [id_user])
      @@index([adm_criador])  
     @@map("categoria")
@@ -74,8 +91,11 @@
     orgaos Orgaos @relation(fields: [org_criador],references: [org_id])
     normas_origem      Normas_Referenciadas[] @relation("origem")
     normas_destino     Normas_Referenciadas[] @relation("destino")
+    favorita Boolean @default(false)
     versoes       Normas_Versoes[] 
     HistoricoAcessoNormas Historico_Acesso_Normas[]
+    categoria Norma_Categoria[]
+    pedidos PedidosdeAlteracao[]
      @@index([adm_criador])   
   @@index([org_criador])   
   
@@ -89,13 +109,14 @@
   model Notas{
     id_not Int @id @default(autoincrement())
     not_titulo String 
-    not_dec String @db.Text
+    not_IT String @db.Text
+    not_AB String? @db.Text
+    not_Pa String? @db.Text
     norm_criador Int
     adm_criador Int
     data_criacao DateTime @default(now()) @db.Timestamp(0)
     usuario Users @relation(fields: [adm_criador],references: [id_user])
     normas Norma @relation(fields: [norm_criador],references: [id_norm])
-    nota_cat Nota_Categoria[]
    @@index([adm_criador])
    @@index([norm_criador])
    @@index([not_titulo])
@@ -103,14 +124,14 @@
   }
 
 
-  model Nota_Categoria{
-    id_nota Int
+  model Norma_Categoria{
+    id_norma Int
     id_cat Int
-    @@id([id_nota, id_cat])
+    @@id([id_norma, id_cat])
     @@index([id_cat])
-    @@index([id_nota])
+    @@index([id_norma])
     cat Categoria @relation(fields: [id_cat],references: [cat_id])
-    nota Notas @relation(fields: [id_nota],references: [id_not])
+    norma Norma @relation(fields: [id_norma],references: [id_norm],onDelete: Cascade)
   }
 
   model Normas_Referenciadas {
@@ -163,5 +184,21 @@ model Historico_Acesso_Normas{
    usuarios Users @relation(fields: [id_user],references: [id_user],onDelete: Cascade)
    normas Norma @relation(fields: [id_norma],references: [id_norm],onDelete: Cascade)
    @@id([id_norma,id_user])
+
+}
+
+model PedidosdeAlteracao{
+     id Int @id @default(autoincrement())
+     id_user Int 
+     alteracao Json
+     acaoDealteracao AcaoDeAlteracao
+     notaorNorma NotaOrNorma
+     status Status @default(PENDENTE)
+     data_pedido     DateTime        @default(now()) 
+     id_norma   Int?
+     usuarios Users @relation(fields: [id_user],references: [id_user])
+     normas Norma ? @relation(fields: [id_norma],references: [id_norm])
+     @@map("pedidos_alteracao")
+
 
 }

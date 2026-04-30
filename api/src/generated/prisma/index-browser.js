@@ -154,20 +154,23 @@ exports.Prisma.NormaScalarFieldEnum = {
   data_criacao: 'data_criacao',
   data_update: 'data_update',
   pdf_nome_original: 'pdf_nome_original',
-  pdf_caminho: 'pdf_caminho'
+  pdf_caminho: 'pdf_caminho',
+  favorita: 'favorita'
 };
 
 exports.Prisma.NotasScalarFieldEnum = {
   id_not: 'id_not',
   not_titulo: 'not_titulo',
-  not_dec: 'not_dec',
+  not_IT: 'not_IT',
+  not_AB: 'not_AB',
+  not_Pa: 'not_Pa',
   norm_criador: 'norm_criador',
   adm_criador: 'adm_criador',
   data_criacao: 'data_criacao'
 };
 
-exports.Prisma.Nota_CategoriaScalarFieldEnum = {
-  id_nota: 'id_nota',
+exports.Prisma.Norma_CategoriaScalarFieldEnum = {
+  id_norma: 'id_norma',
   id_cat: 'id_cat'
 };
 
@@ -202,9 +205,24 @@ exports.Prisma.Historico_Acesso_NormasScalarFieldEnum = {
   data_acesso: 'data_acesso'
 };
 
+exports.Prisma.PedidosdeAlteracaoScalarFieldEnum = {
+  id: 'id',
+  id_user: 'id_user',
+  alteracao: 'alteracao',
+  acaoDealteracao: 'acaoDealteracao',
+  notaorNorma: 'notaorNorma',
+  status: 'status',
+  data_pedido: 'data_pedido',
+  id_norma: 'id_norma'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.UsersOrderByRelevanceFieldEnum = {
@@ -237,7 +255,9 @@ exports.Prisma.NormaOrderByRelevanceFieldEnum = {
 
 exports.Prisma.NotasOrderByRelevanceFieldEnum = {
   not_titulo: 'not_titulo',
-  not_dec: 'not_dec'
+  not_IT: 'not_IT',
+  not_AB: 'not_AB',
+  not_Pa: 'not_Pa'
 };
 
 exports.Prisma.Normas_VersoesOrderByRelevanceFieldEnum = {
@@ -251,9 +271,37 @@ exports.Prisma.Normas_VersoesOrderByRelevanceFieldEnum = {
 exports.Prisma.MfaOrderByRelevanceFieldEnum = {
   cod_mfa: 'cod_mfa'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
 exports.NivelUser = exports.$Enums.NivelUser = {
   ADM: 'ADM',
-  USER: 'USER'
+  USER: 'USER',
+  CHECKER: 'CHECKER'
+};
+
+exports.AcaoDeAlteracao = exports.$Enums.AcaoDeAlteracao = {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE'
+};
+
+exports.NotaOrNorma = exports.$Enums.NotaOrNorma = {
+  NORMA: 'NORMA',
+  NOTA: 'NOTA'
+};
+
+exports.Status = exports.$Enums.Status = {
+  PENDENTE: 'PENDENTE',
+  REJEITADO: 'REJEITADO',
+  APROVADO: 'APROVADO'
 };
 
 exports.Prisma.ModelName = {
@@ -262,11 +310,12 @@ exports.Prisma.ModelName = {
   Categoria: 'Categoria',
   Norma: 'Norma',
   Notas: 'Notas',
-  Nota_Categoria: 'Nota_Categoria',
+  Norma_Categoria: 'Norma_Categoria',
   Normas_Referenciadas: 'Normas_Referenciadas',
   Normas_Versoes: 'Normas_Versoes',
   Mfa: 'Mfa',
-  Historico_Acesso_Normas: 'Historico_Acesso_Normas'
+  Historico_Acesso_Normas: 'Historico_Acesso_Normas',
+  PedidosdeAlteracao: 'PedidosdeAlteracao'
 };
 
 /**
