@@ -17,6 +17,7 @@ export default class PedidoController{
             id_norma}=metadata;
     
         const {
+          norm_codigoAtual,
           norm_titulo,
            norm_desc,
            org_criador,
@@ -32,6 +33,7 @@ export default class PedidoController{
           const pedido={
             id_user:id_user,
             alteracao:{
+              norm_codigoAtual:norm_codigoAtual,
                 norm_codigo:norm_codigo,
                 norm_titulo:norm_titulo,
                 adm_criador:adm_criador,

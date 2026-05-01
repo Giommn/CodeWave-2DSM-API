@@ -154,8 +154,7 @@ exports.Prisma.NormaScalarFieldEnum = {
   data_criacao: 'data_criacao',
   data_update: 'data_update',
   pdf_nome_original: 'pdf_nome_original',
-  pdf_caminho: 'pdf_caminho',
-  favorita: 'favorita'
+  pdf_caminho: 'pdf_caminho'
 };
 
 exports.Prisma.NotasScalarFieldEnum = {
@@ -214,6 +213,12 @@ exports.Prisma.PedidosdeAlteracaoScalarFieldEnum = {
   status: 'status',
   data_pedido: 'data_pedido',
   id_norma: 'id_norma'
+};
+
+exports.Prisma.FavoritosScalarFieldEnum = {
+  id_user: 'id_user',
+  id_norma: 'id_norma',
+  data_criacao: 'data_criacao'
 };
 
 exports.Prisma.SortOrder = {
@@ -315,7 +320,8 @@ exports.Prisma.ModelName = {
   Normas_Versoes: 'Normas_Versoes',
   Mfa: 'Mfa',
   Historico_Acesso_Normas: 'Historico_Acesso_Normas',
-  PedidosdeAlteracao: 'PedidosdeAlteracao'
+  PedidosdeAlteracao: 'PedidosdeAlteracao',
+  Favoritos: 'Favoritos'
 };
 
 /**

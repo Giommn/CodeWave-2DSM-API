@@ -68,6 +68,11 @@ export type Historico_Acesso_Normas = $Result.DefaultSelection<Prisma.$Historico
  * 
  */
 export type PedidosdeAlteracao = $Result.DefaultSelection<Prisma.$PedidosdeAlteracaoPayload>
+/**
+ * Model Favoritos
+ * 
+ */
+export type Favoritos = $Result.DefaultSelection<Prisma.$FavoritosPayload>
 
 /**
  * Enums
@@ -354,6 +359,16 @@ export class PrismaClient<
     * ```
     */
   get pedidosdeAlteracao(): Prisma.PedidosdeAlteracaoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.favoritos`: Exposes CRUD operations for the **Favoritos** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Favoritos
+    * const favoritos = await prisma.favoritos.findMany()
+    * ```
+    */
+  get favoritos(): Prisma.FavoritosDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -798,7 +813,8 @@ export namespace Prisma {
     Normas_Versoes: 'Normas_Versoes',
     Mfa: 'Mfa',
     Historico_Acesso_Normas: 'Historico_Acesso_Normas',
-    PedidosdeAlteracao: 'PedidosdeAlteracao'
+    PedidosdeAlteracao: 'PedidosdeAlteracao',
+    Favoritos: 'Favoritos'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -814,7 +830,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "orgaos" | "categoria" | "norma" | "notas" | "norma_Categoria" | "normas_Referenciadas" | "normas_Versoes" | "mfa" | "historico_Acesso_Normas" | "pedidosdeAlteracao"
+      modelProps: "users" | "orgaos" | "categoria" | "norma" | "notas" | "norma_Categoria" | "normas_Referenciadas" | "normas_Versoes" | "mfa" | "historico_Acesso_Normas" | "pedidosdeAlteracao" | "favoritos"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1544,6 +1560,72 @@ export namespace Prisma {
           }
         }
       }
+      Favoritos: {
+        payload: Prisma.$FavoritosPayload<ExtArgs>
+        fields: Prisma.FavoritosFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FavoritosFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FavoritosFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          findFirst: {
+            args: Prisma.FavoritosFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FavoritosFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          findMany: {
+            args: Prisma.FavoritosFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>[]
+          }
+          create: {
+            args: Prisma.FavoritosCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          createMany: {
+            args: Prisma.FavoritosCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.FavoritosDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          update: {
+            args: Prisma.FavoritosUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          deleteMany: {
+            args: Prisma.FavoritosDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FavoritosUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FavoritosUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          aggregate: {
+            args: Prisma.FavoritosAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFavoritos>
+          }
+          groupBy: {
+            args: Prisma.FavoritosGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FavoritosGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FavoritosCountArgs<ExtArgs>
+            result: $Utils.Optional<FavoritosCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1663,6 +1745,7 @@ export namespace Prisma {
     mfa?: MfaOmit
     historico_Acesso_Normas?: Historico_Acesso_NormasOmit
     pedidosdeAlteracao?: PedidosdeAlteracaoOmit
+    favoritos?: FavoritosOmit
   }
 
   /* Types for Logging */
@@ -1748,6 +1831,7 @@ export namespace Prisma {
     normas: number
     notas: number
     mfa: number
+    favoritos: number
     historicoAcessoNormas: number
     pedidos: number
   }
@@ -1758,6 +1842,7 @@ export namespace Prisma {
     normas?: boolean | UsersCountOutputTypeCountNormasArgs
     notas?: boolean | UsersCountOutputTypeCountNotasArgs
     mfa?: boolean | UsersCountOutputTypeCountMfaArgs
+    favoritos?: boolean | UsersCountOutputTypeCountFavoritosArgs
     historicoAcessoNormas?: boolean | UsersCountOutputTypeCountHistoricoAcessoNormasArgs
     pedidos?: boolean | UsersCountOutputTypeCountPedidosArgs
   }
@@ -1806,6 +1891,13 @@ export namespace Prisma {
    */
   export type UsersCountOutputTypeCountMfaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MfaWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountFavoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoritosWhereInput
   }
 
   /**
@@ -1895,6 +1987,7 @@ export namespace Prisma {
     normas_destino: number
     versoes: number
     HistoricoAcessoNormas: number
+    favoritos: number
     categoria: number
     pedidos: number
   }
@@ -1905,6 +1998,7 @@ export namespace Prisma {
     normas_destino?: boolean | NormaCountOutputTypeCountNormas_destinoArgs
     versoes?: boolean | NormaCountOutputTypeCountVersoesArgs
     HistoricoAcessoNormas?: boolean | NormaCountOutputTypeCountHistoricoAcessoNormasArgs
+    favoritos?: boolean | NormaCountOutputTypeCountFavoritosArgs
     categoria?: boolean | NormaCountOutputTypeCountCategoriaArgs
     pedidos?: boolean | NormaCountOutputTypeCountPedidosArgs
   }
@@ -1953,6 +2047,13 @@ export namespace Prisma {
    */
   export type NormaCountOutputTypeCountHistoricoAcessoNormasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Historico_Acesso_NormasWhereInput
+  }
+
+  /**
+   * NormaCountOutputType without action
+   */
+  export type NormaCountOutputTypeCountFavoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoritosWhereInput
   }
 
   /**
@@ -2185,6 +2286,7 @@ export namespace Prisma {
     normas?: boolean | Users$normasArgs<ExtArgs>
     notas?: boolean | Users$notasArgs<ExtArgs>
     mfa?: boolean | Users$mfaArgs<ExtArgs>
+    favoritos?: boolean | Users$favoritosArgs<ExtArgs>
     historicoAcessoNormas?: boolean | Users$historicoAcessoNormasArgs<ExtArgs>
     pedidos?: boolean | Users$pedidosArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
@@ -2208,6 +2310,7 @@ export namespace Prisma {
     normas?: boolean | Users$normasArgs<ExtArgs>
     notas?: boolean | Users$notasArgs<ExtArgs>
     mfa?: boolean | Users$mfaArgs<ExtArgs>
+    favoritos?: boolean | Users$favoritosArgs<ExtArgs>
     historicoAcessoNormas?: boolean | Users$historicoAcessoNormasArgs<ExtArgs>
     pedidos?: boolean | Users$pedidosArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
@@ -2221,6 +2324,7 @@ export namespace Prisma {
       normas: Prisma.$NormaPayload<ExtArgs>[]
       notas: Prisma.$NotasPayload<ExtArgs>[]
       mfa: Prisma.$MfaPayload<ExtArgs>[]
+      favoritos: Prisma.$FavoritosPayload<ExtArgs>[]
       historicoAcessoNormas: Prisma.$Historico_Acesso_NormasPayload<ExtArgs>[]
       pedidos: Prisma.$PedidosdeAlteracaoPayload<ExtArgs>[]
     }
@@ -2576,6 +2680,7 @@ export namespace Prisma {
     normas<T extends Users$normasArgs<ExtArgs> = {}>(args?: Subset<T, Users$normasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notas<T extends Users$notasArgs<ExtArgs> = {}>(args?: Subset<T, Users$notasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mfa<T extends Users$mfaArgs<ExtArgs> = {}>(args?: Subset<T, Users$mfaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MfaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favoritos<T extends Users$favoritosArgs<ExtArgs> = {}>(args?: Subset<T, Users$favoritosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     historicoAcessoNormas<T extends Users$historicoAcessoNormasArgs<ExtArgs> = {}>(args?: Subset<T, Users$historicoAcessoNormasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pedidos<T extends Users$pedidosArgs<ExtArgs> = {}>(args?: Subset<T, Users$pedidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -3078,6 +3183,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MfaScalarFieldEnum | MfaScalarFieldEnum[]
+  }
+
+  /**
+   * Users.favoritos
+   */
+  export type Users$favoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    where?: FavoritosWhereInput
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    cursor?: FavoritosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
   }
 
   /**
@@ -5184,7 +5313,6 @@ export namespace Prisma {
     data_update: Date | null
     pdf_nome_original: string | null
     pdf_caminho: string | null
-    favorita: boolean | null
   }
 
   export type NormaMaxAggregateOutputType = {
@@ -5199,7 +5327,6 @@ export namespace Prisma {
     data_update: Date | null
     pdf_nome_original: string | null
     pdf_caminho: string | null
-    favorita: boolean | null
   }
 
   export type NormaCountAggregateOutputType = {
@@ -5214,7 +5341,6 @@ export namespace Prisma {
     data_update: number
     pdf_nome_original: number
     pdf_caminho: number
-    favorita: number
     _all: number
   }
 
@@ -5243,7 +5369,6 @@ export namespace Prisma {
     data_update?: true
     pdf_nome_original?: true
     pdf_caminho?: true
-    favorita?: true
   }
 
   export type NormaMaxAggregateInputType = {
@@ -5258,7 +5383,6 @@ export namespace Prisma {
     data_update?: true
     pdf_nome_original?: true
     pdf_caminho?: true
-    favorita?: true
   }
 
   export type NormaCountAggregateInputType = {
@@ -5273,7 +5397,6 @@ export namespace Prisma {
     data_update?: true
     pdf_nome_original?: true
     pdf_caminho?: true
-    favorita?: true
     _all?: true
   }
 
@@ -5375,7 +5498,6 @@ export namespace Prisma {
     data_update: Date
     pdf_nome_original: string
     pdf_caminho: string
-    favorita: boolean
     _count: NormaCountAggregateOutputType | null
     _avg: NormaAvgAggregateOutputType | null
     _sum: NormaSumAggregateOutputType | null
@@ -5409,7 +5531,6 @@ export namespace Prisma {
     data_update?: boolean
     pdf_nome_original?: boolean
     pdf_caminho?: boolean
-    favorita?: boolean
     notas?: boolean | Norma$notasArgs<ExtArgs>
     usuario?: boolean | UsersDefaultArgs<ExtArgs>
     orgaos?: boolean | OrgaosDefaultArgs<ExtArgs>
@@ -5417,6 +5538,7 @@ export namespace Prisma {
     normas_destino?: boolean | Norma$normas_destinoArgs<ExtArgs>
     versoes?: boolean | Norma$versoesArgs<ExtArgs>
     HistoricoAcessoNormas?: boolean | Norma$HistoricoAcessoNormasArgs<ExtArgs>
+    favoritos?: boolean | Norma$favoritosArgs<ExtArgs>
     categoria?: boolean | Norma$categoriaArgs<ExtArgs>
     pedidos?: boolean | Norma$pedidosArgs<ExtArgs>
     _count?: boolean | NormaCountOutputTypeDefaultArgs<ExtArgs>
@@ -5436,10 +5558,9 @@ export namespace Prisma {
     data_update?: boolean
     pdf_nome_original?: boolean
     pdf_caminho?: boolean
-    favorita?: boolean
   }
 
-  export type NormaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_norm" | "norm_titulo" | "norm_desc" | "org_criador" | "adm_criador" | "emissao" | "norm_codigo" | "data_criacao" | "data_update" | "pdf_nome_original" | "pdf_caminho" | "favorita", ExtArgs["result"]["norma"]>
+  export type NormaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_norm" | "norm_titulo" | "norm_desc" | "org_criador" | "adm_criador" | "emissao" | "norm_codigo" | "data_criacao" | "data_update" | "pdf_nome_original" | "pdf_caminho", ExtArgs["result"]["norma"]>
   export type NormaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     notas?: boolean | Norma$notasArgs<ExtArgs>
     usuario?: boolean | UsersDefaultArgs<ExtArgs>
@@ -5448,6 +5569,7 @@ export namespace Prisma {
     normas_destino?: boolean | Norma$normas_destinoArgs<ExtArgs>
     versoes?: boolean | Norma$versoesArgs<ExtArgs>
     HistoricoAcessoNormas?: boolean | Norma$HistoricoAcessoNormasArgs<ExtArgs>
+    favoritos?: boolean | Norma$favoritosArgs<ExtArgs>
     categoria?: boolean | Norma$categoriaArgs<ExtArgs>
     pedidos?: boolean | Norma$pedidosArgs<ExtArgs>
     _count?: boolean | NormaCountOutputTypeDefaultArgs<ExtArgs>
@@ -5463,6 +5585,7 @@ export namespace Prisma {
       normas_destino: Prisma.$Normas_ReferenciadasPayload<ExtArgs>[]
       versoes: Prisma.$Normas_VersoesPayload<ExtArgs>[]
       HistoricoAcessoNormas: Prisma.$Historico_Acesso_NormasPayload<ExtArgs>[]
+      favoritos: Prisma.$FavoritosPayload<ExtArgs>[]
       categoria: Prisma.$Norma_CategoriaPayload<ExtArgs>[]
       pedidos: Prisma.$PedidosdeAlteracaoPayload<ExtArgs>[]
     }
@@ -5478,7 +5601,6 @@ export namespace Prisma {
       data_update: Date
       pdf_nome_original: string
       pdf_caminho: string
-      favorita: boolean
     }, ExtArgs["result"]["norma"]>
     composites: {}
   }
@@ -5826,6 +5948,7 @@ export namespace Prisma {
     normas_destino<T extends Norma$normas_destinoArgs<ExtArgs> = {}>(args?: Subset<T, Norma$normas_destinoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Normas_ReferenciadasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     versoes<T extends Norma$versoesArgs<ExtArgs> = {}>(args?: Subset<T, Norma$versoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Normas_VersoesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     HistoricoAcessoNormas<T extends Norma$HistoricoAcessoNormasArgs<ExtArgs> = {}>(args?: Subset<T, Norma$HistoricoAcessoNormasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favoritos<T extends Norma$favoritosArgs<ExtArgs> = {}>(args?: Subset<T, Norma$favoritosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categoria<T extends Norma$categoriaArgs<ExtArgs> = {}>(args?: Subset<T, Norma$categoriaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pedidos<T extends Norma$pedidosArgs<ExtArgs> = {}>(args?: Subset<T, Norma$pedidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -5868,7 +5991,6 @@ export namespace Prisma {
     readonly data_update: FieldRef<"Norma", 'DateTime'>
     readonly pdf_nome_original: FieldRef<"Norma", 'String'>
     readonly pdf_caminho: FieldRef<"Norma", 'String'>
-    readonly favorita: FieldRef<"Norma", 'Boolean'>
   }
     
 
@@ -6334,6 +6456,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Historico_Acesso_NormasScalarFieldEnum | Historico_Acesso_NormasScalarFieldEnum[]
+  }
+
+  /**
+   * Norma.favoritos
+   */
+  export type Norma$favoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    where?: FavoritosWhereInput
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    cursor?: FavoritosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
   }
 
   /**
@@ -13273,6 +13419,960 @@ export namespace Prisma {
 
 
   /**
+   * Model Favoritos
+   */
+
+  export type AggregateFavoritos = {
+    _count: FavoritosCountAggregateOutputType | null
+    _avg: FavoritosAvgAggregateOutputType | null
+    _sum: FavoritosSumAggregateOutputType | null
+    _min: FavoritosMinAggregateOutputType | null
+    _max: FavoritosMaxAggregateOutputType | null
+  }
+
+  export type FavoritosAvgAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type FavoritosSumAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type FavoritosMinAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+    data_criacao: Date | null
+  }
+
+  export type FavoritosMaxAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+    data_criacao: Date | null
+  }
+
+  export type FavoritosCountAggregateOutputType = {
+    id_user: number
+    id_norma: number
+    data_criacao: number
+    _all: number
+  }
+
+
+  export type FavoritosAvgAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type FavoritosSumAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type FavoritosMinAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_criacao?: true
+  }
+
+  export type FavoritosMaxAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_criacao?: true
+  }
+
+  export type FavoritosCountAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_criacao?: true
+    _all?: true
+  }
+
+  export type FavoritosAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Favoritos to aggregate.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Favoritos
+    **/
+    _count?: true | FavoritosCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FavoritosAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FavoritosSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FavoritosMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FavoritosMaxAggregateInputType
+  }
+
+  export type GetFavoritosAggregateType<T extends FavoritosAggregateArgs> = {
+        [P in keyof T & keyof AggregateFavoritos]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFavoritos[P]>
+      : GetScalarType<T[P], AggregateFavoritos[P]>
+  }
+
+
+
+
+  export type FavoritosGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoritosWhereInput
+    orderBy?: FavoritosOrderByWithAggregationInput | FavoritosOrderByWithAggregationInput[]
+    by: FavoritosScalarFieldEnum[] | FavoritosScalarFieldEnum
+    having?: FavoritosScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FavoritosCountAggregateInputType | true
+    _avg?: FavoritosAvgAggregateInputType
+    _sum?: FavoritosSumAggregateInputType
+    _min?: FavoritosMinAggregateInputType
+    _max?: FavoritosMaxAggregateInputType
+  }
+
+  export type FavoritosGroupByOutputType = {
+    id_user: number
+    id_norma: number
+    data_criacao: Date
+    _count: FavoritosCountAggregateOutputType | null
+    _avg: FavoritosAvgAggregateOutputType | null
+    _sum: FavoritosSumAggregateOutputType | null
+    _min: FavoritosMinAggregateOutputType | null
+    _max: FavoritosMaxAggregateOutputType | null
+  }
+
+  type GetFavoritosGroupByPayload<T extends FavoritosGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FavoritosGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FavoritosGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FavoritosGroupByOutputType[P]>
+            : GetScalarType<T[P], FavoritosGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FavoritosSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_user?: boolean
+    id_norma?: boolean
+    data_criacao?: boolean
+    usuario?: boolean | UsersDefaultArgs<ExtArgs>
+    norma?: boolean | NormaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["favoritos"]>
+
+
+
+  export type FavoritosSelectScalar = {
+    id_user?: boolean
+    id_norma?: boolean
+    data_criacao?: boolean
+  }
+
+  export type FavoritosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_user" | "id_norma" | "data_criacao", ExtArgs["result"]["favoritos"]>
+  export type FavoritosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | UsersDefaultArgs<ExtArgs>
+    norma?: boolean | NormaDefaultArgs<ExtArgs>
+  }
+
+  export type $FavoritosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Favoritos"
+    objects: {
+      usuario: Prisma.$UsersPayload<ExtArgs>
+      norma: Prisma.$NormaPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_user: number
+      id_norma: number
+      data_criacao: Date
+    }, ExtArgs["result"]["favoritos"]>
+    composites: {}
+  }
+
+  type FavoritosGetPayload<S extends boolean | null | undefined | FavoritosDefaultArgs> = $Result.GetResult<Prisma.$FavoritosPayload, S>
+
+  type FavoritosCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FavoritosFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FavoritosCountAggregateInputType | true
+    }
+
+  export interface FavoritosDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Favoritos'], meta: { name: 'Favoritos' } }
+    /**
+     * Find zero or one Favoritos that matches the filter.
+     * @param {FavoritosFindUniqueArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FavoritosFindUniqueArgs>(args: SelectSubset<T, FavoritosFindUniqueArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Favoritos that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FavoritosFindUniqueOrThrowArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FavoritosFindUniqueOrThrowArgs>(args: SelectSubset<T, FavoritosFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Favoritos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosFindFirstArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FavoritosFindFirstArgs>(args?: SelectSubset<T, FavoritosFindFirstArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Favoritos that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosFindFirstOrThrowArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FavoritosFindFirstOrThrowArgs>(args?: SelectSubset<T, FavoritosFindFirstOrThrowArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Favoritos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Favoritos
+     * const favoritos = await prisma.favoritos.findMany()
+     * 
+     * // Get first 10 Favoritos
+     * const favoritos = await prisma.favoritos.findMany({ take: 10 })
+     * 
+     * // Only select the `id_user`
+     * const favoritosWithId_userOnly = await prisma.favoritos.findMany({ select: { id_user: true } })
+     * 
+     */
+    findMany<T extends FavoritosFindManyArgs>(args?: SelectSubset<T, FavoritosFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Favoritos.
+     * @param {FavoritosCreateArgs} args - Arguments to create a Favoritos.
+     * @example
+     * // Create one Favoritos
+     * const Favoritos = await prisma.favoritos.create({
+     *   data: {
+     *     // ... data to create a Favoritos
+     *   }
+     * })
+     * 
+     */
+    create<T extends FavoritosCreateArgs>(args: SelectSubset<T, FavoritosCreateArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Favoritos.
+     * @param {FavoritosCreateManyArgs} args - Arguments to create many Favoritos.
+     * @example
+     * // Create many Favoritos
+     * const favoritos = await prisma.favoritos.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FavoritosCreateManyArgs>(args?: SelectSubset<T, FavoritosCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Favoritos.
+     * @param {FavoritosDeleteArgs} args - Arguments to delete one Favoritos.
+     * @example
+     * // Delete one Favoritos
+     * const Favoritos = await prisma.favoritos.delete({
+     *   where: {
+     *     // ... filter to delete one Favoritos
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FavoritosDeleteArgs>(args: SelectSubset<T, FavoritosDeleteArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Favoritos.
+     * @param {FavoritosUpdateArgs} args - Arguments to update one Favoritos.
+     * @example
+     * // Update one Favoritos
+     * const favoritos = await prisma.favoritos.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FavoritosUpdateArgs>(args: SelectSubset<T, FavoritosUpdateArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Favoritos.
+     * @param {FavoritosDeleteManyArgs} args - Arguments to filter Favoritos to delete.
+     * @example
+     * // Delete a few Favoritos
+     * const { count } = await prisma.favoritos.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FavoritosDeleteManyArgs>(args?: SelectSubset<T, FavoritosDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Favoritos
+     * const favoritos = await prisma.favoritos.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FavoritosUpdateManyArgs>(args: SelectSubset<T, FavoritosUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Favoritos.
+     * @param {FavoritosUpsertArgs} args - Arguments to update or create a Favoritos.
+     * @example
+     * // Update or create a Favoritos
+     * const favoritos = await prisma.favoritos.upsert({
+     *   create: {
+     *     // ... data to create a Favoritos
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Favoritos we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FavoritosUpsertArgs>(args: SelectSubset<T, FavoritosUpsertArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosCountArgs} args - Arguments to filter Favoritos to count.
+     * @example
+     * // Count the number of Favoritos
+     * const count = await prisma.favoritos.count({
+     *   where: {
+     *     // ... the filter for the Favoritos we want to count
+     *   }
+     * })
+    **/
+    count<T extends FavoritosCountArgs>(
+      args?: Subset<T, FavoritosCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FavoritosCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FavoritosAggregateArgs>(args: Subset<T, FavoritosAggregateArgs>): Prisma.PrismaPromise<GetFavoritosAggregateType<T>>
+
+    /**
+     * Group by Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FavoritosGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FavoritosGroupByArgs['orderBy'] }
+        : { orderBy?: FavoritosGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FavoritosGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFavoritosGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Favoritos model
+   */
+  readonly fields: FavoritosFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Favoritos.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FavoritosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    norma<T extends NormaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NormaDefaultArgs<ExtArgs>>): Prisma__NormaClient<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Favoritos model
+   */
+  interface FavoritosFieldRefs {
+    readonly id_user: FieldRef<"Favoritos", 'Int'>
+    readonly id_norma: FieldRef<"Favoritos", 'Int'>
+    readonly data_criacao: FieldRef<"Favoritos", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Favoritos findUnique
+   */
+  export type FavoritosFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos findUniqueOrThrow
+   */
+  export type FavoritosFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos findFirst
+   */
+  export type FavoritosFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Favoritos.
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favoritos.
+     */
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
+   * Favoritos findFirstOrThrow
+   */
+  export type FavoritosFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Favoritos.
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favoritos.
+     */
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
+   * Favoritos findMany
+   */
+  export type FavoritosFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Favoritos.
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favoritos.
+     */
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
+   * Favoritos create
+   */
+  export type FavoritosCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Favoritos.
+     */
+    data: XOR<FavoritosCreateInput, FavoritosUncheckedCreateInput>
+  }
+
+  /**
+   * Favoritos createMany
+   */
+  export type FavoritosCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Favoritos.
+     */
+    data: FavoritosCreateManyInput | FavoritosCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Favoritos update
+   */
+  export type FavoritosUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Favoritos.
+     */
+    data: XOR<FavoritosUpdateInput, FavoritosUncheckedUpdateInput>
+    /**
+     * Choose, which Favoritos to update.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos updateMany
+   */
+  export type FavoritosUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Favoritos.
+     */
+    data: XOR<FavoritosUpdateManyMutationInput, FavoritosUncheckedUpdateManyInput>
+    /**
+     * Filter which Favoritos to update
+     */
+    where?: FavoritosWhereInput
+    /**
+     * Limit how many Favoritos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Favoritos upsert
+   */
+  export type FavoritosUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Favoritos to update in case it exists.
+     */
+    where: FavoritosWhereUniqueInput
+    /**
+     * In case the Favoritos found by the `where` argument doesn't exist, create a new Favoritos with this data.
+     */
+    create: XOR<FavoritosCreateInput, FavoritosUncheckedCreateInput>
+    /**
+     * In case the Favoritos was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FavoritosUpdateInput, FavoritosUncheckedUpdateInput>
+  }
+
+  /**
+   * Favoritos delete
+   */
+  export type FavoritosDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter which Favoritos to delete.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos deleteMany
+   */
+  export type FavoritosDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Favoritos to delete
+     */
+    where?: FavoritosWhereInput
+    /**
+     * Limit how many Favoritos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Favoritos without action
+   */
+  export type FavoritosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13329,8 +14429,7 @@ export namespace Prisma {
     data_criacao: 'data_criacao',
     data_update: 'data_update',
     pdf_nome_original: 'pdf_nome_original',
-    pdf_caminho: 'pdf_caminho',
-    favorita: 'favorita'
+    pdf_caminho: 'pdf_caminho'
   };
 
   export type NormaScalarFieldEnum = (typeof NormaScalarFieldEnum)[keyof typeof NormaScalarFieldEnum]
@@ -13413,6 +14512,15 @@ export namespace Prisma {
   };
 
   export type PedidosdeAlteracaoScalarFieldEnum = (typeof PedidosdeAlteracaoScalarFieldEnum)[keyof typeof PedidosdeAlteracaoScalarFieldEnum]
+
+
+  export const FavoritosScalarFieldEnum: {
+    id_user: 'id_user',
+    id_norma: 'id_norma',
+    data_criacao: 'data_criacao'
+  };
+
+  export type FavoritosScalarFieldEnum = (typeof FavoritosScalarFieldEnum)[keyof typeof FavoritosScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -13552,13 +14660,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -13618,6 +14719,7 @@ export namespace Prisma {
     normas?: NormaListRelationFilter
     notas?: NotasListRelationFilter
     mfa?: MfaListRelationFilter
+    favoritos?: FavoritosListRelationFilter
     historicoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
     pedidos?: PedidosdeAlteracaoListRelationFilter
   }
@@ -13634,6 +14736,7 @@ export namespace Prisma {
     normas?: NormaOrderByRelationAggregateInput
     notas?: NotasOrderByRelationAggregateInput
     mfa?: MfaOrderByRelationAggregateInput
+    favoritos?: FavoritosOrderByRelationAggregateInput
     historicoAcessoNormas?: Historico_Acesso_NormasOrderByRelationAggregateInput
     pedidos?: PedidosdeAlteracaoOrderByRelationAggregateInput
     _relevance?: UsersOrderByRelevanceInput
@@ -13654,6 +14757,7 @@ export namespace Prisma {
     normas?: NormaListRelationFilter
     notas?: NotasListRelationFilter
     mfa?: MfaListRelationFilter
+    favoritos?: FavoritosListRelationFilter
     historicoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
     pedidos?: PedidosdeAlteracaoListRelationFilter
   }, "id_user" | "email">
@@ -13811,7 +14915,6 @@ export namespace Prisma {
     data_update?: DateTimeFilter<"Norma"> | Date | string
     pdf_nome_original?: StringFilter<"Norma"> | string
     pdf_caminho?: StringFilter<"Norma"> | string
-    favorita?: BoolFilter<"Norma"> | boolean
     notas?: NotasListRelationFilter
     usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
     orgaos?: XOR<OrgaosScalarRelationFilter, OrgaosWhereInput>
@@ -13819,6 +14922,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasListRelationFilter
     versoes?: Normas_VersoesListRelationFilter
     HistoricoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
+    favoritos?: FavoritosListRelationFilter
     categoria?: Norma_CategoriaListRelationFilter
     pedidos?: PedidosdeAlteracaoListRelationFilter
   }
@@ -13835,7 +14939,6 @@ export namespace Prisma {
     data_update?: SortOrder
     pdf_nome_original?: SortOrder
     pdf_caminho?: SortOrder
-    favorita?: SortOrder
     notas?: NotasOrderByRelationAggregateInput
     usuario?: UsersOrderByWithRelationInput
     orgaos?: OrgaosOrderByWithRelationInput
@@ -13843,6 +14946,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasOrderByRelationAggregateInput
     versoes?: Normas_VersoesOrderByRelationAggregateInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasOrderByRelationAggregateInput
+    favoritos?: FavoritosOrderByRelationAggregateInput
     categoria?: Norma_CategoriaOrderByRelationAggregateInput
     pedidos?: PedidosdeAlteracaoOrderByRelationAggregateInput
     _relevance?: NormaOrderByRelevanceInput
@@ -13863,7 +14967,6 @@ export namespace Prisma {
     data_update?: DateTimeFilter<"Norma"> | Date | string
     pdf_nome_original?: StringFilter<"Norma"> | string
     pdf_caminho?: StringFilter<"Norma"> | string
-    favorita?: BoolFilter<"Norma"> | boolean
     notas?: NotasListRelationFilter
     usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
     orgaos?: XOR<OrgaosScalarRelationFilter, OrgaosWhereInput>
@@ -13871,6 +14974,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasListRelationFilter
     versoes?: Normas_VersoesListRelationFilter
     HistoricoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
+    favoritos?: FavoritosListRelationFilter
     categoria?: Norma_CategoriaListRelationFilter
     pedidos?: PedidosdeAlteracaoListRelationFilter
   }, "id_norm" | "norm_codigo">
@@ -13887,7 +14991,6 @@ export namespace Prisma {
     data_update?: SortOrder
     pdf_nome_original?: SortOrder
     pdf_caminho?: SortOrder
-    favorita?: SortOrder
     _count?: NormaCountOrderByAggregateInput
     _avg?: NormaAvgOrderByAggregateInput
     _max?: NormaMaxOrderByAggregateInput
@@ -13910,7 +15013,6 @@ export namespace Prisma {
     data_update?: DateTimeWithAggregatesFilter<"Norma"> | Date | string
     pdf_nome_original?: StringWithAggregatesFilter<"Norma"> | string
     pdf_caminho?: StringWithAggregatesFilter<"Norma"> | string
-    favorita?: BoolWithAggregatesFilter<"Norma"> | boolean
   }
 
   export type NotasWhereInput = {
@@ -14343,6 +15445,57 @@ export namespace Prisma {
     id_norma?: IntNullableWithAggregatesFilter<"PedidosdeAlteracao"> | number | null
   }
 
+  export type FavoritosWhereInput = {
+    AND?: FavoritosWhereInput | FavoritosWhereInput[]
+    OR?: FavoritosWhereInput[]
+    NOT?: FavoritosWhereInput | FavoritosWhereInput[]
+    id_user?: IntFilter<"Favoritos"> | number
+    id_norma?: IntFilter<"Favoritos"> | number
+    data_criacao?: DateTimeFilter<"Favoritos"> | Date | string
+    usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    norma?: XOR<NormaScalarRelationFilter, NormaWhereInput>
+  }
+
+  export type FavoritosOrderByWithRelationInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+    usuario?: UsersOrderByWithRelationInput
+    norma?: NormaOrderByWithRelationInput
+  }
+
+  export type FavoritosWhereUniqueInput = Prisma.AtLeast<{
+    id_user_id_norma?: FavoritosId_userId_normaCompoundUniqueInput
+    AND?: FavoritosWhereInput | FavoritosWhereInput[]
+    OR?: FavoritosWhereInput[]
+    NOT?: FavoritosWhereInput | FavoritosWhereInput[]
+    id_user?: IntFilter<"Favoritos"> | number
+    id_norma?: IntFilter<"Favoritos"> | number
+    data_criacao?: DateTimeFilter<"Favoritos"> | Date | string
+    usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    norma?: XOR<NormaScalarRelationFilter, NormaWhereInput>
+  }, "id_user_id_norma">
+
+  export type FavoritosOrderByWithAggregationInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+    _count?: FavoritosCountOrderByAggregateInput
+    _avg?: FavoritosAvgOrderByAggregateInput
+    _max?: FavoritosMaxOrderByAggregateInput
+    _min?: FavoritosMinOrderByAggregateInput
+    _sum?: FavoritosSumOrderByAggregateInput
+  }
+
+  export type FavoritosScalarWhereWithAggregatesInput = {
+    AND?: FavoritosScalarWhereWithAggregatesInput | FavoritosScalarWhereWithAggregatesInput[]
+    OR?: FavoritosScalarWhereWithAggregatesInput[]
+    NOT?: FavoritosScalarWhereWithAggregatesInput | FavoritosScalarWhereWithAggregatesInput[]
+    id_user?: IntWithAggregatesFilter<"Favoritos"> | number
+    id_norma?: IntWithAggregatesFilter<"Favoritos"> | number
+    data_criacao?: DateTimeWithAggregatesFilter<"Favoritos"> | Date | string
+  }
+
   export type UsersCreateInput = {
     user_name: string
     email: string
@@ -14354,6 +15507,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
@@ -14370,6 +15524,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
@@ -14385,6 +15540,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
@@ -14401,6 +15557,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
@@ -14538,7 +15695,6 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
@@ -14546,6 +15702,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -14562,12 +15719,12 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -14581,7 +15738,6 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
@@ -14589,6 +15745,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -14605,12 +15762,12 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -14627,7 +15784,6 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
   }
 
   export type NormaUpdateManyMutationInput = {
@@ -14639,7 +15795,6 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type NormaUncheckedUpdateManyInput = {
@@ -14654,7 +15809,6 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type NotasCreateInput = {
@@ -15041,6 +16195,46 @@ export namespace Prisma {
     id_norma?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type FavoritosCreateInput = {
+    data_criacao?: Date | string
+    usuario: UsersCreateNestedOneWithoutFavoritosInput
+    norma: NormaCreateNestedOneWithoutFavoritosInput
+  }
+
+  export type FavoritosUncheckedCreateInput = {
+    id_user: number
+    id_norma: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosUpdateInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuario?: UsersUpdateOneRequiredWithoutFavoritosNestedInput
+    norma?: NormaUpdateOneRequiredWithoutFavoritosNestedInput
+  }
+
+  export type FavoritosUncheckedUpdateInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosCreateManyInput = {
+    id_user: number
+    id_norma: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosUpdateManyMutationInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosUncheckedUpdateManyInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -15115,6 +16309,12 @@ export namespace Prisma {
     none?: MfaWhereInput
   }
 
+  export type FavoritosListRelationFilter = {
+    every?: FavoritosWhereInput
+    some?: FavoritosWhereInput
+    none?: FavoritosWhereInput
+  }
+
   export type Historico_Acesso_NormasListRelationFilter = {
     every?: Historico_Acesso_NormasWhereInput
     some?: Historico_Acesso_NormasWhereInput
@@ -15144,6 +16344,10 @@ export namespace Prisma {
   }
 
   export type MfaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FavoritosOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15380,11 +16584,6 @@ export namespace Prisma {
     adm_criador?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type OrgaosScalarRelationFilter = {
     is?: OrgaosWhereInput
     isNot?: OrgaosWhereInput
@@ -15428,7 +16627,6 @@ export namespace Prisma {
     data_update?: SortOrder
     pdf_nome_original?: SortOrder
     pdf_caminho?: SortOrder
-    favorita?: SortOrder
   }
 
   export type NormaAvgOrderByAggregateInput = {
@@ -15449,7 +16647,6 @@ export namespace Prisma {
     data_update?: SortOrder
     pdf_nome_original?: SortOrder
     pdf_caminho?: SortOrder
-    favorita?: SortOrder
   }
 
   export type NormaMinOrderByAggregateInput = {
@@ -15464,21 +16661,12 @@ export namespace Prisma {
     data_update?: SortOrder
     pdf_nome_original?: SortOrder
     pdf_caminho?: SortOrder
-    favorita?: SortOrder
   }
 
   export type NormaSumOrderByAggregateInput = {
     id_norm?: SortOrder
     org_criador?: SortOrder
     adm_criador?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -15908,6 +17096,39 @@ export namespace Prisma {
     _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
+  export type FavoritosId_userId_normaCompoundUniqueInput = {
+    id_user: number
+    id_norma: number
+  }
+
+  export type FavoritosCountOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type FavoritosAvgOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
+
+  export type FavoritosMaxOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type FavoritosMinOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type FavoritosSumOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
+
   export type OrgaosCreateNestedManyWithoutUsuariosInput = {
     create?: XOR<OrgaosCreateWithoutUsuariosInput, OrgaosUncheckedCreateWithoutUsuariosInput> | OrgaosCreateWithoutUsuariosInput[] | OrgaosUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: OrgaosCreateOrConnectWithoutUsuariosInput | OrgaosCreateOrConnectWithoutUsuariosInput[]
@@ -15941,6 +17162,13 @@ export namespace Prisma {
     connectOrCreate?: MfaCreateOrConnectWithoutUsuarioInput | MfaCreateOrConnectWithoutUsuarioInput[]
     createMany?: MfaCreateManyUsuarioInputEnvelope
     connect?: MfaWhereUniqueInput | MfaWhereUniqueInput[]
+  }
+
+  export type FavoritosCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
   }
 
   export type Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput = {
@@ -15990,6 +17218,13 @@ export namespace Prisma {
     connectOrCreate?: MfaCreateOrConnectWithoutUsuarioInput | MfaCreateOrConnectWithoutUsuarioInput[]
     createMany?: MfaCreateManyUsuarioInputEnvelope
     connect?: MfaWhereUniqueInput | MfaWhereUniqueInput[]
+  }
+
+  export type FavoritosUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
   }
 
   export type Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput = {
@@ -16086,6 +17321,20 @@ export namespace Prisma {
     update?: MfaUpdateWithWhereUniqueWithoutUsuarioInput | MfaUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: MfaUpdateManyWithWhereWithoutUsuarioInput | MfaUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: MfaScalarWhereInput | MfaScalarWhereInput[]
+  }
+
+  export type FavoritosUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutUsuarioInput | FavoritosUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutUsuarioInput | FavoritosUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutUsuarioInput | FavoritosUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
   }
 
   export type Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput = {
@@ -16192,6 +17441,20 @@ export namespace Prisma {
     update?: MfaUpdateWithWhereUniqueWithoutUsuarioInput | MfaUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: MfaUpdateManyWithWhereWithoutUsuarioInput | MfaUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: MfaScalarWhereInput | MfaScalarWhereInput[]
+  }
+
+  export type FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutUsuarioInput | FavoritosUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutUsuarioInput | FavoritosUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutUsuarioInput | FavoritosUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
   }
 
   export type Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput = {
@@ -16391,6 +17654,13 @@ export namespace Prisma {
     connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
   }
 
+  export type FavoritosCreateNestedManyWithoutNormaInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+  }
+
   export type Norma_CategoriaCreateNestedManyWithoutNormaInput = {
     create?: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput> | Norma_CategoriaCreateWithoutNormaInput[] | Norma_CategoriaUncheckedCreateWithoutNormaInput[]
     connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutNormaInput | Norma_CategoriaCreateOrConnectWithoutNormaInput[]
@@ -16440,6 +17710,13 @@ export namespace Prisma {
     connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
   }
 
+  export type FavoritosUncheckedCreateNestedManyWithoutNormaInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+  }
+
   export type Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput = {
     create?: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput> | Norma_CategoriaCreateWithoutNormaInput[] | Norma_CategoriaUncheckedCreateWithoutNormaInput[]
     connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutNormaInput | Norma_CategoriaCreateOrConnectWithoutNormaInput[]
@@ -16452,10 +17729,6 @@ export namespace Prisma {
     connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutNormasInput | PedidosdeAlteracaoCreateOrConnectWithoutNormasInput[]
     createMany?: PedidosdeAlteracaoCreateManyNormasInputEnvelope
     connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type NotasUpdateManyWithoutNormasNestedInput = {
@@ -16542,6 +17815,20 @@ export namespace Prisma {
     update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput[]
     updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput[]
     deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+  }
+
+  export type FavoritosUpdateManyWithoutNormaNestedInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutNormaInput | FavoritosUpsertWithWhereUniqueWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutNormaInput | FavoritosUpdateWithWhereUniqueWithoutNormaInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutNormaInput | FavoritosUpdateManyWithWhereWithoutNormaInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
   }
 
   export type Norma_CategoriaUpdateManyWithoutNormaNestedInput = {
@@ -16640,6 +17927,20 @@ export namespace Prisma {
     update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutNormasInput[]
     updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutNormasInput[]
     deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+  }
+
+  export type FavoritosUncheckedUpdateManyWithoutNormaNestedInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutNormaInput | FavoritosUpsertWithWhereUniqueWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutNormaInput | FavoritosUpdateWithWhereUniqueWithoutNormaInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutNormaInput | FavoritosUpdateManyWithWhereWithoutNormaInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
   }
 
   export type Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput = {
@@ -16856,6 +18157,34 @@ export namespace Prisma {
     update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutPedidosInput, NormaUpdateWithoutPedidosInput>, NormaUncheckedUpdateWithoutPedidosInput>
   }
 
+  export type UsersCreateNestedOneWithoutFavoritosInput = {
+    create?: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutFavoritosInput
+    connect?: UsersWhereUniqueInput
+  }
+
+  export type NormaCreateNestedOneWithoutFavoritosInput = {
+    create?: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutFavoritosInput
+    connect?: NormaWhereUniqueInput
+  }
+
+  export type UsersUpdateOneRequiredWithoutFavoritosNestedInput = {
+    create?: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutFavoritosInput
+    upsert?: UsersUpsertWithoutFavoritosInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutFavoritosInput, UsersUpdateWithoutFavoritosInput>, UsersUncheckedUpdateWithoutFavoritosInput>
+  }
+
+  export type NormaUpdateOneRequiredWithoutFavoritosNestedInput = {
+    create?: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutFavoritosInput
+    upsert?: NormaUpsertWithoutFavoritosInput
+    connect?: NormaWhereUniqueInput
+    update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutFavoritosInput, NormaUpdateWithoutFavoritosInput>, NormaUncheckedUpdateWithoutFavoritosInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -17005,19 +18334,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -17182,13 +18498,13 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -17204,12 +18520,12 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -17271,6 +18587,26 @@ export namespace Prisma {
 
   export type MfaCreateManyUsuarioInputEnvelope = {
     data: MfaCreateManyUsuarioInput | MfaCreateManyUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FavoritosCreateWithoutUsuarioInput = {
+    data_criacao?: Date | string
+    norma: NormaCreateNestedOneWithoutFavoritosInput
+  }
+
+  export type FavoritosUncheckedCreateWithoutUsuarioInput = {
+    id_norma: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosCreateOrConnectWithoutUsuarioInput = {
+    where: FavoritosWhereUniqueInput
+    create: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type FavoritosCreateManyUsuarioInputEnvelope = {
+    data: FavoritosCreateManyUsuarioInput | FavoritosCreateManyUsuarioInput[]
     skipDuplicates?: boolean
   }
 
@@ -17406,7 +18742,6 @@ export namespace Prisma {
     data_update?: DateTimeFilter<"Norma"> | Date | string
     pdf_nome_original?: StringFilter<"Norma"> | string
     pdf_caminho?: StringFilter<"Norma"> | string
-    favorita?: BoolFilter<"Norma"> | boolean
   }
 
   export type NotasUpsertWithWhereUniqueWithoutUsuarioInput = {
@@ -17463,6 +18798,31 @@ export namespace Prisma {
     user_id_FK?: IntFilter<"Mfa"> | number
     cod_mfa?: StringFilter<"Mfa"> | string
     cod_data_cricao?: DateTimeFilter<"Mfa"> | Date | string
+  }
+
+  export type FavoritosUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: FavoritosWhereUniqueInput
+    update: XOR<FavoritosUpdateWithoutUsuarioInput, FavoritosUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type FavoritosUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: FavoritosWhereUniqueInput
+    data: XOR<FavoritosUpdateWithoutUsuarioInput, FavoritosUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type FavoritosUpdateManyWithWhereWithoutUsuarioInput = {
+    where: FavoritosScalarWhereInput
+    data: XOR<FavoritosUpdateManyMutationInput, FavoritosUncheckedUpdateManyWithoutUsuarioInput>
+  }
+
+  export type FavoritosScalarWhereInput = {
+    AND?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+    OR?: FavoritosScalarWhereInput[]
+    NOT?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+    id_user?: IntFilter<"Favoritos"> | number
+    id_norma?: IntFilter<"Favoritos"> | number
+    data_criacao?: DateTimeFilter<"Favoritos"> | Date | string
   }
 
   export type Historico_Acesso_NormasUpsertWithWhereUniqueWithoutUsuariosInput = {
@@ -17529,13 +18889,13 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -17551,12 +18911,12 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -17581,6 +18941,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
@@ -17596,6 +18957,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
@@ -17642,6 +19004,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
@@ -17657,6 +19020,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
@@ -17689,6 +19053,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
@@ -17704,6 +19069,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
@@ -17758,6 +19124,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
@@ -17773,6 +19140,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
@@ -17816,6 +19184,7 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
@@ -17831,6 +19200,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
@@ -17947,6 +19317,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FavoritosCreateWithoutNormaInput = {
+    data_criacao?: Date | string
+    usuario: UsersCreateNestedOneWithoutFavoritosInput
+  }
+
+  export type FavoritosUncheckedCreateWithoutNormaInput = {
+    id_user: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosCreateOrConnectWithoutNormaInput = {
+    where: FavoritosWhereUniqueInput
+    create: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput>
+  }
+
+  export type FavoritosCreateManyNormaInputEnvelope = {
+    data: FavoritosCreateManyNormaInput | FavoritosCreateManyNormaInput[]
+    skipDuplicates?: boolean
+  }
+
   export type Norma_CategoriaCreateWithoutNormaInput = {
     cat: CategoriaCreateNestedOneWithoutNorma_catInput
   }
@@ -18031,6 +19421,7 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
@@ -18046,6 +19437,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
@@ -18162,6 +19554,22 @@ export namespace Prisma {
     data: XOR<Historico_Acesso_NormasUpdateManyMutationInput, Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasInput>
   }
 
+  export type FavoritosUpsertWithWhereUniqueWithoutNormaInput = {
+    where: FavoritosWhereUniqueInput
+    update: XOR<FavoritosUpdateWithoutNormaInput, FavoritosUncheckedUpdateWithoutNormaInput>
+    create: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput>
+  }
+
+  export type FavoritosUpdateWithWhereUniqueWithoutNormaInput = {
+    where: FavoritosWhereUniqueInput
+    data: XOR<FavoritosUpdateWithoutNormaInput, FavoritosUncheckedUpdateWithoutNormaInput>
+  }
+
+  export type FavoritosUpdateManyWithWhereWithoutNormaInput = {
+    where: FavoritosScalarWhereInput
+    data: XOR<FavoritosUpdateManyMutationInput, FavoritosUncheckedUpdateManyWithoutNormaInput>
+  }
+
   export type Norma_CategoriaUpsertWithWhereUniqueWithoutNormaInput = {
     where: Norma_CategoriaWhereUniqueInput
     update: XOR<Norma_CategoriaUpdateWithoutNormaInput, Norma_CategoriaUncheckedUpdateWithoutNormaInput>
@@ -18204,6 +19612,7 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
@@ -18219,6 +19628,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
@@ -18237,13 +19647,13 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -18260,11 +19670,11 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -18295,6 +19705,7 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
@@ -18310,6 +19721,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
@@ -18334,13 +19746,13 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -18357,11 +19769,11 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -18393,7 +19805,6 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
@@ -18401,6 +19812,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
@@ -18416,12 +19828,12 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
@@ -18474,7 +19886,6 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
@@ -18482,6 +19893,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
@@ -18497,12 +19909,12 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
@@ -18515,13 +19927,13 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -18538,11 +19950,11 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -18561,13 +19973,13 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -18584,11 +19996,11 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -18618,13 +20030,13 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -18641,11 +20053,11 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -18670,13 +20082,13 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -18693,11 +20105,11 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -18711,13 +20123,13 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -18734,11 +20146,11 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -18768,13 +20180,13 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -18791,11 +20203,11 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -18810,6 +20222,7 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
@@ -18825,6 +20238,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
@@ -18855,6 +20269,7 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
@@ -18870,6 +20285,7 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
@@ -18885,6 +20301,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
@@ -18900,6 +20317,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
@@ -18917,13 +20335,13 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
@@ -18940,11 +20358,11 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
     pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
@@ -18976,6 +20394,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
@@ -18991,6 +20410,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
@@ -19014,13 +20434,13 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -19037,11 +20457,11 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -19057,6 +20477,7 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
   }
 
@@ -19072,6 +20493,7 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
@@ -19089,7 +20511,6 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasCreateNestedManyWithoutNormasInput
     usuario: UsersCreateNestedOneWithoutNormasInput
     orgaos: OrgaosCreateNestedOneWithoutNormasInput
@@ -19097,6 +20518,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
   }
 
@@ -19112,12 +20534,12 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
     notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
     categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
   }
 
@@ -19148,6 +20570,7 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
   }
 
@@ -19163,6 +20586,7 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
@@ -19186,7 +20610,6 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
@@ -19194,6 +20617,7 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
   }
 
@@ -19209,13 +20633,189 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
+    notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+  }
+
+  export type UsersCreateWithoutFavoritosInput = {
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
+    normas?: NormaCreateNestedManyWithoutUsuarioInput
+    notas?: NotasCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type UsersUncheckedCreateWithoutFavoritosInput = {
+    id_user?: number
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosUncheckedCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
+    normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
+    notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type UsersCreateOrConnectWithoutFavoritosInput = {
+    where: UsersWhereUniqueInput
+    create: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+  }
+
+  export type NormaCreateWithoutFavoritosInput = {
+    norm_titulo: string
+    norm_desc: string
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasCreateNestedManyWithoutNormasInput
+    usuario: UsersCreateNestedOneWithoutNormasInput
+    orgaos: OrgaosCreateNestedOneWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
+  }
+
+  export type NormaUncheckedCreateWithoutFavoritosInput = {
+    id_norm?: number
+    norm_titulo: string
+    norm_desc: string
+    org_criador: number
+    adm_criador: number
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
+  }
+
+  export type NormaCreateOrConnectWithoutFavoritosInput = {
+    where: NormaWhereUniqueInput
+    create: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+  }
+
+  export type UsersUpsertWithoutFavoritosInput = {
+    update: XOR<UsersUpdateWithoutFavoritosInput, UsersUncheckedUpdateWithoutFavoritosInput>
+    create: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+    where?: UsersWhereInput
+  }
+
+  export type UsersUpdateToOneWithWhereWithoutFavoritosInput = {
+    where?: UsersWhereInput
+    data: XOR<UsersUpdateWithoutFavoritosInput, UsersUncheckedUpdateWithoutFavoritosInput>
+  }
+
+  export type UsersUpdateWithoutFavoritosInput = {
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type UsersUncheckedUpdateWithoutFavoritosInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUncheckedUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type NormaUpsertWithoutFavoritosInput = {
+    update: XOR<NormaUpdateWithoutFavoritosInput, NormaUncheckedUpdateWithoutFavoritosInput>
+    create: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+    where?: NormaWhereInput
+  }
+
+  export type NormaUpdateToOneWithWhereWithoutFavoritosInput = {
+    where?: NormaWhereInput
+    data: XOR<NormaUpdateWithoutFavoritosInput, NormaUncheckedUpdateWithoutFavoritosInput>
+  }
+
+  export type NormaUpdateWithoutFavoritosInput = {
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUpdateManyWithoutNormasNestedInput
+    usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
+    orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
+  }
+
+  export type NormaUncheckedUpdateWithoutFavoritosInput = {
+    id_norm?: IntFieldUpdateOperationsInput | number
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    org_criador?: IntFieldUpdateOperationsInput | number
+    adm_criador?: IntFieldUpdateOperationsInput | number
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type OrgaosCreateManyUsuariosInput = {
@@ -19241,7 +20841,6 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
   }
 
   export type NotasCreateManyUsuarioInput = {
@@ -19258,6 +20857,11 @@ export namespace Prisma {
     id?: number
     cod_mfa: string
     cod_data_cricao?: Date | string
+  }
+
+  export type FavoritosCreateManyUsuarioInput = {
+    id_norma: number
+    data_criacao?: Date | string
   }
 
   export type Historico_Acesso_NormasCreateManyUsuariosInput = {
@@ -19322,13 +20926,13 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -19344,12 +20948,12 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -19365,7 +20969,6 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type NotasUpdateWithoutUsuarioInput = {
@@ -19412,6 +21015,21 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     cod_mfa?: StringFieldUpdateOperationsInput | string
     cod_data_cricao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosUpdateWithoutUsuarioInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norma?: NormaUpdateOneRequiredWithoutFavoritosNestedInput
+  }
+
+  export type FavoritosUncheckedUpdateWithoutUsuarioInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosUncheckedUpdateManyWithoutUsuarioInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Historico_Acesso_NormasUpdateWithoutUsuariosInput = {
@@ -19469,7 +21087,6 @@ export namespace Prisma {
     data_update?: Date | string
     pdf_nome_original: string
     pdf_caminho: string
-    favorita?: boolean
   }
 
   export type NormaUpdateWithoutOrgaosInput = {
@@ -19481,13 +21098,13 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUpdateManyWithoutNormasNestedInput
     usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
@@ -19503,12 +21120,12 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
     notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
     categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
     pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
@@ -19524,7 +21141,6 @@ export namespace Prisma {
     data_update?: DateTimeFieldUpdateOperationsInput | Date | string
     pdf_nome_original?: StringFieldUpdateOperationsInput | string
     pdf_caminho?: StringFieldUpdateOperationsInput | string
-    favorita?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type Norma_CategoriaCreateManyCatInput = {
@@ -19576,6 +21192,11 @@ export namespace Prisma {
   export type Historico_Acesso_NormasCreateManyNormasInput = {
     id_user: number
     data_acesso?: Date | string
+  }
+
+  export type FavoritosCreateManyNormaInput = {
+    id_user: number
+    data_criacao?: Date | string
   }
 
   export type Norma_CategoriaCreateManyNormaInput = {
@@ -19693,6 +21314,21 @@ export namespace Prisma {
   export type Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasInput = {
     id_user?: IntFieldUpdateOperationsInput | number
     data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosUpdateWithoutNormaInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuario?: UsersUpdateOneRequiredWithoutFavoritosNestedInput
+  }
+
+  export type FavoritosUncheckedUpdateWithoutNormaInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosUncheckedUpdateManyWithoutNormaInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Norma_CategoriaUpdateWithoutNormaInput = {

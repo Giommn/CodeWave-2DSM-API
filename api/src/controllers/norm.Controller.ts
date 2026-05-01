@@ -66,7 +66,7 @@ export default class NormController {
       if (erro instanceof ValidatorError)
         return res.status(erro.statusCode).json({
           status: "error",
-          message: erro.code,
+          message: erro.message,
         });
 
       return res.status(500).json({
@@ -235,5 +235,50 @@ export default class NormController {
     }
         
   }
+
+  public static async adicionarFavoritos(req:Request,res:Response){
+    try{
+        const {id_user,id_norm}=req.body;
+        if(!id_norm || !id_user)return res.status(400).json({status:"error",message:"Não temos dados o suficiente"})
+          await NormController.norm_service.favoritarNorma(id_user,id_norm)
+        return res.status(200).json({
+          status:"sucess"
+        })
+
+    }catch(error){
+         return res.status(404).json({
+          status:"error",
+          message:error.message
+        })
+    }
+  }
+  public static async tirarDosFavoritos(req:Request,res:Response){
+    try{
+   const {id_user,id_norm}=req.params;
+        if(!id_norm || !id_user)return res.status(400).json({status:"error",message:"Não temos dados o suficiente"})
+          await NormController.norm_service.tirardosfavoritados(Number(id_user),Number(id_norm))
+        return res.status(200).json({
+          status:"sucess"
+        })
+      }catch(error){
+       return res.status(404).json({
+          status:"error",
+          message:error.message
+        })
+      }
+  }
+  public static async VerFavoritos(req:Request,res:Response){
+    try{
+       const {id_user}=req.params;
+       if(!id_user)return res.status(400).json({status:"error",message:"Não temos dados o suficiente"})
+         await NormController.norm_service.Verfavoritos(Number(id_user))
+    }catch(error){
+        return res.status(404).json({
+          status:"error",
+          message:error.message
+        })
+    }
+ }
+ 
 
 }

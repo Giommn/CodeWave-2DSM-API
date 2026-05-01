@@ -437,5 +437,96 @@ categoria:normaAtualizada.categoria.map(cat=>cat.cat.cat_nome),
     }});
         } 
 
-    
+    public async favoritarNorma(id_user:number,id_norm:number){
+      try{
+          await prisma.favoritos.create({
+            data:{
+                id_norma:id_norm,
+                id_user:id_user
+            }
+          })
+      }catch(error){
+          throw new ValidatorError("Não foi possivel adicionar aos favoritos",400,error.message)
+      }
+    }
+
+    public async tirarFavoritoNorma(id_user: number, id_norm: number): Promise<void> {
+          try{
+          await prisma.favoritos.delete({
+            where:{id_user_id_norma:{id_norma:id_norm,id_user:id_user}},
+            
+          })
+      }catch(error){
+          throw new ValidatorError("Não foi possivel remover",400,error.message)
+      }
+    }
+    public async pegarMinhasNormasFavoritas(id_user: number): Promise<Array<ResponseNorm>> {
+          try{
+            const listaNormas= await prisma.favoritos.findMany({
+                where:{id_norma:id_user},
+                select:{
+                    norma:{
+                         select: {
+                    norm_titulo: true,
+                    norm_desc: true,
+                    norm_codigo: true,
+                    emissao: true,
+                    orgaos: { select: { org_desc: true } },
+                    usuario:{select:{user_name:true}},
+                    id_norm:true,
+                      normas_origem: {
+                        select:{norma_destino:{
+                            select:{norm_titulo:true}
+                        }}
+                    },
+                    pdf_caminho:true,
+                     notas:{
+                        select:{
+                            not_IT:true,
+                            not_titulo:true,
+                            not_AB:true,
+                            not_Pa:true,
+                            normas:{
+                                select:{norm_titulo:true}
+                            },
+                           usuario:{
+                            select:{user_name:true}
+                           }
+                        }
+                    }
+                    ,
+                    categoria:{
+                        select:{cat:{select:{cat_nome:true}}}
+                    }
+                
+                }
+                    }
+                }
+            
+            })
+            return  listaNormas.map(n=>{
+      return{
+        norm_titulo: n.norma.norm_titulo,
+        norm_desc: n.norma.norm_desc,
+        norm_codigo: n.norma.norm_codigo,
+        org_criador: n.norma.orgaos.org_desc, 
+        emissao: n.norma.emissao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
+        adm_criador:n.norma.usuario.user_name,
+        id_norm:n.norma.id_norm,
+        pdf_caminho:n.norma.pdf_caminho,
+        referencias:n.norma.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
+        categoria:n.norma.categoria.map(cat=>cat.cat.cat_nome),
+        notas:n.norma.notas.map(nota=>{ return {
+                     notaIT:nota.not_IT,
+                     notaTitulo:nota.not_titulo,
+                     notaAB:nota.not_AB,
+                     notaPA:nota.not_Pa,
+                     norm_criador:nota.normas.norm_titulo,
+                     adm_criador:nota.usuario.user_name
+            }})
+    }});
+          }catch(erro){
+            throw new ValidatorError("Ouve um erro ao procurar pelas suas normas",400,erro.message)
+          }
+    }
     }
