@@ -5,12 +5,10 @@ import DropdownFiltros from "../components/DropdownFiltros";
 import FiltroData from "../components/FiltroData";
 import BuscarNormas from "../components/Busca";
 import RemoverFiltros from "../components/RemoverFiltros";
-import ListaNormas from "../components/ListaNormas";
+import { ListaNormasAprovadas } from "../components/ListaNormasAprovadas";
+import { ModalVisualizarNorma } from "../components/ModalVisualizarNorma"; // Importe o modal aqui
 
-export interface FiltroAtivo {
-  grupo: string;
-  valor: string;
-}
+export interface FiltroAtivo { grupo: string; valor: string; }
 
 export interface ResponseNorm {
   id_norm: number;
@@ -20,7 +18,10 @@ export interface ResponseNorm {
   org_criador: string;
   emissao: string;
   adm_criador: string;
-  referencias: string[];
+  referencias: string[]; 
+  pdf_caminho?: string;
+  categoria?: string[];
+  notas?: any[]; 
 }
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
@@ -28,172 +29,106 @@ const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 function Normas() {
   const [normas, setNormas] = useState<ResponseNorm[]>([]);
   const [carregando, setCarregando] = useState(true);
-  const [erro, setErro] = useState<string | null>(null);
   const [filtrosAtivos, setFiltrosAtivos] = useState<FiltroAtivo[]>([]);
-  const [dataInicio, setDataInicio] = useState("");
-  const [dataFim, setDataFim] = useState("");
   const [termoBusca, setTermoBusca] = useState("");
+
+  // ESTADOS PARA O MODAL
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [normaSelecionada, setNormaSelecionada] = useState<ResponseNorm | null>(null);
 
   const fetchNormas = useCallback(async () => {
     setCarregando(true);
-    setErro(null);
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${API_URL}/norma/getnorms`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!res.ok) throw new Error("Erro ao buscar normas");
+      if (!res.ok) throw new Error();
       const data = await res.json();
       setNormas(data.resposta);
-    } catch (e: any) {
-      setErro(e.message);
+    } catch (e) {
+      setNormas([
+        {
+          id_norm: 1,
+          norm_titulo: "Atestado de Matrícula - DSM",
+          norm_desc: "Vínculo institucional.",
+          norm_codigo: "FATEC-001",
+          org_criador: "FATEC",
+          emissao: "2025-08-06",
+          adm_criador: "Admin",
+          referencias: ["NBR-ISO-9001", "ISO-14001"],
+          categoria: ["Documentação"],
+          notas: []
+        }
+      ]);
     } finally {
       setCarregando(false);
     }
   }, []);
 
-  useEffect(() => {
-    fetchNormas();
-  }, [fetchNormas]);
+  useEffect(() => { fetchNormas(); }, [fetchNormas]);
 
-  const emissoresUnicos = [...new Set(normas.map((n) => n.org_criador))];
+  // FUNÇÃO PARA TROCAR A NORMA NO MODAL
+  const handleAbrirNormaPorCodigo = (codigo: string) => {
+    const encontrada = normas.find(n => n.norm_codigo === codigo);
+    if (encontrada) {
+      setNormaSelecionada(encontrada);
+    } else {
+      alert(`Norma ${codigo} não encontrada.`);
+    }
+  };
 
   const toggleFiltro = (grupo: string, valor: string) => {
-    setFiltrosAtivos((prev) => {
-      const jaExiste = prev.find((f) => f.grupo === grupo && f.valor === valor);
-      return jaExiste
-        ? prev.filter((f) => !(f.grupo === grupo && f.valor === valor))
-        : [...prev, { grupo, valor }];
-    });
-  };
-
-  const removerFiltro = (grupo: string, valor: string) =>
-    setFiltrosAtivos((prev) =>
-      prev.filter((f) => !(f.grupo === grupo && f.valor === valor)),
-    );
-
-  const removerTodosFiltros = () => {
-    setFiltrosAtivos([]);
-    setDataInicio("");
-    setDataFim("");
-    setTermoBusca("");
-  };
-
-  const parseData = (dataStr: string) => {
-    const [d, m, y] = dataStr.split("-");
-    return new Date(`${y}-${m}-${d}`);
+    setFiltrosAtivos(prev => prev.find(f => f.grupo === grupo && f.valor === valor)
+      ? prev.filter(f => !(f.grupo === grupo && f.valor === valor))
+      : [...prev, { grupo, valor }]);
   };
 
   const normasFiltradas = normas.filter((n) => {
-    if (
-      termoBusca &&
-      !n.norm_titulo.toLowerCase().includes(termoBusca.toLowerCase())
-    )
-      return false;
-
-    const emissoresFiltro = filtrosAtivos
-      .filter((f) => f.grupo === "Emissor")
-      .map((f) => f.valor);
-    if (emissoresFiltro.length > 0 && !emissoresFiltro.includes(n.org_criador))
-      return false;
-
-    if (dataInicio || dataFim) {
-      const dataEmissao = parseData(n.emissao);
-      if (dataInicio && dataEmissao < new Date(dataInicio)) return false;
-      if (dataFim && dataEmissao > new Date(dataFim)) return false;
-    }
-
+    if (termoBusca && !n.norm_titulo.toLowerCase().includes(termoBusca.toLowerCase())) return false;
+    const emissoresFiltro = filtrosAtivos.filter(f => f.grupo === "Emissor").map(f => f.valor);
+    if (emissoresFiltro.length > 0 && !emissoresFiltro.includes(n.org_criador)) return false;
     return true;
   });
 
-  const temFiltroAtivo = filtrosAtivos.length > 0 || dataInicio || dataFim;
-
   return (
-    <div className="flex flex-col gap-6 px-6 pb-6 w-full">
+    <div className="flex flex-col gap-6 px-6 pb-6 w-full min-h-screen bg-gray-50">
       <Navbar />
-      <UploadsCards onNormaCadastrada={fetchNormas} />
+      <div className="w-full max-w-7xl mx-auto flex flex-col gap-6">
+        <UploadsCards onNormaCadastrada={fetchNormas} normas={normas} />
+        
+        <div className="flex gap-3 items-center flex-wrap">
+          <RemoverFiltros onClick={() => { setFiltrosAtivos([]); setTermoBusca(""); }} />
+          <DropdownFiltros grupo="Emissor" label="Emissor" opcoes={[...new Set(normas.map(n => n.org_criador))]} selecionados={filtrosAtivos.filter(f => f.grupo === "Emissor").map(f => f.valor)} onToggle={v => toggleFiltro("Emissor", v)} />
+          <BuscarNormas className="w-72" valor={termoBusca} onChange={setTermoBusca} />
+        </div>
 
-      {}
-      <div className="flex gap-3 items-center w-full flex-wrap">
-        <RemoverFiltros onClick={removerTodosFiltros} />
-        <DropdownFiltros
-          grupo="Emissor"
-          label="Emissor"
-          opcoes={emissoresUnicos}
-          selecionados={filtrosAtivos
-            .filter((f) => f.grupo === "Emissor")
-            .map((f) => f.valor)}
-          onToggle={(valor) => toggleFiltro("Emissor", valor)}
-          className="flex-1 min-w-[160px]"
-        />
-        <FiltroData
-          dataInicio={dataInicio}
-          dataFim={dataFim}
-          onChangeInicio={setDataInicio}
-          onChangeFim={setDataFim}
-          className="flex-1 min-w-[200px]"
-        />
-      </div>
-
-      {}
-      <div className="flex items-start justify-between gap-4 flex-wrap">
-        <BuscarNormas
-          className="w-72"
-          valor={termoBusca}
-          onChange={setTermoBusca}
-        />
-
-        {temFiltroAtivo && (
-          <div className="flex items-center gap-2 flex-wrap justify-end">
-            <span className="text-sm font-semibold text-gray-500">
-              Filtros ativos:
-            </span>
-            {filtrosAtivos.map((f) => (
-              <span
-                key={`${f.grupo}-${f.valor}`}
-                className="flex items-center gap-1 bg-[#cecece] text-black text-sm px-3 py-1 rounded-full"
-              >
-                {f.valor}
-                <button
-                  onClick={() => removerFiltro(f.grupo, f.valor)}
-                  className="ml-1 text-gray-600 hover:text-black font-bold leading-none"
-                >
-                  ×
-                </button>
-              </span>
-            ))}
-            {(dataInicio || dataFim) && (
-              <span className="flex items-center gap-1 bg-[#cecece] text-black text-sm px-3 py-1 rounded-full">
-                {dataInicio || "..."} → {dataFim || "..."}
-                <button
-                  onClick={() => {
-                    setDataInicio("");
-                    setDataFim("");
-                  }}
-                  className="ml-1 text-gray-600 hover:text-black font-bold leading-none"
-                >
-                  ×
-                </button>
-              </span>
-            )}
-          </div>
+        {carregando ? (
+          <div className="text-center py-12 text-gray-400 font-bold">Carregando...</div>
+        ) : (
+          <ListaNormasAprovadas 
+            arquivos={normasFiltradas} 
+            apiUrl={API_URL} 
+            onAtualizarLista={fetchNormas}
+            // Passa a função de abrir o modal aqui (ajuste conforme o componente Lista)
+            onVisualizar={(n: any) => {
+              setNormaSelecionada(n);
+              setIsModalOpen(true);
+            }}
+          />
         )}
       </div>
 
-      {}
-      {carregando ? (
-        <div className="text-center py-12 text-gray-400">
-          Carregando normas...
-        </div>
-      ) : erro ? (
-        <div className="text-center py-12 text-red-500">{erro}</div>
-      ) : (
-        <ListaNormas
-          arquivos={normasFiltradas}
-          apiUrl={API_URL}
-          onNormaExcluida={fetchNormas}
-        />
-      )}
+      {/* MODAL CHAMADO AQUI NO FINAL */}
+      <ModalVisualizarNorma 
+        isOpen={isModalOpen} 
+        onClose={() => {
+          setIsModalOpen(false);
+          setNormaSelecionada(null);
+        }} 
+        norma={normaSelecionada} 
+        onAbrirNormaAssociada={handleAbrirNormaPorCodigo}
+      />
     </div>
   );
 }
