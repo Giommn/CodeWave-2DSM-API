@@ -38,23 +38,23 @@ const CardsDados: React.FC<CardsDadosProps> = ({
   ];
 
   return (
-    <div className="flex flex-wrap gap-4 p-4 justify-center items-center">
+    <div className="flex flex-wrap gap-3 sm:gap-4 p-4 sm:p-6 lg:p-8 justify-center items-center">
       {dashboardData.map((item) => (
         <button
           key={item.id}
           onClick={() => item.isBotao && setIsModalOpen(true)}
-          className={`flex flex-col items-start w-64 p-4 rounded-2xl transition-all text-left
+          className={`flex flex-col items-start flex-1 min-w-[160px] max-w-xs sm:max-w-sm p-4 sm:p-5 rounded-2xl transition-all text-left
             ${
               item.isBotao
                 ? "bg-[#D9D9D9] hover:bg-gray-300 active:scale-95 cursor-pointer shadow-sm"
                 : "bg-[#D9D9D9] cursor-default"
             }`}
         >
-          <div className="text-gray-700 mb-2">{item.icon}</div>
-          <h3 className="text-gray-600 font-medium text-sm leading-tight">
+          <div className="text-gray-700 mb-2 text-lg sm:text-xl">{item.icon}</div>
+          <h3 className="text-gray-600 font-medium text-xs sm:text-sm leading-tight">
             {item.titulo}
           </h3>
-          <span className="text-black font-bold text-lg mt-1">
+          <span className="text-black font-bold text-base sm:text-lg mt-1">
             {item.valor}
           </span>
         </button>

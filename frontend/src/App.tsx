@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route,  } from "react-router-dom";
 import Home from "./pages/Home";
 import Normas from "./pages/Normas";
 import Cadastro from "./pages/cadastro";
 import Login from "./pages/Login";
 
 function App() {
-  const isAuthenticated = !!localStorage.getItem("token");
+
 
   return (
     <BrowserRouter>
@@ -17,7 +17,7 @@ function App() {
         <Route 
           path="/" 
           element={
-            isAuthenticated ? <Home /> : <Navigate to="/login" replace />
+            <Home />
           } 
         />
         
@@ -25,13 +25,13 @@ function App() {
         <Route 
           path="/normas" 
           element={
-            isAuthenticated ? <Normas /> : <Navigate to="/login" replace />
+            <Normas />
           } 
         />
         <Route 
           path="/cadastro" 
           element={
-            isAuthenticated ? <Cadastro /> : <Navigate to="/login" replace />
+            <Cadastro />
           } 
         />
       </Routes>

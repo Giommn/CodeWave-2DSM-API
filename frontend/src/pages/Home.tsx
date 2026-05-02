@@ -30,24 +30,35 @@ const SearchIcon: React.FC = () => (
 
 const NormaCard: React.FC<NormaCardProps> = ({ titulo = "Nome da norma" }) => {
   return (
-    <div className="flex flex-col rounded-xl overflow-hidden h-[280px] shadow-lg transform hover:scale-[1.02] transition-transform cursor-pointer">
-      <div className="bg-[#e2e2e2] h-[160px] p-4">
-        <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+    <div className="flex flex-col rounded-xl overflow-hidden h-[240px] sm:h-[260px] md:h-[280px] shadow-lg transform hover:scale-[1.02] transition-transform cursor-pointer">
+      <div className="bg-[#e2e2e2] h-[140px] sm:h-[150px] p-3 sm:p-4">
+        <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider line-clamp-3">
           {titulo}
         </h3>
       </div>
 
-      <div className="bg-[#8c8c8c] flex-1 p-4 flex flex-col justify-between">
-        <div className="space-y-2">
-          <p className="text-[12px] text-white font-bold">descrição:</p>
-          <p className="text-[12px] text-white font-bold">filtros:</p>
+      <div className="bg-[#8c8c8c] flex-1 p-3 sm:p-4 flex flex-col justify-between">
+        <div className="space-y-1 sm:space-y-2">
+          <p className="text-[11px] sm:text-[12px] text-white font-bold">descrição:</p>
+          <p className="text-[11px] sm:text-[12px] text-white font-bold">filtros:</p>
         </div>
 
-        <div className="flex gap-2 mt-2">
-          <button className="flex-1 bg-[#d1d1d1] hover:bg-white text-[#444] text-[11px] py-2 rounded-lg font-black transition-colors uppercase">
+        {/* Mobile Buttons - Vertical Stack */}
+        <div className="sm:hidden flex flex-col gap-2 mt-2 w-full">
+          <button className="w-full bg-[#d1d1d1] hover:bg-white text-[#444] text-[10px] py-2 rounded font-black transition-colors uppercase">
             Baixar
           </button>
-          <button className="flex-1 bg-[#d1d1d1] hover:bg-white text-[#444] text-[11px] py-2 rounded-lg font-black transition-colors uppercase">
+          <button className="w-full bg-[#d1d1d1] hover:bg-white text-[#444] text-[10px] py-2 rounded font-black transition-colors uppercase">
+            Abrir
+          </button>
+        </div>
+
+        {/* Desktop Buttons - Horizontal */}
+        <div className="hidden sm:flex gap-2 mt-2">
+          <button className="flex-1 bg-[#d1d1d1] hover:bg-white text-[#444] text-[10px] sm:text-[11px] py-2 rounded-lg font-black transition-colors uppercase">
+            Baixar
+          </button>
+          <button className="flex-1 bg-[#d1d1d1] hover:bg-white text-[#444] text-[10px] sm:text-[11px] py-2 rounded-lg font-black transition-colors uppercase">
             Abrir
           </button>
         </div>
@@ -62,20 +73,20 @@ const Home: React.FC = () => {
   const listaNormas = Array.from({ length: 12 });
 
   return (
-    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden font-sans">
-      <header className="relative w-full h-[500px] flex flex-col items-center overflow-hidden bg-white">
-        <div className="absolute inset-0 z-0 pointer-events-none">
+    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden font-sans pb-16 sm:pb-0">
+      <header className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] flex flex-col items-center overflow-hidden bg-white">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src="../../img/logo1.png"
             alt="Fundo Akaer"
-            className="absolute -left-[250px] -top-[-5px] w-[1200px] max-w-none h-120 object-contain"
+            className="absolute -left-[150px] sm:-left-[200px] md:-left-[250px] -top-[-5px] w-[800px] sm:w-[1000px] md:w-[1200px] max-w-none h-auto object-contain"
           />
         </div>
 
         <Navbar />
 
-        <div className="z-10 text-center mt-24 px-4 relative">
-          <h1 className="text-4xl md:text-[52px] font-black text-[#1a1a1a] leading-tight max-w-5xl mx-auto tracking-tight">
+        <div className="z-10 text-center mt-8 sm:mt-16 md:mt-24 px-3 sm:px-4 relative">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[52px] font-black text-[#1a1a1a] leading-tight max-w-4xl mx-auto tracking-tight">
             Bem vindo a Plataforma do Conteúdo
             <br />
             Técnico de Normas Aeronáuticas
@@ -83,18 +94,18 @@ const Home: React.FC = () => {
         </div>
       </header>
 
-      <main className="bg-[#7d2944] w-full flex-1 py-10 px-6 md:px-12 relative">
+      <main className="bg-[#7d2944] w-full flex-1 py-6 sm:py-8 md:py-10 px-3 sm:px-6 lg:px-12 relative">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row justify-between items-center mb-8 gap-4 relative z-10">
-            <h2 className="text-white text-xl font-bold border-b-2 border-white/20 pb-1">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 md:mb-8 gap-4 relative z-10">
+            <h2 className="text-white text-lg sm:text-xl font-bold border-b-2 border-white/20 pb-1 whitespace-nowrap">
               Historico de normas acessadas/baixadas:
             </h2>
 
-            <div className="relative group w-full max-w-xs">
+            <div className="relative group w-full lg:max-w-xs">
               <input
                 type="text"
-                placeholder="buscar nome da norma..."
-                className="w-full bg-[#bcbcbc] rounded-md py-2 pl-4 pr-10 outline-none focus:bg-white transition-all text-sm font-semibold placeholder-gray-600 shadow-inner"
+                placeholder="buscar norma..."
+                className="w-full bg-[#bcbcbc] rounded-md py-2 pl-4 pr-10 outline-none focus:bg-white transition-all text-xs sm:text-sm font-semibold placeholder-gray-600 shadow-inner"
               />
               <span className="absolute right-3 top-2.5 text-gray-700">
                 <SearchIcon />
@@ -102,7 +113,7 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 relative z-10">
             {listaNormas.map((_, index) => (
               <NormaCard key={index} titulo="Nome da norma" />
             ))}

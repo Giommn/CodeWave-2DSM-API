@@ -109,78 +109,85 @@ function Normas() {
   const temFiltroAtivo = filtrosAtivos.length > 0 || dataInicio || dataFim;
 
   return (
-    <div className="flex flex-col gap-6 px-6 pb-6 w-full">
+    <div className="flex flex-col gap-4 sm:gap-6 px-3 sm:px-6 pb-16 sm:pb-6 w-full">
       <Navbar />
       <UploadsCards onNormaCadastrada={fetchNormas} />
 
-      {}
-      <div className="flex gap-3 items-center w-full flex-wrap">
-        <RemoverFiltros onClick={removerTodosFiltros} />
-        <DropdownFiltros
-          grupo="Emissor"
-          label="Emissor"
-          opcoes={emissoresUnicos}
-          selecionados={filtrosAtivos
-            .filter((f) => f.grupo === "Emissor")
-            .map((f) => f.valor)}
-          onToggle={(valor) => toggleFiltro("Emissor", valor)}
-          className="flex-1 min-w-[160px]"
-        />
-        <FiltroData
-          dataInicio={dataInicio}
-          dataFim={dataFim}
-          onChangeInicio={setDataInicio}
-          onChangeFim={setDataFim}
-          className="flex-1 min-w-[200px]"
-        />
-      </div>
+      {/* Filters Section */}
+      <div className="flex flex-col sm:flex-row gap-3 w-full sm:items-center sm:flex-wrap">
+        <div className="flex flex-col items-center gap-2 sm:gap-3 sm:items-start sm:flex-row w-full sm:w-auto max-w-xs sm:max-w-none mx-auto sm:mx-0">
+          <RemoverFiltros onClick={removerTodosFiltros} />
+          <DropdownFiltros
+            grupo="Emissor"
+            label="Emissor"
+            opcoes={emissoresUnicos}
+            selecionados={filtrosAtivos
+              .filter((f) => f.grupo === "Emissor")
+              .map((f) => f.valor)}
+            onToggle={(valor) => toggleFiltro("Emissor", valor)}
+            className="w-full sm:flex-1 sm:min-w-[140px] sm:min-w-[160px]"
+          />
+          <FiltroData
+            dataInicio={dataInicio}
+            dataFim={dataFim}
+            onChangeInicio={setDataInicio}
+            onChangeFim={setDataFim}
+            className="w-full sm:flex-1 sm:min-w-[140px] sm:min-w-[200px]"
+          />
+        </div>
 
-      {}
-      <div className="flex items-start justify-between gap-4 flex-wrap">
-        <BuscarNormas
-          className="w-72"
-          valor={termoBusca}
-          onChange={setTermoBusca}
-        />
+        {/* Search Bar */}
+        <div className="w-full max-w-xs mx-auto sm:mx-0 sm:w-full">
+          <BuscarNormas
+            className="w-full sm:max-w-xs"
+            valor={termoBusca}
+            onChange={setTermoBusca}
+          />
+        </div>
 
+        {/* Active Filters Display */}
         {temFiltroAtivo && (
-          <div className="flex items-center gap-2 flex-wrap justify-end">
-            <span className="text-sm font-semibold text-gray-500">
-              Filtros ativos:
+          <div className="flex items-start gap-2 flex-wrap">
+            <span className="text-xs sm:text-sm font-semibold text-gray-500 leading-8">
+              Filtros:
             </span>
-            {filtrosAtivos.map((f) => (
-              <span
-                key={`${f.grupo}-${f.valor}`}
-                className="flex items-center gap-1 bg-[#cecece] text-black text-sm px-3 py-1 rounded-full"
-              >
-                {f.valor}
-                <button
-                  onClick={() => removerFiltro(f.grupo, f.valor)}
-                  className="ml-1 text-gray-600 hover:text-black font-bold leading-none"
+            <div className="flex items-center gap-2 flex-wrap">
+              {filtrosAtivos.map((f) => (
+                <span
+                  key={`${f.grupo}-${f.valor}`}
+                  className="flex items-center gap-1 bg-[#cecece] text-black text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full"
                 >
-                  ×
-                </button>
-              </span>
-            ))}
-            {(dataInicio || dataFim) && (
-              <span className="flex items-center gap-1 bg-[#cecece] text-black text-sm px-3 py-1 rounded-full">
-                {dataInicio || "..."} → {dataFim || "..."}
-                <button
-                  onClick={() => {
-                    setDataInicio("");
-                    setDataFim("");
-                  }}
-                  className="ml-1 text-gray-600 hover:text-black font-bold leading-none"
-                >
-                  ×
-                </button>
-              </span>
-            )}
+                  <span className="truncate">{f.valor}</span>
+                  <button
+                    onClick={() => removerFiltro(f.grupo, f.valor)}
+                    className="ml-1 text-gray-600 hover:text-black font-bold leading-none flex-shrink-0"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+              {(dataInicio || dataFim) && (
+                <span className="flex items-center gap-1 bg-[#cecece] text-black text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
+                  <span className="truncate text-xs">
+                    {dataInicio || "..."} → {dataFim || "..."}
+                  </span>
+                  <button
+                    onClick={() => {
+                      setDataInicio("");
+                      setDataFim("");
+                    }}
+                    className="ml-1 text-gray-600 hover:text-black font-bold leading-none flex-shrink-0"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+            </div>
           </div>
         )}
       </div>
 
-      {}
+      {/* Content Section */}
       {carregando ? (
         <div className="text-center py-12 text-gray-400">
           Carregando normas...

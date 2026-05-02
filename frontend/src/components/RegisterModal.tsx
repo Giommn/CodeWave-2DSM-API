@@ -69,15 +69,15 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50  backdrop-blur-[7px] bg-opacity-100 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 mx-4">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-[7px] bg-opacity-100 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
         <div className="relative flex items-center justify-center mb-6">
-          <h2 className="text-2xl font-bold bg-[#8a334d] text-white text-center rounded-2xl p-2">
+          <h2 className="text-xl sm:text-2xl font-bold bg-[#8a334d] text-white text-center rounded-2xl p-2 px-3 sm:px-4">
             Criar Conta
           </h2>
           <button
             onClick={handleClose}
-            className="absolute right-0 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+            className="absolute right-0 text-gray-500 hover:text-gray-700 text-2xl sm:text-3xl font-bold"
             title="Fechar modal"
           >
             ×
@@ -85,16 +85,16 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded text-sm">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           <div>
             <label
               htmlFor="nome"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
             >
               Nome Completo:
             </label>
@@ -104,14 +104,14 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
               value={nome}
               onChange={(e) => setNome(e.target.value)}
               placeholder="Digite seu nome completo"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             />
           </div>
 
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
             >
               Email:
             </label>
@@ -121,14 +121,14 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Digite seu email"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             />
           </div>
 
           <div>
             <label
               htmlFor="senha"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
             >
               Senha:
             </label>
@@ -138,14 +138,14 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               placeholder="Digite sua senha"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             />
           </div>
 
           <div>
             <label
               htmlFor="confirmSenha"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
             >
               Confirmar Senha:
             </label>
@@ -155,39 +155,39 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({
               value={confirmSenha}
               onChange={(e) => setConfirmSenha(e.target.value)}
               placeholder="Confirme sua senha"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             />
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-start sm:items-center gap-2">
             <input
               id="nivel_user"
               type="checkbox"
               checked={nivel_user === "ADM"}
               onChange={(e) => setNivelUser(e.target.checked ? "ADM" : "USER")}
-              className="w-4 h-4 text-red-600 bg-red-500 border-red-700 rounded focus:ring-2 focus:ring-red-500"
+              className="w-4 h-4 text-red-600 bg-red-500 border-red-700 rounded focus:ring-2 focus:ring-red-500 mt-1 sm:mt-0 flex-shrink-0"
             />
             <label
               htmlFor="nivel_user"
-              className="ml-2 text-sm font-medium text-gray-700"
+              className="text-xs sm:text-sm font-medium text-gray-700 leading-tight"
             >
               <b>Administrador</b>, este usuário terá permissão para alterar e
               cadastrar normas e notas técnicas
             </label>
           </div>
 
-          <div className="flex gap-3 pt-4">
+          <div className="flex gap-2 sm:gap-3 pt-4">
             <button
               type="button"
               onClick={handleClose}
-              className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-lg font-medium hover:bg-gray-300 transition"
+              className="flex-1 px-3 sm:px-4 py-2 bg-gray-200 text-gray-800 rounded-lg font-medium text-sm hover:bg-gray-300 transition"
               title="Cancelar registro"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-red-900 text-white rounded-lg font-medium hover:bg-[#8a334d] transition"
+              className="flex-1 px-3 sm:px-4 py-2 bg-red-900 text-white rounded-lg font-medium text-sm hover:bg-[#8a334d] transition"
               title="Enviar formulário de registro"
             >
               Registrar

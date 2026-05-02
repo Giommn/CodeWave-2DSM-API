@@ -101,7 +101,7 @@ export default function Cadastro() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-16 sm:pb-0">
       <Navbar />
 
       <CardsDados
@@ -110,23 +110,25 @@ export default function Cadastro() {
         totalUsers={totalUsers}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {registeredUsers.length > 0 ? (
           <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-200">
+            <div className="px-4 sm:px-6 py-4 border-b border-gray-200">
               <input
                 type="text"
                 placeholder="Buscar usuários por nome ou email..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 text-sm sm:text-base"
               />
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-xs sm:text-sm text-gray-500 mt-2">
                 Total de usuários: {registeredUsers.length} | Resultados
                 encontrados: {filteredUsers.length}
               </p>
             </div>
-            <div className="overflow-x-auto">
+            
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-100 border-b border-gray-200">
                   <tr>
@@ -159,12 +161,12 @@ export default function Cadastro() {
                         <td className="px-6 py-4 text-sm text-gray-900">
                           {user.user_name}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900">
+                        <td className="px-6 py-4 text-sm text-gray-900 truncate">
                           {user.email}
                         </td>
                         <td className="px-6 py-4 text-sm">
                           <span
-                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${
                               user.nivel_user === "ADM"
                                 ? "bg-red-400 text-white"
                                 : "bg-[#70243d] text-white"
@@ -179,13 +181,60 @@ export default function Cadastro() {
                 </tbody>
               </table>
             </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-3 p-4 sm:p-6">
+              {filteredUsers.map(
+                (
+                  user: {
+                    id_user?: number;
+                    email: any;
+                    user_name: any;
+                    nivel_user: "ADM" | "USER";
+                  },
+                  index: any,
+                ) => (
+                  <div
+                    key={user.id_user || index}
+                    className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="space-y-2">
+                      <div>
+                        <p className="text-xs font-semibold text-gray-600 uppercase">Nome</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          {user.user_name}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-gray-600 uppercase">Email</p>
+                        <p className="text-sm text-gray-900 break-words">
+                          {user.email}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-gray-600 uppercase">Admin</p>
+                        <span
+                          className={`inline-block mt-1 px-3 py-1 rounded-full text-xs font-semibold ${
+                            user.nivel_user === "ADM"
+                              ? "bg-red-400 text-white"
+                              : "bg-[#70243d] text-white"
+                          }`}
+                        >
+                          {user.nivel_user === "ADM" ? "Sim" : "Não"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ),
+              )}
+            </div>
           </div>
         ) : (
-          <div className="bg-white rounded-lg shadow p-12 text-center">
-            <p className="text-gray-600 text-lg">
+          <div className="bg-white rounded-lg shadow p-8 sm:p-12 text-center">
+            <p className="text-gray-600 text-base sm:text-lg">
               Nenhum usuário registrado ainda.
             </p>
-            <p className="text-gray-500 text-sm mt-2">
+            <p className="text-gray-500 text-xs sm:text-sm mt-2">
               Clique no botão acima para registrar um novo usuário.
             </p>
           </div>

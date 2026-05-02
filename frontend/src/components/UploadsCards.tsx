@@ -299,7 +299,22 @@ function UploadsCards({ onNormaCadastrada }: Props) {
 
   return (
     <>
-      <div className="flex gap-8 w-full">
+      {/* Mobile Buttons */}
+      <div className="sm:hidden flex flex-col gap-2 w-full max-w-xs mx-auto mt-6">
+        <button
+          onClick={() => setModalAberto(true)}
+          className="w-full bg-[#70243d] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#8a334d] transition-colors"
+        >
+          Cadastrar norma
+        </button>
+
+        <div className="w-full bg-[#70243d] text-white font-semibold py-2 px-4 rounded-lg">
+          Adicionar requisitos
+        </div>
+      </div>
+
+      {/* Desktop Buttons */}
+      <div className="hidden sm:flex gap-8 w-full">
         <button
           onClick={() => setModalAberto(true)}
           className="flex-1 flex border border-dashed items-center bg-[#D9D9D9] p-40 gap-3 rounded-2xl justify-center hover:bg-[#c8c8c8] transition-colors cursor-pointer"
