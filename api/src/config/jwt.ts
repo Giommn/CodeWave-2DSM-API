@@ -31,7 +31,10 @@ export function authToken(req, res, next) {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) return res.sendStatus(401);
-    if (user.nivel_user == "USER") return res.sendStatus(401);
+    if (user.nivel_user == "USER") return res.status(401).json({
+      status:"error",
+      message:"Você não possui autorização"
+    });
 
     req.user = user;
     next();

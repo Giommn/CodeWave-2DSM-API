@@ -30,6 +30,8 @@ export default class NormController {
         org_desc,
         org_sigla,
         referencias,
+        notas,
+        categoria 
       } = JSON.parse(req.body.metadata);
       const pdf_caminho: string = req.file.filename;
       const pdf_nome_original: string = req.file.originalname;
@@ -43,8 +45,10 @@ export default class NormController {
         org_desc: org_desc,
         org_sigla: org_sigla,
         referencias: referencias,
+        notas:notas,
         pdf_caminho: pdf_caminho,
         pdf_nome_original: pdf_nome_original,
+        categoria:categoria
       });
       return res.status(201).json({
         status: "sucess",
@@ -231,4 +235,51 @@ export default class NormController {
     }
         
   }
+
+  public static async adicionarFavoritos(req:Request,res:Response){
+    try{
+        const {id_user,id_norm}=req.body;
+        if(!id_norm || !id_user)return res.status(400).json({status:"error",message:"Não temos dados o suficiente"})
+          await NormController.norm_service.favoritarNorma(id_user,id_norm)
+        return res.status(200).json({
+          status:"sucess"
+        })
+
+    }catch(error){
+      console.error("Erro real disparado pelo Service/Repository:", error);
+         return res.status(404).json({
+          status:"error",
+          message:error.code
+        })
+    }
+  }
+  public static async tirarDosFavoritos(req:Request,res:Response){
+    try{
+   const {id_user,id_norm}=req.params;
+        if(!id_norm || !id_user)return res.status(400).json({status:"error",message:"Não temos dados o suficiente"})
+          await NormController.norm_service.tirardosfavoritados(Number(id_user),Number(id_norm))
+        return res.status(200).json({
+          status:"sucess"
+        })
+      }catch(error){
+       return res.status(404).json({
+          status:"error",
+          message:error.message
+        })
+      }
+  }
+  public static async VerFavoritos(req:Request,res:Response){
+    try{
+       const {id_user}=req.params;
+       if(!id_user)return res.status(400).json({status:"error",message:"Não temos dados o suficiente"})
+         await NormController.norm_service.Verfavoritos(Number(id_user))
+    }catch(error){
+        return res.status(404).json({
+          status:"error",
+          message:error.message
+        })
+    }
+ }
+ 
+
 }
