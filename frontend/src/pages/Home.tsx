@@ -43,11 +43,8 @@ const NormaCard: React.FC<NormaCardProps> = ({ titulo = "Nome da norma" }) => {
           <p className="text-[12px] text-white font-bold">filtros:</p>
         </div>
 
-        <div className="flex gap-2 mt-2">
-          <button className="flex-1 bg-[#d1d1d1] hover:bg-white text-[#444] text-[11px] py-2 rounded-lg font-black transition-colors uppercase">
-            Baixar
-          </button>
-          <button className="flex-1 bg-[#d1d1d1] hover:bg-white text-[#444] text-[11px] py-2 rounded-lg font-black transition-colors uppercase">
+        <div className="mt-2 w-full">
+          <button className="w-full bg-[#d1d1d1] hover:bg-white text-[#444] text-[11px] py-2 rounded-lg font-black transition-colors uppercase">
             Abrir
           </button>
         </div>
@@ -62,7 +59,7 @@ const Home: React.FC = () => {
   const listaNormas = Array.from({ length: 12 });
 
   return (
-    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden ">
       <header className="relative w-full h-[500px] flex flex-col items-center overflow-hidden bg-white">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img

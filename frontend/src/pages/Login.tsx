@@ -29,7 +29,7 @@ function Login() {
       window.dispatchEvent(new Event("storage"))
       window.location.href = "/";
     } catch (err) {
-      setError("Email ou senha incorretos.");
+     console.log(err); setError("Email ou senha incorretos.");
     }
   };
 

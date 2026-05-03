@@ -22,4 +22,13 @@ export default class NormService {
   public getHistoric(id_user: number) {
     return this.NormRepository.getHistoricNorms(id_user);
   }
+  public favoritarNorma(id_user:number,id_norm:number){
+     return this.NormRepository.favoritarNorma(id_user,id_norm)
+  }
+  public tirardosfavoritados(id_user:number,id_norm:number){
+    return this.NormRepository.tirarFavoritoNorma(id_user,id_norm)
+  }
+  public Verfavoritos(id_user:number){
+      return this.NormRepository.pegarMinhasNormasFavoritas(id_user)
+  }
 }

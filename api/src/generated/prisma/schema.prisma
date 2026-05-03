@@ -47,6 +47,7 @@ model Users {
   normas                Norma[]
   notas                 Notas[]
   mfa                   Mfa[]
+  favoritos             Favoritos[]
   historicoAcessoNormas Historico_Acesso_Normas[]
   pedidos               PedidosdeAlteracao[]
 
@@ -94,9 +95,9 @@ model Norma {
   orgaos                Orgaos                    @relation(fields: [org_criador], references: [org_id])
   normas_origem         Normas_Referenciadas[]    @relation("origem")
   normas_destino        Normas_Referenciadas[]    @relation("destino")
-  favorita              Boolean                   @default(false)
   versoes               Normas_Versoes[]
   HistoricoAcessoNormas Historico_Acesso_Normas[]
+  favoritos             Favoritos[]
   categoria             Norma_Categoria[]
   pedidos               PedidosdeAlteracao[]
 
@@ -118,7 +119,7 @@ model Notas {
   adm_criador  Int
   data_criacao DateTime @default(now()) @db.Timestamp(0)
   usuario      Users    @relation(fields: [adm_criador], references: [id_user])
-  normas       Norma    @relation(fields: [norm_criador], references: [id_norm])
+  normas       Norma    @relation(fields: [norm_criador], references: [id_norm], onDelete: Cascade)
 
   @@index([adm_criador])
   @@index([norm_criador])
@@ -130,7 +131,7 @@ model Norma_Categoria {
   id_norma Int
   id_cat   Int
   cat      Categoria @relation(fields: [id_cat], references: [cat_id])
-  norma    Norma     @relation(fields: [id_norma], references: [id_norm])
+  norma    Norma     @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
 
   @@id([id_norma, id_cat])
   @@index([id_cat])
@@ -199,7 +200,19 @@ model PedidosdeAlteracao {
   data_pedido     DateTime        @default(now())
   id_norma        Int?
   usuarios        Users           @relation(fields: [id_user], references: [id_user])
-  normas          Norma?          @relation(fields: [id_norma], references: [id_norm])
+  normas          Norma?          @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
 
   @@map("pedidos_alteracao")
+}
+
+model Favoritos {
+  id_user      Int
+  id_norma     Int
+  data_criacao DateTime @default(now())
+
+  usuario Users @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  norma   Norma @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
+
+  @@id([id_user, id_norma])
+  @@map("Normas_favoritadas")
 }
