@@ -4,7 +4,9 @@ import Navbar from "../components/Navbar";
 // --- TIPAGENS ---
 
 interface NormaCardProps {
-  titulo?: string;
+  titulo: string;
+  numero_de_notas: number;
+  descricao: string;
 }
 
 // --- ÍCONES ---
@@ -28,19 +30,19 @@ const SearchIcon: React.FC = () => (
 
 // --- COMPONENTE DO CARD DE NORMA ---
 
-const NormaCard: React.FC<NormaCardProps> = ({ titulo = "Nome da norma" }) => {
+const NormaCard: React.FC<NormaCardProps> = (norma:NormaCardProps) => {
   return (
     <div className="flex flex-col rounded-xl overflow-hidden h-[280px] shadow-lg transform hover:scale-[1.02] transition-transform cursor-pointer">
       <div className="bg-[#e2e2e2] h-[160px] p-4">
         <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
-          {titulo}
+          {norma.titulo}
         </h3>
       </div>
 
       <div className="bg-[#8c8c8c] flex-1 p-4 flex flex-col justify-between">
         <div className="space-y-2">
-          <p className="text-[12px] text-white font-bold">descrição:</p>
-          <p className="text-[12px] text-white font-bold">filtros:</p>
+          <p className="text-[12px] text-white font-bold">Descrição:${norma.descricao}</p>
+          <p className="text-[12px] text-white font-bold">Quantidade de notas:${norma.numero_de_notas}</p>
         </div>
 
         <div className="mt-2 w-full">
@@ -54,10 +56,28 @@ const NormaCard: React.FC<NormaCardProps> = ({ titulo = "Nome da norma" }) => {
 };
 
 // --- COMPONENTE PRINCIPAL (HOME) ---
+function getIdFromToken(): number | null {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.id_user ?? payload.id ?? null;
+  } catch {
+    return null;
+  }
+}
 
+async function get_normas(id_user:number){
+  const token = localStorage.getItem("token")
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/norma/gethistoricacess/:${id_user}`, { 
+  method: "GET",
+  headers: { Authorization: `Bearer ${token}` },
+  
+})
+return response
+}
 const Home: React.FC = () => {
-  const listaNormas = Array.from({ length: 12 });
-
+  const listaNormas = get_normas(getIdFromToken()!)
   return (
     <div className="min-h-screen bg-white flex flex-col overflow-x-hidden ">
       <header className="relative w-full h-[500px] flex flex-col items-center overflow-hidden bg-white">

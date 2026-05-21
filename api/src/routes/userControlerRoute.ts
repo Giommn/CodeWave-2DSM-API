@@ -5,7 +5,7 @@ const router= express.Router();
 
 
 router.post('/login',UserController.loginUser);
-router.post('/createuser',jwt.authToken,UserController.CreateUser)
+router.post('/createuser',UserController.CreateUser)
 router.put('/updateuser',jwt.authToken,UserController.UpdateUser)
 router.delete("/deleteuser/:id",jwt.authToken,UserController.DeleteUser)
 router.get('/getusers',UserController.ListUser)

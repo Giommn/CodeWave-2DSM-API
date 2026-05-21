@@ -103,7 +103,7 @@ function Normas() {
       const res = await fetch(`${API_URL}/norma/getnorms?id_user=${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       if (!res.ok) {
         carregarMock();
         return; 

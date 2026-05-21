@@ -18,6 +18,14 @@ export function ModalVisualizarNorma({ isOpen, onClose, norma, onAbrirNormaAssoc
     nomeArquivo: "",
     urlPdf: ""
   });
+
+  async function Normas_historico_response(id_user:number,id_norma:number){
+    await fetch (`${import.meta.env.VITE_API_URL}/norma/saveinhistoric`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify({id_user: id_user,id_norm:id_norma})
+    })
+  }
   
   const [isCarregandoPdf, setIsCarregandoPdf] = useState(false);
   const [notasExpandidas, setNotasExpandidas] = useState<number[]>([]);
@@ -84,8 +92,21 @@ export function ModalVisualizarNorma({ isOpen, onClose, norma, onAbrirNormaAssoc
   const listaNormas = norma.referencias || norma.normas_associadas || [];
   const temNormasAssociadas = Array.isArray(listaNormas) && listaNormas.length > 0;
 
+  function getIdFromToken(): number | null {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return null;
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.id_user ?? payload.id ?? null;
+  } catch {
+    return null;
+  }
+}
+Normas_historico_response(getIdFromToken()!,norma.id_norm )
+
   return (
     <>
+
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4 py-6 overflow-y-auto">
         <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl transition-all duration-300 relative my-auto flex flex-col">
           

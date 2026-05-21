@@ -181,6 +181,7 @@ export default class NormController {
         status: "sucess",
       });
     } catch (erro) {
+      console.log(erro.message)
       if (erro instanceof ValidatorError) {
         return res.status(400).json({
           status: "error",
