@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { ResponseNorm } from "./Normas";
 
@@ -26,7 +26,7 @@ const SearchIcon: React.FC = () => (
 
 // --- COMPONENTE DO CARD DE NORMA ---
 
-const NormaCard = (norma:ResponseNorm) => {
+const NormaCard = ({norma}:{norma:ResponseNorm}) => {
   return (
     <div className="flex flex-col rounded-xl overflow-hidden h-[280px] shadow-lg transform hover:scale-[1.02] transition-transform cursor-pointer">
       <div className="bg-[#e2e2e2] h-[160px] p-4">
@@ -37,8 +37,8 @@ const NormaCard = (norma:ResponseNorm) => {
 
       <div className="bg-[#8c8c8c] flex-1 p-4 flex flex-col justify-between">
         <div className="space-y-2">
-          <p className="text-[12px] text-white font-bold">Descrição:${norma.norm_desc}</p>
-          <p className="text-[12px] text-white font-bold">Quantidade de notas:${norma.notas?.length}</p>
+          <p className="text-[12px] text-white font-bold">Descrição: {norma.norm_desc}</p>
+          <p className="text-[12px] text-white font-bold">Quantidade de notas: {norma.notas?.length}</p>
         </div>
 
         <div className="mt-2 w-full">
@@ -63,14 +63,25 @@ function getIdFromToken(): number | null {
   }
 }
 
-async function get_normas(id_user:number):Promise<ResponseNorm[]>{
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/norma/gethistoricacess/:${id_user}`, { 
+async function get_normas(id_user:number){
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/norma/gethistoricacess/${id_user}`, { 
   method: "GET"
 })
-return response.json()
+return await response.json()
 }
 const Home: React.FC = () => {
-  const listaNormas = get_normas(getIdFromToken()!).then
+  const [listaNormas,setListaNormas]= useState<ResponseNorm[]>([]);
+  useEffect(()=>{
+    const salvarNormas=async ()=>{const dados= await get_normas(getIdFromToken()!)
+      if (dados && dados.resposta) {
+        setListaNormas(dados.resposta);
+      }
+      
+    }
+    salvarNormas()
+    
+    
+  }, []);
   return (
     <div className="min-h-screen bg-white flex flex-col overflow-x-hidden ">
       <header className="relative w-full h-[500px] flex flex-col items-center overflow-hidden bg-white">
@@ -113,7 +124,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5 relative z-10">
-            {listaNormas.map}
+            {listaNormas.map((norma:ResponseNorm)=>(<NormaCard norma={norma}/>))}
           </div>
         </div>
       </main>
