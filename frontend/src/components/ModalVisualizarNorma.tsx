@@ -106,7 +106,7 @@ Normas_historico_response(getIdFromToken()!,norma.id_norm )
 
   return (
     <>
-
+     
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4 py-6 overflow-y-auto">
         <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl transition-all duration-300 relative my-auto flex flex-col">
           
@@ -271,6 +271,7 @@ Normas_historico_response(getIdFromToken()!,norma.id_norm )
         nomeArquivo={pdfData.nomeArquivo}
         urlPdf={pdfData.urlPdf} 
       />
+  
     </>
   );
 }
