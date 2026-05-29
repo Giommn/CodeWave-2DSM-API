@@ -398,7 +398,6 @@ function Notificacoes() {
       },
     ];
 
-    // Triplicamos os itens para garantir que sempre haja conteúdo nas pontas para o efeito infinito funcionar no clique
     const listaInfinita = [
       ...dadosMockados,
       ...dadosMockados,
@@ -409,7 +408,7 @@ function Notificacoes() {
       if (!carrosselRef.current) return;
 
       const container = carrosselRef.current;
-      const cardWidth = 280 + 24; // Largura do card + gap
+      const cardWidth = 280 + 24;
       const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
 
       // Rola suavemente apenas na direção do clique
@@ -422,17 +421,13 @@ function Notificacoes() {
       const container = carrosselRef.current;
       const currentScroll = container.scrollLeft;
 
-      // Define o tamanho de um terço exato da nossa lista triplicada
       const oneThirdWidth = container.scrollWidth / 3;
 
-      // SE CHEGOU PERTO DO FIM: Volta imperceptivelmente para o bloco do meio
       if (currentScroll >= oneThirdWidth * 2) {
-        container.style.scrollBehavior = "auto"; // Desliga o smooth temporariamente
+        container.style.scrollBehavior = "auto";
         container.scrollLeft = currentScroll - oneThirdWidth;
-        container.style.scrollBehavior = "smooth"; // Religa o smooth
-      }
-      // SE CHEGOU PERTO DO INÍCIO: Avança imperceptivelmente para o bloco do meio
-      else if (currentScroll <= 0) {
+        container.style.scrollBehavior = "smooth";
+      } else if (currentScroll <= 0) {
         container.style.scrollBehavior = "auto";
         container.scrollLeft = currentScroll + oneThirdWidth;
         container.style.scrollBehavior = "smooth";
@@ -440,7 +435,6 @@ function Notificacoes() {
     };
     return (
       <div className="w-full max-w-7xl mx-auto mt-4 relative group px-4">
-        {/* Botão Anterior (Esquerda) */}
         <button
           className="bg-white flex items-center justify-center rounded-full shadow-lg w-10 h-10 absolute left-6 top-1/2 -translate-y-1/2 z-20 hover:bg-gray-100 transition-colors border border-gray-200"
           onClick={() => scroll("left")}
@@ -494,7 +488,6 @@ function Notificacoes() {
           {userRole === "user" ? "Meus Pedidos" : "Solicitações de Normas"}
         </h1>
 
-        {/* COMPONENTE DE FILTRO SENDO CHAMADO AQUI */}
         <FiltroNotificacao
           userRole={userRole}
           filtroStatus={filtroStatus}
