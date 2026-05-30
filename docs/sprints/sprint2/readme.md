@@ -25,7 +25,7 @@
 
 <br>
 
-> Status do Projeto: Em andamento Sprint 2! ⏳
+> Status do Projeto: Pronto Sprint 2! ✅
 
 <br>
 
@@ -102,15 +102,38 @@ Expandir as funcionalidades da plataforma introduzindo mecanismos de busca e vis
 
 <br>
 
+###  📋 DoR (Definition of Ready) - Sprint 2
+
+
+| ID | Critério | Descrição Prática |
+| :--- | :--- | :--- |
+| DoR 01 | Esboço de Interface | Protótipo básico no Figma das telas de listagem e filtros de normas. |
+| DoR 02 | Contrato da API | Definição dos campos de entrada e saída (JSON) para as novas rotas. |
+| DoR 03 | Cenários de Aceite | Regras claras de como o filtro deve funcionar (ex: busca por palavra-chave). |
+| DoR 04 | Dados de Teste | Pelo menos 5 normas cadastradas no MySQL para validar as consultas. |
+
+<br>
+
+### 📋 DoD (Definition of Done) - Sprint 2
+
+| ID | Critério | Verificação Final |
+| :--- | :--- | :--- |
+| DoD 01 | Funcionalidade Integrada | Front-end e Back-end  conversando sem erros. |
+| DoD 02 | Testes| Funcionalidades testadas individualmente para garantir que novas alterações não quebrem recursos existentes.|
+| DoD 03 | Push e Sincronia | Código enviado para a main sem conflitos de merge. |
+| DoD 04 | Validação Visual | Layout validado conforme os requisitos de interface responsiva. |
+
+<br>
+
 ## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
   <details>
   <summary> MVP - Sprint 2 </summary>
   <br>
-  <video src="" controls width="100%"></video>
-  <br>
-  <a href="" target="_blank">
-    <img src="" alt="Ver no YouTube" />
-  </a>
+  <video src="../../videos/sprint2/video_mvp_api_2_sprint2.mp4" controls width="100%"></video>
+    <br>
+    <a href="https://youtu.be/OdWSUOaf51k?si=oA5Wvs_-lIdBVLXD" target="_blank">
+      <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
+    </a>
   </details>
 
   <br>
@@ -120,5 +143,5 @@ Expandir as funcionalidades da plataforma introduzindo mecanismos de busca e vis
 | Sprint | Status | Documentação |
 |:---:|:-----------|:------------------------|
 | **Sprint 1** | Pronta ✅ |  [DOC](../sprint1/readme.md) |
-| **Sprint 2** | Em andamento 🔛 |   [DOC](./readme.md) |
-| **Sprint 3** | A fazer ⏳ |  [DOC](../sprint3/readme.md) |
+| **Sprint 2** | Pronta ✅ |   [DOC](./readme.md) |
+| **Sprint 3** | Em andamento 🔛 |  [DOC](../sprint3/readme.md) |

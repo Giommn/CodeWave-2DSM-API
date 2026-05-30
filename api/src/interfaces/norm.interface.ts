@@ -7,5 +7,7 @@ export default interface INorm{
     deleteNorm(id:number):Promise<ResponseNorm>
     getHistoricNorms(id_user:number):Promise<Array<ResponseNorm>>
     saveNormsInHistoric(id_norm:number,id_user:number):Promise<void>
-
+    favoritarNorma(id_user:number,id_norm:number):Promise<void>
+    tirarFavoritoNorma(id_user:number,id_norm:number):Promise<void>
+    pegarMinhasNormasFavoritas(id_user:number):Promise<Array<ResponseNorm>>
 }

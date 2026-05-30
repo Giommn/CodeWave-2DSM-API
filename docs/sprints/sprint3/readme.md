@@ -25,7 +25,7 @@
 
 <br>
 
-> Status do Projeto: A Fazer Sprint 3! ⏳
+> Status do Projeto: Em andamento Sprint 3! 🔛
 
 <br>
 
@@ -92,12 +92,12 @@ Garantir a rastreabilidade das informações e a acessibilidade multiplataforma 
 
 ## 💡 MVP (Produto Mínimo Viável) <a id="mvp"></a>
   <details>
-  <summary> MVP - Sprint 3 </summary>
+  <summary> MVP - Sprint 3 (Não disponível) </summary>
   <br>
-  <video src="" controls width="100%"></video>
+  <video src="../../videos/sprint3/video_mvp_api_2_sprint3.mp4" controls width="100%"></video>
   <br>
   <a href="" target="_blank">
-    <img src="" alt="Ver no YouTube" />
+    <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
   </a>
   </details>
 
@@ -108,5 +108,5 @@ Garantir a rastreabilidade das informações e a acessibilidade multiplataforma 
 | Sprint | Status | Documentação |
 |:---:|:-----------|:------------------------|
 | **Sprint 1** | Pronta ✅ |  [DOC](../sprint1/readme.md) |
-| **Sprint 2** | Em andamento 🔛 |   [DOC](../sprint2/readme.md) |
-| **Sprint 3** | A fazer ⏳ |  [DOC](./readme.md) |
+| **Sprint 2** | Pronta ✅ |   [DOC](../sprint2/readme.md) |
+| **Sprint 3** | Em andamento 🔛 |  [DOC](./readme.md) |

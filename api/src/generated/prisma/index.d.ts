@@ -39,10 +39,10 @@ export type Norma = $Result.DefaultSelection<Prisma.$NormaPayload>
  */
 export type Notas = $Result.DefaultSelection<Prisma.$NotasPayload>
 /**
- * Model Nota_Categoria
+ * Model Norma_Categoria
  * 
  */
-export type Nota_Categoria = $Result.DefaultSelection<Prisma.$Nota_CategoriaPayload>
+export type Norma_Categoria = $Result.DefaultSelection<Prisma.$Norma_CategoriaPayload>
 /**
  * Model Normas_Referenciadas
  * 
@@ -63,6 +63,16 @@ export type Mfa = $Result.DefaultSelection<Prisma.$MfaPayload>
  * 
  */
 export type Historico_Acesso_Normas = $Result.DefaultSelection<Prisma.$Historico_Acesso_NormasPayload>
+/**
+ * Model PedidosdeAlteracao
+ * 
+ */
+export type PedidosdeAlteracao = $Result.DefaultSelection<Prisma.$PedidosdeAlteracaoPayload>
+/**
+ * Model Favoritos
+ * 
+ */
+export type Favoritos = $Result.DefaultSelection<Prisma.$FavoritosPayload>
 
 /**
  * Enums
@@ -70,16 +80,54 @@ export type Historico_Acesso_Normas = $Result.DefaultSelection<Prisma.$Historico
 export namespace $Enums {
   export const NivelUser: {
   ADM: 'ADM',
-  USER: 'USER'
+  USER: 'USER',
+  CHECKER: 'CHECKER'
 };
 
 export type NivelUser = (typeof NivelUser)[keyof typeof NivelUser]
+
+
+export const AcaoDeAlteracao: {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE'
+};
+
+export type AcaoDeAlteracao = (typeof AcaoDeAlteracao)[keyof typeof AcaoDeAlteracao]
+
+
+export const NotaOrNorma: {
+  NORMA: 'NORMA',
+  NOTA: 'NOTA'
+};
+
+export type NotaOrNorma = (typeof NotaOrNorma)[keyof typeof NotaOrNorma]
+
+
+export const Status: {
+  PENDENTE: 'PENDENTE',
+  REJEITADO: 'REJEITADO',
+  APROVADO: 'APROVADO'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
 
 }
 
 export type NivelUser = $Enums.NivelUser
 
 export const NivelUser: typeof $Enums.NivelUser
+
+export type AcaoDeAlteracao = $Enums.AcaoDeAlteracao
+
+export const AcaoDeAlteracao: typeof $Enums.AcaoDeAlteracao
+
+export type NotaOrNorma = $Enums.NotaOrNorma
+
+export const NotaOrNorma: typeof $Enums.NotaOrNorma
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
 
 /**
  * ##  Prisma Client ʲˢ
@@ -253,14 +301,14 @@ export class PrismaClient<
   get notas(): Prisma.NotasDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.nota_Categoria`: Exposes CRUD operations for the **Nota_Categoria** model.
+   * `prisma.norma_Categoria`: Exposes CRUD operations for the **Norma_Categoria** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Nota_Categorias
-    * const nota_Categorias = await prisma.nota_Categoria.findMany()
+    * // Fetch zero or more Norma_Categorias
+    * const norma_Categorias = await prisma.norma_Categoria.findMany()
     * ```
     */
-  get nota_Categoria(): Prisma.Nota_CategoriaDelegate<ExtArgs, ClientOptions>;
+  get norma_Categoria(): Prisma.Norma_CategoriaDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.normas_Referenciadas`: Exposes CRUD operations for the **Normas_Referenciadas** model.
@@ -301,6 +349,26 @@ export class PrismaClient<
     * ```
     */
   get historico_Acesso_Normas(): Prisma.Historico_Acesso_NormasDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pedidosdeAlteracao`: Exposes CRUD operations for the **PedidosdeAlteracao** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PedidosdeAlteracaos
+    * const pedidosdeAlteracaos = await prisma.pedidosdeAlteracao.findMany()
+    * ```
+    */
+  get pedidosdeAlteracao(): Prisma.PedidosdeAlteracaoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.favoritos`: Exposes CRUD operations for the **Favoritos** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Favoritos
+    * const favoritos = await prisma.favoritos.findMany()
+    * ```
+    */
+  get favoritos(): Prisma.FavoritosDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -740,11 +808,13 @@ export namespace Prisma {
     Categoria: 'Categoria',
     Norma: 'Norma',
     Notas: 'Notas',
-    Nota_Categoria: 'Nota_Categoria',
+    Norma_Categoria: 'Norma_Categoria',
     Normas_Referenciadas: 'Normas_Referenciadas',
     Normas_Versoes: 'Normas_Versoes',
     Mfa: 'Mfa',
-    Historico_Acesso_Normas: 'Historico_Acesso_Normas'
+    Historico_Acesso_Normas: 'Historico_Acesso_Normas',
+    PedidosdeAlteracao: 'PedidosdeAlteracao',
+    Favoritos: 'Favoritos'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -760,7 +830,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "orgaos" | "categoria" | "norma" | "notas" | "nota_Categoria" | "normas_Referenciadas" | "normas_Versoes" | "mfa" | "historico_Acesso_Normas"
+      modelProps: "users" | "orgaos" | "categoria" | "norma" | "notas" | "norma_Categoria" | "normas_Referenciadas" | "normas_Versoes" | "mfa" | "historico_Acesso_Normas" | "pedidosdeAlteracao" | "favoritos"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1094,69 +1164,69 @@ export namespace Prisma {
           }
         }
       }
-      Nota_Categoria: {
-        payload: Prisma.$Nota_CategoriaPayload<ExtArgs>
-        fields: Prisma.Nota_CategoriaFieldRefs
+      Norma_Categoria: {
+        payload: Prisma.$Norma_CategoriaPayload<ExtArgs>
+        fields: Prisma.Norma_CategoriaFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.Nota_CategoriaFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload> | null
+            args: Prisma.Norma_CategoriaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.Nota_CategoriaFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload>
+            args: Prisma.Norma_CategoriaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload>
           }
           findFirst: {
-            args: Prisma.Nota_CategoriaFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload> | null
+            args: Prisma.Norma_CategoriaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.Nota_CategoriaFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload>
+            args: Prisma.Norma_CategoriaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload>
           }
           findMany: {
-            args: Prisma.Nota_CategoriaFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload>[]
+            args: Prisma.Norma_CategoriaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload>[]
           }
           create: {
-            args: Prisma.Nota_CategoriaCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload>
+            args: Prisma.Norma_CategoriaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload>
           }
           createMany: {
-            args: Prisma.Nota_CategoriaCreateManyArgs<ExtArgs>
+            args: Prisma.Norma_CategoriaCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.Nota_CategoriaDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload>
+            args: Prisma.Norma_CategoriaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload>
           }
           update: {
-            args: Prisma.Nota_CategoriaUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload>
+            args: Prisma.Norma_CategoriaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload>
           }
           deleteMany: {
-            args: Prisma.Nota_CategoriaDeleteManyArgs<ExtArgs>
+            args: Prisma.Norma_CategoriaDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.Nota_CategoriaUpdateManyArgs<ExtArgs>
+            args: Prisma.Norma_CategoriaUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.Nota_CategoriaUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$Nota_CategoriaPayload>
+            args: Prisma.Norma_CategoriaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Norma_CategoriaPayload>
           }
           aggregate: {
-            args: Prisma.Nota_CategoriaAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNota_Categoria>
+            args: Prisma.Norma_CategoriaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNorma_Categoria>
           }
           groupBy: {
-            args: Prisma.Nota_CategoriaGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Nota_CategoriaGroupByOutputType>[]
+            args: Prisma.Norma_CategoriaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Norma_CategoriaGroupByOutputType>[]
           }
           count: {
-            args: Prisma.Nota_CategoriaCountArgs<ExtArgs>
-            result: $Utils.Optional<Nota_CategoriaCountAggregateOutputType> | number
+            args: Prisma.Norma_CategoriaCountArgs<ExtArgs>
+            result: $Utils.Optional<Norma_CategoriaCountAggregateOutputType> | number
           }
         }
       }
@@ -1424,6 +1494,138 @@ export namespace Prisma {
           }
         }
       }
+      PedidosdeAlteracao: {
+        payload: Prisma.$PedidosdeAlteracaoPayload<ExtArgs>
+        fields: Prisma.PedidosdeAlteracaoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PedidosdeAlteracaoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PedidosdeAlteracaoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload>
+          }
+          findFirst: {
+            args: Prisma.PedidosdeAlteracaoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PedidosdeAlteracaoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload>
+          }
+          findMany: {
+            args: Prisma.PedidosdeAlteracaoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload>[]
+          }
+          create: {
+            args: Prisma.PedidosdeAlteracaoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload>
+          }
+          createMany: {
+            args: Prisma.PedidosdeAlteracaoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PedidosdeAlteracaoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload>
+          }
+          update: {
+            args: Prisma.PedidosdeAlteracaoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload>
+          }
+          deleteMany: {
+            args: Prisma.PedidosdeAlteracaoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PedidosdeAlteracaoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PedidosdeAlteracaoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PedidosdeAlteracaoPayload>
+          }
+          aggregate: {
+            args: Prisma.PedidosdeAlteracaoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePedidosdeAlteracao>
+          }
+          groupBy: {
+            args: Prisma.PedidosdeAlteracaoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PedidosdeAlteracaoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PedidosdeAlteracaoCountArgs<ExtArgs>
+            result: $Utils.Optional<PedidosdeAlteracaoCountAggregateOutputType> | number
+          }
+        }
+      }
+      Favoritos: {
+        payload: Prisma.$FavoritosPayload<ExtArgs>
+        fields: Prisma.FavoritosFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FavoritosFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FavoritosFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          findFirst: {
+            args: Prisma.FavoritosFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FavoritosFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          findMany: {
+            args: Prisma.FavoritosFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>[]
+          }
+          create: {
+            args: Prisma.FavoritosCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          createMany: {
+            args: Prisma.FavoritosCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.FavoritosDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          update: {
+            args: Prisma.FavoritosUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          deleteMany: {
+            args: Prisma.FavoritosDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FavoritosUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.FavoritosUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FavoritosPayload>
+          }
+          aggregate: {
+            args: Prisma.FavoritosAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFavoritos>
+          }
+          groupBy: {
+            args: Prisma.FavoritosGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FavoritosGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FavoritosCountArgs<ExtArgs>
+            result: $Utils.Optional<FavoritosCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1537,11 +1739,13 @@ export namespace Prisma {
     categoria?: CategoriaOmit
     norma?: NormaOmit
     notas?: NotasOmit
-    nota_Categoria?: Nota_CategoriaOmit
+    norma_Categoria?: Norma_CategoriaOmit
     normas_Referenciadas?: Normas_ReferenciadasOmit
     normas_Versoes?: Normas_VersoesOmit
     mfa?: MfaOmit
     historico_Acesso_Normas?: Historico_Acesso_NormasOmit
+    pedidosdeAlteracao?: PedidosdeAlteracaoOmit
+    favoritos?: FavoritosOmit
   }
 
   /* Types for Logging */
@@ -1627,7 +1831,9 @@ export namespace Prisma {
     normas: number
     notas: number
     mfa: number
+    favoritos: number
     historicoAcessoNormas: number
+    pedidos: number
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1636,7 +1842,9 @@ export namespace Prisma {
     normas?: boolean | UsersCountOutputTypeCountNormasArgs
     notas?: boolean | UsersCountOutputTypeCountNotasArgs
     mfa?: boolean | UsersCountOutputTypeCountMfaArgs
+    favoritos?: boolean | UsersCountOutputTypeCountFavoritosArgs
     historicoAcessoNormas?: boolean | UsersCountOutputTypeCountHistoricoAcessoNormasArgs
+    pedidos?: boolean | UsersCountOutputTypeCountPedidosArgs
   }
 
   // Custom InputTypes
@@ -1688,8 +1896,22 @@ export namespace Prisma {
   /**
    * UsersCountOutputType without action
    */
+  export type UsersCountOutputTypeCountFavoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoritosWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
   export type UsersCountOutputTypeCountHistoricoAcessoNormasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Historico_Acesso_NormasWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountPedidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PedidosdeAlteracaoWhereInput
   }
 
 
@@ -1729,11 +1951,11 @@ export namespace Prisma {
    */
 
   export type CategoriaCountOutputType = {
-    nota_cat: number
+    norma_cat: number
   }
 
   export type CategoriaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    nota_cat?: boolean | CategoriaCountOutputTypeCountNota_catArgs
+    norma_cat?: boolean | CategoriaCountOutputTypeCountNorma_catArgs
   }
 
   // Custom InputTypes
@@ -1750,8 +1972,8 @@ export namespace Prisma {
   /**
    * CategoriaCountOutputType without action
    */
-  export type CategoriaCountOutputTypeCountNota_catArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Nota_CategoriaWhereInput
+  export type CategoriaCountOutputTypeCountNorma_catArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Norma_CategoriaWhereInput
   }
 
 
@@ -1765,6 +1987,9 @@ export namespace Prisma {
     normas_destino: number
     versoes: number
     HistoricoAcessoNormas: number
+    favoritos: number
+    categoria: number
+    pedidos: number
   }
 
   export type NormaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1773,6 +1998,9 @@ export namespace Prisma {
     normas_destino?: boolean | NormaCountOutputTypeCountNormas_destinoArgs
     versoes?: boolean | NormaCountOutputTypeCountVersoesArgs
     HistoricoAcessoNormas?: boolean | NormaCountOutputTypeCountHistoricoAcessoNormasArgs
+    favoritos?: boolean | NormaCountOutputTypeCountFavoritosArgs
+    categoria?: boolean | NormaCountOutputTypeCountCategoriaArgs
+    pedidos?: boolean | NormaCountOutputTypeCountPedidosArgs
   }
 
   // Custom InputTypes
@@ -1821,35 +2049,25 @@ export namespace Prisma {
     where?: Historico_Acesso_NormasWhereInput
   }
 
-
   /**
-   * Count Type NotasCountOutputType
+   * NormaCountOutputType without action
    */
-
-  export type NotasCountOutputType = {
-    nota_cat: number
-  }
-
-  export type NotasCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    nota_cat?: boolean | NotasCountOutputTypeCountNota_catArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * NotasCountOutputType without action
-   */
-  export type NotasCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NotasCountOutputType
-     */
-    select?: NotasCountOutputTypeSelect<ExtArgs> | null
+  export type NormaCountOutputTypeCountFavoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoritosWhereInput
   }
 
   /**
-   * NotasCountOutputType without action
+   * NormaCountOutputType without action
    */
-  export type NotasCountOutputTypeCountNota_catArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Nota_CategoriaWhereInput
+  export type NormaCountOutputTypeCountCategoriaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Norma_CategoriaWhereInput
+  }
+
+  /**
+   * NormaCountOutputType without action
+   */
+  export type NormaCountOutputTypeCountPedidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PedidosdeAlteracaoWhereInput
   }
 
 
@@ -2068,7 +2286,9 @@ export namespace Prisma {
     normas?: boolean | Users$normasArgs<ExtArgs>
     notas?: boolean | Users$notasArgs<ExtArgs>
     mfa?: boolean | Users$mfaArgs<ExtArgs>
+    favoritos?: boolean | Users$favoritosArgs<ExtArgs>
     historicoAcessoNormas?: boolean | Users$historicoAcessoNormasArgs<ExtArgs>
+    pedidos?: boolean | Users$pedidosArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["users"]>
 
@@ -2090,7 +2310,9 @@ export namespace Prisma {
     normas?: boolean | Users$normasArgs<ExtArgs>
     notas?: boolean | Users$notasArgs<ExtArgs>
     mfa?: boolean | Users$mfaArgs<ExtArgs>
+    favoritos?: boolean | Users$favoritosArgs<ExtArgs>
     historicoAcessoNormas?: boolean | Users$historicoAcessoNormasArgs<ExtArgs>
+    pedidos?: boolean | Users$pedidosArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2102,7 +2324,9 @@ export namespace Prisma {
       normas: Prisma.$NormaPayload<ExtArgs>[]
       notas: Prisma.$NotasPayload<ExtArgs>[]
       mfa: Prisma.$MfaPayload<ExtArgs>[]
+      favoritos: Prisma.$FavoritosPayload<ExtArgs>[]
       historicoAcessoNormas: Prisma.$Historico_Acesso_NormasPayload<ExtArgs>[]
+      pedidos: Prisma.$PedidosdeAlteracaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_user: number
@@ -2456,7 +2680,9 @@ export namespace Prisma {
     normas<T extends Users$normasArgs<ExtArgs> = {}>(args?: Subset<T, Users$normasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notas<T extends Users$notasArgs<ExtArgs> = {}>(args?: Subset<T, Users$notasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mfa<T extends Users$mfaArgs<ExtArgs> = {}>(args?: Subset<T, Users$mfaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MfaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favoritos<T extends Users$favoritosArgs<ExtArgs> = {}>(args?: Subset<T, Users$favoritosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     historicoAcessoNormas<T extends Users$historicoAcessoNormasArgs<ExtArgs> = {}>(args?: Subset<T, Users$historicoAcessoNormasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pedidos<T extends Users$pedidosArgs<ExtArgs> = {}>(args?: Subset<T, Users$pedidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2960,6 +3186,30 @@ export namespace Prisma {
   }
 
   /**
+   * Users.favoritos
+   */
+  export type Users$favoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    where?: FavoritosWhereInput
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    cursor?: FavoritosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
    * Users.historicoAcessoNormas
    */
   export type Users$historicoAcessoNormasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2981,6 +3231,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Historico_Acesso_NormasScalarFieldEnum | Historico_Acesso_NormasScalarFieldEnum[]
+  }
+
+  /**
+   * Users.pedidos
+   */
+  export type Users$pedidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    where?: PedidosdeAlteracaoWhereInput
+    orderBy?: PedidosdeAlteracaoOrderByWithRelationInput | PedidosdeAlteracaoOrderByWithRelationInput[]
+    cursor?: PedidosdeAlteracaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PedidosdeAlteracaoScalarFieldEnum | PedidosdeAlteracaoScalarFieldEnum[]
   }
 
   /**
@@ -4206,7 +4480,7 @@ export namespace Prisma {
     cat_nome?: boolean
     adm_criador?: boolean
     data_criacao?: boolean
-    nota_cat?: boolean | Categoria$nota_catArgs<ExtArgs>
+    norma_cat?: boolean | Categoria$norma_catArgs<ExtArgs>
     usuario?: boolean | UsersDefaultArgs<ExtArgs>
     _count?: boolean | CategoriaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["categoria"]>
@@ -4222,7 +4496,7 @@ export namespace Prisma {
 
   export type CategoriaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cat_id" | "cat_nome" | "adm_criador" | "data_criacao", ExtArgs["result"]["categoria"]>
   export type CategoriaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    nota_cat?: boolean | Categoria$nota_catArgs<ExtArgs>
+    norma_cat?: boolean | Categoria$norma_catArgs<ExtArgs>
     usuario?: boolean | UsersDefaultArgs<ExtArgs>
     _count?: boolean | CategoriaCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4230,7 +4504,7 @@ export namespace Prisma {
   export type $CategoriaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Categoria"
     objects: {
-      nota_cat: Prisma.$Nota_CategoriaPayload<ExtArgs>[]
+      norma_cat: Prisma.$Norma_CategoriaPayload<ExtArgs>[]
       usuario: Prisma.$UsersPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4578,7 +4852,7 @@ export namespace Prisma {
    */
   export interface Prisma__CategoriaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    nota_cat<T extends Categoria$nota_catArgs<ExtArgs> = {}>(args?: Subset<T, Categoria$nota_catArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    norma_cat<T extends Categoria$norma_catArgs<ExtArgs> = {}>(args?: Subset<T, Categoria$norma_catArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     usuario<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4961,27 +5235,27 @@ export namespace Prisma {
   }
 
   /**
-   * Categoria.nota_cat
+   * Categoria.norma_cat
    */
-  export type Categoria$nota_catArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Categoria$norma_catArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
-    where?: Nota_CategoriaWhereInput
-    orderBy?: Nota_CategoriaOrderByWithRelationInput | Nota_CategoriaOrderByWithRelationInput[]
-    cursor?: Nota_CategoriaWhereUniqueInput
+    include?: Norma_CategoriaInclude<ExtArgs> | null
+    where?: Norma_CategoriaWhereInput
+    orderBy?: Norma_CategoriaOrderByWithRelationInput | Norma_CategoriaOrderByWithRelationInput[]
+    cursor?: Norma_CategoriaWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Nota_CategoriaScalarFieldEnum | Nota_CategoriaScalarFieldEnum[]
+    distinct?: Norma_CategoriaScalarFieldEnum | Norma_CategoriaScalarFieldEnum[]
   }
 
   /**
@@ -5264,6 +5538,9 @@ export namespace Prisma {
     normas_destino?: boolean | Norma$normas_destinoArgs<ExtArgs>
     versoes?: boolean | Norma$versoesArgs<ExtArgs>
     HistoricoAcessoNormas?: boolean | Norma$HistoricoAcessoNormasArgs<ExtArgs>
+    favoritos?: boolean | Norma$favoritosArgs<ExtArgs>
+    categoria?: boolean | Norma$categoriaArgs<ExtArgs>
+    pedidos?: boolean | Norma$pedidosArgs<ExtArgs>
     _count?: boolean | NormaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["norma"]>
 
@@ -5292,6 +5569,9 @@ export namespace Prisma {
     normas_destino?: boolean | Norma$normas_destinoArgs<ExtArgs>
     versoes?: boolean | Norma$versoesArgs<ExtArgs>
     HistoricoAcessoNormas?: boolean | Norma$HistoricoAcessoNormasArgs<ExtArgs>
+    favoritos?: boolean | Norma$favoritosArgs<ExtArgs>
+    categoria?: boolean | Norma$categoriaArgs<ExtArgs>
+    pedidos?: boolean | Norma$pedidosArgs<ExtArgs>
     _count?: boolean | NormaCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5305,6 +5585,9 @@ export namespace Prisma {
       normas_destino: Prisma.$Normas_ReferenciadasPayload<ExtArgs>[]
       versoes: Prisma.$Normas_VersoesPayload<ExtArgs>[]
       HistoricoAcessoNormas: Prisma.$Historico_Acesso_NormasPayload<ExtArgs>[]
+      favoritos: Prisma.$FavoritosPayload<ExtArgs>[]
+      categoria: Prisma.$Norma_CategoriaPayload<ExtArgs>[]
+      pedidos: Prisma.$PedidosdeAlteracaoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_norm: number
@@ -5665,6 +5948,9 @@ export namespace Prisma {
     normas_destino<T extends Norma$normas_destinoArgs<ExtArgs> = {}>(args?: Subset<T, Norma$normas_destinoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Normas_ReferenciadasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     versoes<T extends Norma$versoesArgs<ExtArgs> = {}>(args?: Subset<T, Norma$versoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Normas_VersoesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     HistoricoAcessoNormas<T extends Norma$HistoricoAcessoNormasArgs<ExtArgs> = {}>(args?: Subset<T, Norma$HistoricoAcessoNormasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Historico_Acesso_NormasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favoritos<T extends Norma$favoritosArgs<ExtArgs> = {}>(args?: Subset<T, Norma$favoritosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    categoria<T extends Norma$categoriaArgs<ExtArgs> = {}>(args?: Subset<T, Norma$categoriaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pedidos<T extends Norma$pedidosArgs<ExtArgs> = {}>(args?: Subset<T, Norma$pedidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6173,6 +6459,78 @@ export namespace Prisma {
   }
 
   /**
+   * Norma.favoritos
+   */
+  export type Norma$favoritosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    where?: FavoritosWhereInput
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    cursor?: FavoritosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
+   * Norma.categoria
+   */
+  export type Norma$categoriaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Norma_Categoria
+     */
+    select?: Norma_CategoriaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Norma_Categoria
+     */
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Norma_CategoriaInclude<ExtArgs> | null
+    where?: Norma_CategoriaWhereInput
+    orderBy?: Norma_CategoriaOrderByWithRelationInput | Norma_CategoriaOrderByWithRelationInput[]
+    cursor?: Norma_CategoriaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Norma_CategoriaScalarFieldEnum | Norma_CategoriaScalarFieldEnum[]
+  }
+
+  /**
+   * Norma.pedidos
+   */
+  export type Norma$pedidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    where?: PedidosdeAlteracaoWhereInput
+    orderBy?: PedidosdeAlteracaoOrderByWithRelationInput | PedidosdeAlteracaoOrderByWithRelationInput[]
+    cursor?: PedidosdeAlteracaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PedidosdeAlteracaoScalarFieldEnum | PedidosdeAlteracaoScalarFieldEnum[]
+  }
+
+  /**
    * Norma without action
    */
   export type NormaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6218,7 +6576,9 @@ export namespace Prisma {
   export type NotasMinAggregateOutputType = {
     id_not: number | null
     not_titulo: string | null
-    not_dec: string | null
+    not_IT: string | null
+    not_AB: string | null
+    not_Pa: string | null
     norm_criador: number | null
     adm_criador: number | null
     data_criacao: Date | null
@@ -6227,7 +6587,9 @@ export namespace Prisma {
   export type NotasMaxAggregateOutputType = {
     id_not: number | null
     not_titulo: string | null
-    not_dec: string | null
+    not_IT: string | null
+    not_AB: string | null
+    not_Pa: string | null
     norm_criador: number | null
     adm_criador: number | null
     data_criacao: Date | null
@@ -6236,7 +6598,9 @@ export namespace Prisma {
   export type NotasCountAggregateOutputType = {
     id_not: number
     not_titulo: number
-    not_dec: number
+    not_IT: number
+    not_AB: number
+    not_Pa: number
     norm_criador: number
     adm_criador: number
     data_criacao: number
@@ -6259,7 +6623,9 @@ export namespace Prisma {
   export type NotasMinAggregateInputType = {
     id_not?: true
     not_titulo?: true
-    not_dec?: true
+    not_IT?: true
+    not_AB?: true
+    not_Pa?: true
     norm_criador?: true
     adm_criador?: true
     data_criacao?: true
@@ -6268,7 +6634,9 @@ export namespace Prisma {
   export type NotasMaxAggregateInputType = {
     id_not?: true
     not_titulo?: true
-    not_dec?: true
+    not_IT?: true
+    not_AB?: true
+    not_Pa?: true
     norm_criador?: true
     adm_criador?: true
     data_criacao?: true
@@ -6277,7 +6645,9 @@ export namespace Prisma {
   export type NotasCountAggregateInputType = {
     id_not?: true
     not_titulo?: true
-    not_dec?: true
+    not_IT?: true
+    not_AB?: true
+    not_Pa?: true
     norm_criador?: true
     adm_criador?: true
     data_criacao?: true
@@ -6373,7 +6743,9 @@ export namespace Prisma {
   export type NotasGroupByOutputType = {
     id_not: number
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB: string | null
+    not_Pa: string | null
     norm_criador: number
     adm_criador: number
     data_criacao: Date
@@ -6401,14 +6773,14 @@ export namespace Prisma {
   export type NotasSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id_not?: boolean
     not_titulo?: boolean
-    not_dec?: boolean
+    not_IT?: boolean
+    not_AB?: boolean
+    not_Pa?: boolean
     norm_criador?: boolean
     adm_criador?: boolean
     data_criacao?: boolean
     usuario?: boolean | UsersDefaultArgs<ExtArgs>
     normas?: boolean | NormaDefaultArgs<ExtArgs>
-    nota_cat?: boolean | Notas$nota_catArgs<ExtArgs>
-    _count?: boolean | NotasCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["notas"]>
 
 
@@ -6416,18 +6788,18 @@ export namespace Prisma {
   export type NotasSelectScalar = {
     id_not?: boolean
     not_titulo?: boolean
-    not_dec?: boolean
+    not_IT?: boolean
+    not_AB?: boolean
+    not_Pa?: boolean
     norm_criador?: boolean
     adm_criador?: boolean
     data_criacao?: boolean
   }
 
-  export type NotasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_not" | "not_titulo" | "not_dec" | "norm_criador" | "adm_criador" | "data_criacao", ExtArgs["result"]["notas"]>
+  export type NotasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_not" | "not_titulo" | "not_IT" | "not_AB" | "not_Pa" | "norm_criador" | "adm_criador" | "data_criacao", ExtArgs["result"]["notas"]>
   export type NotasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuario?: boolean | UsersDefaultArgs<ExtArgs>
     normas?: boolean | NormaDefaultArgs<ExtArgs>
-    nota_cat?: boolean | Notas$nota_catArgs<ExtArgs>
-    _count?: boolean | NotasCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $NotasPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6435,12 +6807,13 @@ export namespace Prisma {
     objects: {
       usuario: Prisma.$UsersPayload<ExtArgs>
       normas: Prisma.$NormaPayload<ExtArgs>
-      nota_cat: Prisma.$Nota_CategoriaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id_not: number
       not_titulo: string
-      not_dec: string
+      not_IT: string
+      not_AB: string | null
+      not_Pa: string | null
       norm_criador: number
       adm_criador: number
       data_criacao: Date
@@ -6786,7 +7159,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     usuario<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     normas<T extends NormaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NormaDefaultArgs<ExtArgs>>): Prisma__NormaClient<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    nota_cat<T extends Notas$nota_catArgs<ExtArgs> = {}>(args?: Subset<T, Notas$nota_catArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6818,7 +7190,9 @@ export namespace Prisma {
   interface NotasFieldRefs {
     readonly id_not: FieldRef<"Notas", 'Int'>
     readonly not_titulo: FieldRef<"Notas", 'String'>
-    readonly not_dec: FieldRef<"Notas", 'String'>
+    readonly not_IT: FieldRef<"Notas", 'String'>
+    readonly not_AB: FieldRef<"Notas", 'String'>
+    readonly not_Pa: FieldRef<"Notas", 'String'>
     readonly norm_criador: FieldRef<"Notas", 'Int'>
     readonly adm_criador: FieldRef<"Notas", 'Int'>
     readonly data_criacao: FieldRef<"Notas", 'DateTime'>
@@ -7170,30 +7544,6 @@ export namespace Prisma {
   }
 
   /**
-   * Notas.nota_cat
-   */
-  export type Notas$nota_catArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Nota_Categoria
-     */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Nota_Categoria
-     */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
-    where?: Nota_CategoriaWhereInput
-    orderBy?: Nota_CategoriaOrderByWithRelationInput | Nota_CategoriaOrderByWithRelationInput[]
-    cursor?: Nota_CategoriaWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Nota_CategoriaScalarFieldEnum | Nota_CategoriaScalarFieldEnum[]
-  }
-
-  /**
    * Notas without action
    */
   export type NotasDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7213,346 +7563,346 @@ export namespace Prisma {
 
 
   /**
-   * Model Nota_Categoria
+   * Model Norma_Categoria
    */
 
-  export type AggregateNota_Categoria = {
-    _count: Nota_CategoriaCountAggregateOutputType | null
-    _avg: Nota_CategoriaAvgAggregateOutputType | null
-    _sum: Nota_CategoriaSumAggregateOutputType | null
-    _min: Nota_CategoriaMinAggregateOutputType | null
-    _max: Nota_CategoriaMaxAggregateOutputType | null
+  export type AggregateNorma_Categoria = {
+    _count: Norma_CategoriaCountAggregateOutputType | null
+    _avg: Norma_CategoriaAvgAggregateOutputType | null
+    _sum: Norma_CategoriaSumAggregateOutputType | null
+    _min: Norma_CategoriaMinAggregateOutputType | null
+    _max: Norma_CategoriaMaxAggregateOutputType | null
   }
 
-  export type Nota_CategoriaAvgAggregateOutputType = {
-    id_nota: number | null
+  export type Norma_CategoriaAvgAggregateOutputType = {
+    id_norma: number | null
     id_cat: number | null
   }
 
-  export type Nota_CategoriaSumAggregateOutputType = {
-    id_nota: number | null
+  export type Norma_CategoriaSumAggregateOutputType = {
+    id_norma: number | null
     id_cat: number | null
   }
 
-  export type Nota_CategoriaMinAggregateOutputType = {
-    id_nota: number | null
+  export type Norma_CategoriaMinAggregateOutputType = {
+    id_norma: number | null
     id_cat: number | null
   }
 
-  export type Nota_CategoriaMaxAggregateOutputType = {
-    id_nota: number | null
+  export type Norma_CategoriaMaxAggregateOutputType = {
+    id_norma: number | null
     id_cat: number | null
   }
 
-  export type Nota_CategoriaCountAggregateOutputType = {
-    id_nota: number
+  export type Norma_CategoriaCountAggregateOutputType = {
+    id_norma: number
     id_cat: number
     _all: number
   }
 
 
-  export type Nota_CategoriaAvgAggregateInputType = {
-    id_nota?: true
+  export type Norma_CategoriaAvgAggregateInputType = {
+    id_norma?: true
     id_cat?: true
   }
 
-  export type Nota_CategoriaSumAggregateInputType = {
-    id_nota?: true
+  export type Norma_CategoriaSumAggregateInputType = {
+    id_norma?: true
     id_cat?: true
   }
 
-  export type Nota_CategoriaMinAggregateInputType = {
-    id_nota?: true
+  export type Norma_CategoriaMinAggregateInputType = {
+    id_norma?: true
     id_cat?: true
   }
 
-  export type Nota_CategoriaMaxAggregateInputType = {
-    id_nota?: true
+  export type Norma_CategoriaMaxAggregateInputType = {
+    id_norma?: true
     id_cat?: true
   }
 
-  export type Nota_CategoriaCountAggregateInputType = {
-    id_nota?: true
+  export type Norma_CategoriaCountAggregateInputType = {
+    id_norma?: true
     id_cat?: true
     _all?: true
   }
 
-  export type Nota_CategoriaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Nota_Categoria to aggregate.
+     * Filter which Norma_Categoria to aggregate.
      */
-    where?: Nota_CategoriaWhereInput
+    where?: Norma_CategoriaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Nota_Categorias to fetch.
+     * Determine the order of Norma_Categorias to fetch.
      */
-    orderBy?: Nota_CategoriaOrderByWithRelationInput | Nota_CategoriaOrderByWithRelationInput[]
+    orderBy?: Norma_CategoriaOrderByWithRelationInput | Norma_CategoriaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: Nota_CategoriaWhereUniqueInput
+    cursor?: Norma_CategoriaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Nota_Categorias from the position of the cursor.
+     * Take `±n` Norma_Categorias from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Nota_Categorias.
+     * Skip the first `n` Norma_Categorias.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Nota_Categorias
+     * Count returned Norma_Categorias
     **/
-    _count?: true | Nota_CategoriaCountAggregateInputType
+    _count?: true | Norma_CategoriaCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: Nota_CategoriaAvgAggregateInputType
+    _avg?: Norma_CategoriaAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: Nota_CategoriaSumAggregateInputType
+    _sum?: Norma_CategoriaSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: Nota_CategoriaMinAggregateInputType
+    _min?: Norma_CategoriaMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: Nota_CategoriaMaxAggregateInputType
+    _max?: Norma_CategoriaMaxAggregateInputType
   }
 
-  export type GetNota_CategoriaAggregateType<T extends Nota_CategoriaAggregateArgs> = {
-        [P in keyof T & keyof AggregateNota_Categoria]: P extends '_count' | 'count'
+  export type GetNorma_CategoriaAggregateType<T extends Norma_CategoriaAggregateArgs> = {
+        [P in keyof T & keyof AggregateNorma_Categoria]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateNota_Categoria[P]>
-      : GetScalarType<T[P], AggregateNota_Categoria[P]>
+        : GetScalarType<T[P], AggregateNorma_Categoria[P]>
+      : GetScalarType<T[P], AggregateNorma_Categoria[P]>
   }
 
 
 
 
-  export type Nota_CategoriaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Nota_CategoriaWhereInput
-    orderBy?: Nota_CategoriaOrderByWithAggregationInput | Nota_CategoriaOrderByWithAggregationInput[]
-    by: Nota_CategoriaScalarFieldEnum[] | Nota_CategoriaScalarFieldEnum
-    having?: Nota_CategoriaScalarWhereWithAggregatesInput
+  export type Norma_CategoriaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Norma_CategoriaWhereInput
+    orderBy?: Norma_CategoriaOrderByWithAggregationInput | Norma_CategoriaOrderByWithAggregationInput[]
+    by: Norma_CategoriaScalarFieldEnum[] | Norma_CategoriaScalarFieldEnum
+    having?: Norma_CategoriaScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: Nota_CategoriaCountAggregateInputType | true
-    _avg?: Nota_CategoriaAvgAggregateInputType
-    _sum?: Nota_CategoriaSumAggregateInputType
-    _min?: Nota_CategoriaMinAggregateInputType
-    _max?: Nota_CategoriaMaxAggregateInputType
+    _count?: Norma_CategoriaCountAggregateInputType | true
+    _avg?: Norma_CategoriaAvgAggregateInputType
+    _sum?: Norma_CategoriaSumAggregateInputType
+    _min?: Norma_CategoriaMinAggregateInputType
+    _max?: Norma_CategoriaMaxAggregateInputType
   }
 
-  export type Nota_CategoriaGroupByOutputType = {
-    id_nota: number
+  export type Norma_CategoriaGroupByOutputType = {
+    id_norma: number
     id_cat: number
-    _count: Nota_CategoriaCountAggregateOutputType | null
-    _avg: Nota_CategoriaAvgAggregateOutputType | null
-    _sum: Nota_CategoriaSumAggregateOutputType | null
-    _min: Nota_CategoriaMinAggregateOutputType | null
-    _max: Nota_CategoriaMaxAggregateOutputType | null
+    _count: Norma_CategoriaCountAggregateOutputType | null
+    _avg: Norma_CategoriaAvgAggregateOutputType | null
+    _sum: Norma_CategoriaSumAggregateOutputType | null
+    _min: Norma_CategoriaMinAggregateOutputType | null
+    _max: Norma_CategoriaMaxAggregateOutputType | null
   }
 
-  type GetNota_CategoriaGroupByPayload<T extends Nota_CategoriaGroupByArgs> = Prisma.PrismaPromise<
+  type GetNorma_CategoriaGroupByPayload<T extends Norma_CategoriaGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<Nota_CategoriaGroupByOutputType, T['by']> &
+      PickEnumerable<Norma_CategoriaGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof Nota_CategoriaGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof Norma_CategoriaGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], Nota_CategoriaGroupByOutputType[P]>
-            : GetScalarType<T[P], Nota_CategoriaGroupByOutputType[P]>
+              : GetScalarType<T[P], Norma_CategoriaGroupByOutputType[P]>
+            : GetScalarType<T[P], Norma_CategoriaGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type Nota_CategoriaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id_nota?: boolean
+  export type Norma_CategoriaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_norma?: boolean
     id_cat?: boolean
     cat?: boolean | CategoriaDefaultArgs<ExtArgs>
-    nota?: boolean | NotasDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["nota_Categoria"]>
+    norma?: boolean | NormaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["norma_Categoria"]>
 
 
 
-  export type Nota_CategoriaSelectScalar = {
-    id_nota?: boolean
+  export type Norma_CategoriaSelectScalar = {
+    id_norma?: boolean
     id_cat?: boolean
   }
 
-  export type Nota_CategoriaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_nota" | "id_cat", ExtArgs["result"]["nota_Categoria"]>
-  export type Nota_CategoriaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_norma" | "id_cat", ExtArgs["result"]["norma_Categoria"]>
+  export type Norma_CategoriaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cat?: boolean | CategoriaDefaultArgs<ExtArgs>
-    nota?: boolean | NotasDefaultArgs<ExtArgs>
+    norma?: boolean | NormaDefaultArgs<ExtArgs>
   }
 
-  export type $Nota_CategoriaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Nota_Categoria"
+  export type $Norma_CategoriaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Norma_Categoria"
     objects: {
       cat: Prisma.$CategoriaPayload<ExtArgs>
-      nota: Prisma.$NotasPayload<ExtArgs>
+      norma: Prisma.$NormaPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id_nota: number
+      id_norma: number
       id_cat: number
-    }, ExtArgs["result"]["nota_Categoria"]>
+    }, ExtArgs["result"]["norma_Categoria"]>
     composites: {}
   }
 
-  type Nota_CategoriaGetPayload<S extends boolean | null | undefined | Nota_CategoriaDefaultArgs> = $Result.GetResult<Prisma.$Nota_CategoriaPayload, S>
+  type Norma_CategoriaGetPayload<S extends boolean | null | undefined | Norma_CategoriaDefaultArgs> = $Result.GetResult<Prisma.$Norma_CategoriaPayload, S>
 
-  type Nota_CategoriaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<Nota_CategoriaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Nota_CategoriaCountAggregateInputType | true
+  type Norma_CategoriaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Norma_CategoriaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Norma_CategoriaCountAggregateInputType | true
     }
 
-  export interface Nota_CategoriaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Nota_Categoria'], meta: { name: 'Nota_Categoria' } }
+  export interface Norma_CategoriaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Norma_Categoria'], meta: { name: 'Norma_Categoria' } }
     /**
-     * Find zero or one Nota_Categoria that matches the filter.
-     * @param {Nota_CategoriaFindUniqueArgs} args - Arguments to find a Nota_Categoria
+     * Find zero or one Norma_Categoria that matches the filter.
+     * @param {Norma_CategoriaFindUniqueArgs} args - Arguments to find a Norma_Categoria
      * @example
-     * // Get one Nota_Categoria
-     * const nota_Categoria = await prisma.nota_Categoria.findUnique({
+     * // Get one Norma_Categoria
+     * const norma_Categoria = await prisma.norma_Categoria.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends Nota_CategoriaFindUniqueArgs>(args: SelectSubset<T, Nota_CategoriaFindUniqueArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends Norma_CategoriaFindUniqueArgs>(args: SelectSubset<T, Norma_CategoriaFindUniqueArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Nota_Categoria that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Norma_Categoria that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {Nota_CategoriaFindUniqueOrThrowArgs} args - Arguments to find a Nota_Categoria
+     * @param {Norma_CategoriaFindUniqueOrThrowArgs} args - Arguments to find a Norma_Categoria
      * @example
-     * // Get one Nota_Categoria
-     * const nota_Categoria = await prisma.nota_Categoria.findUniqueOrThrow({
+     * // Get one Norma_Categoria
+     * const norma_Categoria = await prisma.norma_Categoria.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends Nota_CategoriaFindUniqueOrThrowArgs>(args: SelectSubset<T, Nota_CategoriaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends Norma_CategoriaFindUniqueOrThrowArgs>(args: SelectSubset<T, Norma_CategoriaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Nota_Categoria that matches the filter.
+     * Find the first Norma_Categoria that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Nota_CategoriaFindFirstArgs} args - Arguments to find a Nota_Categoria
+     * @param {Norma_CategoriaFindFirstArgs} args - Arguments to find a Norma_Categoria
      * @example
-     * // Get one Nota_Categoria
-     * const nota_Categoria = await prisma.nota_Categoria.findFirst({
+     * // Get one Norma_Categoria
+     * const norma_Categoria = await prisma.norma_Categoria.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends Nota_CategoriaFindFirstArgs>(args?: SelectSubset<T, Nota_CategoriaFindFirstArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends Norma_CategoriaFindFirstArgs>(args?: SelectSubset<T, Norma_CategoriaFindFirstArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Nota_Categoria that matches the filter or
+     * Find the first Norma_Categoria that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Nota_CategoriaFindFirstOrThrowArgs} args - Arguments to find a Nota_Categoria
+     * @param {Norma_CategoriaFindFirstOrThrowArgs} args - Arguments to find a Norma_Categoria
      * @example
-     * // Get one Nota_Categoria
-     * const nota_Categoria = await prisma.nota_Categoria.findFirstOrThrow({
+     * // Get one Norma_Categoria
+     * const norma_Categoria = await prisma.norma_Categoria.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends Nota_CategoriaFindFirstOrThrowArgs>(args?: SelectSubset<T, Nota_CategoriaFindFirstOrThrowArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends Norma_CategoriaFindFirstOrThrowArgs>(args?: SelectSubset<T, Norma_CategoriaFindFirstOrThrowArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Nota_Categorias that matches the filter.
+     * Find zero or more Norma_Categorias that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Nota_CategoriaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {Norma_CategoriaFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Nota_Categorias
-     * const nota_Categorias = await prisma.nota_Categoria.findMany()
+     * // Get all Norma_Categorias
+     * const norma_Categorias = await prisma.norma_Categoria.findMany()
      * 
-     * // Get first 10 Nota_Categorias
-     * const nota_Categorias = await prisma.nota_Categoria.findMany({ take: 10 })
+     * // Get first 10 Norma_Categorias
+     * const norma_Categorias = await prisma.norma_Categoria.findMany({ take: 10 })
      * 
-     * // Only select the `id_nota`
-     * const nota_CategoriaWithId_notaOnly = await prisma.nota_Categoria.findMany({ select: { id_nota: true } })
+     * // Only select the `id_norma`
+     * const norma_CategoriaWithId_normaOnly = await prisma.norma_Categoria.findMany({ select: { id_norma: true } })
      * 
      */
-    findMany<T extends Nota_CategoriaFindManyArgs>(args?: SelectSubset<T, Nota_CategoriaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends Norma_CategoriaFindManyArgs>(args?: SelectSubset<T, Norma_CategoriaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Nota_Categoria.
-     * @param {Nota_CategoriaCreateArgs} args - Arguments to create a Nota_Categoria.
+     * Create a Norma_Categoria.
+     * @param {Norma_CategoriaCreateArgs} args - Arguments to create a Norma_Categoria.
      * @example
-     * // Create one Nota_Categoria
-     * const Nota_Categoria = await prisma.nota_Categoria.create({
+     * // Create one Norma_Categoria
+     * const Norma_Categoria = await prisma.norma_Categoria.create({
      *   data: {
-     *     // ... data to create a Nota_Categoria
+     *     // ... data to create a Norma_Categoria
      *   }
      * })
      * 
      */
-    create<T extends Nota_CategoriaCreateArgs>(args: SelectSubset<T, Nota_CategoriaCreateArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends Norma_CategoriaCreateArgs>(args: SelectSubset<T, Norma_CategoriaCreateArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Nota_Categorias.
-     * @param {Nota_CategoriaCreateManyArgs} args - Arguments to create many Nota_Categorias.
+     * Create many Norma_Categorias.
+     * @param {Norma_CategoriaCreateManyArgs} args - Arguments to create many Norma_Categorias.
      * @example
-     * // Create many Nota_Categorias
-     * const nota_Categoria = await prisma.nota_Categoria.createMany({
+     * // Create many Norma_Categorias
+     * const norma_Categoria = await prisma.norma_Categoria.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends Nota_CategoriaCreateManyArgs>(args?: SelectSubset<T, Nota_CategoriaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends Norma_CategoriaCreateManyArgs>(args?: SelectSubset<T, Norma_CategoriaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Nota_Categoria.
-     * @param {Nota_CategoriaDeleteArgs} args - Arguments to delete one Nota_Categoria.
+     * Delete a Norma_Categoria.
+     * @param {Norma_CategoriaDeleteArgs} args - Arguments to delete one Norma_Categoria.
      * @example
-     * // Delete one Nota_Categoria
-     * const Nota_Categoria = await prisma.nota_Categoria.delete({
+     * // Delete one Norma_Categoria
+     * const Norma_Categoria = await prisma.norma_Categoria.delete({
      *   where: {
-     *     // ... filter to delete one Nota_Categoria
+     *     // ... filter to delete one Norma_Categoria
      *   }
      * })
      * 
      */
-    delete<T extends Nota_CategoriaDeleteArgs>(args: SelectSubset<T, Nota_CategoriaDeleteArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends Norma_CategoriaDeleteArgs>(args: SelectSubset<T, Norma_CategoriaDeleteArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Nota_Categoria.
-     * @param {Nota_CategoriaUpdateArgs} args - Arguments to update one Nota_Categoria.
+     * Update one Norma_Categoria.
+     * @param {Norma_CategoriaUpdateArgs} args - Arguments to update one Norma_Categoria.
      * @example
-     * // Update one Nota_Categoria
-     * const nota_Categoria = await prisma.nota_Categoria.update({
+     * // Update one Norma_Categoria
+     * const norma_Categoria = await prisma.norma_Categoria.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7562,30 +7912,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends Nota_CategoriaUpdateArgs>(args: SelectSubset<T, Nota_CategoriaUpdateArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends Norma_CategoriaUpdateArgs>(args: SelectSubset<T, Norma_CategoriaUpdateArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Nota_Categorias.
-     * @param {Nota_CategoriaDeleteManyArgs} args - Arguments to filter Nota_Categorias to delete.
+     * Delete zero or more Norma_Categorias.
+     * @param {Norma_CategoriaDeleteManyArgs} args - Arguments to filter Norma_Categorias to delete.
      * @example
-     * // Delete a few Nota_Categorias
-     * const { count } = await prisma.nota_Categoria.deleteMany({
+     * // Delete a few Norma_Categorias
+     * const { count } = await prisma.norma_Categoria.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends Nota_CategoriaDeleteManyArgs>(args?: SelectSubset<T, Nota_CategoriaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends Norma_CategoriaDeleteManyArgs>(args?: SelectSubset<T, Norma_CategoriaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Nota_Categorias.
+     * Update zero or more Norma_Categorias.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Nota_CategoriaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {Norma_CategoriaUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Nota_Categorias
-     * const nota_Categoria = await prisma.nota_Categoria.updateMany({
+     * // Update many Norma_Categorias
+     * const norma_Categoria = await prisma.norma_Categoria.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7595,56 +7945,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends Nota_CategoriaUpdateManyArgs>(args: SelectSubset<T, Nota_CategoriaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends Norma_CategoriaUpdateManyArgs>(args: SelectSubset<T, Norma_CategoriaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Nota_Categoria.
-     * @param {Nota_CategoriaUpsertArgs} args - Arguments to update or create a Nota_Categoria.
+     * Create or update one Norma_Categoria.
+     * @param {Norma_CategoriaUpsertArgs} args - Arguments to update or create a Norma_Categoria.
      * @example
-     * // Update or create a Nota_Categoria
-     * const nota_Categoria = await prisma.nota_Categoria.upsert({
+     * // Update or create a Norma_Categoria
+     * const norma_Categoria = await prisma.norma_Categoria.upsert({
      *   create: {
-     *     // ... data to create a Nota_Categoria
+     *     // ... data to create a Norma_Categoria
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Nota_Categoria we want to update
+     *     // ... the filter for the Norma_Categoria we want to update
      *   }
      * })
      */
-    upsert<T extends Nota_CategoriaUpsertArgs>(args: SelectSubset<T, Nota_CategoriaUpsertArgs<ExtArgs>>): Prisma__Nota_CategoriaClient<$Result.GetResult<Prisma.$Nota_CategoriaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends Norma_CategoriaUpsertArgs>(args: SelectSubset<T, Norma_CategoriaUpsertArgs<ExtArgs>>): Prisma__Norma_CategoriaClient<$Result.GetResult<Prisma.$Norma_CategoriaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Nota_Categorias.
+     * Count the number of Norma_Categorias.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Nota_CategoriaCountArgs} args - Arguments to filter Nota_Categorias to count.
+     * @param {Norma_CategoriaCountArgs} args - Arguments to filter Norma_Categorias to count.
      * @example
-     * // Count the number of Nota_Categorias
-     * const count = await prisma.nota_Categoria.count({
+     * // Count the number of Norma_Categorias
+     * const count = await prisma.norma_Categoria.count({
      *   where: {
-     *     // ... the filter for the Nota_Categorias we want to count
+     *     // ... the filter for the Norma_Categorias we want to count
      *   }
      * })
     **/
-    count<T extends Nota_CategoriaCountArgs>(
-      args?: Subset<T, Nota_CategoriaCountArgs>,
+    count<T extends Norma_CategoriaCountArgs>(
+      args?: Subset<T, Norma_CategoriaCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], Nota_CategoriaCountAggregateOutputType>
+          : GetScalarType<T['select'], Norma_CategoriaCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Nota_Categoria.
+     * Allows you to perform aggregations operations on a Norma_Categoria.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Nota_CategoriaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {Norma_CategoriaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7664,13 +8014,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends Nota_CategoriaAggregateArgs>(args: Subset<T, Nota_CategoriaAggregateArgs>): Prisma.PrismaPromise<GetNota_CategoriaAggregateType<T>>
+    aggregate<T extends Norma_CategoriaAggregateArgs>(args: Subset<T, Norma_CategoriaAggregateArgs>): Prisma.PrismaPromise<GetNorma_CategoriaAggregateType<T>>
 
     /**
-     * Group by Nota_Categoria.
+     * Group by Norma_Categoria.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {Nota_CategoriaGroupByArgs} args - Group by arguments.
+     * @param {Norma_CategoriaGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7685,14 +8035,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends Nota_CategoriaGroupByArgs,
+      T extends Norma_CategoriaGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: Nota_CategoriaGroupByArgs['orderBy'] }
-        : { orderBy?: Nota_CategoriaGroupByArgs['orderBy'] },
+        ? { orderBy: Norma_CategoriaGroupByArgs['orderBy'] }
+        : { orderBy?: Norma_CategoriaGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7741,23 +8091,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, Nota_CategoriaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNota_CategoriaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, Norma_CategoriaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNorma_CategoriaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Nota_Categoria model
+   * Fields of the Norma_Categoria model
    */
-  readonly fields: Nota_CategoriaFieldRefs;
+  readonly fields: Norma_CategoriaFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Nota_Categoria.
+   * The delegate class that acts as a "Promise-like" for Norma_Categoria.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__Nota_CategoriaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__Norma_CategoriaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     cat<T extends CategoriaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoriaDefaultArgs<ExtArgs>>): Prisma__CategoriaClient<$Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    nota<T extends NotasDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NotasDefaultArgs<ExtArgs>>): Prisma__NotasClient<$Result.GetResult<Prisma.$NotasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    norma<T extends NormaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NormaDefaultArgs<ExtArgs>>): Prisma__NormaClient<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7784,374 +8134,374 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Nota_Categoria model
+   * Fields of the Norma_Categoria model
    */
-  interface Nota_CategoriaFieldRefs {
-    readonly id_nota: FieldRef<"Nota_Categoria", 'Int'>
-    readonly id_cat: FieldRef<"Nota_Categoria", 'Int'>
+  interface Norma_CategoriaFieldRefs {
+    readonly id_norma: FieldRef<"Norma_Categoria", 'Int'>
+    readonly id_cat: FieldRef<"Norma_Categoria", 'Int'>
   }
     
 
   // Custom InputTypes
   /**
-   * Nota_Categoria findUnique
+   * Norma_Categoria findUnique
    */
-  export type Nota_CategoriaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * Filter, which Nota_Categoria to fetch.
+     * Filter, which Norma_Categoria to fetch.
      */
-    where: Nota_CategoriaWhereUniqueInput
+    where: Norma_CategoriaWhereUniqueInput
   }
 
   /**
-   * Nota_Categoria findUniqueOrThrow
+   * Norma_Categoria findUniqueOrThrow
    */
-  export type Nota_CategoriaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * Filter, which Nota_Categoria to fetch.
+     * Filter, which Norma_Categoria to fetch.
      */
-    where: Nota_CategoriaWhereUniqueInput
+    where: Norma_CategoriaWhereUniqueInput
   }
 
   /**
-   * Nota_Categoria findFirst
+   * Norma_Categoria findFirst
    */
-  export type Nota_CategoriaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * Filter, which Nota_Categoria to fetch.
+     * Filter, which Norma_Categoria to fetch.
      */
-    where?: Nota_CategoriaWhereInput
+    where?: Norma_CategoriaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Nota_Categorias to fetch.
+     * Determine the order of Norma_Categorias to fetch.
      */
-    orderBy?: Nota_CategoriaOrderByWithRelationInput | Nota_CategoriaOrderByWithRelationInput[]
+    orderBy?: Norma_CategoriaOrderByWithRelationInput | Norma_CategoriaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Nota_Categorias.
+     * Sets the position for searching for Norma_Categorias.
      */
-    cursor?: Nota_CategoriaWhereUniqueInput
+    cursor?: Norma_CategoriaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Nota_Categorias from the position of the cursor.
+     * Take `±n` Norma_Categorias from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Nota_Categorias.
+     * Skip the first `n` Norma_Categorias.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Nota_Categorias.
+     * Filter by unique combinations of Norma_Categorias.
      */
-    distinct?: Nota_CategoriaScalarFieldEnum | Nota_CategoriaScalarFieldEnum[]
+    distinct?: Norma_CategoriaScalarFieldEnum | Norma_CategoriaScalarFieldEnum[]
   }
 
   /**
-   * Nota_Categoria findFirstOrThrow
+   * Norma_Categoria findFirstOrThrow
    */
-  export type Nota_CategoriaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * Filter, which Nota_Categoria to fetch.
+     * Filter, which Norma_Categoria to fetch.
      */
-    where?: Nota_CategoriaWhereInput
+    where?: Norma_CategoriaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Nota_Categorias to fetch.
+     * Determine the order of Norma_Categorias to fetch.
      */
-    orderBy?: Nota_CategoriaOrderByWithRelationInput | Nota_CategoriaOrderByWithRelationInput[]
+    orderBy?: Norma_CategoriaOrderByWithRelationInput | Norma_CategoriaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Nota_Categorias.
+     * Sets the position for searching for Norma_Categorias.
      */
-    cursor?: Nota_CategoriaWhereUniqueInput
+    cursor?: Norma_CategoriaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Nota_Categorias from the position of the cursor.
+     * Take `±n` Norma_Categorias from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Nota_Categorias.
+     * Skip the first `n` Norma_Categorias.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Nota_Categorias.
+     * Filter by unique combinations of Norma_Categorias.
      */
-    distinct?: Nota_CategoriaScalarFieldEnum | Nota_CategoriaScalarFieldEnum[]
+    distinct?: Norma_CategoriaScalarFieldEnum | Norma_CategoriaScalarFieldEnum[]
   }
 
   /**
-   * Nota_Categoria findMany
+   * Norma_Categoria findMany
    */
-  export type Nota_CategoriaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * Filter, which Nota_Categorias to fetch.
+     * Filter, which Norma_Categorias to fetch.
      */
-    where?: Nota_CategoriaWhereInput
+    where?: Norma_CategoriaWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Nota_Categorias to fetch.
+     * Determine the order of Norma_Categorias to fetch.
      */
-    orderBy?: Nota_CategoriaOrderByWithRelationInput | Nota_CategoriaOrderByWithRelationInput[]
+    orderBy?: Norma_CategoriaOrderByWithRelationInput | Norma_CategoriaOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Nota_Categorias.
+     * Sets the position for listing Norma_Categorias.
      */
-    cursor?: Nota_CategoriaWhereUniqueInput
+    cursor?: Norma_CategoriaWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Nota_Categorias from the position of the cursor.
+     * Take `±n` Norma_Categorias from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Nota_Categorias.
+     * Skip the first `n` Norma_Categorias.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Nota_Categorias.
+     * Filter by unique combinations of Norma_Categorias.
      */
-    distinct?: Nota_CategoriaScalarFieldEnum | Nota_CategoriaScalarFieldEnum[]
+    distinct?: Norma_CategoriaScalarFieldEnum | Norma_CategoriaScalarFieldEnum[]
   }
 
   /**
-   * Nota_Categoria create
+   * Norma_Categoria create
    */
-  export type Nota_CategoriaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * The data needed to create a Nota_Categoria.
+     * The data needed to create a Norma_Categoria.
      */
-    data: XOR<Nota_CategoriaCreateInput, Nota_CategoriaUncheckedCreateInput>
+    data: XOR<Norma_CategoriaCreateInput, Norma_CategoriaUncheckedCreateInput>
   }
 
   /**
-   * Nota_Categoria createMany
+   * Norma_Categoria createMany
    */
-  export type Nota_CategoriaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Nota_Categorias.
+     * The data used to create many Norma_Categorias.
      */
-    data: Nota_CategoriaCreateManyInput | Nota_CategoriaCreateManyInput[]
+    data: Norma_CategoriaCreateManyInput | Norma_CategoriaCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Nota_Categoria update
+   * Norma_Categoria update
    */
-  export type Nota_CategoriaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * The data needed to update a Nota_Categoria.
+     * The data needed to update a Norma_Categoria.
      */
-    data: XOR<Nota_CategoriaUpdateInput, Nota_CategoriaUncheckedUpdateInput>
+    data: XOR<Norma_CategoriaUpdateInput, Norma_CategoriaUncheckedUpdateInput>
     /**
-     * Choose, which Nota_Categoria to update.
+     * Choose, which Norma_Categoria to update.
      */
-    where: Nota_CategoriaWhereUniqueInput
+    where: Norma_CategoriaWhereUniqueInput
   }
 
   /**
-   * Nota_Categoria updateMany
+   * Norma_Categoria updateMany
    */
-  export type Nota_CategoriaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Nota_Categorias.
+     * The data used to update Norma_Categorias.
      */
-    data: XOR<Nota_CategoriaUpdateManyMutationInput, Nota_CategoriaUncheckedUpdateManyInput>
+    data: XOR<Norma_CategoriaUpdateManyMutationInput, Norma_CategoriaUncheckedUpdateManyInput>
     /**
-     * Filter which Nota_Categorias to update
+     * Filter which Norma_Categorias to update
      */
-    where?: Nota_CategoriaWhereInput
+    where?: Norma_CategoriaWhereInput
     /**
-     * Limit how many Nota_Categorias to update.
+     * Limit how many Norma_Categorias to update.
      */
     limit?: number
   }
 
   /**
-   * Nota_Categoria upsert
+   * Norma_Categoria upsert
    */
-  export type Nota_CategoriaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * The filter to search for the Nota_Categoria to update in case it exists.
+     * The filter to search for the Norma_Categoria to update in case it exists.
      */
-    where: Nota_CategoriaWhereUniqueInput
+    where: Norma_CategoriaWhereUniqueInput
     /**
-     * In case the Nota_Categoria found by the `where` argument doesn't exist, create a new Nota_Categoria with this data.
+     * In case the Norma_Categoria found by the `where` argument doesn't exist, create a new Norma_Categoria with this data.
      */
-    create: XOR<Nota_CategoriaCreateInput, Nota_CategoriaUncheckedCreateInput>
+    create: XOR<Norma_CategoriaCreateInput, Norma_CategoriaUncheckedCreateInput>
     /**
-     * In case the Nota_Categoria was found with the provided `where` argument, update it with this data.
+     * In case the Norma_Categoria was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<Nota_CategoriaUpdateInput, Nota_CategoriaUncheckedUpdateInput>
+    update: XOR<Norma_CategoriaUpdateInput, Norma_CategoriaUncheckedUpdateInput>
   }
 
   /**
-   * Nota_Categoria delete
+   * Norma_Categoria delete
    */
-  export type Nota_CategoriaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
     /**
-     * Filter which Nota_Categoria to delete.
+     * Filter which Norma_Categoria to delete.
      */
-    where: Nota_CategoriaWhereUniqueInput
+    where: Norma_CategoriaWhereUniqueInput
   }
 
   /**
-   * Nota_Categoria deleteMany
+   * Norma_Categoria deleteMany
    */
-  export type Nota_CategoriaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Nota_Categorias to delete
+     * Filter which Norma_Categorias to delete
      */
-    where?: Nota_CategoriaWhereInput
+    where?: Norma_CategoriaWhereInput
     /**
-     * Limit how many Nota_Categorias to delete.
+     * Limit how many Norma_Categorias to delete.
      */
     limit?: number
   }
 
   /**
-   * Nota_Categoria without action
+   * Norma_Categoria without action
    */
-  export type Nota_CategoriaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Norma_CategoriaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Nota_Categoria
+     * Select specific fields to fetch from the Norma_Categoria
      */
-    select?: Nota_CategoriaSelect<ExtArgs> | null
+    select?: Norma_CategoriaSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Nota_Categoria
+     * Omit specific fields from the Norma_Categoria
      */
-    omit?: Nota_CategoriaOmit<ExtArgs> | null
+    omit?: Norma_CategoriaOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: Nota_CategoriaInclude<ExtArgs> | null
+    include?: Norma_CategoriaInclude<ExtArgs> | null
   }
 
 
@@ -12041,6 +12391,1988 @@ export namespace Prisma {
 
 
   /**
+   * Model PedidosdeAlteracao
+   */
+
+  export type AggregatePedidosdeAlteracao = {
+    _count: PedidosdeAlteracaoCountAggregateOutputType | null
+    _avg: PedidosdeAlteracaoAvgAggregateOutputType | null
+    _sum: PedidosdeAlteracaoSumAggregateOutputType | null
+    _min: PedidosdeAlteracaoMinAggregateOutputType | null
+    _max: PedidosdeAlteracaoMaxAggregateOutputType | null
+  }
+
+  export type PedidosdeAlteracaoAvgAggregateOutputType = {
+    id: number | null
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type PedidosdeAlteracaoSumAggregateOutputType = {
+    id: number | null
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type PedidosdeAlteracaoMinAggregateOutputType = {
+    id: number | null
+    id_user: number | null
+    acaoDealteracao: $Enums.AcaoDeAlteracao | null
+    notaorNorma: $Enums.NotaOrNorma | null
+    status: $Enums.Status | null
+    data_pedido: Date | null
+    id_norma: number | null
+  }
+
+  export type PedidosdeAlteracaoMaxAggregateOutputType = {
+    id: number | null
+    id_user: number | null
+    acaoDealteracao: $Enums.AcaoDeAlteracao | null
+    notaorNorma: $Enums.NotaOrNorma | null
+    status: $Enums.Status | null
+    data_pedido: Date | null
+    id_norma: number | null
+  }
+
+  export type PedidosdeAlteracaoCountAggregateOutputType = {
+    id: number
+    id_user: number
+    alteracao: number
+    acaoDealteracao: number
+    notaorNorma: number
+    status: number
+    data_pedido: number
+    id_norma: number
+    _all: number
+  }
+
+
+  export type PedidosdeAlteracaoAvgAggregateInputType = {
+    id?: true
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type PedidosdeAlteracaoSumAggregateInputType = {
+    id?: true
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type PedidosdeAlteracaoMinAggregateInputType = {
+    id?: true
+    id_user?: true
+    acaoDealteracao?: true
+    notaorNorma?: true
+    status?: true
+    data_pedido?: true
+    id_norma?: true
+  }
+
+  export type PedidosdeAlteracaoMaxAggregateInputType = {
+    id?: true
+    id_user?: true
+    acaoDealteracao?: true
+    notaorNorma?: true
+    status?: true
+    data_pedido?: true
+    id_norma?: true
+  }
+
+  export type PedidosdeAlteracaoCountAggregateInputType = {
+    id?: true
+    id_user?: true
+    alteracao?: true
+    acaoDealteracao?: true
+    notaorNorma?: true
+    status?: true
+    data_pedido?: true
+    id_norma?: true
+    _all?: true
+  }
+
+  export type PedidosdeAlteracaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PedidosdeAlteracao to aggregate.
+     */
+    where?: PedidosdeAlteracaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PedidosdeAlteracaos to fetch.
+     */
+    orderBy?: PedidosdeAlteracaoOrderByWithRelationInput | PedidosdeAlteracaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PedidosdeAlteracaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PedidosdeAlteracaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PedidosdeAlteracaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PedidosdeAlteracaos
+    **/
+    _count?: true | PedidosdeAlteracaoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PedidosdeAlteracaoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PedidosdeAlteracaoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PedidosdeAlteracaoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PedidosdeAlteracaoMaxAggregateInputType
+  }
+
+  export type GetPedidosdeAlteracaoAggregateType<T extends PedidosdeAlteracaoAggregateArgs> = {
+        [P in keyof T & keyof AggregatePedidosdeAlteracao]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePedidosdeAlteracao[P]>
+      : GetScalarType<T[P], AggregatePedidosdeAlteracao[P]>
+  }
+
+
+
+
+  export type PedidosdeAlteracaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PedidosdeAlteracaoWhereInput
+    orderBy?: PedidosdeAlteracaoOrderByWithAggregationInput | PedidosdeAlteracaoOrderByWithAggregationInput[]
+    by: PedidosdeAlteracaoScalarFieldEnum[] | PedidosdeAlteracaoScalarFieldEnum
+    having?: PedidosdeAlteracaoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PedidosdeAlteracaoCountAggregateInputType | true
+    _avg?: PedidosdeAlteracaoAvgAggregateInputType
+    _sum?: PedidosdeAlteracaoSumAggregateInputType
+    _min?: PedidosdeAlteracaoMinAggregateInputType
+    _max?: PedidosdeAlteracaoMaxAggregateInputType
+  }
+
+  export type PedidosdeAlteracaoGroupByOutputType = {
+    id: number
+    id_user: number
+    alteracao: JsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status: $Enums.Status
+    data_pedido: Date
+    id_norma: number | null
+    _count: PedidosdeAlteracaoCountAggregateOutputType | null
+    _avg: PedidosdeAlteracaoAvgAggregateOutputType | null
+    _sum: PedidosdeAlteracaoSumAggregateOutputType | null
+    _min: PedidosdeAlteracaoMinAggregateOutputType | null
+    _max: PedidosdeAlteracaoMaxAggregateOutputType | null
+  }
+
+  type GetPedidosdeAlteracaoGroupByPayload<T extends PedidosdeAlteracaoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PedidosdeAlteracaoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PedidosdeAlteracaoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PedidosdeAlteracaoGroupByOutputType[P]>
+            : GetScalarType<T[P], PedidosdeAlteracaoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PedidosdeAlteracaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    id_user?: boolean
+    alteracao?: boolean
+    acaoDealteracao?: boolean
+    notaorNorma?: boolean
+    status?: boolean
+    data_pedido?: boolean
+    id_norma?: boolean
+    usuarios?: boolean | UsersDefaultArgs<ExtArgs>
+    normas?: boolean | PedidosdeAlteracao$normasArgs<ExtArgs>
+  }, ExtArgs["result"]["pedidosdeAlteracao"]>
+
+
+
+  export type PedidosdeAlteracaoSelectScalar = {
+    id?: boolean
+    id_user?: boolean
+    alteracao?: boolean
+    acaoDealteracao?: boolean
+    notaorNorma?: boolean
+    status?: boolean
+    data_pedido?: boolean
+    id_norma?: boolean
+  }
+
+  export type PedidosdeAlteracaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_user" | "alteracao" | "acaoDealteracao" | "notaorNorma" | "status" | "data_pedido" | "id_norma", ExtArgs["result"]["pedidosdeAlteracao"]>
+  export type PedidosdeAlteracaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuarios?: boolean | UsersDefaultArgs<ExtArgs>
+    normas?: boolean | PedidosdeAlteracao$normasArgs<ExtArgs>
+  }
+
+  export type $PedidosdeAlteracaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PedidosdeAlteracao"
+    objects: {
+      usuarios: Prisma.$UsersPayload<ExtArgs>
+      normas: Prisma.$NormaPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      id_user: number
+      alteracao: Prisma.JsonValue
+      acaoDealteracao: $Enums.AcaoDeAlteracao
+      notaorNorma: $Enums.NotaOrNorma
+      status: $Enums.Status
+      data_pedido: Date
+      id_norma: number | null
+    }, ExtArgs["result"]["pedidosdeAlteracao"]>
+    composites: {}
+  }
+
+  type PedidosdeAlteracaoGetPayload<S extends boolean | null | undefined | PedidosdeAlteracaoDefaultArgs> = $Result.GetResult<Prisma.$PedidosdeAlteracaoPayload, S>
+
+  type PedidosdeAlteracaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PedidosdeAlteracaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PedidosdeAlteracaoCountAggregateInputType | true
+    }
+
+  export interface PedidosdeAlteracaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PedidosdeAlteracao'], meta: { name: 'PedidosdeAlteracao' } }
+    /**
+     * Find zero or one PedidosdeAlteracao that matches the filter.
+     * @param {PedidosdeAlteracaoFindUniqueArgs} args - Arguments to find a PedidosdeAlteracao
+     * @example
+     * // Get one PedidosdeAlteracao
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PedidosdeAlteracaoFindUniqueArgs>(args: SelectSubset<T, PedidosdeAlteracaoFindUniqueArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PedidosdeAlteracao that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PedidosdeAlteracaoFindUniqueOrThrowArgs} args - Arguments to find a PedidosdeAlteracao
+     * @example
+     * // Get one PedidosdeAlteracao
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PedidosdeAlteracaoFindUniqueOrThrowArgs>(args: SelectSubset<T, PedidosdeAlteracaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PedidosdeAlteracao that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PedidosdeAlteracaoFindFirstArgs} args - Arguments to find a PedidosdeAlteracao
+     * @example
+     * // Get one PedidosdeAlteracao
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PedidosdeAlteracaoFindFirstArgs>(args?: SelectSubset<T, PedidosdeAlteracaoFindFirstArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PedidosdeAlteracao that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PedidosdeAlteracaoFindFirstOrThrowArgs} args - Arguments to find a PedidosdeAlteracao
+     * @example
+     * // Get one PedidosdeAlteracao
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PedidosdeAlteracaoFindFirstOrThrowArgs>(args?: SelectSubset<T, PedidosdeAlteracaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PedidosdeAlteracaos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PedidosdeAlteracaoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PedidosdeAlteracaos
+     * const pedidosdeAlteracaos = await prisma.pedidosdeAlteracao.findMany()
+     * 
+     * // Get first 10 PedidosdeAlteracaos
+     * const pedidosdeAlteracaos = await prisma.pedidosdeAlteracao.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pedidosdeAlteracaoWithIdOnly = await prisma.pedidosdeAlteracao.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PedidosdeAlteracaoFindManyArgs>(args?: SelectSubset<T, PedidosdeAlteracaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PedidosdeAlteracao.
+     * @param {PedidosdeAlteracaoCreateArgs} args - Arguments to create a PedidosdeAlteracao.
+     * @example
+     * // Create one PedidosdeAlteracao
+     * const PedidosdeAlteracao = await prisma.pedidosdeAlteracao.create({
+     *   data: {
+     *     // ... data to create a PedidosdeAlteracao
+     *   }
+     * })
+     * 
+     */
+    create<T extends PedidosdeAlteracaoCreateArgs>(args: SelectSubset<T, PedidosdeAlteracaoCreateArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PedidosdeAlteracaos.
+     * @param {PedidosdeAlteracaoCreateManyArgs} args - Arguments to create many PedidosdeAlteracaos.
+     * @example
+     * // Create many PedidosdeAlteracaos
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PedidosdeAlteracaoCreateManyArgs>(args?: SelectSubset<T, PedidosdeAlteracaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PedidosdeAlteracao.
+     * @param {PedidosdeAlteracaoDeleteArgs} args - Arguments to delete one PedidosdeAlteracao.
+     * @example
+     * // Delete one PedidosdeAlteracao
+     * const PedidosdeAlteracao = await prisma.pedidosdeAlteracao.delete({
+     *   where: {
+     *     // ... filter to delete one PedidosdeAlteracao
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PedidosdeAlteracaoDeleteArgs>(args: SelectSubset<T, PedidosdeAlteracaoDeleteArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PedidosdeAlteracao.
+     * @param {PedidosdeAlteracaoUpdateArgs} args - Arguments to update one PedidosdeAlteracao.
+     * @example
+     * // Update one PedidosdeAlteracao
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PedidosdeAlteracaoUpdateArgs>(args: SelectSubset<T, PedidosdeAlteracaoUpdateArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PedidosdeAlteracaos.
+     * @param {PedidosdeAlteracaoDeleteManyArgs} args - Arguments to filter PedidosdeAlteracaos to delete.
+     * @example
+     * // Delete a few PedidosdeAlteracaos
+     * const { count } = await prisma.pedidosdeAlteracao.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PedidosdeAlteracaoDeleteManyArgs>(args?: SelectSubset<T, PedidosdeAlteracaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PedidosdeAlteracaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PedidosdeAlteracaoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PedidosdeAlteracaos
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PedidosdeAlteracaoUpdateManyArgs>(args: SelectSubset<T, PedidosdeAlteracaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PedidosdeAlteracao.
+     * @param {PedidosdeAlteracaoUpsertArgs} args - Arguments to update or create a PedidosdeAlteracao.
+     * @example
+     * // Update or create a PedidosdeAlteracao
+     * const pedidosdeAlteracao = await prisma.pedidosdeAlteracao.upsert({
+     *   create: {
+     *     // ... data to create a PedidosdeAlteracao
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PedidosdeAlteracao we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PedidosdeAlteracaoUpsertArgs>(args: SelectSubset<T, PedidosdeAlteracaoUpsertArgs<ExtArgs>>): Prisma__PedidosdeAlteracaoClient<$Result.GetResult<Prisma.$PedidosdeAlteracaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PedidosdeAlteracaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PedidosdeAlteracaoCountArgs} args - Arguments to filter PedidosdeAlteracaos to count.
+     * @example
+     * // Count the number of PedidosdeAlteracaos
+     * const count = await prisma.pedidosdeAlteracao.count({
+     *   where: {
+     *     // ... the filter for the PedidosdeAlteracaos we want to count
+     *   }
+     * })
+    **/
+    count<T extends PedidosdeAlteracaoCountArgs>(
+      args?: Subset<T, PedidosdeAlteracaoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PedidosdeAlteracaoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PedidosdeAlteracao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PedidosdeAlteracaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PedidosdeAlteracaoAggregateArgs>(args: Subset<T, PedidosdeAlteracaoAggregateArgs>): Prisma.PrismaPromise<GetPedidosdeAlteracaoAggregateType<T>>
+
+    /**
+     * Group by PedidosdeAlteracao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PedidosdeAlteracaoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PedidosdeAlteracaoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PedidosdeAlteracaoGroupByArgs['orderBy'] }
+        : { orderBy?: PedidosdeAlteracaoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PedidosdeAlteracaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPedidosdeAlteracaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PedidosdeAlteracao model
+   */
+  readonly fields: PedidosdeAlteracaoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PedidosdeAlteracao.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PedidosdeAlteracaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuarios<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    normas<T extends PedidosdeAlteracao$normasArgs<ExtArgs> = {}>(args?: Subset<T, PedidosdeAlteracao$normasArgs<ExtArgs>>): Prisma__NormaClient<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PedidosdeAlteracao model
+   */
+  interface PedidosdeAlteracaoFieldRefs {
+    readonly id: FieldRef<"PedidosdeAlteracao", 'Int'>
+    readonly id_user: FieldRef<"PedidosdeAlteracao", 'Int'>
+    readonly alteracao: FieldRef<"PedidosdeAlteracao", 'Json'>
+    readonly acaoDealteracao: FieldRef<"PedidosdeAlteracao", 'AcaoDeAlteracao'>
+    readonly notaorNorma: FieldRef<"PedidosdeAlteracao", 'NotaOrNorma'>
+    readonly status: FieldRef<"PedidosdeAlteracao", 'Status'>
+    readonly data_pedido: FieldRef<"PedidosdeAlteracao", 'DateTime'>
+    readonly id_norma: FieldRef<"PedidosdeAlteracao", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PedidosdeAlteracao findUnique
+   */
+  export type PedidosdeAlteracaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * Filter, which PedidosdeAlteracao to fetch.
+     */
+    where: PedidosdeAlteracaoWhereUniqueInput
+  }
+
+  /**
+   * PedidosdeAlteracao findUniqueOrThrow
+   */
+  export type PedidosdeAlteracaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * Filter, which PedidosdeAlteracao to fetch.
+     */
+    where: PedidosdeAlteracaoWhereUniqueInput
+  }
+
+  /**
+   * PedidosdeAlteracao findFirst
+   */
+  export type PedidosdeAlteracaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * Filter, which PedidosdeAlteracao to fetch.
+     */
+    where?: PedidosdeAlteracaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PedidosdeAlteracaos to fetch.
+     */
+    orderBy?: PedidosdeAlteracaoOrderByWithRelationInput | PedidosdeAlteracaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PedidosdeAlteracaos.
+     */
+    cursor?: PedidosdeAlteracaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PedidosdeAlteracaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PedidosdeAlteracaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PedidosdeAlteracaos.
+     */
+    distinct?: PedidosdeAlteracaoScalarFieldEnum | PedidosdeAlteracaoScalarFieldEnum[]
+  }
+
+  /**
+   * PedidosdeAlteracao findFirstOrThrow
+   */
+  export type PedidosdeAlteracaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * Filter, which PedidosdeAlteracao to fetch.
+     */
+    where?: PedidosdeAlteracaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PedidosdeAlteracaos to fetch.
+     */
+    orderBy?: PedidosdeAlteracaoOrderByWithRelationInput | PedidosdeAlteracaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PedidosdeAlteracaos.
+     */
+    cursor?: PedidosdeAlteracaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PedidosdeAlteracaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PedidosdeAlteracaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PedidosdeAlteracaos.
+     */
+    distinct?: PedidosdeAlteracaoScalarFieldEnum | PedidosdeAlteracaoScalarFieldEnum[]
+  }
+
+  /**
+   * PedidosdeAlteracao findMany
+   */
+  export type PedidosdeAlteracaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * Filter, which PedidosdeAlteracaos to fetch.
+     */
+    where?: PedidosdeAlteracaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PedidosdeAlteracaos to fetch.
+     */
+    orderBy?: PedidosdeAlteracaoOrderByWithRelationInput | PedidosdeAlteracaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PedidosdeAlteracaos.
+     */
+    cursor?: PedidosdeAlteracaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PedidosdeAlteracaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PedidosdeAlteracaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PedidosdeAlteracaos.
+     */
+    distinct?: PedidosdeAlteracaoScalarFieldEnum | PedidosdeAlteracaoScalarFieldEnum[]
+  }
+
+  /**
+   * PedidosdeAlteracao create
+   */
+  export type PedidosdeAlteracaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PedidosdeAlteracao.
+     */
+    data: XOR<PedidosdeAlteracaoCreateInput, PedidosdeAlteracaoUncheckedCreateInput>
+  }
+
+  /**
+   * PedidosdeAlteracao createMany
+   */
+  export type PedidosdeAlteracaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PedidosdeAlteracaos.
+     */
+    data: PedidosdeAlteracaoCreateManyInput | PedidosdeAlteracaoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PedidosdeAlteracao update
+   */
+  export type PedidosdeAlteracaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PedidosdeAlteracao.
+     */
+    data: XOR<PedidosdeAlteracaoUpdateInput, PedidosdeAlteracaoUncheckedUpdateInput>
+    /**
+     * Choose, which PedidosdeAlteracao to update.
+     */
+    where: PedidosdeAlteracaoWhereUniqueInput
+  }
+
+  /**
+   * PedidosdeAlteracao updateMany
+   */
+  export type PedidosdeAlteracaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PedidosdeAlteracaos.
+     */
+    data: XOR<PedidosdeAlteracaoUpdateManyMutationInput, PedidosdeAlteracaoUncheckedUpdateManyInput>
+    /**
+     * Filter which PedidosdeAlteracaos to update
+     */
+    where?: PedidosdeAlteracaoWhereInput
+    /**
+     * Limit how many PedidosdeAlteracaos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PedidosdeAlteracao upsert
+   */
+  export type PedidosdeAlteracaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PedidosdeAlteracao to update in case it exists.
+     */
+    where: PedidosdeAlteracaoWhereUniqueInput
+    /**
+     * In case the PedidosdeAlteracao found by the `where` argument doesn't exist, create a new PedidosdeAlteracao with this data.
+     */
+    create: XOR<PedidosdeAlteracaoCreateInput, PedidosdeAlteracaoUncheckedCreateInput>
+    /**
+     * In case the PedidosdeAlteracao was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PedidosdeAlteracaoUpdateInput, PedidosdeAlteracaoUncheckedUpdateInput>
+  }
+
+  /**
+   * PedidosdeAlteracao delete
+   */
+  export type PedidosdeAlteracaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+    /**
+     * Filter which PedidosdeAlteracao to delete.
+     */
+    where: PedidosdeAlteracaoWhereUniqueInput
+  }
+
+  /**
+   * PedidosdeAlteracao deleteMany
+   */
+  export type PedidosdeAlteracaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PedidosdeAlteracaos to delete
+     */
+    where?: PedidosdeAlteracaoWhereInput
+    /**
+     * Limit how many PedidosdeAlteracaos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PedidosdeAlteracao.normas
+   */
+  export type PedidosdeAlteracao$normasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Norma
+     */
+    select?: NormaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Norma
+     */
+    omit?: NormaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NormaInclude<ExtArgs> | null
+    where?: NormaWhereInput
+  }
+
+  /**
+   * PedidosdeAlteracao without action
+   */
+  export type PedidosdeAlteracaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PedidosdeAlteracao
+     */
+    select?: PedidosdeAlteracaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PedidosdeAlteracao
+     */
+    omit?: PedidosdeAlteracaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PedidosdeAlteracaoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Favoritos
+   */
+
+  export type AggregateFavoritos = {
+    _count: FavoritosCountAggregateOutputType | null
+    _avg: FavoritosAvgAggregateOutputType | null
+    _sum: FavoritosSumAggregateOutputType | null
+    _min: FavoritosMinAggregateOutputType | null
+    _max: FavoritosMaxAggregateOutputType | null
+  }
+
+  export type FavoritosAvgAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type FavoritosSumAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+  }
+
+  export type FavoritosMinAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+    data_criacao: Date | null
+  }
+
+  export type FavoritosMaxAggregateOutputType = {
+    id_user: number | null
+    id_norma: number | null
+    data_criacao: Date | null
+  }
+
+  export type FavoritosCountAggregateOutputType = {
+    id_user: number
+    id_norma: number
+    data_criacao: number
+    _all: number
+  }
+
+
+  export type FavoritosAvgAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type FavoritosSumAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+  }
+
+  export type FavoritosMinAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_criacao?: true
+  }
+
+  export type FavoritosMaxAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_criacao?: true
+  }
+
+  export type FavoritosCountAggregateInputType = {
+    id_user?: true
+    id_norma?: true
+    data_criacao?: true
+    _all?: true
+  }
+
+  export type FavoritosAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Favoritos to aggregate.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Favoritos
+    **/
+    _count?: true | FavoritosCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FavoritosAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FavoritosSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FavoritosMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FavoritosMaxAggregateInputType
+  }
+
+  export type GetFavoritosAggregateType<T extends FavoritosAggregateArgs> = {
+        [P in keyof T & keyof AggregateFavoritos]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFavoritos[P]>
+      : GetScalarType<T[P], AggregateFavoritos[P]>
+  }
+
+
+
+
+  export type FavoritosGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavoritosWhereInput
+    orderBy?: FavoritosOrderByWithAggregationInput | FavoritosOrderByWithAggregationInput[]
+    by: FavoritosScalarFieldEnum[] | FavoritosScalarFieldEnum
+    having?: FavoritosScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FavoritosCountAggregateInputType | true
+    _avg?: FavoritosAvgAggregateInputType
+    _sum?: FavoritosSumAggregateInputType
+    _min?: FavoritosMinAggregateInputType
+    _max?: FavoritosMaxAggregateInputType
+  }
+
+  export type FavoritosGroupByOutputType = {
+    id_user: number
+    id_norma: number
+    data_criacao: Date
+    _count: FavoritosCountAggregateOutputType | null
+    _avg: FavoritosAvgAggregateOutputType | null
+    _sum: FavoritosSumAggregateOutputType | null
+    _min: FavoritosMinAggregateOutputType | null
+    _max: FavoritosMaxAggregateOutputType | null
+  }
+
+  type GetFavoritosGroupByPayload<T extends FavoritosGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FavoritosGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FavoritosGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FavoritosGroupByOutputType[P]>
+            : GetScalarType<T[P], FavoritosGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FavoritosSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id_user?: boolean
+    id_norma?: boolean
+    data_criacao?: boolean
+    usuario?: boolean | UsersDefaultArgs<ExtArgs>
+    norma?: boolean | NormaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["favoritos"]>
+
+
+
+  export type FavoritosSelectScalar = {
+    id_user?: boolean
+    id_norma?: boolean
+    data_criacao?: boolean
+  }
+
+  export type FavoritosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id_user" | "id_norma" | "data_criacao", ExtArgs["result"]["favoritos"]>
+  export type FavoritosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | UsersDefaultArgs<ExtArgs>
+    norma?: boolean | NormaDefaultArgs<ExtArgs>
+  }
+
+  export type $FavoritosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Favoritos"
+    objects: {
+      usuario: Prisma.$UsersPayload<ExtArgs>
+      norma: Prisma.$NormaPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id_user: number
+      id_norma: number
+      data_criacao: Date
+    }, ExtArgs["result"]["favoritos"]>
+    composites: {}
+  }
+
+  type FavoritosGetPayload<S extends boolean | null | undefined | FavoritosDefaultArgs> = $Result.GetResult<Prisma.$FavoritosPayload, S>
+
+  type FavoritosCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FavoritosFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FavoritosCountAggregateInputType | true
+    }
+
+  export interface FavoritosDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Favoritos'], meta: { name: 'Favoritos' } }
+    /**
+     * Find zero or one Favoritos that matches the filter.
+     * @param {FavoritosFindUniqueArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FavoritosFindUniqueArgs>(args: SelectSubset<T, FavoritosFindUniqueArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Favoritos that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FavoritosFindUniqueOrThrowArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FavoritosFindUniqueOrThrowArgs>(args: SelectSubset<T, FavoritosFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Favoritos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosFindFirstArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FavoritosFindFirstArgs>(args?: SelectSubset<T, FavoritosFindFirstArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Favoritos that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosFindFirstOrThrowArgs} args - Arguments to find a Favoritos
+     * @example
+     * // Get one Favoritos
+     * const favoritos = await prisma.favoritos.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FavoritosFindFirstOrThrowArgs>(args?: SelectSubset<T, FavoritosFindFirstOrThrowArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Favoritos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Favoritos
+     * const favoritos = await prisma.favoritos.findMany()
+     * 
+     * // Get first 10 Favoritos
+     * const favoritos = await prisma.favoritos.findMany({ take: 10 })
+     * 
+     * // Only select the `id_user`
+     * const favoritosWithId_userOnly = await prisma.favoritos.findMany({ select: { id_user: true } })
+     * 
+     */
+    findMany<T extends FavoritosFindManyArgs>(args?: SelectSubset<T, FavoritosFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Favoritos.
+     * @param {FavoritosCreateArgs} args - Arguments to create a Favoritos.
+     * @example
+     * // Create one Favoritos
+     * const Favoritos = await prisma.favoritos.create({
+     *   data: {
+     *     // ... data to create a Favoritos
+     *   }
+     * })
+     * 
+     */
+    create<T extends FavoritosCreateArgs>(args: SelectSubset<T, FavoritosCreateArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Favoritos.
+     * @param {FavoritosCreateManyArgs} args - Arguments to create many Favoritos.
+     * @example
+     * // Create many Favoritos
+     * const favoritos = await prisma.favoritos.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FavoritosCreateManyArgs>(args?: SelectSubset<T, FavoritosCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Favoritos.
+     * @param {FavoritosDeleteArgs} args - Arguments to delete one Favoritos.
+     * @example
+     * // Delete one Favoritos
+     * const Favoritos = await prisma.favoritos.delete({
+     *   where: {
+     *     // ... filter to delete one Favoritos
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FavoritosDeleteArgs>(args: SelectSubset<T, FavoritosDeleteArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Favoritos.
+     * @param {FavoritosUpdateArgs} args - Arguments to update one Favoritos.
+     * @example
+     * // Update one Favoritos
+     * const favoritos = await prisma.favoritos.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FavoritosUpdateArgs>(args: SelectSubset<T, FavoritosUpdateArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Favoritos.
+     * @param {FavoritosDeleteManyArgs} args - Arguments to filter Favoritos to delete.
+     * @example
+     * // Delete a few Favoritos
+     * const { count } = await prisma.favoritos.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FavoritosDeleteManyArgs>(args?: SelectSubset<T, FavoritosDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Favoritos
+     * const favoritos = await prisma.favoritos.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FavoritosUpdateManyArgs>(args: SelectSubset<T, FavoritosUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Favoritos.
+     * @param {FavoritosUpsertArgs} args - Arguments to update or create a Favoritos.
+     * @example
+     * // Update or create a Favoritos
+     * const favoritos = await prisma.favoritos.upsert({
+     *   create: {
+     *     // ... data to create a Favoritos
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Favoritos we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FavoritosUpsertArgs>(args: SelectSubset<T, FavoritosUpsertArgs<ExtArgs>>): Prisma__FavoritosClient<$Result.GetResult<Prisma.$FavoritosPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosCountArgs} args - Arguments to filter Favoritos to count.
+     * @example
+     * // Count the number of Favoritos
+     * const count = await prisma.favoritos.count({
+     *   where: {
+     *     // ... the filter for the Favoritos we want to count
+     *   }
+     * })
+    **/
+    count<T extends FavoritosCountArgs>(
+      args?: Subset<T, FavoritosCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FavoritosCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FavoritosAggregateArgs>(args: Subset<T, FavoritosAggregateArgs>): Prisma.PrismaPromise<GetFavoritosAggregateType<T>>
+
+    /**
+     * Group by Favoritos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FavoritosGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FavoritosGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FavoritosGroupByArgs['orderBy'] }
+        : { orderBy?: FavoritosGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FavoritosGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFavoritosGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Favoritos model
+   */
+  readonly fields: FavoritosFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Favoritos.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FavoritosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    norma<T extends NormaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NormaDefaultArgs<ExtArgs>>): Prisma__NormaClient<$Result.GetResult<Prisma.$NormaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Favoritos model
+   */
+  interface FavoritosFieldRefs {
+    readonly id_user: FieldRef<"Favoritos", 'Int'>
+    readonly id_norma: FieldRef<"Favoritos", 'Int'>
+    readonly data_criacao: FieldRef<"Favoritos", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Favoritos findUnique
+   */
+  export type FavoritosFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos findUniqueOrThrow
+   */
+  export type FavoritosFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos findFirst
+   */
+  export type FavoritosFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Favoritos.
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favoritos.
+     */
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
+   * Favoritos findFirstOrThrow
+   */
+  export type FavoritosFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Favoritos.
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favoritos.
+     */
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
+   * Favoritos findMany
+   */
+  export type FavoritosFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter, which Favoritos to fetch.
+     */
+    where?: FavoritosWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Favoritos to fetch.
+     */
+    orderBy?: FavoritosOrderByWithRelationInput | FavoritosOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Favoritos.
+     */
+    cursor?: FavoritosWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Favoritos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Favoritos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Favoritos.
+     */
+    distinct?: FavoritosScalarFieldEnum | FavoritosScalarFieldEnum[]
+  }
+
+  /**
+   * Favoritos create
+   */
+  export type FavoritosCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Favoritos.
+     */
+    data: XOR<FavoritosCreateInput, FavoritosUncheckedCreateInput>
+  }
+
+  /**
+   * Favoritos createMany
+   */
+  export type FavoritosCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Favoritos.
+     */
+    data: FavoritosCreateManyInput | FavoritosCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Favoritos update
+   */
+  export type FavoritosUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Favoritos.
+     */
+    data: XOR<FavoritosUpdateInput, FavoritosUncheckedUpdateInput>
+    /**
+     * Choose, which Favoritos to update.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos updateMany
+   */
+  export type FavoritosUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Favoritos.
+     */
+    data: XOR<FavoritosUpdateManyMutationInput, FavoritosUncheckedUpdateManyInput>
+    /**
+     * Filter which Favoritos to update
+     */
+    where?: FavoritosWhereInput
+    /**
+     * Limit how many Favoritos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Favoritos upsert
+   */
+  export type FavoritosUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Favoritos to update in case it exists.
+     */
+    where: FavoritosWhereUniqueInput
+    /**
+     * In case the Favoritos found by the `where` argument doesn't exist, create a new Favoritos with this data.
+     */
+    create: XOR<FavoritosCreateInput, FavoritosUncheckedCreateInput>
+    /**
+     * In case the Favoritos was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FavoritosUpdateInput, FavoritosUncheckedUpdateInput>
+  }
+
+  /**
+   * Favoritos delete
+   */
+  export type FavoritosDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+    /**
+     * Filter which Favoritos to delete.
+     */
+    where: FavoritosWhereUniqueInput
+  }
+
+  /**
+   * Favoritos deleteMany
+   */
+  export type FavoritosDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Favoritos to delete
+     */
+    where?: FavoritosWhereInput
+    /**
+     * Limit how many Favoritos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Favoritos without action
+   */
+  export type FavoritosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Favoritos
+     */
+    select?: FavoritosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Favoritos
+     */
+    omit?: FavoritosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavoritosInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -12106,7 +14438,9 @@ export namespace Prisma {
   export const NotasScalarFieldEnum: {
     id_not: 'id_not',
     not_titulo: 'not_titulo',
-    not_dec: 'not_dec',
+    not_IT: 'not_IT',
+    not_AB: 'not_AB',
+    not_Pa: 'not_Pa',
     norm_criador: 'norm_criador',
     adm_criador: 'adm_criador',
     data_criacao: 'data_criacao'
@@ -12115,12 +14449,12 @@ export namespace Prisma {
   export type NotasScalarFieldEnum = (typeof NotasScalarFieldEnum)[keyof typeof NotasScalarFieldEnum]
 
 
-  export const Nota_CategoriaScalarFieldEnum: {
-    id_nota: 'id_nota',
+  export const Norma_CategoriaScalarFieldEnum: {
+    id_norma: 'id_norma',
     id_cat: 'id_cat'
   };
 
-  export type Nota_CategoriaScalarFieldEnum = (typeof Nota_CategoriaScalarFieldEnum)[keyof typeof Nota_CategoriaScalarFieldEnum]
+  export type Norma_CategoriaScalarFieldEnum = (typeof Norma_CategoriaScalarFieldEnum)[keyof typeof Norma_CategoriaScalarFieldEnum]
 
 
   export const Normas_ReferenciadasScalarFieldEnum: {
@@ -12166,12 +14500,42 @@ export namespace Prisma {
   export type Historico_Acesso_NormasScalarFieldEnum = (typeof Historico_Acesso_NormasScalarFieldEnum)[keyof typeof Historico_Acesso_NormasScalarFieldEnum]
 
 
+  export const PedidosdeAlteracaoScalarFieldEnum: {
+    id: 'id',
+    id_user: 'id_user',
+    alteracao: 'alteracao',
+    acaoDealteracao: 'acaoDealteracao',
+    notaorNorma: 'notaorNorma',
+    status: 'status',
+    data_pedido: 'data_pedido',
+    id_norma: 'id_norma'
+  };
+
+  export type PedidosdeAlteracaoScalarFieldEnum = (typeof PedidosdeAlteracaoScalarFieldEnum)[keyof typeof PedidosdeAlteracaoScalarFieldEnum]
+
+
+  export const FavoritosScalarFieldEnum: {
+    id_user: 'id_user',
+    id_norma: 'id_norma',
+    data_criacao: 'data_criacao'
+  };
+
+  export type FavoritosScalarFieldEnum = (typeof FavoritosScalarFieldEnum)[keyof typeof FavoritosScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const UsersOrderByRelevanceFieldEnum: {
@@ -12219,7 +14583,9 @@ export namespace Prisma {
 
   export const NotasOrderByRelevanceFieldEnum: {
     not_titulo: 'not_titulo',
-    not_dec: 'not_dec'
+    not_IT: 'not_IT',
+    not_AB: 'not_AB',
+    not_Pa: 'not_Pa'
   };
 
   export type NotasOrderByRelevanceFieldEnum = (typeof NotasOrderByRelevanceFieldEnum)[keyof typeof NotasOrderByRelevanceFieldEnum]
@@ -12241,6 +14607,23 @@ export namespace Prisma {
   };
 
   export type MfaOrderByRelevanceFieldEnum = (typeof MfaOrderByRelevanceFieldEnum)[keyof typeof MfaOrderByRelevanceFieldEnum]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
   /**
@@ -12277,6 +14660,41 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'AcaoDeAlteracao'
+   */
+  export type EnumAcaoDeAlteracaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AcaoDeAlteracao'>
+    
+
+
+  /**
+   * Reference to a field of type 'NotaOrNorma'
+   */
+  export type EnumNotaOrNormaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotaOrNorma'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -12301,7 +14719,9 @@ export namespace Prisma {
     normas?: NormaListRelationFilter
     notas?: NotasListRelationFilter
     mfa?: MfaListRelationFilter
+    favoritos?: FavoritosListRelationFilter
     historicoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
+    pedidos?: PedidosdeAlteracaoListRelationFilter
   }
 
   export type UsersOrderByWithRelationInput = {
@@ -12316,7 +14736,9 @@ export namespace Prisma {
     normas?: NormaOrderByRelationAggregateInput
     notas?: NotasOrderByRelationAggregateInput
     mfa?: MfaOrderByRelationAggregateInput
+    favoritos?: FavoritosOrderByRelationAggregateInput
     historicoAcessoNormas?: Historico_Acesso_NormasOrderByRelationAggregateInput
+    pedidos?: PedidosdeAlteracaoOrderByRelationAggregateInput
     _relevance?: UsersOrderByRelevanceInput
   }
 
@@ -12335,7 +14757,9 @@ export namespace Prisma {
     normas?: NormaListRelationFilter
     notas?: NotasListRelationFilter
     mfa?: MfaListRelationFilter
+    favoritos?: FavoritosListRelationFilter
     historicoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
+    pedidos?: PedidosdeAlteracaoListRelationFilter
   }, "id_user" | "email">
 
   export type UsersOrderByWithAggregationInput = {
@@ -12428,7 +14852,7 @@ export namespace Prisma {
     cat_nome?: StringFilter<"Categoria"> | string
     adm_criador?: IntFilter<"Categoria"> | number
     data_criacao?: DateTimeFilter<"Categoria"> | Date | string
-    nota_cat?: Nota_CategoriaListRelationFilter
+    norma_cat?: Norma_CategoriaListRelationFilter
     usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
   }
 
@@ -12437,7 +14861,7 @@ export namespace Prisma {
     cat_nome?: SortOrder
     adm_criador?: SortOrder
     data_criacao?: SortOrder
-    nota_cat?: Nota_CategoriaOrderByRelationAggregateInput
+    norma_cat?: Norma_CategoriaOrderByRelationAggregateInput
     usuario?: UsersOrderByWithRelationInput
     _relevance?: CategoriaOrderByRelevanceInput
   }
@@ -12450,7 +14874,7 @@ export namespace Prisma {
     NOT?: CategoriaWhereInput | CategoriaWhereInput[]
     adm_criador?: IntFilter<"Categoria"> | number
     data_criacao?: DateTimeFilter<"Categoria"> | Date | string
-    nota_cat?: Nota_CategoriaListRelationFilter
+    norma_cat?: Norma_CategoriaListRelationFilter
     usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
   }, "cat_id" | "cat_nome">
 
@@ -12498,6 +14922,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasListRelationFilter
     versoes?: Normas_VersoesListRelationFilter
     HistoricoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
+    favoritos?: FavoritosListRelationFilter
+    categoria?: Norma_CategoriaListRelationFilter
+    pedidos?: PedidosdeAlteracaoListRelationFilter
   }
 
   export type NormaOrderByWithRelationInput = {
@@ -12519,6 +14946,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasOrderByRelationAggregateInput
     versoes?: Normas_VersoesOrderByRelationAggregateInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasOrderByRelationAggregateInput
+    favoritos?: FavoritosOrderByRelationAggregateInput
+    categoria?: Norma_CategoriaOrderByRelationAggregateInput
+    pedidos?: PedidosdeAlteracaoOrderByRelationAggregateInput
     _relevance?: NormaOrderByRelevanceInput
   }
 
@@ -12544,6 +14974,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasListRelationFilter
     versoes?: Normas_VersoesListRelationFilter
     HistoricoAcessoNormas?: Historico_Acesso_NormasListRelationFilter
+    favoritos?: FavoritosListRelationFilter
+    categoria?: Norma_CategoriaListRelationFilter
+    pedidos?: PedidosdeAlteracaoListRelationFilter
   }, "id_norm" | "norm_codigo">
 
   export type NormaOrderByWithAggregationInput = {
@@ -12588,25 +15021,27 @@ export namespace Prisma {
     NOT?: NotasWhereInput | NotasWhereInput[]
     id_not?: IntFilter<"Notas"> | number
     not_titulo?: StringFilter<"Notas"> | string
-    not_dec?: StringFilter<"Notas"> | string
+    not_IT?: StringFilter<"Notas"> | string
+    not_AB?: StringNullableFilter<"Notas"> | string | null
+    not_Pa?: StringNullableFilter<"Notas"> | string | null
     norm_criador?: IntFilter<"Notas"> | number
     adm_criador?: IntFilter<"Notas"> | number
     data_criacao?: DateTimeFilter<"Notas"> | Date | string
     usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
     normas?: XOR<NormaScalarRelationFilter, NormaWhereInput>
-    nota_cat?: Nota_CategoriaListRelationFilter
   }
 
   export type NotasOrderByWithRelationInput = {
     id_not?: SortOrder
     not_titulo?: SortOrder
-    not_dec?: SortOrder
+    not_IT?: SortOrder
+    not_AB?: SortOrderInput | SortOrder
+    not_Pa?: SortOrderInput | SortOrder
     norm_criador?: SortOrder
     adm_criador?: SortOrder
     data_criacao?: SortOrder
     usuario?: UsersOrderByWithRelationInput
     normas?: NormaOrderByWithRelationInput
-    nota_cat?: Nota_CategoriaOrderByRelationAggregateInput
     _relevance?: NotasOrderByRelevanceInput
   }
 
@@ -12616,19 +15051,22 @@ export namespace Prisma {
     OR?: NotasWhereInput[]
     NOT?: NotasWhereInput | NotasWhereInput[]
     not_titulo?: StringFilter<"Notas"> | string
-    not_dec?: StringFilter<"Notas"> | string
+    not_IT?: StringFilter<"Notas"> | string
+    not_AB?: StringNullableFilter<"Notas"> | string | null
+    not_Pa?: StringNullableFilter<"Notas"> | string | null
     norm_criador?: IntFilter<"Notas"> | number
     adm_criador?: IntFilter<"Notas"> | number
     data_criacao?: DateTimeFilter<"Notas"> | Date | string
     usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
     normas?: XOR<NormaScalarRelationFilter, NormaWhereInput>
-    nota_cat?: Nota_CategoriaListRelationFilter
   }, "id_not">
 
   export type NotasOrderByWithAggregationInput = {
     id_not?: SortOrder
     not_titulo?: SortOrder
-    not_dec?: SortOrder
+    not_IT?: SortOrder
+    not_AB?: SortOrderInput | SortOrder
+    not_Pa?: SortOrderInput | SortOrder
     norm_criador?: SortOrder
     adm_criador?: SortOrder
     data_criacao?: SortOrder
@@ -12645,56 +15083,58 @@ export namespace Prisma {
     NOT?: NotasScalarWhereWithAggregatesInput | NotasScalarWhereWithAggregatesInput[]
     id_not?: IntWithAggregatesFilter<"Notas"> | number
     not_titulo?: StringWithAggregatesFilter<"Notas"> | string
-    not_dec?: StringWithAggregatesFilter<"Notas"> | string
+    not_IT?: StringWithAggregatesFilter<"Notas"> | string
+    not_AB?: StringNullableWithAggregatesFilter<"Notas"> | string | null
+    not_Pa?: StringNullableWithAggregatesFilter<"Notas"> | string | null
     norm_criador?: IntWithAggregatesFilter<"Notas"> | number
     adm_criador?: IntWithAggregatesFilter<"Notas"> | number
     data_criacao?: DateTimeWithAggregatesFilter<"Notas"> | Date | string
   }
 
-  export type Nota_CategoriaWhereInput = {
-    AND?: Nota_CategoriaWhereInput | Nota_CategoriaWhereInput[]
-    OR?: Nota_CategoriaWhereInput[]
-    NOT?: Nota_CategoriaWhereInput | Nota_CategoriaWhereInput[]
-    id_nota?: IntFilter<"Nota_Categoria"> | number
-    id_cat?: IntFilter<"Nota_Categoria"> | number
+  export type Norma_CategoriaWhereInput = {
+    AND?: Norma_CategoriaWhereInput | Norma_CategoriaWhereInput[]
+    OR?: Norma_CategoriaWhereInput[]
+    NOT?: Norma_CategoriaWhereInput | Norma_CategoriaWhereInput[]
+    id_norma?: IntFilter<"Norma_Categoria"> | number
+    id_cat?: IntFilter<"Norma_Categoria"> | number
     cat?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
-    nota?: XOR<NotasScalarRelationFilter, NotasWhereInput>
+    norma?: XOR<NormaScalarRelationFilter, NormaWhereInput>
   }
 
-  export type Nota_CategoriaOrderByWithRelationInput = {
-    id_nota?: SortOrder
+  export type Norma_CategoriaOrderByWithRelationInput = {
+    id_norma?: SortOrder
     id_cat?: SortOrder
     cat?: CategoriaOrderByWithRelationInput
-    nota?: NotasOrderByWithRelationInput
+    norma?: NormaOrderByWithRelationInput
   }
 
-  export type Nota_CategoriaWhereUniqueInput = Prisma.AtLeast<{
-    id_nota_id_cat?: Nota_CategoriaId_notaId_catCompoundUniqueInput
-    AND?: Nota_CategoriaWhereInput | Nota_CategoriaWhereInput[]
-    OR?: Nota_CategoriaWhereInput[]
-    NOT?: Nota_CategoriaWhereInput | Nota_CategoriaWhereInput[]
-    id_nota?: IntFilter<"Nota_Categoria"> | number
-    id_cat?: IntFilter<"Nota_Categoria"> | number
+  export type Norma_CategoriaWhereUniqueInput = Prisma.AtLeast<{
+    id_norma_id_cat?: Norma_CategoriaId_normaId_catCompoundUniqueInput
+    AND?: Norma_CategoriaWhereInput | Norma_CategoriaWhereInput[]
+    OR?: Norma_CategoriaWhereInput[]
+    NOT?: Norma_CategoriaWhereInput | Norma_CategoriaWhereInput[]
+    id_norma?: IntFilter<"Norma_Categoria"> | number
+    id_cat?: IntFilter<"Norma_Categoria"> | number
     cat?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
-    nota?: XOR<NotasScalarRelationFilter, NotasWhereInput>
-  }, "id_nota_id_cat">
+    norma?: XOR<NormaScalarRelationFilter, NormaWhereInput>
+  }, "id_norma_id_cat">
 
-  export type Nota_CategoriaOrderByWithAggregationInput = {
-    id_nota?: SortOrder
+  export type Norma_CategoriaOrderByWithAggregationInput = {
+    id_norma?: SortOrder
     id_cat?: SortOrder
-    _count?: Nota_CategoriaCountOrderByAggregateInput
-    _avg?: Nota_CategoriaAvgOrderByAggregateInput
-    _max?: Nota_CategoriaMaxOrderByAggregateInput
-    _min?: Nota_CategoriaMinOrderByAggregateInput
-    _sum?: Nota_CategoriaSumOrderByAggregateInput
+    _count?: Norma_CategoriaCountOrderByAggregateInput
+    _avg?: Norma_CategoriaAvgOrderByAggregateInput
+    _max?: Norma_CategoriaMaxOrderByAggregateInput
+    _min?: Norma_CategoriaMinOrderByAggregateInput
+    _sum?: Norma_CategoriaSumOrderByAggregateInput
   }
 
-  export type Nota_CategoriaScalarWhereWithAggregatesInput = {
-    AND?: Nota_CategoriaScalarWhereWithAggregatesInput | Nota_CategoriaScalarWhereWithAggregatesInput[]
-    OR?: Nota_CategoriaScalarWhereWithAggregatesInput[]
-    NOT?: Nota_CategoriaScalarWhereWithAggregatesInput | Nota_CategoriaScalarWhereWithAggregatesInput[]
-    id_nota?: IntWithAggregatesFilter<"Nota_Categoria"> | number
-    id_cat?: IntWithAggregatesFilter<"Nota_Categoria"> | number
+  export type Norma_CategoriaScalarWhereWithAggregatesInput = {
+    AND?: Norma_CategoriaScalarWhereWithAggregatesInput | Norma_CategoriaScalarWhereWithAggregatesInput[]
+    OR?: Norma_CategoriaScalarWhereWithAggregatesInput[]
+    NOT?: Norma_CategoriaScalarWhereWithAggregatesInput | Norma_CategoriaScalarWhereWithAggregatesInput[]
+    id_norma?: IntWithAggregatesFilter<"Norma_Categoria"> | number
+    id_cat?: IntWithAggregatesFilter<"Norma_Categoria"> | number
   }
 
   export type Normas_ReferenciadasWhereInput = {
@@ -12930,6 +15370,132 @@ export namespace Prisma {
     data_acesso?: DateTimeWithAggregatesFilter<"Historico_Acesso_Normas"> | Date | string
   }
 
+  export type PedidosdeAlteracaoWhereInput = {
+    AND?: PedidosdeAlteracaoWhereInput | PedidosdeAlteracaoWhereInput[]
+    OR?: PedidosdeAlteracaoWhereInput[]
+    NOT?: PedidosdeAlteracaoWhereInput | PedidosdeAlteracaoWhereInput[]
+    id?: IntFilter<"PedidosdeAlteracao"> | number
+    id_user?: IntFilter<"PedidosdeAlteracao"> | number
+    alteracao?: JsonFilter<"PedidosdeAlteracao">
+    acaoDealteracao?: EnumAcaoDeAlteracaoFilter<"PedidosdeAlteracao"> | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFilter<"PedidosdeAlteracao"> | $Enums.NotaOrNorma
+    status?: EnumStatusFilter<"PedidosdeAlteracao"> | $Enums.Status
+    data_pedido?: DateTimeFilter<"PedidosdeAlteracao"> | Date | string
+    id_norma?: IntNullableFilter<"PedidosdeAlteracao"> | number | null
+    usuarios?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    normas?: XOR<NormaNullableScalarRelationFilter, NormaWhereInput> | null
+  }
+
+  export type PedidosdeAlteracaoOrderByWithRelationInput = {
+    id?: SortOrder
+    id_user?: SortOrder
+    alteracao?: SortOrder
+    acaoDealteracao?: SortOrder
+    notaorNorma?: SortOrder
+    status?: SortOrder
+    data_pedido?: SortOrder
+    id_norma?: SortOrderInput | SortOrder
+    usuarios?: UsersOrderByWithRelationInput
+    normas?: NormaOrderByWithRelationInput
+  }
+
+  export type PedidosdeAlteracaoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PedidosdeAlteracaoWhereInput | PedidosdeAlteracaoWhereInput[]
+    OR?: PedidosdeAlteracaoWhereInput[]
+    NOT?: PedidosdeAlteracaoWhereInput | PedidosdeAlteracaoWhereInput[]
+    id_user?: IntFilter<"PedidosdeAlteracao"> | number
+    alteracao?: JsonFilter<"PedidosdeAlteracao">
+    acaoDealteracao?: EnumAcaoDeAlteracaoFilter<"PedidosdeAlteracao"> | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFilter<"PedidosdeAlteracao"> | $Enums.NotaOrNorma
+    status?: EnumStatusFilter<"PedidosdeAlteracao"> | $Enums.Status
+    data_pedido?: DateTimeFilter<"PedidosdeAlteracao"> | Date | string
+    id_norma?: IntNullableFilter<"PedidosdeAlteracao"> | number | null
+    usuarios?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    normas?: XOR<NormaNullableScalarRelationFilter, NormaWhereInput> | null
+  }, "id">
+
+  export type PedidosdeAlteracaoOrderByWithAggregationInput = {
+    id?: SortOrder
+    id_user?: SortOrder
+    alteracao?: SortOrder
+    acaoDealteracao?: SortOrder
+    notaorNorma?: SortOrder
+    status?: SortOrder
+    data_pedido?: SortOrder
+    id_norma?: SortOrderInput | SortOrder
+    _count?: PedidosdeAlteracaoCountOrderByAggregateInput
+    _avg?: PedidosdeAlteracaoAvgOrderByAggregateInput
+    _max?: PedidosdeAlteracaoMaxOrderByAggregateInput
+    _min?: PedidosdeAlteracaoMinOrderByAggregateInput
+    _sum?: PedidosdeAlteracaoSumOrderByAggregateInput
+  }
+
+  export type PedidosdeAlteracaoScalarWhereWithAggregatesInput = {
+    AND?: PedidosdeAlteracaoScalarWhereWithAggregatesInput | PedidosdeAlteracaoScalarWhereWithAggregatesInput[]
+    OR?: PedidosdeAlteracaoScalarWhereWithAggregatesInput[]
+    NOT?: PedidosdeAlteracaoScalarWhereWithAggregatesInput | PedidosdeAlteracaoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"PedidosdeAlteracao"> | number
+    id_user?: IntWithAggregatesFilter<"PedidosdeAlteracao"> | number
+    alteracao?: JsonWithAggregatesFilter<"PedidosdeAlteracao">
+    acaoDealteracao?: EnumAcaoDeAlteracaoWithAggregatesFilter<"PedidosdeAlteracao"> | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaWithAggregatesFilter<"PedidosdeAlteracao"> | $Enums.NotaOrNorma
+    status?: EnumStatusWithAggregatesFilter<"PedidosdeAlteracao"> | $Enums.Status
+    data_pedido?: DateTimeWithAggregatesFilter<"PedidosdeAlteracao"> | Date | string
+    id_norma?: IntNullableWithAggregatesFilter<"PedidosdeAlteracao"> | number | null
+  }
+
+  export type FavoritosWhereInput = {
+    AND?: FavoritosWhereInput | FavoritosWhereInput[]
+    OR?: FavoritosWhereInput[]
+    NOT?: FavoritosWhereInput | FavoritosWhereInput[]
+    id_user?: IntFilter<"Favoritos"> | number
+    id_norma?: IntFilter<"Favoritos"> | number
+    data_criacao?: DateTimeFilter<"Favoritos"> | Date | string
+    usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    norma?: XOR<NormaScalarRelationFilter, NormaWhereInput>
+  }
+
+  export type FavoritosOrderByWithRelationInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+    usuario?: UsersOrderByWithRelationInput
+    norma?: NormaOrderByWithRelationInput
+  }
+
+  export type FavoritosWhereUniqueInput = Prisma.AtLeast<{
+    id_user_id_norma?: FavoritosId_userId_normaCompoundUniqueInput
+    AND?: FavoritosWhereInput | FavoritosWhereInput[]
+    OR?: FavoritosWhereInput[]
+    NOT?: FavoritosWhereInput | FavoritosWhereInput[]
+    id_user?: IntFilter<"Favoritos"> | number
+    id_norma?: IntFilter<"Favoritos"> | number
+    data_criacao?: DateTimeFilter<"Favoritos"> | Date | string
+    usuario?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    norma?: XOR<NormaScalarRelationFilter, NormaWhereInput>
+  }, "id_user_id_norma">
+
+  export type FavoritosOrderByWithAggregationInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+    _count?: FavoritosCountOrderByAggregateInput
+    _avg?: FavoritosAvgOrderByAggregateInput
+    _max?: FavoritosMaxOrderByAggregateInput
+    _min?: FavoritosMinOrderByAggregateInput
+    _sum?: FavoritosSumOrderByAggregateInput
+  }
+
+  export type FavoritosScalarWhereWithAggregatesInput = {
+    AND?: FavoritosScalarWhereWithAggregatesInput | FavoritosScalarWhereWithAggregatesInput[]
+    OR?: FavoritosScalarWhereWithAggregatesInput[]
+    NOT?: FavoritosScalarWhereWithAggregatesInput | FavoritosScalarWhereWithAggregatesInput[]
+    id_user?: IntWithAggregatesFilter<"Favoritos"> | number
+    id_norma?: IntWithAggregatesFilter<"Favoritos"> | number
+    data_criacao?: DateTimeWithAggregatesFilter<"Favoritos"> | Date | string
+  }
+
   export type UsersCreateInput = {
     user_name: string
     email: string
@@ -12941,7 +15507,9 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateInput = {
@@ -12956,7 +15524,9 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUpdateInput = {
@@ -12970,7 +15540,9 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateInput = {
@@ -12985,7 +15557,9 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersCreateManyInput = {
@@ -13066,7 +15640,7 @@ export namespace Prisma {
   export type CategoriaCreateInput = {
     cat_nome: string
     data_criacao?: Date | string
-    nota_cat?: Nota_CategoriaCreateNestedManyWithoutCatInput
+    norma_cat?: Norma_CategoriaCreateNestedManyWithoutCatInput
     usuario: UsersCreateNestedOneWithoutCategoriaInput
   }
 
@@ -13075,13 +15649,13 @@ export namespace Prisma {
     cat_nome: string
     adm_criador: number
     data_criacao?: Date | string
-    nota_cat?: Nota_CategoriaUncheckedCreateNestedManyWithoutCatInput
+    norma_cat?: Norma_CategoriaUncheckedCreateNestedManyWithoutCatInput
   }
 
   export type CategoriaUpdateInput = {
     cat_nome?: StringFieldUpdateOperationsInput | string
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    nota_cat?: Nota_CategoriaUpdateManyWithoutCatNestedInput
+    norma_cat?: Norma_CategoriaUpdateManyWithoutCatNestedInput
     usuario?: UsersUpdateOneRequiredWithoutCategoriaNestedInput
   }
 
@@ -13090,7 +15664,7 @@ export namespace Prisma {
     cat_nome?: StringFieldUpdateOperationsInput | string
     adm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    nota_cat?: Nota_CategoriaUncheckedUpdateManyWithoutCatNestedInput
+    norma_cat?: Norma_CategoriaUncheckedUpdateManyWithoutCatNestedInput
   }
 
   export type CategoriaCreateManyInput = {
@@ -13128,6 +15702,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateInput = {
@@ -13147,6 +15724,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUpdateInput = {
@@ -13165,6 +15745,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateInput = {
@@ -13184,6 +15767,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaCreateManyInput = {
@@ -13227,46 +15813,52 @@ export namespace Prisma {
 
   export type NotasCreateInput = {
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     data_criacao?: Date | string
     usuario: UsersCreateNestedOneWithoutNotasInput
     normas: NormaCreateNestedOneWithoutNotasInput
-    nota_cat?: Nota_CategoriaCreateNestedManyWithoutNotaInput
   }
 
   export type NotasUncheckedCreateInput = {
     id_not?: number
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     norm_criador: number
     adm_criador: number
     data_criacao?: Date | string
-    nota_cat?: Nota_CategoriaUncheckedCreateNestedManyWithoutNotaInput
   }
 
   export type NotasUpdateInput = {
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsersUpdateOneRequiredWithoutNotasNestedInput
     normas?: NormaUpdateOneRequiredWithoutNotasNestedInput
-    nota_cat?: Nota_CategoriaUpdateManyWithoutNotaNestedInput
   }
 
   export type NotasUncheckedUpdateInput = {
     id_not?: IntFieldUpdateOperationsInput | number
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     norm_criador?: IntFieldUpdateOperationsInput | number
     adm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    nota_cat?: Nota_CategoriaUncheckedUpdateManyWithoutNotaNestedInput
   }
 
   export type NotasCreateManyInput = {
     id_not?: number
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     norm_criador: number
     adm_criador: number
     data_criacao?: Date | string
@@ -13274,50 +15866,54 @@ export namespace Prisma {
 
   export type NotasUpdateManyMutationInput = {
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotasUncheckedUpdateManyInput = {
     id_not?: IntFieldUpdateOperationsInput | number
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     norm_criador?: IntFieldUpdateOperationsInput | number
     adm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type Nota_CategoriaCreateInput = {
-    cat: CategoriaCreateNestedOneWithoutNota_catInput
-    nota: NotasCreateNestedOneWithoutNota_catInput
+  export type Norma_CategoriaCreateInput = {
+    cat: CategoriaCreateNestedOneWithoutNorma_catInput
+    norma: NormaCreateNestedOneWithoutCategoriaInput
   }
 
-  export type Nota_CategoriaUncheckedCreateInput = {
-    id_nota: number
+  export type Norma_CategoriaUncheckedCreateInput = {
+    id_norma: number
     id_cat: number
   }
 
-  export type Nota_CategoriaUpdateInput = {
-    cat?: CategoriaUpdateOneRequiredWithoutNota_catNestedInput
-    nota?: NotasUpdateOneRequiredWithoutNota_catNestedInput
+  export type Norma_CategoriaUpdateInput = {
+    cat?: CategoriaUpdateOneRequiredWithoutNorma_catNestedInput
+    norma?: NormaUpdateOneRequiredWithoutCategoriaNestedInput
   }
 
-  export type Nota_CategoriaUncheckedUpdateInput = {
-    id_nota?: IntFieldUpdateOperationsInput | number
+  export type Norma_CategoriaUncheckedUpdateInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
     id_cat?: IntFieldUpdateOperationsInput | number
   }
 
-  export type Nota_CategoriaCreateManyInput = {
-    id_nota: number
+  export type Norma_CategoriaCreateManyInput = {
+    id_norma: number
     id_cat: number
   }
 
-  export type Nota_CategoriaUpdateManyMutationInput = {
+  export type Norma_CategoriaUpdateManyMutationInput = {
 
   }
 
-  export type Nota_CategoriaUncheckedUpdateManyInput = {
-    id_nota?: IntFieldUpdateOperationsInput | number
+  export type Norma_CategoriaUncheckedUpdateManyInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
     id_cat?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13527,6 +16123,118 @@ export namespace Prisma {
     data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PedidosdeAlteracaoCreateInput = {
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+    usuarios: UsersCreateNestedOneWithoutPedidosInput
+    normas?: NormaCreateNestedOneWithoutPedidosInput
+  }
+
+  export type PedidosdeAlteracaoUncheckedCreateInput = {
+    id?: number
+    id_user: number
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+    id_norma?: number | null
+  }
+
+  export type PedidosdeAlteracaoUpdateInput = {
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UsersUpdateOneRequiredWithoutPedidosNestedInput
+    normas?: NormaUpdateOneWithoutPedidosNestedInput
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    id_user?: IntFieldUpdateOperationsInput | number
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+    id_norma?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PedidosdeAlteracaoCreateManyInput = {
+    id?: number
+    id_user: number
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+    id_norma?: number | null
+  }
+
+  export type PedidosdeAlteracaoUpdateManyMutationInput = {
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    id_user?: IntFieldUpdateOperationsInput | number
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+    id_norma?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type FavoritosCreateInput = {
+    data_criacao?: Date | string
+    usuario: UsersCreateNestedOneWithoutFavoritosInput
+    norma: NormaCreateNestedOneWithoutFavoritosInput
+  }
+
+  export type FavoritosUncheckedCreateInput = {
+    id_user: number
+    id_norma: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosUpdateInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuario?: UsersUpdateOneRequiredWithoutFavoritosNestedInput
+    norma?: NormaUpdateOneRequiredWithoutFavoritosNestedInput
+  }
+
+  export type FavoritosUncheckedUpdateInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosCreateManyInput = {
+    id_user: number
+    id_norma: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosUpdateManyMutationInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosUncheckedUpdateManyInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -13601,10 +16309,22 @@ export namespace Prisma {
     none?: MfaWhereInput
   }
 
+  export type FavoritosListRelationFilter = {
+    every?: FavoritosWhereInput
+    some?: FavoritosWhereInput
+    none?: FavoritosWhereInput
+  }
+
   export type Historico_Acesso_NormasListRelationFilter = {
     every?: Historico_Acesso_NormasWhereInput
     some?: Historico_Acesso_NormasWhereInput
     none?: Historico_Acesso_NormasWhereInput
+  }
+
+  export type PedidosdeAlteracaoListRelationFilter = {
+    every?: PedidosdeAlteracaoWhereInput
+    some?: PedidosdeAlteracaoWhereInput
+    none?: PedidosdeAlteracaoWhereInput
   }
 
   export type OrgaosOrderByRelationAggregateInput = {
@@ -13627,7 +16347,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type FavoritosOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type Historico_Acesso_NormasOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PedidosdeAlteracaoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13804,10 +16532,10 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type Nota_CategoriaListRelationFilter = {
-    every?: Nota_CategoriaWhereInput
-    some?: Nota_CategoriaWhereInput
-    none?: Nota_CategoriaWhereInput
+  export type Norma_CategoriaListRelationFilter = {
+    every?: Norma_CategoriaWhereInput
+    some?: Norma_CategoriaWhereInput
+    none?: Norma_CategoriaWhereInput
   }
 
   export type UsersScalarRelationFilter = {
@@ -13815,7 +16543,7 @@ export namespace Prisma {
     isNot?: UsersWhereInput
   }
 
-  export type Nota_CategoriaOrderByRelationAggregateInput = {
+  export type Norma_CategoriaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13941,6 +16669,21 @@ export namespace Prisma {
     adm_criador?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NormaScalarRelationFilter = {
     is?: NormaWhereInput
     isNot?: NormaWhereInput
@@ -13955,7 +16698,9 @@ export namespace Prisma {
   export type NotasCountOrderByAggregateInput = {
     id_not?: SortOrder
     not_titulo?: SortOrder
-    not_dec?: SortOrder
+    not_IT?: SortOrder
+    not_AB?: SortOrder
+    not_Pa?: SortOrder
     norm_criador?: SortOrder
     adm_criador?: SortOrder
     data_criacao?: SortOrder
@@ -13970,7 +16715,9 @@ export namespace Prisma {
   export type NotasMaxOrderByAggregateInput = {
     id_not?: SortOrder
     not_titulo?: SortOrder
-    not_dec?: SortOrder
+    not_IT?: SortOrder
+    not_AB?: SortOrder
+    not_Pa?: SortOrder
     norm_criador?: SortOrder
     adm_criador?: SortOrder
     data_criacao?: SortOrder
@@ -13979,7 +16726,9 @@ export namespace Prisma {
   export type NotasMinOrderByAggregateInput = {
     id_not?: SortOrder
     not_titulo?: SortOrder
-    not_dec?: SortOrder
+    not_IT?: SortOrder
+    not_AB?: SortOrder
+    not_Pa?: SortOrder
     norm_criador?: SortOrder
     adm_criador?: SortOrder
     data_criacao?: SortOrder
@@ -13991,43 +16740,56 @@ export namespace Prisma {
     adm_criador?: SortOrder
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type CategoriaScalarRelationFilter = {
     is?: CategoriaWhereInput
     isNot?: CategoriaWhereInput
   }
 
-  export type NotasScalarRelationFilter = {
-    is?: NotasWhereInput
-    isNot?: NotasWhereInput
-  }
-
-  export type Nota_CategoriaId_notaId_catCompoundUniqueInput = {
-    id_nota: number
+  export type Norma_CategoriaId_normaId_catCompoundUniqueInput = {
+    id_norma: number
     id_cat: number
   }
 
-  export type Nota_CategoriaCountOrderByAggregateInput = {
-    id_nota?: SortOrder
+  export type Norma_CategoriaCountOrderByAggregateInput = {
+    id_norma?: SortOrder
     id_cat?: SortOrder
   }
 
-  export type Nota_CategoriaAvgOrderByAggregateInput = {
-    id_nota?: SortOrder
+  export type Norma_CategoriaAvgOrderByAggregateInput = {
+    id_norma?: SortOrder
     id_cat?: SortOrder
   }
 
-  export type Nota_CategoriaMaxOrderByAggregateInput = {
-    id_nota?: SortOrder
+  export type Norma_CategoriaMaxOrderByAggregateInput = {
+    id_norma?: SortOrder
     id_cat?: SortOrder
   }
 
-  export type Nota_CategoriaMinOrderByAggregateInput = {
-    id_nota?: SortOrder
+  export type Norma_CategoriaMinOrderByAggregateInput = {
+    id_norma?: SortOrder
     id_cat?: SortOrder
   }
 
-  export type Nota_CategoriaSumOrderByAggregateInput = {
-    id_nota?: SortOrder
+  export type Norma_CategoriaSumOrderByAggregateInput = {
+    id_norma?: SortOrder
     id_cat?: SortOrder
   }
 
@@ -14185,6 +16947,187 @@ export namespace Prisma {
     id_user?: SortOrder
     id_norma?: SortOrder
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EnumAcaoDeAlteracaoFilter<$PrismaModel = never> = {
+    equals?: $Enums.AcaoDeAlteracao | EnumAcaoDeAlteracaoFieldRefInput<$PrismaModel>
+    in?: $Enums.AcaoDeAlteracao[]
+    notIn?: $Enums.AcaoDeAlteracao[]
+    not?: NestedEnumAcaoDeAlteracaoFilter<$PrismaModel> | $Enums.AcaoDeAlteracao
+  }
+
+  export type EnumNotaOrNormaFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotaOrNorma | EnumNotaOrNormaFieldRefInput<$PrismaModel>
+    in?: $Enums.NotaOrNorma[]
+    notIn?: $Enums.NotaOrNorma[]
+    not?: NestedEnumNotaOrNormaFilter<$PrismaModel> | $Enums.NotaOrNorma
+  }
+
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type NormaNullableScalarRelationFilter = {
+    is?: NormaWhereInput | null
+    isNot?: NormaWhereInput | null
+  }
+
+  export type PedidosdeAlteracaoCountOrderByAggregateInput = {
+    id?: SortOrder
+    id_user?: SortOrder
+    alteracao?: SortOrder
+    acaoDealteracao?: SortOrder
+    notaorNorma?: SortOrder
+    status?: SortOrder
+    data_pedido?: SortOrder
+    id_norma?: SortOrder
+  }
+
+  export type PedidosdeAlteracaoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
+
+  export type PedidosdeAlteracaoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    id_user?: SortOrder
+    acaoDealteracao?: SortOrder
+    notaorNorma?: SortOrder
+    status?: SortOrder
+    data_pedido?: SortOrder
+    id_norma?: SortOrder
+  }
+
+  export type PedidosdeAlteracaoMinOrderByAggregateInput = {
+    id?: SortOrder
+    id_user?: SortOrder
+    acaoDealteracao?: SortOrder
+    notaorNorma?: SortOrder
+    status?: SortOrder
+    data_pedido?: SortOrder
+    id_norma?: SortOrder
+  }
+
+  export type PedidosdeAlteracaoSumOrderByAggregateInput = {
+    id?: SortOrder
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type EnumAcaoDeAlteracaoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AcaoDeAlteracao | EnumAcaoDeAlteracaoFieldRefInput<$PrismaModel>
+    in?: $Enums.AcaoDeAlteracao[]
+    notIn?: $Enums.AcaoDeAlteracao[]
+    not?: NestedEnumAcaoDeAlteracaoWithAggregatesFilter<$PrismaModel> | $Enums.AcaoDeAlteracao
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAcaoDeAlteracaoFilter<$PrismaModel>
+    _max?: NestedEnumAcaoDeAlteracaoFilter<$PrismaModel>
+  }
+
+  export type EnumNotaOrNormaWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotaOrNorma | EnumNotaOrNormaFieldRefInput<$PrismaModel>
+    in?: $Enums.NotaOrNorma[]
+    notIn?: $Enums.NotaOrNorma[]
+    not?: NestedEnumNotaOrNormaWithAggregatesFilter<$PrismaModel> | $Enums.NotaOrNorma
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotaOrNormaFilter<$PrismaModel>
+    _max?: NestedEnumNotaOrNormaFilter<$PrismaModel>
+  }
+
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type FavoritosId_userId_normaCompoundUniqueInput = {
+    id_user: number
+    id_norma: number
+  }
+
+  export type FavoritosCountOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type FavoritosAvgOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
+
+  export type FavoritosMaxOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type FavoritosMinOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+    data_criacao?: SortOrder
+  }
+
+  export type FavoritosSumOrderByAggregateInput = {
+    id_user?: SortOrder
+    id_norma?: SortOrder
+  }
 
   export type OrgaosCreateNestedManyWithoutUsuariosInput = {
     create?: XOR<OrgaosCreateWithoutUsuariosInput, OrgaosUncheckedCreateWithoutUsuariosInput> | OrgaosCreateWithoutUsuariosInput[] | OrgaosUncheckedCreateWithoutUsuariosInput[]
@@ -14221,11 +17164,25 @@ export namespace Prisma {
     connect?: MfaWhereUniqueInput | MfaWhereUniqueInput[]
   }
 
+  export type FavoritosCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+  }
+
   export type Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput = {
     create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
     createMany?: Historico_Acesso_NormasCreateManyUsuariosInputEnvelope
     connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+  }
+
+  export type PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput> | PedidosdeAlteracaoCreateWithoutUsuariosInput[] | PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput | PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput[]
+    createMany?: PedidosdeAlteracaoCreateManyUsuariosInputEnvelope
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
   }
 
   export type OrgaosUncheckedCreateNestedManyWithoutUsuariosInput = {
@@ -14263,11 +17220,25 @@ export namespace Prisma {
     connect?: MfaWhereUniqueInput | MfaWhereUniqueInput[]
   }
 
+  export type FavoritosUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+  }
+
   export type Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput = {
     create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
     createMany?: Historico_Acesso_NormasCreateManyUsuariosInputEnvelope
     connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+  }
+
+  export type PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput> | PedidosdeAlteracaoCreateWithoutUsuariosInput[] | PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput | PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput[]
+    createMany?: PedidosdeAlteracaoCreateManyUsuariosInputEnvelope
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -14352,6 +17323,20 @@ export namespace Prisma {
     deleteMany?: MfaScalarWhereInput | MfaScalarWhereInput[]
   }
 
+  export type FavoritosUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutUsuarioInput | FavoritosUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutUsuarioInput | FavoritosUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutUsuarioInput | FavoritosUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+  }
+
   export type Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput = {
     create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
@@ -14364,6 +17349,20 @@ export namespace Prisma {
     update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput[]
     updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput[]
     deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+  }
+
+  export type PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput> | PedidosdeAlteracaoCreateWithoutUsuariosInput[] | PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput | PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput[]
+    upsert?: PedidosdeAlteracaoUpsertWithWhereUniqueWithoutUsuariosInput | PedidosdeAlteracaoUpsertWithWhereUniqueWithoutUsuariosInput[]
+    createMany?: PedidosdeAlteracaoCreateManyUsuariosInputEnvelope
+    set?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    disconnect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    delete?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    update?: PedidosdeAlteracaoUpdateWithWhereUniqueWithoutUsuariosInput | PedidosdeAlteracaoUpdateWithWhereUniqueWithoutUsuariosInput[]
+    updateMany?: PedidosdeAlteracaoUpdateManyWithWhereWithoutUsuariosInput | PedidosdeAlteracaoUpdateManyWithWhereWithoutUsuariosInput[]
+    deleteMany?: PedidosdeAlteracaoScalarWhereInput | PedidosdeAlteracaoScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -14444,6 +17443,20 @@ export namespace Prisma {
     deleteMany?: MfaScalarWhereInput | MfaScalarWhereInput[]
   }
 
+  export type FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput> | FavoritosCreateWithoutUsuarioInput[] | FavoritosUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutUsuarioInput | FavoritosCreateOrConnectWithoutUsuarioInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutUsuarioInput | FavoritosUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: FavoritosCreateManyUsuarioInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutUsuarioInput | FavoritosUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutUsuarioInput | FavoritosUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+  }
+
   export type Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput = {
     create?: XOR<Historico_Acesso_NormasCreateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput> | Historico_Acesso_NormasCreateWithoutUsuariosInput[] | Historico_Acesso_NormasUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput | Historico_Acesso_NormasCreateOrConnectWithoutUsuariosInput[]
@@ -14456,6 +17469,20 @@ export namespace Prisma {
     update?: Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput | Historico_Acesso_NormasUpdateWithWhereUniqueWithoutUsuariosInput[]
     updateMany?: Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput | Historico_Acesso_NormasUpdateManyWithWhereWithoutUsuariosInput[]
     deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput> | PedidosdeAlteracaoCreateWithoutUsuariosInput[] | PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput | PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput[]
+    upsert?: PedidosdeAlteracaoUpsertWithWhereUniqueWithoutUsuariosInput | PedidosdeAlteracaoUpsertWithWhereUniqueWithoutUsuariosInput[]
+    createMany?: PedidosdeAlteracaoCreateManyUsuariosInputEnvelope
+    set?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    disconnect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    delete?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    update?: PedidosdeAlteracaoUpdateWithWhereUniqueWithoutUsuariosInput | PedidosdeAlteracaoUpdateWithWhereUniqueWithoutUsuariosInput[]
+    updateMany?: PedidosdeAlteracaoUpdateManyWithWhereWithoutUsuariosInput | PedidosdeAlteracaoUpdateManyWithWhereWithoutUsuariosInput[]
+    deleteMany?: PedidosdeAlteracaoScalarWhereInput | PedidosdeAlteracaoScalarWhereInput[]
   }
 
   export type NormaCreateNestedManyWithoutOrgaosInput = {
@@ -14524,11 +17551,11 @@ export namespace Prisma {
     deleteMany?: NormaScalarWhereInput | NormaScalarWhereInput[]
   }
 
-  export type Nota_CategoriaCreateNestedManyWithoutCatInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutCatInput, Nota_CategoriaUncheckedCreateWithoutCatInput> | Nota_CategoriaCreateWithoutCatInput[] | Nota_CategoriaUncheckedCreateWithoutCatInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutCatInput | Nota_CategoriaCreateOrConnectWithoutCatInput[]
-    createMany?: Nota_CategoriaCreateManyCatInputEnvelope
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
+  export type Norma_CategoriaCreateNestedManyWithoutCatInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutCatInput, Norma_CategoriaUncheckedCreateWithoutCatInput> | Norma_CategoriaCreateWithoutCatInput[] | Norma_CategoriaUncheckedCreateWithoutCatInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutCatInput | Norma_CategoriaCreateOrConnectWithoutCatInput[]
+    createMany?: Norma_CategoriaCreateManyCatInputEnvelope
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
   }
 
   export type UsersCreateNestedOneWithoutCategoriaInput = {
@@ -14537,25 +17564,25 @@ export namespace Prisma {
     connect?: UsersWhereUniqueInput
   }
 
-  export type Nota_CategoriaUncheckedCreateNestedManyWithoutCatInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutCatInput, Nota_CategoriaUncheckedCreateWithoutCatInput> | Nota_CategoriaCreateWithoutCatInput[] | Nota_CategoriaUncheckedCreateWithoutCatInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutCatInput | Nota_CategoriaCreateOrConnectWithoutCatInput[]
-    createMany?: Nota_CategoriaCreateManyCatInputEnvelope
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
+  export type Norma_CategoriaUncheckedCreateNestedManyWithoutCatInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutCatInput, Norma_CategoriaUncheckedCreateWithoutCatInput> | Norma_CategoriaCreateWithoutCatInput[] | Norma_CategoriaUncheckedCreateWithoutCatInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutCatInput | Norma_CategoriaCreateOrConnectWithoutCatInput[]
+    createMany?: Norma_CategoriaCreateManyCatInputEnvelope
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
   }
 
-  export type Nota_CategoriaUpdateManyWithoutCatNestedInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutCatInput, Nota_CategoriaUncheckedCreateWithoutCatInput> | Nota_CategoriaCreateWithoutCatInput[] | Nota_CategoriaUncheckedCreateWithoutCatInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutCatInput | Nota_CategoriaCreateOrConnectWithoutCatInput[]
-    upsert?: Nota_CategoriaUpsertWithWhereUniqueWithoutCatInput | Nota_CategoriaUpsertWithWhereUniqueWithoutCatInput[]
-    createMany?: Nota_CategoriaCreateManyCatInputEnvelope
-    set?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    disconnect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    delete?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    update?: Nota_CategoriaUpdateWithWhereUniqueWithoutCatInput | Nota_CategoriaUpdateWithWhereUniqueWithoutCatInput[]
-    updateMany?: Nota_CategoriaUpdateManyWithWhereWithoutCatInput | Nota_CategoriaUpdateManyWithWhereWithoutCatInput[]
-    deleteMany?: Nota_CategoriaScalarWhereInput | Nota_CategoriaScalarWhereInput[]
+  export type Norma_CategoriaUpdateManyWithoutCatNestedInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutCatInput, Norma_CategoriaUncheckedCreateWithoutCatInput> | Norma_CategoriaCreateWithoutCatInput[] | Norma_CategoriaUncheckedCreateWithoutCatInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutCatInput | Norma_CategoriaCreateOrConnectWithoutCatInput[]
+    upsert?: Norma_CategoriaUpsertWithWhereUniqueWithoutCatInput | Norma_CategoriaUpsertWithWhereUniqueWithoutCatInput[]
+    createMany?: Norma_CategoriaCreateManyCatInputEnvelope
+    set?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    disconnect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    delete?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    update?: Norma_CategoriaUpdateWithWhereUniqueWithoutCatInput | Norma_CategoriaUpdateWithWhereUniqueWithoutCatInput[]
+    updateMany?: Norma_CategoriaUpdateManyWithWhereWithoutCatInput | Norma_CategoriaUpdateManyWithWhereWithoutCatInput[]
+    deleteMany?: Norma_CategoriaScalarWhereInput | Norma_CategoriaScalarWhereInput[]
   }
 
   export type UsersUpdateOneRequiredWithoutCategoriaNestedInput = {
@@ -14566,18 +17593,18 @@ export namespace Prisma {
     update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutCategoriaInput, UsersUpdateWithoutCategoriaInput>, UsersUncheckedUpdateWithoutCategoriaInput>
   }
 
-  export type Nota_CategoriaUncheckedUpdateManyWithoutCatNestedInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutCatInput, Nota_CategoriaUncheckedCreateWithoutCatInput> | Nota_CategoriaCreateWithoutCatInput[] | Nota_CategoriaUncheckedCreateWithoutCatInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutCatInput | Nota_CategoriaCreateOrConnectWithoutCatInput[]
-    upsert?: Nota_CategoriaUpsertWithWhereUniqueWithoutCatInput | Nota_CategoriaUpsertWithWhereUniqueWithoutCatInput[]
-    createMany?: Nota_CategoriaCreateManyCatInputEnvelope
-    set?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    disconnect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    delete?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    update?: Nota_CategoriaUpdateWithWhereUniqueWithoutCatInput | Nota_CategoriaUpdateWithWhereUniqueWithoutCatInput[]
-    updateMany?: Nota_CategoriaUpdateManyWithWhereWithoutCatInput | Nota_CategoriaUpdateManyWithWhereWithoutCatInput[]
-    deleteMany?: Nota_CategoriaScalarWhereInput | Nota_CategoriaScalarWhereInput[]
+  export type Norma_CategoriaUncheckedUpdateManyWithoutCatNestedInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutCatInput, Norma_CategoriaUncheckedCreateWithoutCatInput> | Norma_CategoriaCreateWithoutCatInput[] | Norma_CategoriaUncheckedCreateWithoutCatInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutCatInput | Norma_CategoriaCreateOrConnectWithoutCatInput[]
+    upsert?: Norma_CategoriaUpsertWithWhereUniqueWithoutCatInput | Norma_CategoriaUpsertWithWhereUniqueWithoutCatInput[]
+    createMany?: Norma_CategoriaCreateManyCatInputEnvelope
+    set?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    disconnect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    delete?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    update?: Norma_CategoriaUpdateWithWhereUniqueWithoutCatInput | Norma_CategoriaUpdateWithWhereUniqueWithoutCatInput[]
+    updateMany?: Norma_CategoriaUpdateManyWithWhereWithoutCatInput | Norma_CategoriaUpdateManyWithWhereWithoutCatInput[]
+    deleteMany?: Norma_CategoriaScalarWhereInput | Norma_CategoriaScalarWhereInput[]
   }
 
   export type NotasCreateNestedManyWithoutNormasInput = {
@@ -14627,6 +17654,27 @@ export namespace Prisma {
     connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
   }
 
+  export type FavoritosCreateNestedManyWithoutNormaInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+  }
+
+  export type Norma_CategoriaCreateNestedManyWithoutNormaInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput> | Norma_CategoriaCreateWithoutNormaInput[] | Norma_CategoriaUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutNormaInput | Norma_CategoriaCreateOrConnectWithoutNormaInput[]
+    createMany?: Norma_CategoriaCreateManyNormaInputEnvelope
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+  }
+
+  export type PedidosdeAlteracaoCreateNestedManyWithoutNormasInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutNormasInput, PedidosdeAlteracaoUncheckedCreateWithoutNormasInput> | PedidosdeAlteracaoCreateWithoutNormasInput[] | PedidosdeAlteracaoUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutNormasInput | PedidosdeAlteracaoCreateOrConnectWithoutNormasInput[]
+    createMany?: PedidosdeAlteracaoCreateManyNormasInputEnvelope
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+  }
+
   export type NotasUncheckedCreateNestedManyWithoutNormasInput = {
     create?: XOR<NotasCreateWithoutNormasInput, NotasUncheckedCreateWithoutNormasInput> | NotasCreateWithoutNormasInput[] | NotasUncheckedCreateWithoutNormasInput[]
     connectOrCreate?: NotasCreateOrConnectWithoutNormasInput | NotasCreateOrConnectWithoutNormasInput[]
@@ -14660,6 +17708,27 @@ export namespace Prisma {
     connectOrCreate?: Historico_Acesso_NormasCreateOrConnectWithoutNormasInput | Historico_Acesso_NormasCreateOrConnectWithoutNormasInput[]
     createMany?: Historico_Acesso_NormasCreateManyNormasInputEnvelope
     connect?: Historico_Acesso_NormasWhereUniqueInput | Historico_Acesso_NormasWhereUniqueInput[]
+  }
+
+  export type FavoritosUncheckedCreateNestedManyWithoutNormaInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+  }
+
+  export type Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput> | Norma_CategoriaCreateWithoutNormaInput[] | Norma_CategoriaUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutNormaInput | Norma_CategoriaCreateOrConnectWithoutNormaInput[]
+    createMany?: Norma_CategoriaCreateManyNormaInputEnvelope
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+  }
+
+  export type PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutNormasInput, PedidosdeAlteracaoUncheckedCreateWithoutNormasInput> | PedidosdeAlteracaoCreateWithoutNormasInput[] | PedidosdeAlteracaoUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutNormasInput | PedidosdeAlteracaoCreateOrConnectWithoutNormasInput[]
+    createMany?: PedidosdeAlteracaoCreateManyNormasInputEnvelope
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
   }
 
   export type NotasUpdateManyWithoutNormasNestedInput = {
@@ -14748,6 +17817,48 @@ export namespace Prisma {
     deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
   }
 
+  export type FavoritosUpdateManyWithoutNormaNestedInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutNormaInput | FavoritosUpsertWithWhereUniqueWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutNormaInput | FavoritosUpdateWithWhereUniqueWithoutNormaInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutNormaInput | FavoritosUpdateManyWithWhereWithoutNormaInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+  }
+
+  export type Norma_CategoriaUpdateManyWithoutNormaNestedInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput> | Norma_CategoriaCreateWithoutNormaInput[] | Norma_CategoriaUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutNormaInput | Norma_CategoriaCreateOrConnectWithoutNormaInput[]
+    upsert?: Norma_CategoriaUpsertWithWhereUniqueWithoutNormaInput | Norma_CategoriaUpsertWithWhereUniqueWithoutNormaInput[]
+    createMany?: Norma_CategoriaCreateManyNormaInputEnvelope
+    set?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    disconnect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    delete?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    update?: Norma_CategoriaUpdateWithWhereUniqueWithoutNormaInput | Norma_CategoriaUpdateWithWhereUniqueWithoutNormaInput[]
+    updateMany?: Norma_CategoriaUpdateManyWithWhereWithoutNormaInput | Norma_CategoriaUpdateManyWithWhereWithoutNormaInput[]
+    deleteMany?: Norma_CategoriaScalarWhereInput | Norma_CategoriaScalarWhereInput[]
+  }
+
+  export type PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutNormasInput, PedidosdeAlteracaoUncheckedCreateWithoutNormasInput> | PedidosdeAlteracaoCreateWithoutNormasInput[] | PedidosdeAlteracaoUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutNormasInput | PedidosdeAlteracaoCreateOrConnectWithoutNormasInput[]
+    upsert?: PedidosdeAlteracaoUpsertWithWhereUniqueWithoutNormasInput | PedidosdeAlteracaoUpsertWithWhereUniqueWithoutNormasInput[]
+    createMany?: PedidosdeAlteracaoCreateManyNormasInputEnvelope
+    set?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    disconnect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    delete?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    update?: PedidosdeAlteracaoUpdateWithWhereUniqueWithoutNormasInput | PedidosdeAlteracaoUpdateWithWhereUniqueWithoutNormasInput[]
+    updateMany?: PedidosdeAlteracaoUpdateManyWithWhereWithoutNormasInput | PedidosdeAlteracaoUpdateManyWithWhereWithoutNormasInput[]
+    deleteMany?: PedidosdeAlteracaoScalarWhereInput | PedidosdeAlteracaoScalarWhereInput[]
+  }
+
   export type NotasUncheckedUpdateManyWithoutNormasNestedInput = {
     create?: XOR<NotasCreateWithoutNormasInput, NotasUncheckedCreateWithoutNormasInput> | NotasCreateWithoutNormasInput[] | NotasUncheckedCreateWithoutNormasInput[]
     connectOrCreate?: NotasCreateOrConnectWithoutNormasInput | NotasCreateOrConnectWithoutNormasInput[]
@@ -14818,6 +17929,48 @@ export namespace Prisma {
     deleteMany?: Historico_Acesso_NormasScalarWhereInput | Historico_Acesso_NormasScalarWhereInput[]
   }
 
+  export type FavoritosUncheckedUpdateManyWithoutNormaNestedInput = {
+    create?: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput> | FavoritosCreateWithoutNormaInput[] | FavoritosUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: FavoritosCreateOrConnectWithoutNormaInput | FavoritosCreateOrConnectWithoutNormaInput[]
+    upsert?: FavoritosUpsertWithWhereUniqueWithoutNormaInput | FavoritosUpsertWithWhereUniqueWithoutNormaInput[]
+    createMany?: FavoritosCreateManyNormaInputEnvelope
+    set?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    disconnect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    delete?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    connect?: FavoritosWhereUniqueInput | FavoritosWhereUniqueInput[]
+    update?: FavoritosUpdateWithWhereUniqueWithoutNormaInput | FavoritosUpdateWithWhereUniqueWithoutNormaInput[]
+    updateMany?: FavoritosUpdateManyWithWhereWithoutNormaInput | FavoritosUpdateManyWithWhereWithoutNormaInput[]
+    deleteMany?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+  }
+
+  export type Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput = {
+    create?: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput> | Norma_CategoriaCreateWithoutNormaInput[] | Norma_CategoriaUncheckedCreateWithoutNormaInput[]
+    connectOrCreate?: Norma_CategoriaCreateOrConnectWithoutNormaInput | Norma_CategoriaCreateOrConnectWithoutNormaInput[]
+    upsert?: Norma_CategoriaUpsertWithWhereUniqueWithoutNormaInput | Norma_CategoriaUpsertWithWhereUniqueWithoutNormaInput[]
+    createMany?: Norma_CategoriaCreateManyNormaInputEnvelope
+    set?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    disconnect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    delete?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    connect?: Norma_CategoriaWhereUniqueInput | Norma_CategoriaWhereUniqueInput[]
+    update?: Norma_CategoriaUpdateWithWhereUniqueWithoutNormaInput | Norma_CategoriaUpdateWithWhereUniqueWithoutNormaInput[]
+    updateMany?: Norma_CategoriaUpdateManyWithWhereWithoutNormaInput | Norma_CategoriaUpdateManyWithWhereWithoutNormaInput[]
+    deleteMany?: Norma_CategoriaScalarWhereInput | Norma_CategoriaScalarWhereInput[]
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput = {
+    create?: XOR<PedidosdeAlteracaoCreateWithoutNormasInput, PedidosdeAlteracaoUncheckedCreateWithoutNormasInput> | PedidosdeAlteracaoCreateWithoutNormasInput[] | PedidosdeAlteracaoUncheckedCreateWithoutNormasInput[]
+    connectOrCreate?: PedidosdeAlteracaoCreateOrConnectWithoutNormasInput | PedidosdeAlteracaoCreateOrConnectWithoutNormasInput[]
+    upsert?: PedidosdeAlteracaoUpsertWithWhereUniqueWithoutNormasInput | PedidosdeAlteracaoUpsertWithWhereUniqueWithoutNormasInput[]
+    createMany?: PedidosdeAlteracaoCreateManyNormasInputEnvelope
+    set?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    disconnect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    delete?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    connect?: PedidosdeAlteracaoWhereUniqueInput | PedidosdeAlteracaoWhereUniqueInput[]
+    update?: PedidosdeAlteracaoUpdateWithWhereUniqueWithoutNormasInput | PedidosdeAlteracaoUpdateWithWhereUniqueWithoutNormasInput[]
+    updateMany?: PedidosdeAlteracaoUpdateManyWithWhereWithoutNormasInput | PedidosdeAlteracaoUpdateManyWithWhereWithoutNormasInput[]
+    deleteMany?: PedidosdeAlteracaoScalarWhereInput | PedidosdeAlteracaoScalarWhereInput[]
+  }
+
   export type UsersCreateNestedOneWithoutNotasInput = {
     create?: XOR<UsersCreateWithoutNotasInput, UsersUncheckedCreateWithoutNotasInput>
     connectOrCreate?: UsersCreateOrConnectWithoutNotasInput
@@ -14830,18 +17983,8 @@ export namespace Prisma {
     connect?: NormaWhereUniqueInput
   }
 
-  export type Nota_CategoriaCreateNestedManyWithoutNotaInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutNotaInput, Nota_CategoriaUncheckedCreateWithoutNotaInput> | Nota_CategoriaCreateWithoutNotaInput[] | Nota_CategoriaUncheckedCreateWithoutNotaInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutNotaInput | Nota_CategoriaCreateOrConnectWithoutNotaInput[]
-    createMany?: Nota_CategoriaCreateManyNotaInputEnvelope
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-  }
-
-  export type Nota_CategoriaUncheckedCreateNestedManyWithoutNotaInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutNotaInput, Nota_CategoriaUncheckedCreateWithoutNotaInput> | Nota_CategoriaCreateWithoutNotaInput[] | Nota_CategoriaUncheckedCreateWithoutNotaInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutNotaInput | Nota_CategoriaCreateOrConnectWithoutNotaInput[]
-    createMany?: Nota_CategoriaCreateManyNotaInputEnvelope
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type UsersUpdateOneRequiredWithoutNotasNestedInput = {
@@ -14860,60 +18003,32 @@ export namespace Prisma {
     update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutNotasInput, NormaUpdateWithoutNotasInput>, NormaUncheckedUpdateWithoutNotasInput>
   }
 
-  export type Nota_CategoriaUpdateManyWithoutNotaNestedInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutNotaInput, Nota_CategoriaUncheckedCreateWithoutNotaInput> | Nota_CategoriaCreateWithoutNotaInput[] | Nota_CategoriaUncheckedCreateWithoutNotaInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutNotaInput | Nota_CategoriaCreateOrConnectWithoutNotaInput[]
-    upsert?: Nota_CategoriaUpsertWithWhereUniqueWithoutNotaInput | Nota_CategoriaUpsertWithWhereUniqueWithoutNotaInput[]
-    createMany?: Nota_CategoriaCreateManyNotaInputEnvelope
-    set?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    disconnect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    delete?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    update?: Nota_CategoriaUpdateWithWhereUniqueWithoutNotaInput | Nota_CategoriaUpdateWithWhereUniqueWithoutNotaInput[]
-    updateMany?: Nota_CategoriaUpdateManyWithWhereWithoutNotaInput | Nota_CategoriaUpdateManyWithWhereWithoutNotaInput[]
-    deleteMany?: Nota_CategoriaScalarWhereInput | Nota_CategoriaScalarWhereInput[]
-  }
-
-  export type Nota_CategoriaUncheckedUpdateManyWithoutNotaNestedInput = {
-    create?: XOR<Nota_CategoriaCreateWithoutNotaInput, Nota_CategoriaUncheckedCreateWithoutNotaInput> | Nota_CategoriaCreateWithoutNotaInput[] | Nota_CategoriaUncheckedCreateWithoutNotaInput[]
-    connectOrCreate?: Nota_CategoriaCreateOrConnectWithoutNotaInput | Nota_CategoriaCreateOrConnectWithoutNotaInput[]
-    upsert?: Nota_CategoriaUpsertWithWhereUniqueWithoutNotaInput | Nota_CategoriaUpsertWithWhereUniqueWithoutNotaInput[]
-    createMany?: Nota_CategoriaCreateManyNotaInputEnvelope
-    set?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    disconnect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    delete?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    connect?: Nota_CategoriaWhereUniqueInput | Nota_CategoriaWhereUniqueInput[]
-    update?: Nota_CategoriaUpdateWithWhereUniqueWithoutNotaInput | Nota_CategoriaUpdateWithWhereUniqueWithoutNotaInput[]
-    updateMany?: Nota_CategoriaUpdateManyWithWhereWithoutNotaInput | Nota_CategoriaUpdateManyWithWhereWithoutNotaInput[]
-    deleteMany?: Nota_CategoriaScalarWhereInput | Nota_CategoriaScalarWhereInput[]
-  }
-
-  export type CategoriaCreateNestedOneWithoutNota_catInput = {
-    create?: XOR<CategoriaCreateWithoutNota_catInput, CategoriaUncheckedCreateWithoutNota_catInput>
-    connectOrCreate?: CategoriaCreateOrConnectWithoutNota_catInput
+  export type CategoriaCreateNestedOneWithoutNorma_catInput = {
+    create?: XOR<CategoriaCreateWithoutNorma_catInput, CategoriaUncheckedCreateWithoutNorma_catInput>
+    connectOrCreate?: CategoriaCreateOrConnectWithoutNorma_catInput
     connect?: CategoriaWhereUniqueInput
   }
 
-  export type NotasCreateNestedOneWithoutNota_catInput = {
-    create?: XOR<NotasCreateWithoutNota_catInput, NotasUncheckedCreateWithoutNota_catInput>
-    connectOrCreate?: NotasCreateOrConnectWithoutNota_catInput
-    connect?: NotasWhereUniqueInput
+  export type NormaCreateNestedOneWithoutCategoriaInput = {
+    create?: XOR<NormaCreateWithoutCategoriaInput, NormaUncheckedCreateWithoutCategoriaInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutCategoriaInput
+    connect?: NormaWhereUniqueInput
   }
 
-  export type CategoriaUpdateOneRequiredWithoutNota_catNestedInput = {
-    create?: XOR<CategoriaCreateWithoutNota_catInput, CategoriaUncheckedCreateWithoutNota_catInput>
-    connectOrCreate?: CategoriaCreateOrConnectWithoutNota_catInput
-    upsert?: CategoriaUpsertWithoutNota_catInput
+  export type CategoriaUpdateOneRequiredWithoutNorma_catNestedInput = {
+    create?: XOR<CategoriaCreateWithoutNorma_catInput, CategoriaUncheckedCreateWithoutNorma_catInput>
+    connectOrCreate?: CategoriaCreateOrConnectWithoutNorma_catInput
+    upsert?: CategoriaUpsertWithoutNorma_catInput
     connect?: CategoriaWhereUniqueInput
-    update?: XOR<XOR<CategoriaUpdateToOneWithWhereWithoutNota_catInput, CategoriaUpdateWithoutNota_catInput>, CategoriaUncheckedUpdateWithoutNota_catInput>
+    update?: XOR<XOR<CategoriaUpdateToOneWithWhereWithoutNorma_catInput, CategoriaUpdateWithoutNorma_catInput>, CategoriaUncheckedUpdateWithoutNorma_catInput>
   }
 
-  export type NotasUpdateOneRequiredWithoutNota_catNestedInput = {
-    create?: XOR<NotasCreateWithoutNota_catInput, NotasUncheckedCreateWithoutNota_catInput>
-    connectOrCreate?: NotasCreateOrConnectWithoutNota_catInput
-    upsert?: NotasUpsertWithoutNota_catInput
-    connect?: NotasWhereUniqueInput
-    update?: XOR<XOR<NotasUpdateToOneWithWhereWithoutNota_catInput, NotasUpdateWithoutNota_catInput>, NotasUncheckedUpdateWithoutNota_catInput>
+  export type NormaUpdateOneRequiredWithoutCategoriaNestedInput = {
+    create?: XOR<NormaCreateWithoutCategoriaInput, NormaUncheckedCreateWithoutCategoriaInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutCategoriaInput
+    upsert?: NormaUpsertWithoutCategoriaInput
+    connect?: NormaWhereUniqueInput
+    update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutCategoriaInput, NormaUpdateWithoutCategoriaInput>, NormaUncheckedUpdateWithoutCategoriaInput>
   }
 
   export type NormaCreateNestedOneWithoutNormas_origemInput = {
@@ -14998,6 +18113,76 @@ export namespace Prisma {
     upsert?: NormaUpsertWithoutHistoricoAcessoNormasInput
     connect?: NormaWhereUniqueInput
     update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutHistoricoAcessoNormasInput, NormaUpdateWithoutHistoricoAcessoNormasInput>, NormaUncheckedUpdateWithoutHistoricoAcessoNormasInput>
+  }
+
+  export type UsersCreateNestedOneWithoutPedidosInput = {
+    create?: XOR<UsersCreateWithoutPedidosInput, UsersUncheckedCreateWithoutPedidosInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutPedidosInput
+    connect?: UsersWhereUniqueInput
+  }
+
+  export type NormaCreateNestedOneWithoutPedidosInput = {
+    create?: XOR<NormaCreateWithoutPedidosInput, NormaUncheckedCreateWithoutPedidosInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutPedidosInput
+    connect?: NormaWhereUniqueInput
+  }
+
+  export type EnumAcaoDeAlteracaoFieldUpdateOperationsInput = {
+    set?: $Enums.AcaoDeAlteracao
+  }
+
+  export type EnumNotaOrNormaFieldUpdateOperationsInput = {
+    set?: $Enums.NotaOrNorma
+  }
+
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
+  }
+
+  export type UsersUpdateOneRequiredWithoutPedidosNestedInput = {
+    create?: XOR<UsersCreateWithoutPedidosInput, UsersUncheckedCreateWithoutPedidosInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutPedidosInput
+    upsert?: UsersUpsertWithoutPedidosInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutPedidosInput, UsersUpdateWithoutPedidosInput>, UsersUncheckedUpdateWithoutPedidosInput>
+  }
+
+  export type NormaUpdateOneWithoutPedidosNestedInput = {
+    create?: XOR<NormaCreateWithoutPedidosInput, NormaUncheckedCreateWithoutPedidosInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutPedidosInput
+    upsert?: NormaUpsertWithoutPedidosInput
+    disconnect?: NormaWhereInput | boolean
+    delete?: NormaWhereInput | boolean
+    connect?: NormaWhereUniqueInput
+    update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutPedidosInput, NormaUpdateWithoutPedidosInput>, NormaUncheckedUpdateWithoutPedidosInput>
+  }
+
+  export type UsersCreateNestedOneWithoutFavoritosInput = {
+    create?: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutFavoritosInput
+    connect?: UsersWhereUniqueInput
+  }
+
+  export type NormaCreateNestedOneWithoutFavoritosInput = {
+    create?: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutFavoritosInput
+    connect?: NormaWhereUniqueInput
+  }
+
+  export type UsersUpdateOneRequiredWithoutFavoritosNestedInput = {
+    create?: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutFavoritosInput
+    upsert?: UsersUpsertWithoutFavoritosInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutFavoritosInput, UsersUpdateWithoutFavoritosInput>, UsersUncheckedUpdateWithoutFavoritosInput>
+  }
+
+  export type NormaUpdateOneRequiredWithoutFavoritosNestedInput = {
+    create?: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+    connectOrCreate?: NormaCreateOrConnectWithoutFavoritosInput
+    upsert?: NormaUpsertWithoutFavoritosInput
+    connect?: NormaWhereUniqueInput
+    update?: XOR<XOR<NormaUpdateToOneWithWhereWithoutFavoritosInput, NormaUpdateWithoutFavoritosInput>, NormaUncheckedUpdateWithoutFavoritosInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -15151,6 +18336,113 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAcaoDeAlteracaoFilter<$PrismaModel = never> = {
+    equals?: $Enums.AcaoDeAlteracao | EnumAcaoDeAlteracaoFieldRefInput<$PrismaModel>
+    in?: $Enums.AcaoDeAlteracao[]
+    notIn?: $Enums.AcaoDeAlteracao[]
+    not?: NestedEnumAcaoDeAlteracaoFilter<$PrismaModel> | $Enums.AcaoDeAlteracao
+  }
+
+  export type NestedEnumNotaOrNormaFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotaOrNorma | EnumNotaOrNormaFieldRefInput<$PrismaModel>
+    in?: $Enums.NotaOrNorma[]
+    notIn?: $Enums.NotaOrNorma[]
+    not?: NestedEnumNotaOrNormaFilter<$PrismaModel> | $Enums.NotaOrNorma
+  }
+
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumAcaoDeAlteracaoWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AcaoDeAlteracao | EnumAcaoDeAlteracaoFieldRefInput<$PrismaModel>
+    in?: $Enums.AcaoDeAlteracao[]
+    notIn?: $Enums.AcaoDeAlteracao[]
+    not?: NestedEnumAcaoDeAlteracaoWithAggregatesFilter<$PrismaModel> | $Enums.AcaoDeAlteracao
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAcaoDeAlteracaoFilter<$PrismaModel>
+    _max?: NestedEnumAcaoDeAlteracaoFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNotaOrNormaWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NotaOrNorma | EnumNotaOrNormaFieldRefInput<$PrismaModel>
+    in?: $Enums.NotaOrNorma[]
+    notIn?: $Enums.NotaOrNorma[]
+    not?: NestedEnumNotaOrNormaWithAggregatesFilter<$PrismaModel> | $Enums.NotaOrNorma
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNotaOrNormaFilter<$PrismaModel>
+    _max?: NestedEnumNotaOrNormaFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
   export type OrgaosCreateWithoutUsuariosInput = {
     org_desc: string
     org_sigla: string
@@ -15177,14 +18469,14 @@ export namespace Prisma {
   export type CategoriaCreateWithoutUsuarioInput = {
     cat_nome: string
     data_criacao?: Date | string
-    nota_cat?: Nota_CategoriaCreateNestedManyWithoutCatInput
+    norma_cat?: Norma_CategoriaCreateNestedManyWithoutCatInput
   }
 
   export type CategoriaUncheckedCreateWithoutUsuarioInput = {
     cat_id?: number
     cat_nome: string
     data_criacao?: Date | string
-    nota_cat?: Nota_CategoriaUncheckedCreateNestedManyWithoutCatInput
+    norma_cat?: Norma_CategoriaUncheckedCreateNestedManyWithoutCatInput
   }
 
   export type CategoriaCreateOrConnectWithoutUsuarioInput = {
@@ -15212,6 +18504,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutUsuarioInput = {
@@ -15230,6 +18525,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutUsuarioInput = {
@@ -15244,19 +18542,21 @@ export namespace Prisma {
 
   export type NotasCreateWithoutUsuarioInput = {
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     data_criacao?: Date | string
     normas: NormaCreateNestedOneWithoutNotasInput
-    nota_cat?: Nota_CategoriaCreateNestedManyWithoutNotaInput
   }
 
   export type NotasUncheckedCreateWithoutUsuarioInput = {
     id_not?: number
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     norm_criador: number
     data_criacao?: Date | string
-    nota_cat?: Nota_CategoriaUncheckedCreateNestedManyWithoutNotaInput
   }
 
   export type NotasCreateOrConnectWithoutUsuarioInput = {
@@ -15290,6 +18590,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FavoritosCreateWithoutUsuarioInput = {
+    data_criacao?: Date | string
+    norma: NormaCreateNestedOneWithoutFavoritosInput
+  }
+
+  export type FavoritosUncheckedCreateWithoutUsuarioInput = {
+    id_norma: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosCreateOrConnectWithoutUsuarioInput = {
+    where: FavoritosWhereUniqueInput
+    create: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type FavoritosCreateManyUsuarioInputEnvelope = {
+    data: FavoritosCreateManyUsuarioInput | FavoritosCreateManyUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
   export type Historico_Acesso_NormasCreateWithoutUsuariosInput = {
     data_acesso?: Date | string
     normas: NormaCreateNestedOneWithoutHistoricoAcessoNormasInput
@@ -15307,6 +18627,35 @@ export namespace Prisma {
 
   export type Historico_Acesso_NormasCreateManyUsuariosInputEnvelope = {
     data: Historico_Acesso_NormasCreateManyUsuariosInput | Historico_Acesso_NormasCreateManyUsuariosInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PedidosdeAlteracaoCreateWithoutUsuariosInput = {
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+    normas?: NormaCreateNestedOneWithoutPedidosInput
+  }
+
+  export type PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput = {
+    id?: number
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+    id_norma?: number | null
+  }
+
+  export type PedidosdeAlteracaoCreateOrConnectWithoutUsuariosInput = {
+    where: PedidosdeAlteracaoWhereUniqueInput
+    create: XOR<PedidosdeAlteracaoCreateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput>
+  }
+
+  export type PedidosdeAlteracaoCreateManyUsuariosInputEnvelope = {
+    data: PedidosdeAlteracaoCreateManyUsuariosInput | PedidosdeAlteracaoCreateManyUsuariosInput[]
     skipDuplicates?: boolean
   }
 
@@ -15417,7 +18766,9 @@ export namespace Prisma {
     NOT?: NotasScalarWhereInput | NotasScalarWhereInput[]
     id_not?: IntFilter<"Notas"> | number
     not_titulo?: StringFilter<"Notas"> | string
-    not_dec?: StringFilter<"Notas"> | string
+    not_IT?: StringFilter<"Notas"> | string
+    not_AB?: StringNullableFilter<"Notas"> | string | null
+    not_Pa?: StringNullableFilter<"Notas"> | string | null
     norm_criador?: IntFilter<"Notas"> | number
     adm_criador?: IntFilter<"Notas"> | number
     data_criacao?: DateTimeFilter<"Notas"> | Date | string
@@ -15449,6 +18800,31 @@ export namespace Prisma {
     cod_data_cricao?: DateTimeFilter<"Mfa"> | Date | string
   }
 
+  export type FavoritosUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: FavoritosWhereUniqueInput
+    update: XOR<FavoritosUpdateWithoutUsuarioInput, FavoritosUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<FavoritosCreateWithoutUsuarioInput, FavoritosUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type FavoritosUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: FavoritosWhereUniqueInput
+    data: XOR<FavoritosUpdateWithoutUsuarioInput, FavoritosUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type FavoritosUpdateManyWithWhereWithoutUsuarioInput = {
+    where: FavoritosScalarWhereInput
+    data: XOR<FavoritosUpdateManyMutationInput, FavoritosUncheckedUpdateManyWithoutUsuarioInput>
+  }
+
+  export type FavoritosScalarWhereInput = {
+    AND?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+    OR?: FavoritosScalarWhereInput[]
+    NOT?: FavoritosScalarWhereInput | FavoritosScalarWhereInput[]
+    id_user?: IntFilter<"Favoritos"> | number
+    id_norma?: IntFilter<"Favoritos"> | number
+    data_criacao?: DateTimeFilter<"Favoritos"> | Date | string
+  }
+
   export type Historico_Acesso_NormasUpsertWithWhereUniqueWithoutUsuariosInput = {
     where: Historico_Acesso_NormasWhereUniqueInput
     update: XOR<Historico_Acesso_NormasUpdateWithoutUsuariosInput, Historico_Acesso_NormasUncheckedUpdateWithoutUsuariosInput>
@@ -15474,6 +18850,36 @@ export namespace Prisma {
     data_acesso?: DateTimeFilter<"Historico_Acesso_Normas"> | Date | string
   }
 
+  export type PedidosdeAlteracaoUpsertWithWhereUniqueWithoutUsuariosInput = {
+    where: PedidosdeAlteracaoWhereUniqueInput
+    update: XOR<PedidosdeAlteracaoUpdateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedUpdateWithoutUsuariosInput>
+    create: XOR<PedidosdeAlteracaoCreateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedCreateWithoutUsuariosInput>
+  }
+
+  export type PedidosdeAlteracaoUpdateWithWhereUniqueWithoutUsuariosInput = {
+    where: PedidosdeAlteracaoWhereUniqueInput
+    data: XOR<PedidosdeAlteracaoUpdateWithoutUsuariosInput, PedidosdeAlteracaoUncheckedUpdateWithoutUsuariosInput>
+  }
+
+  export type PedidosdeAlteracaoUpdateManyWithWhereWithoutUsuariosInput = {
+    where: PedidosdeAlteracaoScalarWhereInput
+    data: XOR<PedidosdeAlteracaoUpdateManyMutationInput, PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosInput>
+  }
+
+  export type PedidosdeAlteracaoScalarWhereInput = {
+    AND?: PedidosdeAlteracaoScalarWhereInput | PedidosdeAlteracaoScalarWhereInput[]
+    OR?: PedidosdeAlteracaoScalarWhereInput[]
+    NOT?: PedidosdeAlteracaoScalarWhereInput | PedidosdeAlteracaoScalarWhereInput[]
+    id?: IntFilter<"PedidosdeAlteracao"> | number
+    id_user?: IntFilter<"PedidosdeAlteracao"> | number
+    alteracao?: JsonFilter<"PedidosdeAlteracao">
+    acaoDealteracao?: EnumAcaoDeAlteracaoFilter<"PedidosdeAlteracao"> | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFilter<"PedidosdeAlteracao"> | $Enums.NotaOrNorma
+    status?: EnumStatusFilter<"PedidosdeAlteracao"> | $Enums.Status
+    data_pedido?: DateTimeFilter<"PedidosdeAlteracao"> | Date | string
+    id_norma?: IntNullableFilter<"PedidosdeAlteracao"> | number | null
+  }
+
   export type NormaCreateWithoutOrgaosInput = {
     norm_titulo: string
     norm_desc: string
@@ -15489,6 +18895,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutOrgaosInput = {
@@ -15507,6 +18916,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutOrgaosInput = {
@@ -15529,7 +18941,9 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutOrgaosInput = {
@@ -15543,7 +18957,9 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutOrgaosInput = {
@@ -15588,7 +19004,9 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutOrgaosInput = {
@@ -15602,24 +19020,26 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
-  export type Nota_CategoriaCreateWithoutCatInput = {
-    nota: NotasCreateNestedOneWithoutNota_catInput
+  export type Norma_CategoriaCreateWithoutCatInput = {
+    norma: NormaCreateNestedOneWithoutCategoriaInput
   }
 
-  export type Nota_CategoriaUncheckedCreateWithoutCatInput = {
-    id_nota: number
+  export type Norma_CategoriaUncheckedCreateWithoutCatInput = {
+    id_norma: number
   }
 
-  export type Nota_CategoriaCreateOrConnectWithoutCatInput = {
-    where: Nota_CategoriaWhereUniqueInput
-    create: XOR<Nota_CategoriaCreateWithoutCatInput, Nota_CategoriaUncheckedCreateWithoutCatInput>
+  export type Norma_CategoriaCreateOrConnectWithoutCatInput = {
+    where: Norma_CategoriaWhereUniqueInput
+    create: XOR<Norma_CategoriaCreateWithoutCatInput, Norma_CategoriaUncheckedCreateWithoutCatInput>
   }
 
-  export type Nota_CategoriaCreateManyCatInputEnvelope = {
-    data: Nota_CategoriaCreateManyCatInput | Nota_CategoriaCreateManyCatInput[]
+  export type Norma_CategoriaCreateManyCatInputEnvelope = {
+    data: Norma_CategoriaCreateManyCatInput | Norma_CategoriaCreateManyCatInput[]
     skipDuplicates?: boolean
   }
 
@@ -15633,7 +19053,9 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutCategoriaInput = {
@@ -15647,7 +19069,9 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutCategoriaInput = {
@@ -15655,28 +19079,28 @@ export namespace Prisma {
     create: XOR<UsersCreateWithoutCategoriaInput, UsersUncheckedCreateWithoutCategoriaInput>
   }
 
-  export type Nota_CategoriaUpsertWithWhereUniqueWithoutCatInput = {
-    where: Nota_CategoriaWhereUniqueInput
-    update: XOR<Nota_CategoriaUpdateWithoutCatInput, Nota_CategoriaUncheckedUpdateWithoutCatInput>
-    create: XOR<Nota_CategoriaCreateWithoutCatInput, Nota_CategoriaUncheckedCreateWithoutCatInput>
+  export type Norma_CategoriaUpsertWithWhereUniqueWithoutCatInput = {
+    where: Norma_CategoriaWhereUniqueInput
+    update: XOR<Norma_CategoriaUpdateWithoutCatInput, Norma_CategoriaUncheckedUpdateWithoutCatInput>
+    create: XOR<Norma_CategoriaCreateWithoutCatInput, Norma_CategoriaUncheckedCreateWithoutCatInput>
   }
 
-  export type Nota_CategoriaUpdateWithWhereUniqueWithoutCatInput = {
-    where: Nota_CategoriaWhereUniqueInput
-    data: XOR<Nota_CategoriaUpdateWithoutCatInput, Nota_CategoriaUncheckedUpdateWithoutCatInput>
+  export type Norma_CategoriaUpdateWithWhereUniqueWithoutCatInput = {
+    where: Norma_CategoriaWhereUniqueInput
+    data: XOR<Norma_CategoriaUpdateWithoutCatInput, Norma_CategoriaUncheckedUpdateWithoutCatInput>
   }
 
-  export type Nota_CategoriaUpdateManyWithWhereWithoutCatInput = {
-    where: Nota_CategoriaScalarWhereInput
-    data: XOR<Nota_CategoriaUpdateManyMutationInput, Nota_CategoriaUncheckedUpdateManyWithoutCatInput>
+  export type Norma_CategoriaUpdateManyWithWhereWithoutCatInput = {
+    where: Norma_CategoriaScalarWhereInput
+    data: XOR<Norma_CategoriaUpdateManyMutationInput, Norma_CategoriaUncheckedUpdateManyWithoutCatInput>
   }
 
-  export type Nota_CategoriaScalarWhereInput = {
-    AND?: Nota_CategoriaScalarWhereInput | Nota_CategoriaScalarWhereInput[]
-    OR?: Nota_CategoriaScalarWhereInput[]
-    NOT?: Nota_CategoriaScalarWhereInput | Nota_CategoriaScalarWhereInput[]
-    id_nota?: IntFilter<"Nota_Categoria"> | number
-    id_cat?: IntFilter<"Nota_Categoria"> | number
+  export type Norma_CategoriaScalarWhereInput = {
+    AND?: Norma_CategoriaScalarWhereInput | Norma_CategoriaScalarWhereInput[]
+    OR?: Norma_CategoriaScalarWhereInput[]
+    NOT?: Norma_CategoriaScalarWhereInput | Norma_CategoriaScalarWhereInput[]
+    id_norma?: IntFilter<"Norma_Categoria"> | number
+    id_cat?: IntFilter<"Norma_Categoria"> | number
   }
 
   export type UsersUpsertWithoutCategoriaInput = {
@@ -15700,7 +19124,9 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutCategoriaInput = {
@@ -15714,24 +19140,28 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type NotasCreateWithoutNormasInput = {
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     data_criacao?: Date | string
     usuario: UsersCreateNestedOneWithoutNotasInput
-    nota_cat?: Nota_CategoriaCreateNestedManyWithoutNotaInput
   }
 
   export type NotasUncheckedCreateWithoutNormasInput = {
     id_not?: number
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     adm_criador: number
     data_criacao?: Date | string
-    nota_cat?: Nota_CategoriaUncheckedCreateNestedManyWithoutNotaInput
   }
 
   export type NotasCreateOrConnectWithoutNormasInput = {
@@ -15754,7 +19184,9 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutNormasInput = {
@@ -15768,7 +19200,9 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutNormasInput = {
@@ -15883,6 +19317,73 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type FavoritosCreateWithoutNormaInput = {
+    data_criacao?: Date | string
+    usuario: UsersCreateNestedOneWithoutFavoritosInput
+  }
+
+  export type FavoritosUncheckedCreateWithoutNormaInput = {
+    id_user: number
+    data_criacao?: Date | string
+  }
+
+  export type FavoritosCreateOrConnectWithoutNormaInput = {
+    where: FavoritosWhereUniqueInput
+    create: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput>
+  }
+
+  export type FavoritosCreateManyNormaInputEnvelope = {
+    data: FavoritosCreateManyNormaInput | FavoritosCreateManyNormaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type Norma_CategoriaCreateWithoutNormaInput = {
+    cat: CategoriaCreateNestedOneWithoutNorma_catInput
+  }
+
+  export type Norma_CategoriaUncheckedCreateWithoutNormaInput = {
+    id_cat: number
+  }
+
+  export type Norma_CategoriaCreateOrConnectWithoutNormaInput = {
+    where: Norma_CategoriaWhereUniqueInput
+    create: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput>
+  }
+
+  export type Norma_CategoriaCreateManyNormaInputEnvelope = {
+    data: Norma_CategoriaCreateManyNormaInput | Norma_CategoriaCreateManyNormaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PedidosdeAlteracaoCreateWithoutNormasInput = {
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+    usuarios: UsersCreateNestedOneWithoutPedidosInput
+  }
+
+  export type PedidosdeAlteracaoUncheckedCreateWithoutNormasInput = {
+    id?: number
+    id_user: number
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+  }
+
+  export type PedidosdeAlteracaoCreateOrConnectWithoutNormasInput = {
+    where: PedidosdeAlteracaoWhereUniqueInput
+    create: XOR<PedidosdeAlteracaoCreateWithoutNormasInput, PedidosdeAlteracaoUncheckedCreateWithoutNormasInput>
+  }
+
+  export type PedidosdeAlteracaoCreateManyNormasInputEnvelope = {
+    data: PedidosdeAlteracaoCreateManyNormasInput | PedidosdeAlteracaoCreateManyNormasInput[]
+    skipDuplicates?: boolean
+  }
+
   export type NotasUpsertWithWhereUniqueWithoutNormasInput = {
     where: NotasWhereUniqueInput
     update: XOR<NotasUpdateWithoutNormasInput, NotasUncheckedUpdateWithoutNormasInput>
@@ -15920,7 +19421,9 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutNormasInput = {
@@ -15934,7 +19437,9 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type OrgaosUpsertWithoutNormasInput = {
@@ -16049,6 +19554,54 @@ export namespace Prisma {
     data: XOR<Historico_Acesso_NormasUpdateManyMutationInput, Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasInput>
   }
 
+  export type FavoritosUpsertWithWhereUniqueWithoutNormaInput = {
+    where: FavoritosWhereUniqueInput
+    update: XOR<FavoritosUpdateWithoutNormaInput, FavoritosUncheckedUpdateWithoutNormaInput>
+    create: XOR<FavoritosCreateWithoutNormaInput, FavoritosUncheckedCreateWithoutNormaInput>
+  }
+
+  export type FavoritosUpdateWithWhereUniqueWithoutNormaInput = {
+    where: FavoritosWhereUniqueInput
+    data: XOR<FavoritosUpdateWithoutNormaInput, FavoritosUncheckedUpdateWithoutNormaInput>
+  }
+
+  export type FavoritosUpdateManyWithWhereWithoutNormaInput = {
+    where: FavoritosScalarWhereInput
+    data: XOR<FavoritosUpdateManyMutationInput, FavoritosUncheckedUpdateManyWithoutNormaInput>
+  }
+
+  export type Norma_CategoriaUpsertWithWhereUniqueWithoutNormaInput = {
+    where: Norma_CategoriaWhereUniqueInput
+    update: XOR<Norma_CategoriaUpdateWithoutNormaInput, Norma_CategoriaUncheckedUpdateWithoutNormaInput>
+    create: XOR<Norma_CategoriaCreateWithoutNormaInput, Norma_CategoriaUncheckedCreateWithoutNormaInput>
+  }
+
+  export type Norma_CategoriaUpdateWithWhereUniqueWithoutNormaInput = {
+    where: Norma_CategoriaWhereUniqueInput
+    data: XOR<Norma_CategoriaUpdateWithoutNormaInput, Norma_CategoriaUncheckedUpdateWithoutNormaInput>
+  }
+
+  export type Norma_CategoriaUpdateManyWithWhereWithoutNormaInput = {
+    where: Norma_CategoriaScalarWhereInput
+    data: XOR<Norma_CategoriaUpdateManyMutationInput, Norma_CategoriaUncheckedUpdateManyWithoutNormaInput>
+  }
+
+  export type PedidosdeAlteracaoUpsertWithWhereUniqueWithoutNormasInput = {
+    where: PedidosdeAlteracaoWhereUniqueInput
+    update: XOR<PedidosdeAlteracaoUpdateWithoutNormasInput, PedidosdeAlteracaoUncheckedUpdateWithoutNormasInput>
+    create: XOR<PedidosdeAlteracaoCreateWithoutNormasInput, PedidosdeAlteracaoUncheckedCreateWithoutNormasInput>
+  }
+
+  export type PedidosdeAlteracaoUpdateWithWhereUniqueWithoutNormasInput = {
+    where: PedidosdeAlteracaoWhereUniqueInput
+    data: XOR<PedidosdeAlteracaoUpdateWithoutNormasInput, PedidosdeAlteracaoUncheckedUpdateWithoutNormasInput>
+  }
+
+  export type PedidosdeAlteracaoUpdateManyWithWhereWithoutNormasInput = {
+    where: PedidosdeAlteracaoScalarWhereInput
+    data: XOR<PedidosdeAlteracaoUpdateManyMutationInput, PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasInput>
+  }
+
   export type UsersCreateWithoutNotasInput = {
     user_name: string
     email: string
@@ -16059,7 +19612,9 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutNotasInput = {
@@ -16073,7 +19628,9 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutNotasInput = {
@@ -16096,6 +19653,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutNotasInput = {
@@ -16114,29 +19674,14 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutNotasInput = {
     where: NormaWhereUniqueInput
     create: XOR<NormaCreateWithoutNotasInput, NormaUncheckedCreateWithoutNotasInput>
-  }
-
-  export type Nota_CategoriaCreateWithoutNotaInput = {
-    cat: CategoriaCreateNestedOneWithoutNota_catInput
-  }
-
-  export type Nota_CategoriaUncheckedCreateWithoutNotaInput = {
-    id_cat: number
-  }
-
-  export type Nota_CategoriaCreateOrConnectWithoutNotaInput = {
-    where: Nota_CategoriaWhereUniqueInput
-    create: XOR<Nota_CategoriaCreateWithoutNotaInput, Nota_CategoriaUncheckedCreateWithoutNotaInput>
-  }
-
-  export type Nota_CategoriaCreateManyNotaInputEnvelope = {
-    data: Nota_CategoriaCreateManyNotaInput | Nota_CategoriaCreateManyNotaInput[]
-    skipDuplicates?: boolean
   }
 
   export type UsersUpsertWithoutNotasInput = {
@@ -16160,7 +19705,9 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutNotasInput = {
@@ -16174,7 +19721,9 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type NormaUpsertWithoutNotasInput = {
@@ -16203,6 +19752,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutNotasInput = {
@@ -16221,114 +19773,149 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
-  export type Nota_CategoriaUpsertWithWhereUniqueWithoutNotaInput = {
-    where: Nota_CategoriaWhereUniqueInput
-    update: XOR<Nota_CategoriaUpdateWithoutNotaInput, Nota_CategoriaUncheckedUpdateWithoutNotaInput>
-    create: XOR<Nota_CategoriaCreateWithoutNotaInput, Nota_CategoriaUncheckedCreateWithoutNotaInput>
-  }
-
-  export type Nota_CategoriaUpdateWithWhereUniqueWithoutNotaInput = {
-    where: Nota_CategoriaWhereUniqueInput
-    data: XOR<Nota_CategoriaUpdateWithoutNotaInput, Nota_CategoriaUncheckedUpdateWithoutNotaInput>
-  }
-
-  export type Nota_CategoriaUpdateManyWithWhereWithoutNotaInput = {
-    where: Nota_CategoriaScalarWhereInput
-    data: XOR<Nota_CategoriaUpdateManyMutationInput, Nota_CategoriaUncheckedUpdateManyWithoutNotaInput>
-  }
-
-  export type CategoriaCreateWithoutNota_catInput = {
+  export type CategoriaCreateWithoutNorma_catInput = {
     cat_nome: string
     data_criacao?: Date | string
     usuario: UsersCreateNestedOneWithoutCategoriaInput
   }
 
-  export type CategoriaUncheckedCreateWithoutNota_catInput = {
+  export type CategoriaUncheckedCreateWithoutNorma_catInput = {
     cat_id?: number
     cat_nome: string
     adm_criador: number
     data_criacao?: Date | string
   }
 
-  export type CategoriaCreateOrConnectWithoutNota_catInput = {
+  export type CategoriaCreateOrConnectWithoutNorma_catInput = {
     where: CategoriaWhereUniqueInput
-    create: XOR<CategoriaCreateWithoutNota_catInput, CategoriaUncheckedCreateWithoutNota_catInput>
+    create: XOR<CategoriaCreateWithoutNorma_catInput, CategoriaUncheckedCreateWithoutNorma_catInput>
   }
 
-  export type NotasCreateWithoutNota_catInput = {
-    not_titulo: string
-    not_dec: string
+  export type NormaCreateWithoutCategoriaInput = {
+    norm_titulo: string
+    norm_desc: string
+    emissao: Date | string
+    norm_codigo: string
     data_criacao?: Date | string
-    usuario: UsersCreateNestedOneWithoutNotasInput
-    normas: NormaCreateNestedOneWithoutNotasInput
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasCreateNestedManyWithoutNormasInput
+    usuario: UsersCreateNestedOneWithoutNormasInput
+    orgaos: OrgaosCreateNestedOneWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
-  export type NotasUncheckedCreateWithoutNota_catInput = {
-    id_not?: number
-    not_titulo: string
-    not_dec: string
-    norm_criador: number
+  export type NormaUncheckedCreateWithoutCategoriaInput = {
+    id_norm?: number
+    norm_titulo: string
+    norm_desc: string
+    org_criador: number
     adm_criador: number
+    emissao: Date | string
+    norm_codigo: string
     data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
-  export type NotasCreateOrConnectWithoutNota_catInput = {
-    where: NotasWhereUniqueInput
-    create: XOR<NotasCreateWithoutNota_catInput, NotasUncheckedCreateWithoutNota_catInput>
+  export type NormaCreateOrConnectWithoutCategoriaInput = {
+    where: NormaWhereUniqueInput
+    create: XOR<NormaCreateWithoutCategoriaInput, NormaUncheckedCreateWithoutCategoriaInput>
   }
 
-  export type CategoriaUpsertWithoutNota_catInput = {
-    update: XOR<CategoriaUpdateWithoutNota_catInput, CategoriaUncheckedUpdateWithoutNota_catInput>
-    create: XOR<CategoriaCreateWithoutNota_catInput, CategoriaUncheckedCreateWithoutNota_catInput>
+  export type CategoriaUpsertWithoutNorma_catInput = {
+    update: XOR<CategoriaUpdateWithoutNorma_catInput, CategoriaUncheckedUpdateWithoutNorma_catInput>
+    create: XOR<CategoriaCreateWithoutNorma_catInput, CategoriaUncheckedCreateWithoutNorma_catInput>
     where?: CategoriaWhereInput
   }
 
-  export type CategoriaUpdateToOneWithWhereWithoutNota_catInput = {
+  export type CategoriaUpdateToOneWithWhereWithoutNorma_catInput = {
     where?: CategoriaWhereInput
-    data: XOR<CategoriaUpdateWithoutNota_catInput, CategoriaUncheckedUpdateWithoutNota_catInput>
+    data: XOR<CategoriaUpdateWithoutNorma_catInput, CategoriaUncheckedUpdateWithoutNorma_catInput>
   }
 
-  export type CategoriaUpdateWithoutNota_catInput = {
+  export type CategoriaUpdateWithoutNorma_catInput = {
     cat_nome?: StringFieldUpdateOperationsInput | string
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsersUpdateOneRequiredWithoutCategoriaNestedInput
   }
 
-  export type CategoriaUncheckedUpdateWithoutNota_catInput = {
+  export type CategoriaUncheckedUpdateWithoutNorma_catInput = {
     cat_id?: IntFieldUpdateOperationsInput | number
     cat_nome?: StringFieldUpdateOperationsInput | string
     adm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type NotasUpsertWithoutNota_catInput = {
-    update: XOR<NotasUpdateWithoutNota_catInput, NotasUncheckedUpdateWithoutNota_catInput>
-    create: XOR<NotasCreateWithoutNota_catInput, NotasUncheckedCreateWithoutNota_catInput>
-    where?: NotasWhereInput
+  export type NormaUpsertWithoutCategoriaInput = {
+    update: XOR<NormaUpdateWithoutCategoriaInput, NormaUncheckedUpdateWithoutCategoriaInput>
+    create: XOR<NormaCreateWithoutCategoriaInput, NormaUncheckedCreateWithoutCategoriaInput>
+    where?: NormaWhereInput
   }
 
-  export type NotasUpdateToOneWithWhereWithoutNota_catInput = {
-    where?: NotasWhereInput
-    data: XOR<NotasUpdateWithoutNota_catInput, NotasUncheckedUpdateWithoutNota_catInput>
+  export type NormaUpdateToOneWithWhereWithoutCategoriaInput = {
+    where?: NormaWhereInput
+    data: XOR<NormaUpdateWithoutCategoriaInput, NormaUncheckedUpdateWithoutCategoriaInput>
   }
 
-  export type NotasUpdateWithoutNota_catInput = {
-    not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+  export type NormaUpdateWithoutCategoriaInput = {
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuario?: UsersUpdateOneRequiredWithoutNotasNestedInput
-    normas?: NormaUpdateOneRequiredWithoutNotasNestedInput
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUpdateManyWithoutNormasNestedInput
+    usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
+    orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
-  export type NotasUncheckedUpdateWithoutNota_catInput = {
-    id_not?: IntFieldUpdateOperationsInput | number
-    not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
-    norm_criador?: IntFieldUpdateOperationsInput | number
+  export type NormaUncheckedUpdateWithoutCategoriaInput = {
+    id_norm?: IntFieldUpdateOperationsInput | number
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    org_criador?: IntFieldUpdateOperationsInput | number
     adm_criador?: IntFieldUpdateOperationsInput | number
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaCreateWithoutNormas_origemInput = {
@@ -16346,6 +19933,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutNormas_origemInput = {
@@ -16364,6 +19954,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutNormas_origemInput = {
@@ -16386,6 +19979,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutNormas_destinoInput = {
@@ -16404,6 +20000,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutNormas_destinoInput = {
@@ -16437,6 +20036,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutNormas_origemInput = {
@@ -16455,6 +20057,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUpsertWithoutNormas_destinoInput = {
@@ -16483,6 +20088,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutNormas_destinoInput = {
@@ -16501,6 +20109,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaCreateWithoutVersoesInput = {
@@ -16518,6 +20129,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutVersoesInput = {
@@ -16536,6 +20150,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutVersoesInput = {
@@ -16569,6 +20186,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutVersoesInput = {
@@ -16587,6 +20207,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type UsersCreateWithoutMfaInput = {
@@ -16599,7 +20222,9 @@ export namespace Prisma {
     categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutMfaInput = {
@@ -16613,7 +20238,9 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutMfaInput = {
@@ -16642,7 +20269,9 @@ export namespace Prisma {
     categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutMfaInput = {
@@ -16656,7 +20285,9 @@ export namespace Prisma {
     categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
     historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersCreateWithoutHistoricoAcessoNormasInput = {
@@ -16670,6 +20301,8 @@ export namespace Prisma {
     normas?: NormaCreateNestedManyWithoutUsuarioInput
     notas?: NotasCreateNestedManyWithoutUsuarioInput
     mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersUncheckedCreateWithoutHistoricoAcessoNormasInput = {
@@ -16684,6 +20317,8 @@ export namespace Prisma {
     normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
     notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
     mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
   }
 
   export type UsersCreateOrConnectWithoutHistoricoAcessoNormasInput = {
@@ -16706,6 +20341,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
   }
 
   export type NormaUncheckedCreateWithoutHistoricoAcessoNormasInput = {
@@ -16724,6 +20362,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
     normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
     versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
   }
 
   export type NormaCreateOrConnectWithoutHistoricoAcessoNormasInput = {
@@ -16753,6 +20394,8 @@ export namespace Prisma {
     normas?: NormaUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
   }
 
   export type UsersUncheckedUpdateWithoutHistoricoAcessoNormasInput = {
@@ -16767,6 +20410,8 @@ export namespace Prisma {
     normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
     notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
     mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
   }
 
   export type NormaUpsertWithoutHistoricoAcessoNormasInput = {
@@ -16795,6 +20440,9 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutHistoricoAcessoNormasInput = {
@@ -16813,6 +20461,361 @@ export namespace Prisma {
     normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
+  }
+
+  export type UsersCreateWithoutPedidosInput = {
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
+    normas?: NormaCreateNestedManyWithoutUsuarioInput
+    notas?: NotasCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type UsersUncheckedCreateWithoutPedidosInput = {
+    id_user?: number
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosUncheckedCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
+    normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
+    notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type UsersCreateOrConnectWithoutPedidosInput = {
+    where: UsersWhereUniqueInput
+    create: XOR<UsersCreateWithoutPedidosInput, UsersUncheckedCreateWithoutPedidosInput>
+  }
+
+  export type NormaCreateWithoutPedidosInput = {
+    norm_titulo: string
+    norm_desc: string
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasCreateNestedManyWithoutNormasInput
+    usuario: UsersCreateNestedOneWithoutNormasInput
+    orgaos: OrgaosCreateNestedOneWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+  }
+
+  export type NormaUncheckedCreateWithoutPedidosInput = {
+    id_norm?: number
+    norm_titulo: string
+    norm_desc: string
+    org_criador: number
+    adm_criador: number
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    favoritos?: FavoritosUncheckedCreateNestedManyWithoutNormaInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+  }
+
+  export type NormaCreateOrConnectWithoutPedidosInput = {
+    where: NormaWhereUniqueInput
+    create: XOR<NormaCreateWithoutPedidosInput, NormaUncheckedCreateWithoutPedidosInput>
+  }
+
+  export type UsersUpsertWithoutPedidosInput = {
+    update: XOR<UsersUpdateWithoutPedidosInput, UsersUncheckedUpdateWithoutPedidosInput>
+    create: XOR<UsersCreateWithoutPedidosInput, UsersUncheckedCreateWithoutPedidosInput>
+    where?: UsersWhereInput
+  }
+
+  export type UsersUpdateToOneWithWhereWithoutPedidosInput = {
+    where?: UsersWhereInput
+    data: XOR<UsersUpdateWithoutPedidosInput, UsersUncheckedUpdateWithoutPedidosInput>
+  }
+
+  export type UsersUpdateWithoutPedidosInput = {
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type UsersUncheckedUpdateWithoutPedidosInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUncheckedUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type NormaUpsertWithoutPedidosInput = {
+    update: XOR<NormaUpdateWithoutPedidosInput, NormaUncheckedUpdateWithoutPedidosInput>
+    create: XOR<NormaCreateWithoutPedidosInput, NormaUncheckedCreateWithoutPedidosInput>
+    where?: NormaWhereInput
+  }
+
+  export type NormaUpdateToOneWithWhereWithoutPedidosInput = {
+    where?: NormaWhereInput
+    data: XOR<NormaUpdateWithoutPedidosInput, NormaUncheckedUpdateWithoutPedidosInput>
+  }
+
+  export type NormaUpdateWithoutPedidosInput = {
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUpdateManyWithoutNormasNestedInput
+    usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
+    orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+  }
+
+  export type NormaUncheckedUpdateWithoutPedidosInput = {
+    id_norm?: IntFieldUpdateOperationsInput | number
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    org_criador?: IntFieldUpdateOperationsInput | number
+    adm_criador?: IntFieldUpdateOperationsInput | number
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+  }
+
+  export type UsersCreateWithoutFavoritosInput = {
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaCreateNestedManyWithoutUsuarioInput
+    normas?: NormaCreateNestedManyWithoutUsuarioInput
+    notas?: NotasCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type UsersUncheckedCreateWithoutFavoritosInput = {
+    id_user?: number
+    user_name: string
+    email: string
+    user_senha_hash: string
+    data_criacao?: Date | string
+    nivel_user?: $Enums.NivelUser
+    orgaos?: OrgaosUncheckedCreateNestedManyWithoutUsuariosInput
+    categoria?: CategoriaUncheckedCreateNestedManyWithoutUsuarioInput
+    normas?: NormaUncheckedCreateNestedManyWithoutUsuarioInput
+    notas?: NotasUncheckedCreateNestedManyWithoutUsuarioInput
+    mfa?: MfaUncheckedCreateNestedManyWithoutUsuarioInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutUsuariosInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type UsersCreateOrConnectWithoutFavoritosInput = {
+    where: UsersWhereUniqueInput
+    create: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+  }
+
+  export type NormaCreateWithoutFavoritosInput = {
+    norm_titulo: string
+    norm_desc: string
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasCreateNestedManyWithoutNormasInput
+    usuario: UsersCreateNestedOneWithoutNormasInput
+    orgaos: OrgaosCreateNestedOneWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasCreateNestedManyWithoutNormasInput
+    categoria?: Norma_CategoriaCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoCreateNestedManyWithoutNormasInput
+  }
+
+  export type NormaUncheckedCreateWithoutFavoritosInput = {
+    id_norm?: number
+    norm_titulo: string
+    norm_desc: string
+    org_criador: number
+    adm_criador: number
+    emissao: Date | string
+    norm_codigo: string
+    data_criacao?: Date | string
+    data_update?: Date | string
+    pdf_nome_original: string
+    pdf_caminho: string
+    notas?: NotasUncheckedCreateNestedManyWithoutNormasInput
+    normas_origem?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_origemInput
+    normas_destino?: Normas_ReferenciadasUncheckedCreateNestedManyWithoutNorma_destinoInput
+    versoes?: Normas_VersoesUncheckedCreateNestedManyWithoutNormaInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedCreateNestedManyWithoutNormasInput
+    categoria?: Norma_CategoriaUncheckedCreateNestedManyWithoutNormaInput
+    pedidos?: PedidosdeAlteracaoUncheckedCreateNestedManyWithoutNormasInput
+  }
+
+  export type NormaCreateOrConnectWithoutFavoritosInput = {
+    where: NormaWhereUniqueInput
+    create: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+  }
+
+  export type UsersUpsertWithoutFavoritosInput = {
+    update: XOR<UsersUpdateWithoutFavoritosInput, UsersUncheckedUpdateWithoutFavoritosInput>
+    create: XOR<UsersCreateWithoutFavoritosInput, UsersUncheckedCreateWithoutFavoritosInput>
+    where?: UsersWhereInput
+  }
+
+  export type UsersUpdateToOneWithWhereWithoutFavoritosInput = {
+    where?: UsersWhereInput
+    data: XOR<UsersUpdateWithoutFavoritosInput, UsersUncheckedUpdateWithoutFavoritosInput>
+  }
+
+  export type UsersUpdateWithoutFavoritosInput = {
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type UsersUncheckedUpdateWithoutFavoritosInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    user_name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    user_senha_hash?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    nivel_user?: EnumNivelUserFieldUpdateOperationsInput | $Enums.NivelUser
+    orgaos?: OrgaosUncheckedUpdateManyWithoutUsuariosNestedInput
+    categoria?: CategoriaUncheckedUpdateManyWithoutUsuarioNestedInput
+    normas?: NormaUncheckedUpdateManyWithoutUsuarioNestedInput
+    notas?: NotasUncheckedUpdateManyWithoutUsuarioNestedInput
+    mfa?: MfaUncheckedUpdateManyWithoutUsuarioNestedInput
+    historicoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type NormaUpsertWithoutFavoritosInput = {
+    update: XOR<NormaUpdateWithoutFavoritosInput, NormaUncheckedUpdateWithoutFavoritosInput>
+    create: XOR<NormaCreateWithoutFavoritosInput, NormaUncheckedCreateWithoutFavoritosInput>
+    where?: NormaWhereInput
+  }
+
+  export type NormaUpdateToOneWithWhereWithoutFavoritosInput = {
+    where?: NormaWhereInput
+    data: XOR<NormaUpdateWithoutFavoritosInput, NormaUncheckedUpdateWithoutFavoritosInput>
+  }
+
+  export type NormaUpdateWithoutFavoritosInput = {
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUpdateManyWithoutNormasNestedInput
+    usuario?: UsersUpdateOneRequiredWithoutNormasNestedInput
+    orgaos?: OrgaosUpdateOneRequiredWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
+  }
+
+  export type NormaUncheckedUpdateWithoutFavoritosInput = {
+    id_norm?: IntFieldUpdateOperationsInput | number
+    norm_titulo?: StringFieldUpdateOperationsInput | string
+    norm_desc?: StringFieldUpdateOperationsInput | string
+    org_criador?: IntFieldUpdateOperationsInput | number
+    adm_criador?: IntFieldUpdateOperationsInput | number
+    emissao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norm_codigo?: StringFieldUpdateOperationsInput | string
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_update?: DateTimeFieldUpdateOperationsInput | Date | string
+    pdf_nome_original?: StringFieldUpdateOperationsInput | string
+    pdf_caminho?: StringFieldUpdateOperationsInput | string
+    notas?: NotasUncheckedUpdateManyWithoutNormasNestedInput
+    normas_origem?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_origemNestedInput
+    normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
+    versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
+    HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type OrgaosCreateManyUsuariosInput = {
@@ -16843,7 +20846,9 @@ export namespace Prisma {
   export type NotasCreateManyUsuarioInput = {
     id_not?: number
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     norm_criador: number
     data_criacao?: Date | string
   }
@@ -16854,9 +20859,24 @@ export namespace Prisma {
     cod_data_cricao?: Date | string
   }
 
+  export type FavoritosCreateManyUsuarioInput = {
+    id_norma: number
+    data_criacao?: Date | string
+  }
+
   export type Historico_Acesso_NormasCreateManyUsuariosInput = {
     id_norma: number
     data_acesso?: Date | string
+  }
+
+  export type PedidosdeAlteracaoCreateManyUsuariosInput = {
+    id?: number
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+    id_norma?: number | null
   }
 
   export type OrgaosUpdateWithoutUsuariosInput = {
@@ -16881,14 +20901,14 @@ export namespace Prisma {
   export type CategoriaUpdateWithoutUsuarioInput = {
     cat_nome?: StringFieldUpdateOperationsInput | string
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    nota_cat?: Nota_CategoriaUpdateManyWithoutCatNestedInput
+    norma_cat?: Norma_CategoriaUpdateManyWithoutCatNestedInput
   }
 
   export type CategoriaUncheckedUpdateWithoutUsuarioInput = {
     cat_id?: IntFieldUpdateOperationsInput | number
     cat_nome?: StringFieldUpdateOperationsInput | string
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    nota_cat?: Nota_CategoriaUncheckedUpdateManyWithoutCatNestedInput
+    norma_cat?: Norma_CategoriaUncheckedUpdateManyWithoutCatNestedInput
   }
 
   export type CategoriaUncheckedUpdateManyWithoutUsuarioInput = {
@@ -16912,6 +20932,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutUsuarioInput = {
@@ -16930,6 +20953,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateManyWithoutUsuarioInput = {
@@ -16947,25 +20973,29 @@ export namespace Prisma {
 
   export type NotasUpdateWithoutUsuarioInput = {
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     normas?: NormaUpdateOneRequiredWithoutNotasNestedInput
-    nota_cat?: Nota_CategoriaUpdateManyWithoutNotaNestedInput
   }
 
   export type NotasUncheckedUpdateWithoutUsuarioInput = {
     id_not?: IntFieldUpdateOperationsInput | number
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     norm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    nota_cat?: Nota_CategoriaUncheckedUpdateManyWithoutNotaNestedInput
   }
 
   export type NotasUncheckedUpdateManyWithoutUsuarioInput = {
     id_not?: IntFieldUpdateOperationsInput | number
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     norm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16987,6 +21017,21 @@ export namespace Prisma {
     cod_data_cricao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FavoritosUpdateWithoutUsuarioInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    norma?: NormaUpdateOneRequiredWithoutFavoritosNestedInput
+  }
+
+  export type FavoritosUncheckedUpdateWithoutUsuarioInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FavoritosUncheckedUpdateManyWithoutUsuarioInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type Historico_Acesso_NormasUpdateWithoutUsuariosInput = {
     data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
     normas?: NormaUpdateOneRequiredWithoutHistoricoAcessoNormasNestedInput
@@ -17000,6 +21045,35 @@ export namespace Prisma {
   export type Historico_Acesso_NormasUncheckedUpdateManyWithoutUsuariosInput = {
     id_norma?: IntFieldUpdateOperationsInput | number
     data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PedidosdeAlteracaoUpdateWithoutUsuariosInput = {
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+    normas?: NormaUpdateOneWithoutPedidosNestedInput
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateWithoutUsuariosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+    id_norma?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateManyWithoutUsuariosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+    id_norma?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type NormaCreateManyOrgaosInput = {
@@ -17030,6 +21104,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateWithoutOrgaosInput = {
@@ -17048,6 +21125,9 @@ export namespace Prisma {
     normas_destino?: Normas_ReferenciadasUncheckedUpdateManyWithoutNorma_destinoNestedInput
     versoes?: Normas_VersoesUncheckedUpdateManyWithoutNormaNestedInput
     HistoricoAcessoNormas?: Historico_Acesso_NormasUncheckedUpdateManyWithoutNormasNestedInput
+    favoritos?: FavoritosUncheckedUpdateManyWithoutNormaNestedInput
+    categoria?: Norma_CategoriaUncheckedUpdateManyWithoutNormaNestedInput
+    pedidos?: PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasNestedInput
   }
 
   export type NormaUncheckedUpdateManyWithoutOrgaosInput = {
@@ -17063,26 +21143,28 @@ export namespace Prisma {
     pdf_caminho?: StringFieldUpdateOperationsInput | string
   }
 
-  export type Nota_CategoriaCreateManyCatInput = {
-    id_nota: number
+  export type Norma_CategoriaCreateManyCatInput = {
+    id_norma: number
   }
 
-  export type Nota_CategoriaUpdateWithoutCatInput = {
-    nota?: NotasUpdateOneRequiredWithoutNota_catNestedInput
+  export type Norma_CategoriaUpdateWithoutCatInput = {
+    norma?: NormaUpdateOneRequiredWithoutCategoriaNestedInput
   }
 
-  export type Nota_CategoriaUncheckedUpdateWithoutCatInput = {
-    id_nota?: IntFieldUpdateOperationsInput | number
+  export type Norma_CategoriaUncheckedUpdateWithoutCatInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
   }
 
-  export type Nota_CategoriaUncheckedUpdateManyWithoutCatInput = {
-    id_nota?: IntFieldUpdateOperationsInput | number
+  export type Norma_CategoriaUncheckedUpdateManyWithoutCatInput = {
+    id_norma?: IntFieldUpdateOperationsInput | number
   }
 
   export type NotasCreateManyNormasInput = {
     id_not?: number
     not_titulo: string
-    not_dec: string
+    not_IT: string
+    not_AB?: string | null
+    not_Pa?: string | null
     adm_criador: number
     data_criacao?: Date | string
   }
@@ -17112,27 +21194,50 @@ export namespace Prisma {
     data_acesso?: Date | string
   }
 
+  export type FavoritosCreateManyNormaInput = {
+    id_user: number
+    data_criacao?: Date | string
+  }
+
+  export type Norma_CategoriaCreateManyNormaInput = {
+    id_cat: number
+  }
+
+  export type PedidosdeAlteracaoCreateManyNormasInput = {
+    id?: number
+    id_user: number
+    alteracao: JsonNullValueInput | InputJsonValue
+    acaoDealteracao: $Enums.AcaoDeAlteracao
+    notaorNorma: $Enums.NotaOrNorma
+    status?: $Enums.Status
+    data_pedido?: Date | string
+  }
+
   export type NotasUpdateWithoutNormasInput = {
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
     usuario?: UsersUpdateOneRequiredWithoutNotasNestedInput
-    nota_cat?: Nota_CategoriaUpdateManyWithoutNotaNestedInput
   }
 
   export type NotasUncheckedUpdateWithoutNormasInput = {
     id_not?: IntFieldUpdateOperationsInput | number
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     adm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
-    nota_cat?: Nota_CategoriaUncheckedUpdateManyWithoutNotaNestedInput
   }
 
   export type NotasUncheckedUpdateManyWithoutNormasInput = {
     id_not?: IntFieldUpdateOperationsInput | number
     not_titulo?: StringFieldUpdateOperationsInput | string
-    not_dec?: StringFieldUpdateOperationsInput | string
+    not_IT?: StringFieldUpdateOperationsInput | string
+    not_AB?: NullableStringFieldUpdateOperationsInput | string | null
+    not_Pa?: NullableStringFieldUpdateOperationsInput | string | null
     adm_criador?: IntFieldUpdateOperationsInput | number
     data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17211,20 +21316,60 @@ export namespace Prisma {
     data_acesso?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type Nota_CategoriaCreateManyNotaInput = {
-    id_cat: number
+  export type FavoritosUpdateWithoutNormaInput = {
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuario?: UsersUpdateOneRequiredWithoutFavoritosNestedInput
   }
 
-  export type Nota_CategoriaUpdateWithoutNotaInput = {
-    cat?: CategoriaUpdateOneRequiredWithoutNota_catNestedInput
+  export type FavoritosUncheckedUpdateWithoutNormaInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type Nota_CategoriaUncheckedUpdateWithoutNotaInput = {
+  export type FavoritosUncheckedUpdateManyWithoutNormaInput = {
+    id_user?: IntFieldUpdateOperationsInput | number
+    data_criacao?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Norma_CategoriaUpdateWithoutNormaInput = {
+    cat?: CategoriaUpdateOneRequiredWithoutNorma_catNestedInput
+  }
+
+  export type Norma_CategoriaUncheckedUpdateWithoutNormaInput = {
     id_cat?: IntFieldUpdateOperationsInput | number
   }
 
-  export type Nota_CategoriaUncheckedUpdateManyWithoutNotaInput = {
+  export type Norma_CategoriaUncheckedUpdateManyWithoutNormaInput = {
     id_cat?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PedidosdeAlteracaoUpdateWithoutNormasInput = {
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UsersUpdateOneRequiredWithoutPedidosNestedInput
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateWithoutNormasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    id_user?: IntFieldUpdateOperationsInput | number
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PedidosdeAlteracaoUncheckedUpdateManyWithoutNormasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    id_user?: IntFieldUpdateOperationsInput | number
+    alteracao?: JsonNullValueInput | InputJsonValue
+    acaoDealteracao?: EnumAcaoDeAlteracaoFieldUpdateOperationsInput | $Enums.AcaoDeAlteracao
+    notaorNorma?: EnumNotaOrNormaFieldUpdateOperationsInput | $Enums.NotaOrNorma
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    data_pedido?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
