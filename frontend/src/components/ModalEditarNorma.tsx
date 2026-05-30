@@ -28,7 +28,7 @@ export function ModalEditarNorma({ isOpen, onClose, normaOriginal, onSave }: Mod
   const [codigo, setCodigo] = useState("");
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [emissao, setEmissao] = useState("");
+  const [emissao, setEmissao] = useState<Date | null>(null);
   const [novoArquivo, setNovoArquivo] = useState<File | null>(null);
   
   const [enviando, setEnviando] = useState(false);
@@ -52,14 +52,19 @@ export function ModalEditarNorma({ isOpen, onClose, normaOriginal, onSave }: Mod
       setTitulo(normaOriginal.norm_titulo || "");
       setDescricao(normaOriginal.norm_desc || "");
       
-      let dataEmissaoFormatada = normaOriginal.emissao || "";
-      if (dataEmissaoFormatada.includes("/")) {
-        const partes = dataEmissaoFormatada.split("/");
-        if (partes.length === 3) {
-          dataEmissaoFormatada = `${partes[2]}-${partes[1]}-${partes[0]}`;
+      // Converte a string do banco para Date
+      let dataEmissaoDate: Date | null = null;
+      if (normaOriginal.emissao) {
+        if (normaOriginal.emissao.includes("/")) {
+          const partes = normaOriginal.emissao.split("/");
+          if (partes.length === 3) {
+            dataEmissaoDate = new Date(Number(partes[2]), Number(partes[1]) - 1, Number(partes[0]));
+          }
+        } else {
+          dataEmissaoDate = new Date(normaOriginal.emissao);
         }
       }
-      setEmissao(dataEmissaoFormatada);
+      setEmissao(dataEmissaoDate);
 
       setNovoArquivo(null); 
       setIsReviewMode(false);
@@ -101,13 +106,35 @@ export function ModalEditarNorma({ isOpen, onClose, normaOriginal, onSave }: Mod
 
       if (!token || !idUsuario) throw new Error("Usuário não autenticado.");
 
-      // Objeto exato mapeado para UpdateNormDTO
+      // --- TRATAMENTO RIGOROSO DA DATA PARA O BACKEND NÃO QUEBRAR ---
+      // Caso a conversão falhe, enviamos a data atual para o banco não dar "Invalid Date"
+      let emissaoParaBackend = new Date().toISOString(); 
+
+      if (emissao && !isNaN(emissao.getTime())) {
+        const ano = emissao.getFullYear();
+        const mes = String(emissao.getMonth() + 1).padStart(2, '0');
+        const dia = String(emissao.getDate()).padStart(2, '0');
+        // Formato ISO estrito que o Prisma entende sem problemas
+        emissaoParaBackend = `${ano}-${mes}-${dia}T00:00:00.000Z`;
+      } else if (normaOriginal.emissao) {
+        // Fallback: se o estado 'emissao' for nulo, tenta resgatar a data original do objeto
+        let d = new Date(normaOriginal.emissao);
+        if (normaOriginal.emissao.includes('/')) {
+          const [dia, mes, ano] = normaOriginal.emissao.split('/');
+          d = new Date(Number(ano), Number(mes) - 1, Number(dia));
+        }
+        if (!isNaN(d.getTime())) {
+          emissaoParaBackend = d.toISOString();
+        }
+      }
+
+      // Objeto mapeado para UpdateNormDTO
       const baseMetadata = {
         norm_codigoAtual: normaOriginal.norm_codigo,
         norm_codigo: codigo,
         norm_titulo: titulo,
         norm_desc: descricao,
-        emissao: emissao,
+        emissao: emissaoParaBackend, // Envia a data garantida no formato ISO
         pdf_nome_original: "",
         pdf_caminho: ""
       };

@@ -135,11 +135,12 @@ export default class NormController {
         status: "sucess",
         resposta,
       });
-    } catch (erro) {
+    } catch (erro)  {
+      console.log(erro.code)
       if (erro instanceof ValidatorError) {
         return res.status(400).json({
           status: "error",
-          message: erro.message,
+          message: erro.code //message,
         });
       }
       return res.status(500).json({

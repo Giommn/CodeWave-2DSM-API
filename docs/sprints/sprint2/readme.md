@@ -25,7 +25,7 @@
 
 <br>
 
-> Status do Projeto: Em andamento Sprint 2! ⏳
+> Status do Projeto: Pronto Sprint 2! ✅
 
 <br>
 
@@ -129,11 +129,11 @@ Expandir as funcionalidades da plataforma introduzindo mecanismos de busca e vis
   <details>
   <summary> MVP - Sprint 2 </summary>
   <br>
-  <video src="" controls width="100%"></video>
-  <br>
-  <a href="" target="_blank">
-    <img src="" alt="Ver no YouTube" />
-  </a>
+  <video src="../../videos/sprint2/video_mvp_api_2_sprint2.mp4" controls width="100%"></video>
+    <br>
+    <a href="https://youtu.be/OdWSUOaf51k?si=oA5Wvs_-lIdBVLXD" target="_blank">
+      <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
+    </a>
   </details>
 
   <br>
@@ -143,5 +143,5 @@ Expandir as funcionalidades da plataforma introduzindo mecanismos de busca e vis
 | Sprint | Status | Documentação |
 |:---:|:-----------|:------------------------|
 | **Sprint 1** | Pronta ✅ |  [DOC](../sprint1/readme.md) |
-| **Sprint 2** | Em andamento 🔛 |   [DOC](./readme.md) |
-| **Sprint 3** | A fazer ⏳ |  [DOC](../sprint3/readme.md) |
+| **Sprint 2** | Pronta ✅ |   [DOC](./readme.md) |
+| **Sprint 3** | Em andamento 🔛 |  [DOC](../sprint3/readme.md) |

@@ -45,7 +45,7 @@
 
 <br>
 
-> Status do Projeto: Em andamento Sprint 2! 🔛:
+> Status do Projeto: Em andamento Sprint 3! 🔛:
 
 ## :dart: Objetivo <a id="Objetivo"></a>
 O desafio consiste em desenvolver uma plataforma web estruturada para centralizar, organizar e correlacionar requisitos normativos aeronáuticos. O sistema visa transformar o processo atual, que é manual e descentralizado, em uma fonte de dados organizada que reduza o tempo de análise e o risco de inconsistências interpretativas, apoiando a tomada de decisão de profissionais habilitados.
@@ -130,7 +130,7 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 </details>
 
   <details>
-  <summary> MVP - Sprint 2 (Não disponível) </summary>
+  <summary> MVP - Sprint 2 </summary>
   <br>
 
   ## 📋 Backlog da Sprint
@@ -142,9 +142,9 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 | $\color{green}{\text{7}}$ | $\color{green}{\text{Média}}$ | $\color{green}{\text{Como Analista de Qualidade,}}$ $\color{green}{\text{quero adicionar notas técnicas}}$ $\color{green}{\text{a um requisito}}$ $\color{green}{\text{para documentar análises.}}$ | $\color{green}{\text{8}}$ | $\color{green}{\text{2}}$ | $\color{green}{\text{🔛}}$ |
 
 <br>
-  <video src="docs/videos/sprint1/video_mvp_api_2_sprint2.mp4" controls width="100%"></video>
+  <video src="docs/videos/sprint2/video_mvp_api_2_sprint2.mp4" controls width="100%"></video>
   <br>
-  <a href="" target="_blank">
+  <a href="https://youtu.be/OdWSUOaf51k?si=oA5Wvs_-lIdBVLXD" target="_blank">
     <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
   </a>
 
@@ -172,8 +172,8 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 | Sprint | Status | Documentação |
 |:---:|:-----------|:------------------------|
 | **Sprint 1** | Pronta |  [DOC](docs/sprints/sprint1/readme.md) |
-| **Sprint 2** | Em andamento |   [DOC](docs/sprints/sprint2/readme.md) |
-| **Sprint 3** | A Fazer |  [DOC](docs/sprints/sprint3/readme.md) |
+| **Sprint 2** | Pronta |   [DOC](docs/sprints/sprint2/readme.md) |
+| **Sprint 3** | Em andamanto |  [DOC](docs/sprints/sprint3/readme.md) |
 
 <br>
 
@@ -196,8 +196,8 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 | Sprint | Período |  Status  | Foco |
 |:------:|:-------:|:------------:|:----------:|
 | **Sprint 1**  | 16/03 - 05/04 | ✅ | Cadastro de usuários e normas |
-| **Sprint 2**  | 13/04 - 03/05 | 🔛 | Filtro de normas e requisitos |
-| **Sprint 3**  | 11/11 - 31/05 | ⏳ | Histórico de normas |
+| **Sprint 2**  | 13/04 - 03/05 | ✅ | Filtro de normas e requisitos |
+| **Sprint 3**  | 11/05 - 31/05 | 🔛 | Histórico de normas |
 
 </br>
 
@@ -217,11 +217,11 @@ Descrição clara sobre o que está sendo entregue no commit criado e enviado pa
 | 2 | Alta | Como Analista de Qualidade, quero atribuir e manipular normas (emitente, título, data) técnicas ao sistema, para permitir melhor visualização das informações. | 11 | 1 | ✅ |
 | 3 | Alta | Como Analista de Qualidade, quero atribuir e manipular requisitos a uma norma, para que informações complementares fiquem registradas no sistema. | 13 | 1 | ✅ |
 | 4 | Alta | Como Analista de Qualidade, quero realizar login informando meu email e senha para acessar o sistema. | 8 | 1 | ✅ |
-| 5 | Alta | Como Analista de Qualidade, quero filtrar normas técnicas por órgão, categoria e palavra-chave, para agilizar o processo de busca. | 8 | 2 | 🔛 |
-| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | 🔛 |
-| 7 | Média | Como Analista de Qualidade, quero adicionar notas técnicas a um requisito para documentar análises. | 8 | 2 | 🔛 |
-| 8 | Média | Como Analista de Qualidade, quero visualizar o histórico de alterações nos requisitos para rastreabilidade. | 8 | 3 | ⌛ |
-| 9 | Baixa | Como Projetista, quero vizualizar o site pelo meu celular, para visualizar detalhes técnicos. | 8 | 3 | ⌛ |
+| 5 | Alta | Como Analista de Qualidade, quero filtrar normas técnicas por órgão, categoria e palavra-chave, para agilizar o processo de busca. | 8 | 2 | ✅ |
+| 6 | Média | Como Analista de Qualidade, quero visualizar todos os projetistas cadastrados no site, para ter controle sobre a plataforma. | 8 | 2 | ✅ |
+| 7 | Média | Como Analista de Qualidade, quero adicionar notas técnicas a um requisito para documentar análises. | 8 | 2 | ✅ |
+| 8 | Média | Como Analista de Qualidade, quero visualizar o histórico de alterações nos requisitos para rastreabilidade. | 8 | 3 | 🔛 |
+| 9 | Baixa | Como Projetista, quero vizualizar o site pelo meu celular, para visualizar detalhes técnicos. | 8 | 3 | 🔛 |
 
 <br>
 

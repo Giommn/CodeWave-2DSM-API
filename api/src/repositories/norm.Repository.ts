@@ -302,6 +302,7 @@
                     norm_codigo:true,
                     usuario:{select:{user_name:true}},
                     id_norm:true,
+                    data_criacao: true,
                     normas_origem:{select:{norma_destino:{select:{norm_titulo:true}}}},
                     pdf_caminho:true,
                     categoria:{
@@ -331,6 +332,7 @@
             emissao: n.emissao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
             adm_criador:n.usuario.user_name,
             id_norm:n.id_norm,
+            criado_em:n.data_criacao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
             pdf_caminho:n.pdf_caminho,
             referencias:n.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
             categoria:n.categoria.map(cat=>cat.cat.cat_nome),
@@ -523,7 +525,7 @@
                         notaPA:nota.not_Pa,
                         norm_criador:nota.normas.norm_titulo,
                         adm_criador:nota.usuario.user_name
-                }})
+                }} , )
         }});
             }catch(erro){
                 throw new ValidatorError("Ouve um erro ao procurar pelas suas normas",400,erro.message)

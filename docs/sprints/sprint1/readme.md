@@ -140,7 +140,7 @@ Estabelecer a fundação do sistema com foco no controle de acesso e na estrutur
   <details>
   <summary> MVP - Sprint 1 </summary>
   <br>
-  <video src="docs/videos/sprint1/video_mvp_api_2_sprint1.mp4" controls width="100%"></video>
+  <video src="../../videos/sprint1/video_mvp_api_2_sprint1.mp4" controls width="100%"></video>
   <br>
   <a href="https://youtu.be/Yi9m4oz6Bg4?si=PA6AvCtkteVwIgGQ" target="_blank">
     <img src="https://img.shields.io/badge/Ver_no_YouTube-FF0000?style=flat&logo=youtube&logoColor=white" alt="Ver no YouTube" />
@@ -155,5 +155,5 @@ Estabelecer a fundação do sistema com foco no controle de acesso e na estrutur
 | Sprint | Status | Documentação |
 |:---:|:-----------|:------------------------|
 | **Sprint 1** | Pronta ✅ |  [DOC](./readme.md) |
-| **Sprint 2** | Em andamento 🔛 |   [DOC](../sprint2/readme.md) |
-| **Sprint 3** | A fazer ⏳ |  [DOC](../sprint3/readme.md) |
+| **Sprint 2** | Pronta ✅ |   [DOC](../sprint2/readme.md) |
+| **Sprint 3** | Em andamento 🔛 |  [DOC](../sprint3/readme.md) |
