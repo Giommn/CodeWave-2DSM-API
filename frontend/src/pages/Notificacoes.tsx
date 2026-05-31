@@ -115,7 +115,7 @@ function Notificacoes() {
   const [normasHoje, setNormasHoje] = useState<ResponseNorm[]>([]);
   const [secaoAberta, setSecaoAberta] = useState(false);
   const [normaModalAberta, setNormaModalAberta] = useState<ResponseNorm | null>(null);
- 
+  
   const userRole = localStorage.getItem("userRole") || "user";
  
   // Busca normas criadas hoje
