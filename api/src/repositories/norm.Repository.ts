@@ -296,6 +296,7 @@
             const normas= await prisma.norma.findMany({
                 select:{
                     norm_titulo:true,
+                    data_criacao:true,
                     norm_desc:true,
                     orgaos:{select:{org_desc:true}},
                     emissao:true,
@@ -331,6 +332,7 @@
             emissao: n.emissao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
             adm_criador:n.usuario.user_name,
             id_norm:n.id_norm,
+            criacao:n.data_criacao.toLocaleDateString('pt-BR').replace(/\//g,'-'),
             pdf_caminho:n.pdf_caminho,
             referencias:n.normas_origem.map(ref=> ref.norma_destino.norm_titulo),
             categoria:n.categoria.map(cat=>cat.cat.cat_nome),
@@ -529,4 +531,72 @@
                 throw new ValidatorError("Ouve um erro ao procurar pelas suas normas",400,erro.message)
             }
         }
+
+
+       public async PegarVersoesNormas(id_norm: number) {
+  const versoes = await prisma.normas_Versoes.findMany({
+    where: { norma_id: id_norm },
+    select: {
+      norm_titulo: true,
+      norma_id: true,
+      norma_codigo: true,
+      emissao: true,
+      criado_em: true,
+      pdf_caminho: true,
+      norm_dec: true,
+      norma: {
+        select: {
+          categoria: {
+            select: {
+              cat: { select: { cat_nome: true } }
+            }
+          },
+          orgaos: {
+            select: { org_desc: true }
+          },
+          notas: {
+            select: {
+              not_IT: true,
+              not_titulo: true,
+              not_AB: true,
+              not_Pa: true,
+              normas: { select: { norm_titulo: true } },
+              usuario: { select: { user_name: true } }
+            }
+          },
+          normas_origem: {
+            select: {
+              norma_destino: { select: { norm_titulo: true } }
+            }
+          },
+          adm_criador: true,
+          emissao: true
         }
+      }
+    }
+  });
+
+  return versoes.map((normas) => ({
+    norm_titulo: normas.norm_titulo,
+    norm_desc: normas.norm_dec,
+    org_criador: normas.norma.orgaos.org_desc,
+    emissao: normas.norma.emissao.toLocaleDateString('pt-BR').replace(/\//g, '-'),
+    norm_codigo: normas.norma_codigo,
+    adm_criador: String(normas.norma.adm_criador),
+    id_norm: normas.norma_id,
+    pdf_caminho: normas.pdf_caminho,
+    referencias: normas.norma.normas_origem.map((ref) => ref.norma_destino.norm_titulo),
+    categoria: normas.norma.categoria.map((cat) => cat.cat.cat_nome),
+    criado:normas.criado_em.toLocaleDateString('pt-BR').replace(/\//g, '-'),
+    notas: normas.norma.notas.map((nota) => ({
+      notaIT: nota.not_IT,
+      notaTitulo: nota.not_titulo,
+      notaAB: nota.not_AB,
+      notaPA: nota.not_Pa,
+      norm_criador: nota.normas.norm_titulo,
+      adm_criador: nota.usuario.user_name,
+    })),
+
+  }));
+}
+    }

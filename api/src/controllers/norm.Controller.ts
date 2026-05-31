@@ -282,6 +282,23 @@ export default class NormController {
         })
     }
  }
+ public static async Verversoes(req:Request,res:Response){
+  try{
+    const {id_norm}=req.params;
+    const resposta= await NormController.norm_service.Versoes(Number(id_norm))
+    res.status(200).json({
+      status:'sucess',
+      resposta
+    }
+    )
+  }catch(erro){
+     return res.status(404).json({
+          status:"error",
+          message:erro.message
+        })
+  }
+
+ }
  
 
 }
