@@ -1,0 +1,218 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum NivelUser {
+  ADM
+  USER
+  CHECKER
+}
+
+enum AcaoDeAlteracao {
+  CREATE
+  UPDATE
+}
+
+enum NotaOrNorma {
+  NORMA
+  NOTA
+}
+
+enum Status {
+  PENDENTE
+  REJEITADO
+  APROVADO
+}
+
+model Users {
+  id_user         Int       @id @default(autoincrement())
+  user_name       String
+  email           String    @unique
+  user_senha_hash String    @db.VarChar(255)
+  data_criacao    DateTime  @default(now()) @db.Timestamp(0)
+  nivel_user      NivelUser @default(USER)
+
+  orgaos                Orgaos[]
+  categoria             Categoria[]
+  normas                Norma[]
+  notas                 Notas[]
+  mfa                   Mfa[]
+  favoritos             Favoritos[]
+  historicoAcessoNormas Historico_Acesso_Normas[]
+  pedidos               PedidosdeAlteracao[]
+
+  @@map("usuarios")
+}
+
+model Orgaos {
+  org_id      Int     @id @default(autoincrement())
+  org_desc    String  @unique @db.VarChar(50)
+  org_sigla   String  @db.VarChar(10)
+  adm_criador Int?
+  normas      Norma[]
+  usuarios    Users?  @relation(fields: [adm_criador], references: [id_user])
+
+  @@index([adm_criador])
+  @@map("orgaos")
+}
+
+model Categoria {
+  cat_id       Int               @id @default(autoincrement())
+  cat_nome     String            @unique @db.VarChar(50)
+  adm_criador  Int
+  data_criacao DateTime          @default(now()) @db.Timestamp(0)
+  norma_cat    Norma_Categoria[]
+  usuario      Users             @relation(fields: [adm_criador], references: [id_user])
+
+  @@index([adm_criador])
+  @@map("categoria")
+}
+
+model Norma {
+  id_norm               Int                       @id @default(autoincrement())
+  norm_titulo           String                    @db.VarChar(100)
+  norm_desc             String                    @db.Text
+  org_criador           Int
+  adm_criador           Int
+  emissao               DateTime                  @db.Date
+  norm_codigo           String                    @unique @db.VarChar(50)
+  data_criacao          DateTime                  @default(now()) @db.Timestamp(0)
+  data_update           DateTime                  @default(now()) @updatedAt @db.Timestamp(0)
+  notas                 Notas[]
+  pdf_nome_original     String                    @db.VarChar(255)
+  pdf_caminho           String                    @db.VarChar(500)
+  usuario               Users                     @relation(fields: [adm_criador], references: [id_user])
+  orgaos                Orgaos                    @relation(fields: [org_criador], references: [org_id])
+  normas_origem         Normas_Referenciadas[]    @relation("origem")
+  normas_destino        Normas_Referenciadas[]    @relation("destino")
+  versoes               Normas_Versoes[]
+  HistoricoAcessoNormas Historico_Acesso_Normas[]
+  favoritos             Favoritos[]
+  categoria             Norma_Categoria[]
+  pedidos               PedidosdeAlteracao[]
+
+  @@index([adm_criador])
+  @@index([org_criador])
+  @@index([norm_titulo])
+  @@index([emissao])
+  @@index([data_criacao])
+  @@map("normas")
+}
+
+model Notas {
+  id_not       Int      @id @default(autoincrement())
+  not_titulo   String
+  not_IT       String   @db.Text
+  not_AB       String?  @db.Text
+  not_Pa       String?  @db.Text
+  norm_criador Int
+  adm_criador  Int
+  data_criacao DateTime @default(now()) @db.Timestamp(0)
+  usuario      Users    @relation(fields: [adm_criador], references: [id_user])
+  normas       Norma    @relation(fields: [norm_criador], references: [id_norm], onDelete: Cascade)
+
+  @@index([adm_criador])
+  @@index([norm_criador])
+  @@index([not_titulo])
+  @@map("notas")
+}
+
+model Norma_Categoria {
+  id_norma Int
+  id_cat   Int
+  cat      Categoria @relation(fields: [id_cat], references: [cat_id])
+  norma    Norma     @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
+
+  @@id([id_norma, id_cat])
+  @@index([id_cat])
+  @@index([id_norma])
+}
+
+model Normas_Referenciadas {
+  norma_origem_id  Int
+  norma_destino_id Int
+
+  norma_origem  Norma @relation(fields: [norma_origem_id], references: [id_norm], name: "origem", onDelete: Cascade)
+  norma_destino Norma @relation(fields: [norma_destino_id], references: [id_norm], name: "destino", onDelete: Cascade)
+
+  @@id([norma_origem_id, norma_destino_id])
+  @@index([norma_destino_id])
+  @@index([norma_origem_id])
+  @@map("normas_referenciadas")
+}
+
+model Normas_Versoes {
+  id_versao         Int      @id @default(autoincrement())
+  norma_id          Int
+  norma_codigo      String   @db.VarChar(50)
+  norm_titulo       String   @db.VarChar(50)
+  norm_dec          String   @db.VarChar(500)
+  emissao           DateTime @db.Date
+  criado_em         DateTime @db.Timestamp(0)
+  criado_em_novo    DateTime @default(now()) @db.Timestamp(0)
+  pdf_nome_original String   @db.VarChar(255)
+  pdf_caminho       String   @db.VarChar(500)
+  norma             Norma    @relation(fields: [norma_id], references: [id_norm], onDelete: Cascade)
+
+  @@index([norma_id])
+  @@index([norma_codigo])
+  @@map("normas_versoes")
+}
+
+model Mfa {
+  id              Int      @id @default(autoincrement())
+  user_id_FK      Int
+  cod_mfa         String   @db.VarChar(255)
+  cod_data_cricao DateTime @default(now()) @db.Timestamp(0)
+  usuario         Users    @relation(fields: [user_id_FK], references: [id_user], onDelete: Cascade)
+
+  @@index([user_id_FK])
+  @@map("mfa")
+}
+
+model Historico_Acesso_Normas {
+  id_user     Int
+  id_norma    Int
+  data_acesso DateTime @default(now())
+  usuarios    Users    @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  normas      Norma    @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
+
+  @@id([id_norma, id_user])
+}
+
+model PedidosdeAlteracao {
+  id              Int             @id @default(autoincrement())
+  id_user         Int
+  alteracao       Json
+  acaoDealteracao AcaoDeAlteracao
+  notaorNorma     NotaOrNorma
+  status          Status          @default(PENDENTE)
+  data_pedido     DateTime        @default(now())
+  id_norma        Int?
+  usuarios        Users           @relation(fields: [id_user], references: [id_user])
+  normas          Norma?          @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
+
+  @@map("pedidos_alteracao")
+}
+
+model Favoritos {
+  id_user      Int
+  id_norma     Int
+  data_criacao DateTime @default(now())
+
+  usuario Users @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  norma   Norma @relation(fields: [id_norma], references: [id_norm], onDelete: Cascade)
+
+  @@id([id_user, id_norma])
+  @@map("Normas_favoritadas")
+}
