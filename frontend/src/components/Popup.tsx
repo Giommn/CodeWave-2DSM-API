@@ -58,4 +58,3 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, title, children }) => {
 };
 
 export default Popup;
-("");

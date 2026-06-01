@@ -7,6 +7,7 @@ import BuscarNormas from "../components/Busca";
 import RemoverFiltros from "../components/RemoverFiltros";
 import { ListaNormasAprovadas } from "../components/ListaNormasAprovadas";
 import { BsStar, BsStarFill } from "react-icons/bs";
+import { ModalVisualizarNorma } from "../components/ModalVisualizarNorma";
 
 export interface FiltroAtivo {
   grupo: string;
@@ -50,7 +51,9 @@ function Normas() {
   const [apenasFavoritos, setApenasFavoritos] = useState(false);
   const [idsFavoritos, setIdsFavoritos] = useState<number[]>([]);
 
-  // FUNÇÃO NOVA: Atualiza apenas o estado de IDs sem disparar o fetch das normas
+  const [normaParaVisualizar, setNormaParaVisualizar] = useState<any>(null);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+
   const atualizarFavoritosDoStorage = useCallback(() => {
     const salvos = localStorage.getItem("favoritos_normas");
     if (salvos) {
@@ -178,6 +181,42 @@ function Normas() {
     return true;
   });
 
+  const handleNavegarTag = async (codigoClicado: string | number) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${API_URL}/norma/getnorms`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (!res.ok) throw new Error("Erro na busca");
+
+      const data = await res.json();
+      const todasNormas = Array.isArray(data) ? data : (data.resposta || []);
+
+      const normaEncontrada = todasNormas.find((n: any) => 
+        String(n.id_norm) === String(codigoClicado) || 
+        n.norm_titulo === codigoClicado || 
+        n.norm_codigo === codigoClicado
+      );
+
+      if (normaEncontrada) {
+        const normaFormatada = {
+          ...normaEncontrada,
+          referencias: normaEncontrada.referencias || normaEncontrada.normas_associadas || [],
+          url_arquivo: normaEncontrada.pdf_caminho || normaEncontrada.url_arquivo,
+          nome_arquivo: normaEncontrada.pdf_nome_original || normaEncontrada.nome_arquivo,
+          notas: normaEncontrada.notas || []
+        };
+        setNormaParaVisualizar(normaFormatada);
+        setIsViewModalOpen(true);
+      } else {
+        alert("A norma associada não foi encontrada no banco de dados.");
+      }
+    } catch (err) {
+      alert("A norma associada não foi encontrada no banco de dados.");
+    }
+  };
+
   const temFiltroAtivo = filtrosAtivos.length > 0 || dataInicio || dataFim || apenasFavoritos;
 
   return (
@@ -251,9 +290,17 @@ function Normas() {
             apiUrl={API_URL} 
             onAtualizarLista={fetchNormas}
             onFavoritoAlterado={atualizarFavoritosDoStorage}
+            onNavegarTag={handleNavegarTag} // <<< PASSANDO A FUNÇÃO PARA A LISTA
           />
         )}
       </div>
+
+      <ModalVisualizarNorma
+        isOpen={isViewModalOpen}
+        onClose={() => setIsViewModalOpen(false)}
+        norma={normaParaVisualizar}
+        onAbrirNormaAssociada={handleNavegarTag} // <<< PASSANDO A FUNÇÃO PARA O MODAL PAI 
+      />
     </div>
   );
 }

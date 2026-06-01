@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { ResponseNorm } from "../pages/Normas";
 import { ModalEditarNorma } from "./ModalEditarNorma";
 import { ModalVisualizarNorma } from "./ModalVisualizarNorma";
@@ -8,21 +9,25 @@ interface Props {
   arquivos: ResponseNorm[];
   apiUrl: string;
   onAtualizarLista: () => void;
-  onFavoritoAlterado: () => void; // Prop para atualização instantânea
+  onFavoritoAlterado: () => void; 
   onVisualizar?: (norma: ResponseNorm) => void;
+  onNavegarTag?: (codigo: string | number) => void;
 }
 
-export function ListaNormasAprovadas({
-  arquivos,
-  apiUrl,
-  onAtualizarLista,
-  onFavoritoAlterado,
-}: Props) {
+const parseDataCriacao = (dataStr?: string) => {
+  if (!dataStr) return new Date(0);
+  const parts = dataStr.split(/[-/]/);
+  if (parts.length === 3) {
+    return new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));
+  }
+  return new Date(0);
+};
+
+export function ListaNormasAprovadas({ arquivos, apiUrl, onAtualizarLista, onFavoritoAlterado, onNavegarTag }: Props) {
   const userRole = localStorage.getItem("userRole") || "user";
   const [favoritosLocais, setFavoritosLocais] = useState<number[]>([]);
   const [menuAbertoId, setMenuAbertoId] = useState<number | null>(null);
   
-  // Modais
   const [normaParaVisualizar, setNormaParaVisualizar] = useState<ResponseNorm | null>(null);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [normaParaEditar, setNormaParaEditar] = useState<ResponseNorm | null>(null);
@@ -30,7 +35,14 @@ export function ListaNormasAprovadas({
   const [normaParaExcluir, setNormaParaExcluir] = useState<ResponseNorm | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const ITENS_POR_PAGINA = 10;
+
   const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setPaginaAtual(1);
+  }, [arquivos]);
 
   useEffect(() => {
     const salvos = localStorage.getItem("favoritos_normas");
@@ -48,7 +60,6 @@ export function ListaNormasAprovadas({
     setFavoritosLocais(novaLista);
     localStorage.setItem("favoritos_normas", JSON.stringify(novaLista));
     
-    // Notifica o pai para atualizar o estado de IDs sem disparar o fetch geral
     onFavoritoAlterado(); 
   };
 
@@ -90,28 +101,40 @@ export function ListaNormasAprovadas({
     );
   }
 
+  const arquivosOrdenados = [...arquivos].sort((a, b) => {
+    // Mantém a ordenação inteligente usando a criação como prioridade de fato mais recente
+    const dataA = parseDataCriacao(a.criacao || a.criado_em || a.data_criacao || a.emissao);
+    const dataB = parseDataCriacao(b.criacao || b.criado_em || b.data_criacao || b.emissao);
+    return dataB.getTime() - dataA.getTime();
+  });
+
+  const totalPaginas = Math.ceil(arquivosOrdenados.length / ITENS_POR_PAGINA);
+  const itensExibidos = arquivosOrdenados.slice(
+    (paginaAtual - 1) * ITENS_POR_PAGINA,
+    paginaAtual * ITENS_POR_PAGINA
+  );
+
   return (
     <>
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 w-full">
-        <div className="flex flex-col min-w-[1100px]">
-          {/* HEADER DA TABELA */}
-          <div className="flex items-center px-4 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider bg-gray-100 border-b border-gray-200 rounded-t-lg">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 w-full overflow-hidden">
+        <div className="flex flex-col min-w-[1100px] overflow-x-auto">
+          <div className="flex items-center px-4 py-3 text-[11px] font-bold text-gray-500 uppercase tracking-wider bg-gray-100 border-b border-gray-200">
             <div className="w-[65%] flex items-center">
               <div className="w-[6%]"></div>
               <div className="w-[15%] pl-2">Código</div>
               <div className="w-[49%]">Nome da Norma</div>
               <div className="w-[30%]">Órgão Emissor</div>
             </div>
+            {/* AGORA EXIBINDO DATA DE EMISSÃO NA TELA */}
             <div className="w-[15%] text-center">Data de Emissão</div>
             <div className="w-[15%] pl-4">Criado por</div>
             <div className="w-[5%] text-center pr-4">Ações</div>
           </div>
 
-          {/* LINHAS DA TABELA */}
-          {arquivos.map((norma, index) => (
+          {itensExibidos.map((norma, index) => (
             <div
               key={norma.id_norm}
-              className={`flex items-stretch border-b border-gray-100 last:border-0 relative
+              className={`flex items-stretch border-b border-gray-100 relative
                 ${index % 2 === 0 ? "bg-white" : "bg-gray-50 hover:bg-gray-100 transition-colors"}`}
             >
               <div
@@ -148,11 +171,12 @@ export function ListaNormasAprovadas({
                 </div>
               </div>
 
+              {/* RENDERIZANDO A DATA DE EMISSÃO */}
               <div className="w-[15%] flex items-center justify-center text-sm font-bold text-gray-600">
                 {norma.emissao || "-"}
               </div>
               <div className="w-[15%] flex items-center text-sm font-medium text-gray-800 truncate pl-4 pr-2">
-                {norma.aprovado_por || norma.adm_criador}
+                {norma.adm_criador || "Sistema"}
               </div>
 
               <div className="w-[5%] flex items-center justify-center pr-4 relative">
@@ -195,12 +219,37 @@ export function ListaNormasAprovadas({
             </div>
           ))}
         </div>
+
+        {totalPaginas > 1 && (
+          <div className="flex items-center justify-center gap-4 py-4 bg-gray-50">
+            <button 
+              onClick={() => setPaginaAtual(prev => Math.max(prev - 1, 1))}
+              disabled={paginaAtual === 1}
+              className="w-8 h-8 rounded-full flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              <FaChevronLeft className="w-3 h-3" />
+            </button>
+            
+            <span className="text-gray-600 font-bold text-sm">
+              Página {paginaAtual} de {totalPaginas}
+            </span>
+
+            <button 
+              onClick={() => setPaginaAtual(prev => Math.min(prev + 1, totalPaginas))}
+              disabled={paginaAtual === totalPaginas}
+              className="w-8 h-8 rounded-full flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              <FaChevronRight className="w-3 h-3" />
+            </button>
+          </div>
+        )}
       </div>
 
       <ModalVisualizarNorma
         isOpen={isViewModalOpen}
         onClose={() => setIsViewModalOpen(false)}
         norma={normaParaVisualizar}
+        onAbrirNormaAssociada={onNavegarTag} 
       />
       
       <ModalEditarNorma

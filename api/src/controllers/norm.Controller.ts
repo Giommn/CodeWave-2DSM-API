@@ -4,6 +4,7 @@ import NormRepository from "../repositories/norm.Repository";
 import NormService from "../service/norm.Service";
 import { Request, Response } from "express";
 import fs from "fs/promises";
+
 export default class NormController {
   private static norm_repository: NormRepository = new NormRepository();
   private static norm_service: NormService = new NormService(
@@ -111,6 +112,7 @@ export default class NormController {
       });
     }
   }
+
   public static async UpdateNorms(req: Request, res: Response) {
     try {
       if (!req.file)
@@ -170,6 +172,7 @@ export default class NormController {
       });
     }
   }
+
   public static async SaveHistoric(req: Request, res: Response){
     try {
       const { id_norm, id_user } = req.body;
@@ -223,6 +226,7 @@ export default class NormController {
       });
     }
   }
+
   public static getPdf(req:Request,res:Response){
     try{
         const arquivo=req.params.nome
@@ -254,6 +258,7 @@ export default class NormController {
         })
     }
   }
+
   public static async tirarDosFavoritos(req:Request,res:Response){
     try{
    const {id_user,id_norm}=req.params;
@@ -269,6 +274,7 @@ export default class NormController {
         })
       }
   }
+
   public static async VerFavoritos(req:Request,res:Response){
     try{
        const {id_user}=req.params;
@@ -281,6 +287,24 @@ export default class NormController {
         })
     }
  }
- 
+
+ // ==========================================
+ // NOVA FUNÇÃO ACRESCENTADA DO CONTROLADOR 2
+ // ==========================================
+ public static async Verversoes(req: Request, res: Response) {
+   try {
+     const { id_norm } = req.params;
+     const resposta = await NormController.norm_service.Versoes(Number(id_norm));
+     res.status(200).json({
+       status: 'sucess',
+       resposta
+     });
+   } catch (erro) {
+     return res.status(404).json({
+       status: "error",
+       message: erro.message
+     });
+   }
+ }
 
 }

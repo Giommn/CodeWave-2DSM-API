@@ -14,5 +14,6 @@ route.get("/norma/getpdf/:nome",NormController.getPdf)
 route.get("/norma/favoritas/:id_user",NormController.VerFavoritos)
 route.post("/norma/favoritar",NormController.adicionarFavoritos)
 route.delete("/norma/favoritas/deletar/:id_user/:id_norm",NormController.tirarDosFavoritos)
+route.get('/norma/versoes/:id_norm',NormController.Verversoes)
 
 export default route

@@ -20,7 +20,7 @@ export interface PedidoNorma {
   nome_solicitante: string;
   tipo_pedido: 'criacao' | 'edicao';
   status: 'pendente' | 'aprovado' | 'recusado';
-  normas_relacionadas: string[];
+  normas_relacionadas: string[] | number[];
   categoria: string;
   versao_anterior?: Partial<PedidoNorma>; 
 }
@@ -39,7 +39,7 @@ interface ModalNotificacaoProps {
   pedido: PedidoNorma | null;
   onAprovar: (id: number) => void;
   onRecusar: (id: number) => void;
-  onNavegarTag: (codigoNorma: string) => void;
+  onNavegarTag: (codigoNorma: string | number) => void;
   normaPreviewData: NormaEmVigor | null; 
   onClosePreview: () => void; 
 }
@@ -141,17 +141,26 @@ export function ModalNotificacao({
               </h2>
               
               {pedido.normas_relacionadas && pedido.normas_relacionadas.length > 0 && (
-                <div className="flex items-center gap-2 mt-2 flex-wrap">
-                  <span className="text-xs text-gray-500">Baseado nas normas:</span>
-                  {pedido.normas_relacionadas.map((tag, idx) => (
-                    <button 
-                      key={idx}
-                      onClick={() => onNavegarTag(tag)} 
-                      className="bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300 px-3 py-0.5 rounded text-xs font-bold cursor-pointer transition-colors"
-                    >
-                      {tag}
-                    </button>
-                  ))}
+                <div className="flex items-center gap-2 mt-2 mb-2 flex-wrap">
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                    Baseado nas normas:
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {pedido.normas_relacionadas.map((ref: any, idx: number) => (
+                      <button
+                        key={idx}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (onNavegarTag) onNavegarTag(ref);
+                        }}
+                        className="bg-white border border-gray-300 text-[#72203E] hover:bg-[#72203E] hover:text-white hover:border-[#72203E] transition-all text-xs font-bold px-2.5 py-1 rounded shadow-sm cursor-pointer flex items-center gap-1"
+                        title={`Visualizar norma ${ref}`}
+                      >
+                        <IoEyeOutline className="w-3.5 h-3.5" />
+                        {ref}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

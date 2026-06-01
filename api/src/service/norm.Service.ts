@@ -31,4 +31,7 @@ export default class NormService {
   public Verfavoritos(id_user:number){
       return this.NormRepository.pegarMinhasNormasFavoritas(id_user)
   }
+  public Versoes(id_norm:number){
+    return this.NormRepository.PegarVersoesNormas(id_norm)
+  }
 }

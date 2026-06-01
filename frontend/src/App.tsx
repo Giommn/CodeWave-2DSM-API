@@ -4,6 +4,7 @@ import Normas from "./pages/Normas";
 import Cadastro from "./pages/cadastro";
 import Login from "./pages/Login";
 import Notificacoes from "./pages/Notificacoes";
+import { UserBadge } from "./components/UserBadge";
 import { LayoutProtegido } from "./layouts/LayoutProtegido";
  
 // ─── DEV TOOL (remover em produção) ──────────────────────────────────────────
@@ -27,7 +28,7 @@ function DevRoleSwitcher() {
     </div>
   );
 }
- 
+
 // ─── APP ──────────────────────────────────────────────────────────────────────
  
 function App() {
@@ -37,6 +38,9 @@ function App() {
   return (
     <BrowserRouter>
       <DevRoleSwitcher />
+      
+      {/* O UserBadge fica aqui dentro, assim ele aparece em todas as telas! */}
+      <UserBadge />
  
       <Routes>
         {/* Rota pública — fora do LayoutProtegido, toast nunca aparece aqui */}

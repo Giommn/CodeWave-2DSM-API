@@ -29,19 +29,16 @@ export interface UpdateNormDTO{
 
 //Saida
 export interface ResponseNorm{
-norm_titulo:string;
-norm_desc:string;
-org_criador:string;
-emissao:string;
-norm_codigo:string;
-adm_criador:string;
-id_norm:number;
-criado_em?:string;
-pdf_caminho:string;
-referencias:Array<string>
-notas:Array<ResponseNota>
-categoria:Array<string>
+  norm_titulo:string;
+  norm_desc:string;
+  org_criador:string;
+  emissao:string;
+  norm_codigo:string;
+  adm_criador:string;
+  id_norm:number;
+  criacao?:string;
+  pdf_caminho:string;
+  referencias:Array<string>
+  notas:Array<ResponseNota>
+  categoria:Array<string>
 }
-
-
-

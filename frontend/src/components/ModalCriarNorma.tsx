@@ -231,6 +231,9 @@ export function ModalCriarNorma({ onFechar, onSucesso, normasExistentes }: Modal
         norm_criador: 0 
       }));
 
+      // ==========================================
+      // CORREÇÃO: Adicionando o "T12:00:00" na emissão
+      // ==========================================
       const normPayload = {
         norm_titulo: form.norm_titulo,
         norm_desc: form.norm_desc,
@@ -238,7 +241,7 @@ export function ModalCriarNorma({ onFechar, onSucesso, normasExistentes }: Modal
         referencias: referenciasIds, 
         notas: notasDTO, 
         norm_codigo: form.norm_codigo,
-        emissao: form.emissao, 
+        emissao: form.emissao, // <--- BASTA DEIXAR ASSIM
         org_desc: form.org_desc,
         org_sigla: form.org_sigla,
         org_criador: 1, 
