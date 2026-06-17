@@ -214,19 +214,51 @@ function Notificacoes() {
         const caminhoDoPdfNovo = alt.pdf_caminho || alt.pdfcaminho || "";
         const nomeDoPdfNovo = alt.pdf_nome_original || alt.pdfNomeOriginal || "Documento.pdf";
 
-        let catAntiga = "Não informada";
+        // <<< VERSÃO ANTERIOR (estado atual em vigor, antes da edição proposta) >>>
+        // Antes só pegávamos a categoria antiga. Agora guardamos o objeto
+        // completo da norma em vigor, no formato que o ModalNotificacao espera
+        // em `pedido.versao_anterior` (Partial<PedidoNorma>).
+        let normaAntigaBruta: any = null;
         if (p.acaoAlteracao === "UPDATE") {
-           const normaReal = normasEmVigor.find((n: any) => n.norm_titulo === p.norma_nome || n.id_norm === p.id_norma);
-           if (normaReal) {
-              catAntiga = normaReal.categoria ? (Array.isArray(normaReal.categoria) ? normaReal.categoria.join(", ") : String(normaReal.categoria)) : "Não informada";
-           }
+          normaAntigaBruta = normasEmVigor.find(
+            (n: any) => n.norm_titulo === p.norma_nome || n.id_norm === p.id_norma
+          ) || null;
         }
 
-        // <<< MÁGICA DOS IDs PARA NOMES AQUI >>>
+        const catAntiga = normaAntigaBruta?.categoria
+          ? (Array.isArray(normaAntigaBruta.categoria)
+              ? normaAntigaBruta.categoria.join(", ")
+              : String(normaAntigaBruta.categoria))
+          : "Não informada";
+
+        // Mapeia as referências (IDs) da norma nova para os nomes/títulos
         const referenciasNomes = (alt.referencias || []).map((refId: any) => {
           const normaReal = normasEmVigor.find((n: any) => String(n.id_norm) === String(refId) || n.norm_titulo === refId);
           return normaReal ? normaReal.norm_titulo : refId;
         });
+
+        // Mesmo mapeamento de IDs -> nomes, só que para as referências da versão ANTERIOR
+        const referenciasAntigasBrutas = normaAntigaBruta?.referencias || normaAntigaBruta?.normas_associadas || [];
+        const referenciasAntigasNomes = referenciasAntigasBrutas.map((refId: any) => {
+          const normaReal = normasEmVigor.find((n: any) => String(n.id_norm) === String(refId) || n.norm_titulo === refId);
+          return normaReal ? normaReal.norm_titulo : refId;
+        });
+
+        // Objeto que o ModalNotificacao consome em `pedido.versao_anterior`.
+        // Quando a norma antiga não é encontrada, usamos o título-sentinela
+        // "Norma não encontrada no sistema" que o modal já trata explicitamente.
+        const versaoAnterior = normaAntigaBruta ? {
+          titulo: normaAntigaBruta.norm_titulo || "Sem título",
+          descricao: normaAntigaBruta.norm_desc || "Sem descrição",
+          categoria: catAntiga,
+          normas_relacionadas: referenciasAntigasNomes,
+          codigo: normaAntigaBruta.norm_codigo || "N/A",
+          data_emissao: formatarDataLocal(normaAntigaBruta.emissao),
+          emissor: normaAntigaBruta.org_desc || "N/A",
+          sigla_emissor: normaAntigaBruta.org_sigla || "",
+          nome_arquivo: normaAntigaBruta.pdf_nome_original || normaAntigaBruta.nome_arquivo || "Documento.pdf",
+          url_arquivo: normaAntigaBruta.pdf_caminho || normaAntigaBruta.url_arquivo || "",
+        } : (p.acaoAlteracao === "UPDATE" ? { titulo: "Norma não encontrada no sistema" } : undefined);
 
         let statusTratado = p.status.toLowerCase();
         if (statusTratado === "rejeitado") statusTratado = "recusado";
@@ -237,7 +269,7 @@ function Notificacoes() {
           norma_nome: p.norma_nome || "Desconhecida", 
           descricao: alt.norm_desc || "Sem descrição",
           categoria: alt.categoria ? (Array.isArray(alt.categoria) ? alt.categoria.join(", ") : String(alt.categoria)) : catAntiga,
-          normas_relacionadas: referenciasNomes, // Nomes aplicados
+          normas_relacionadas: referenciasNomes, // Nomes aplicados (versão NOVA)
           codigo: alt.norm_codigo || "N/A",
           data_emissao: formatarDataLocal(alt.emissao),
           data_pedido: formatarDataLocal(p.data_pedido),
@@ -245,6 +277,9 @@ function Notificacoes() {
           sigla_emissor: alt.org_sigla || "",
           nome_arquivo: nomeDoPdfNovo,
           url_arquivo: caminhoDoPdfNovo, 
+
+          // <<< NOVO: dados da versão anterior, usados pelo ModalNotificacao na comparação >>>
+          versao_anterior: versaoAnterior,
           
           nome_solicitante: p.user_name || "Desconhecido",
           tipo_pedido: p.acaoAlteracao === "CREATE" ? "criacao" : "edicao",

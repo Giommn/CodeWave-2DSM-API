@@ -1,22 +1,24 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
-import Normas from "./pages/Normas";
-import Cadastro from "./pages/cadastro";
-import Login from "./pages/Login";
-import Notificacoes from "./pages/Notificacoes";
-import { UserBadge } from "./components/UserBadge";
+import Home          from "./pages/Home";
+import Normas        from "./pages/Normas";
+import Cadastro      from "./pages/cadastro";
+import Login         from "./pages/Login";
+import Notificacoes  from "./pages/Notificacoes";
+import { UserBadge }      from "./components/UserBadge";
 import { LayoutProtegido } from "./layouts/LayoutProtegido";
- 
+
+// ─── Helper ──────────────────────────────────────────────────────────────────
+function getRole(): string {
+  return (localStorage.getItem("userRole") ?? "user").trim().toLowerCase();
+}
+
 // ─── DEV TOOL (remover em produção) ──────────────────────────────────────────
- 
 function DevRoleSwitcher() {
-  const currentRole = localStorage.getItem("userRole") || "user";
- 
-  const changeRole = (newRole: string) => {
+  const currentRole = getRole();
+  const changeRole  = (newRole: string) => {
     localStorage.setItem("userRole", newRole);
     window.location.reload();
   };
- 
   return (
     <div className="fixed bottom-4 left-4 bg-black/80 text-white p-3 rounded-lg z-[9999] shadow-2xl backdrop-blur-sm border border-gray-600">
       <p className="text-xs font-bold mb-2 text-gray-300 uppercase tracking-wider">Dev Switcher</p>
@@ -29,45 +31,41 @@ function DevRoleSwitcher() {
   );
 }
 
-// ─── APP ──────────────────────────────────────────────────────────────────────
- 
+// ─── APP ─────────────────────────────────────────────────────────────────────
 function App() {
   const isAuthenticated = !!localStorage.getItem("token");
-  const userRole        = localStorage.getItem("userRole") || "user";
- 
+  const userRole        = getRole();
+  const isAdmOrChecker  = userRole === "adm" || userRole === "checker";
+
+  console.debug("[App] userRole:", JSON.stringify(userRole), "| isAdmOrChecker:", isAdmOrChecker);
+
   return (
     <BrowserRouter>
-      <DevRoleSwitcher />
-      
-      {/* O UserBadge fica aqui dentro, assim ele aparece em todas as telas! */}
+
       <UserBadge />
- 
+
       <Routes>
-        {/* Rota pública — fora do LayoutProtegido, toast nunca aparece aqui */}
+        {/* Rota pública */}
         <Route path="/login" element={<Login />} />
- 
-        {/* Rotas protegidas — LayoutProtegido provê o contexto e renderiza o toast */}
+
+        {/* Rotas protegidas */}
         <Route element={isAuthenticated ? <LayoutProtegido /> : <Navigate to="/login" replace />}>
- 
-          <Route path="/" element={<Home />} />
- 
-          <Route path="/normas" element={<Normas />} />
- 
+          <Route path="/"             element={<Home />} />
+          <Route path="/normas"       element={<Normas />} />
+          <Route path="/notificacoes" element={<Notificacoes />} />
+
+          {/* Cadastro restrito a ADM e CHECKER */}
           <Route
-            path="/notificacoes"
-            element={
-              userRole === "adm" || userRole === "checker" || userRole === "user"
-                ? <Notificacoes />
-                : <Navigate to="/" replace />
-            }
+            path="/cadastro"
+            element={isAdmOrChecker ? <Cadastro /> : <Navigate to="/" replace />}
           />
- 
-          <Route path="/cadastro" element={<Cadastro />} />
- 
         </Route>
+
+        {/* Qualquer rota desconhecida redireciona para home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
 }
- 
+
 export default App;
