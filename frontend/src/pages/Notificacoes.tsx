@@ -611,4 +611,4 @@ function Notificacoes() {
   );
 }
 
-export default Notificacoes;
+export default Notificacoes ;
