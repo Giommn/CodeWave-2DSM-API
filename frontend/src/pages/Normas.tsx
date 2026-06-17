@@ -220,50 +220,54 @@ function Normas() {
   const temFiltroAtivo = filtrosAtivos.length > 0 || dataInicio || dataFim || apenasFavoritos;
 
   return (
-    <div className="flex flex-col gap-6 px-6 pb-6 w-full min-h-screen bg-gray-50">
+    <div className="flex flex-col gap-4 sm:gap-6 px-3 sm:px-6 pb-6 w-full min-h-screen bg-gray-50">
       <Navbar />
-      <div className="w-full max-w-7xl mx-auto flex flex-col gap-6">
+      <div className="w-full max-w-7xl mx-auto flex flex-col gap-4 sm:gap-6">
         <UploadsCards onNormaCadastrada={fetchNormas} normas={normas} />
         
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-3 items-center w-full flex-wrap">
-            <RemoverFiltros onClick={removerTodosFiltros} />
-            
-            <button
-              onClick={() => setApenasFavoritos(!apenasFavoritos)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all border h-[42px]
-                ${apenasFavoritos 
-                  ? "bg-yellow-400 border-yellow-500 text-yellow-900 shadow-sm" 
-                  : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"}`}
-            >
-              {apenasFavoritos ? <BsStarFill className="w-4 h-4" /> : <BsStar className="w-4 h-4" />}
-              Favoritos
-            </button>
+        <div className="flex flex-col gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:items-center w-full sm:flex-wrap">
+            <div className="flex gap-3 w-full sm:w-auto">
+              <RemoverFiltros onClick={removerTodosFiltros} />
 
-            <DropdownFiltros
-              grupo="Emissor" label="Emissor" opcoes={emissoresUnicos}
-              selecionados={filtrosAtivos.filter((f) => f.grupo === "Emissor").map((f) => f.valor)}
-              onToggle={(valor) => toggleFiltro("Emissor", valor)}
-              className="flex-1 min-w-[160px]"
-            />
-            <DropdownFiltros
-              grupo="Categoria" label="Categoria" opcoes={categoriasUnicas}
-              selecionados={filtrosAtivos.filter((f) => f.grupo === "Categoria").map((f) => f.valor)}
-              onToggle={(valor) => toggleFiltro("Categoria", valor)}
-              className="flex-1 min-w-[160px]"
-            />
-            <FiltroData
-              dataInicio={dataInicio} dataFim={dataFim}
-              onChangeInicio={setDataInicio} onChangeFim={setDataFim}
-              className="flex-1 min-w-[200px]"
-            />
+              <button
+                onClick={() => setApenasFavoritos(!apenasFavoritos)}
+                className={`flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all border h-[42px] w-full sm:w-auto whitespace-nowrap
+                  ${apenasFavoritos 
+                    ? "bg-yellow-400 border-yellow-500 text-yellow-900 shadow-sm" 
+                    : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"}`}
+              >
+                {apenasFavoritos ? <BsStarFill className="w-4 h-4" /> : <BsStar className="w-4 h-4" />}
+                Favoritos
+              </button>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:flex-1 sm:flex-wrap">
+              <DropdownFiltros
+                grupo="Emissor" label="Emissor" opcoes={emissoresUnicos}
+                selecionados={filtrosAtivos.filter((f) => f.grupo === "Emissor").map((f) => f.valor)}
+                onToggle={(valor) => toggleFiltro("Emissor", valor)}
+                className="w-full sm:flex-1 sm:min-w-[160px]"
+              />
+              <DropdownFiltros
+                grupo="Categoria" label="Categoria" opcoes={categoriasUnicas}
+                selecionados={filtrosAtivos.filter((f) => f.grupo === "Categoria").map((f) => f.valor)}
+                onToggle={(valor) => toggleFiltro("Categoria", valor)}
+                className="w-full sm:flex-1 sm:min-w-[160px]"
+              />
+              <FiltroData
+                dataInicio={dataInicio} dataFim={dataFim}
+                onChangeInicio={setDataInicio} onChangeFim={setDataFim}
+                className="w-full sm:flex-1 sm:min-w-[200px]"
+              />
+            </div>
           </div>
 
-          <div className="flex items-start justify-between gap-4 flex-wrap">
-            <BuscarNormas className="w-72" valor={termoBusca} onChange={setTermoBusca} />
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-start sm:justify-between gap-3 sm:gap-4 flex-wrap">
+            <BuscarNormas className="w-full sm:w-72" valor={termoBusca} onChange={setTermoBusca} />
             
             {temFiltroAtivo && (
-              <div className="flex items-center gap-2 flex-wrap justify-end">
+              <div className="flex items-center gap-2 flex-wrap justify-start sm:justify-end">
                 <span className="text-sm font-semibold text-gray-500">Filtros ativos:</span>
                 {apenasFavoritos && (
                   <span className="flex items-center gap-1 bg-yellow-100 text-yellow-800 text-sm px-3 py-1 rounded-full border border-yellow-200">
