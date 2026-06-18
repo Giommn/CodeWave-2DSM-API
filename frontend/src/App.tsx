@@ -42,7 +42,7 @@ function App() {
   return (
     <BrowserRouter>
 
-      <UserBadge />
+      
 
       <Routes>
         {/* Rota pública */}

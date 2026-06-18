@@ -55,7 +55,7 @@ export default class UserRepository implements IUser {
     const usuarios = await prisma.users.findMany({
       select: { id_user: true, user_name: true, email: true, nivel_user: true },
     });
-    if (usuarios.length === 0) throw new ValidatorError("Not Exists Users", 400, "Not Found");
+    
     return usuarios;
   }
 
